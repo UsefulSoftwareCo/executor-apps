@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webscraperio",
+  "description": "Manage Web Scraper Cloud sitemaps, scraping jobs, schedulers and scraped data downloads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Web Scraper"
+  }
+}

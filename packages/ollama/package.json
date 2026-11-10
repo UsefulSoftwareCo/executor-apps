@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ollama",
+  "description": "Run models on Ollama Cloud: chat, generate, embeddings, model listing and details, plus usage and balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ollama"
+  }
+}

@@ -1,0 +1,11 @@
+# Emarsys
+
+SAP Emarsys marketing platform: contacts, fields, contact lists, segments, email campaigns and templates, tracked links and sections, delivery and response reports, external events, Automation Center programs, asynchronous exports, the Media Database, Relational Data Storage, administrators and engagement event ingestion.
+
+**Interface:** hand-written tools over the Emarsys Core API at `https://api.emarsys.net`. Emarsys publishes no downloadable OpenAPI document (the reference at dev.emarsys.com is a hosted portal), so the endpoints and their parameters come from the official Postman collection (`https://github.com/emartech/Emarsys-postman-collection`) and the Core API guides. 117 endpoint tools mirror that collection, plus `api.get` and `api.send` for anything else under `/api/`. Every non-GET tool, and the GET-style delete endpoints, needs approval; read-only POSTs (contact data, history, delivery status, response queries) are queries. Nothing was exercised against a live account.
+
+**Auth:** OAuth 2.0 client credentials (OpenID Connect API credentials, API v3). The account owner creates API credentials under Management > Security Settings > API Credentials in Emarsys; the secret is shown once. Paste the client ID and secret on the connect page; Executor exchanges them at `https://auth.emarsys.net/oauth2/token` with HTTP Basic client authentication and no scopes. There is no redirect URI. The legacy WSSE (`X-WSSE`) authentication is deprecated by Emarsys with sunset at the end of 2026 and is not offered. The health check calls `GET /api/v3/settings`.
+
+**Known gaps:** the Sales Data API (`admin.scarabresearch.com`, Predict merchant ids), Keyring key tools and the SMS partner API are not covered; the generic tools only reach the `api.emarsys.net` origin. Emarsys can return errors inside HTTP 200 responses as `{replyCode, replyText}`; check `replyCode` in results. Body-heavy endpoints take a free-form `body` object, so consult the Emarsys API reference for field shapes.
+
+**Icon:** the Emarsys mark (stacked green, yellow and blue chevrons) cropped from the vendor's own PNG logo in `https://github.com/emartech/developer-hub-public-assets` (`emarsys-sap-logo.png`, 368x160; the mark is upscaled from about 50x65 px because the vendor publishes no SVG or larger mark). Visible on white and dark backgrounds.

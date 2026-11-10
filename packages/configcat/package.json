@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/configcat",
+  "description": "Manage ConfigCat feature flags: products, configs, environments, settings, targeting rules, segments, tags and members.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ConfigCat"
+  }
+}

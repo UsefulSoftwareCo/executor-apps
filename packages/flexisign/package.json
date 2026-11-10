@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/flexisign",
+  "description": "List FlexiSign e-signature templates and send documents for signature.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "FlexiSign"
+  }
+}

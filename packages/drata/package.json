@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/drata",
+  "description": "Drata compliance automation: users, personnel, devices, assets, controls, policies, risks, vendors, evidence, monitoring and custom connections through the Drata public API v2.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Drata"
+  }
+}

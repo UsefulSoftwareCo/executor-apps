@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rocketlane",
+  "description": "Customer onboarding and implementation projects in Rocketlane: projects, phases, tasks, companies, users, time entries, budgets, invoices and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rocketlane"
+  }
+}

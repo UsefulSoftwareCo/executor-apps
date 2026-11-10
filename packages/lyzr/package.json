@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lyzr",
+  "description": "Build, run and manage AI agents in Lyzr Agent Studio: agents, sessions, knowledge bases, tools, workflows and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lyzr"
+  }
+}

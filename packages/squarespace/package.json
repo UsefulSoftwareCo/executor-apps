@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/squarespace",
+  "description": "Squarespace Commerce: orders, products, inventory, contacts, discounts and transactions for a merchant site.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Squarespace"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

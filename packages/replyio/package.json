@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/replyio",
+  "description": "Reply.io sales engagement: contacts, accounts, sequences, inbox, email accounts, templates, reports and AI SDR.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Reply.io"
+  }
+}

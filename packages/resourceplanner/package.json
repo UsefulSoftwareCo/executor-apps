@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/resourceplanner",
+  "description": "Resource Planner: resources, projects, assignments and time entries for scheduling people and reviewing workspace time.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Resource Planner"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

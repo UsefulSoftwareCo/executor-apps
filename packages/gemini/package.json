@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gemini",
+  "description": "Google Gemini API: generate content, embeddings, token counts, files, cached contents, batches, tuned models, file search stores and Veo/Imagen predictions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Gemini"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

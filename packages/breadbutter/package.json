@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/breadbutter",
+  "description": "Manage Bread & Butter lead intelligence: apps, leads and lead lists, events, attribution, domains, integrations and identity providers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bread & Butter"
+  }
+}

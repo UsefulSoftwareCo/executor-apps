@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/postiz",
+  "description": "Schedule and publish social media posts with Postiz: channels, posts, media, analytics, notifications and clipping.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Postiz"
+  }
+}

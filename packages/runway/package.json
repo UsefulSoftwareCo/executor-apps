@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/runway",
+  "description": "Generate video, images and audio with Runway: text, image and video generation, tasks, uploads, avatars, documents and organization usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Runway"
+  }
+}

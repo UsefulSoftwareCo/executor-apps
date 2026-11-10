@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/botpress",
+  "description": "Build and manage Botpress Cloud agents: workspaces, bots, integrations, runtime conversations and messages, files and tables.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Botpress"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cuttly",
+  "description": "Shorten, edit, delete and analyze short links with Cutt.ly.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Cutt.ly"
+  }
+}

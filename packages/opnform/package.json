@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/opnform",
+  "description": "Manage OpnForm workspaces, forms, submissions, members and webhook integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OPNForm"
+  }
+}

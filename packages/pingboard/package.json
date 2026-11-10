@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pingboard",
+  "description": "Pingboard org chart and employee directory: users, groups, departments, locations, statuses, custom fields and linked accounts.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Pingboard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

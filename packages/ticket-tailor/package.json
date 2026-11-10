@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/ticket-tailor",
+  "description": "Events, ticket types, orders, discounts, products, check-ins and memberships in Ticket Tailor, through Ticket Tailor's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ticket Tailor"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

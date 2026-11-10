@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/videodb",
+  "description": "Upload, index, search, edit and stream video, audio and images with VideoDB: collections, videos, transcripts, scenes, generation and timelines.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "VideoDB"
+  }
+}

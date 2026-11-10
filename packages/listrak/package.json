@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/listrak",
+  "description": "Listrak retail marketing: email lists, contacts, messages, segmentation, reports, SMS short codes and data import.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Listrak"
+  }
+}

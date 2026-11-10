@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/payhip",
+  "description": "Manage Payhip discount coupons and verify, enable, disable and meter software license keys.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Payhip"
+  }
+}

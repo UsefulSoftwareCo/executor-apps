@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shortenrest",
+  "description": "Create and manage Shorten.REST short link aliases and read click analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Shorten.REST"
+  }
+}

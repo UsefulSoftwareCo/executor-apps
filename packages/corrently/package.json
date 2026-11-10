@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/corrently",
+  "description": "Corrently (STROMDAO) German green power index, CO2 and electricity price forecasts, tariff data, metering and Stromkonto APIs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Corrently"
+  }
+}

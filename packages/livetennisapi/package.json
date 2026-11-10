@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/livetennisapi",
+  "description": "Live tennis data from Live Tennis API: matches, scores, points, statistics, odds and prices, players, rankings, tournaments, head-to-head, history archive and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Live Tennis API"
+  }
+}

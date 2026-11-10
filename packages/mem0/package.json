@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mem0",
+  "description": "Store, search and manage long-term memories for AI agents and users with the Mem0 platform: memories, entities, events, exports, webhooks, organizations and projects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mem0"
+  }
+}

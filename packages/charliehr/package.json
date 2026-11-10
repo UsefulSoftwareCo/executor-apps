@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/charliehr",
+  "description": "Read CharlieHR people data: company, offices, teams, team members and their notes, leave requests and leave allowances.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CharlieHR"
+  }
+}

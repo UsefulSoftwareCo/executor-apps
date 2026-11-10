@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rollbar",
+  "description": "Rollbar error tracking: items, occurrences, deploys, projects, teams, access tokens and RQL queries.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rollbar"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/roller",
+  "description": "ROLLER venue management: bookings, products, sessions and availability, guests, gift cards, discounts, plus the Reporting API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ROLLER"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/eledo",
+  "description": "Eledo PDF: list templates, read template schemas and generate PDF documents from structured data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Eledo PDF"
+  }
+}

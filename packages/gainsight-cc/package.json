@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gainsight-cc",
+  "description": "Gainsight Customer Communities (formerly inSided): topics, questions, articles, ideas, conversations, categories, users, badges, events and search.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Gainsight CC"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

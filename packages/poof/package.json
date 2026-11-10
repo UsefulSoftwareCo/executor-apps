@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/poof",
+  "description": "Accept crypto and fiat payments with Poof: charges, invoices, checkouts, deposit addresses, payouts, ACH debits, prices and transactions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Poof"
+  }
+}

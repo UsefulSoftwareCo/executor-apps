@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tinypng",
+  "description": "TinyPNG (Tinify): compress, resize and convert WebP, JPEG, PNG and AVIF images from a URL, and store results in S3 or Google Cloud Storage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TinyPNG"
+  }
+}

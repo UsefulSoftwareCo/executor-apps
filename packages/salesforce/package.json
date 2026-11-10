@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/salesforce",
+  "description": "Salesforce records, flows, invocable actions and API catalog, through Salesforce's official hosted MCP servers.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Salesforce"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

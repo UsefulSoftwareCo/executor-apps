@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apollo",
+  "description": "Search and enrich people and companies, manage contacts, accounts, deals, sequences, tasks and calls in Apollo.io.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Apollo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

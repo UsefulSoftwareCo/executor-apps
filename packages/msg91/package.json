@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/msg91",
+  "description": "MSG91: send SMS, OTP, email, WhatsApp and voice messages, validate emails, read delivery logs and analytics, and manage contacts and campaigns.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MSG91"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stackexchange",
+  "description": "Questions, answers, comments, users, tags, badges and search across Stack Overflow and the rest of the Stack Exchange network.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Stack Exchange"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

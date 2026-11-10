@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bluesky",
+  "description": "Bluesky and the AT Protocol: read feeds and profiles, post, like, follow, manage lists, send chat messages and run repo and moderation calls.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bluesky"
+  }
+}

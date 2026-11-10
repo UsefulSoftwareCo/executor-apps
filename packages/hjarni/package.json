@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hjarni",
+  "description": "Read and write Hjarni notes, folders and tags: search, create, edit, link, move, archive and restore notes in your Markdown knowledge base.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hjarni"
+  }
+}

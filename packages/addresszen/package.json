@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/addresszen",
+  "description": "AddressZen address autocomplete, US address verification, phone and email validation, and API key management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AddressZen"
+  }
+}

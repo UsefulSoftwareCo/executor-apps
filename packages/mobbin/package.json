@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/mobbin",
+  "description": "Search Mobbin's library of real-world app screens and flows, through Mobbin's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mobbin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

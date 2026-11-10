@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/searchapi",
+  "description": "Real-time structured search results from SearchApi.io: Google (web, news, maps, shopping, flights, hotels, scholar, trends), Bing, YouTube, Amazon, Walmart, TikTok, Airbnb and 140+ other engines, plus account usage, locations and search history.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SearchApi"
+  }
+}

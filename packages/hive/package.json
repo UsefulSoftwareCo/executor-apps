@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/hive",
+  "description": "Projects, actions, comments, timesheets and the rest of Hive's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hive"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

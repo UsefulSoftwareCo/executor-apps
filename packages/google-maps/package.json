@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-maps",
+  "description": "Search places, geocode addresses, compute routes, and look up weather, air quality, pollen, solar, elevation and time zones with Google Maps Platform.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Maps"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

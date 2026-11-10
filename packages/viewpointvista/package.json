@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/viewpointvista",
+  "description": "Trimble Vista (Viewpoint Vista) construction ERP. Modules: Accounts Payable, Accounts Receivable, Document Management, Equipment Management, General Ledger, Headquarters, Human Resources, Inventory, Job Cost, Material Sales, Pre-Construction, Project Management, Purchase Order, Payroll, Service Management, Subcontract Ledger, User Defined Tables, Viewpoint Administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Trimble Vista"
+  }
+}

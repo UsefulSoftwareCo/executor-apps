@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/voiceflow",
+  "description": "Build, run and analyze Voiceflow AI agents: agents, playbooks, functions, tools, knowledge base, conversations, transcripts, tests and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Voiceflow"
+  }
+}

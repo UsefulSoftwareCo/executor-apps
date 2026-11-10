@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nethuntcrm",
+  "description": "Manage NetHunt CRM folders, fields, records, search and filters, timelines, comments and call logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NetHunt CRM"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/connectwise-psa",
+  "description": "ConnectWise PSA (Manage): tickets, projects, companies, contacts, time entries, agreements, configurations, opportunities, members and system lookups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ConnectWise PSA"
+  }
+}

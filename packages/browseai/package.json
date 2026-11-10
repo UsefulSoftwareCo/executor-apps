@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/browseai",
+  "description": "Run and monitor Browse AI robots: tasks, monitors, bulk runs and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Browse AI"
+  }
+}

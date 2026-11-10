@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/formbricks",
+  "description": "Manage Formbricks surveys data: responses, contacts, attributes, webhooks, teams and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Formbricks"
+  }
+}

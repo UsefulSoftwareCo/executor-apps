@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/verifiemail",
+  "description": "Validate email addresses (single or up to 10 at once) and check a domain's SPF, DKIM, DMARC and BIMI setup with Verifi.Email.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Verifi.Email"
+  }
+}

@@ -1,0 +1,9 @@
+# Lightspeed Retail X-Series
+
+Covers the Lightspeed Retail (X-Series) point-of-sale API: products and variants, inventory, sales and returns, customers and groups, registers, outlets, suppliers, consignments and purchase orders, price books, promotions, gift cards, store credit, taxes, users, custom fields, webhooks and more (209 operations, 106 of them mutations, all behind approval).
+
+**Interface:** OpenAPI. Lightspeed publishes its API 2026-07 reference at https://x-series-api.lightspeedhq.com/reference, but only as one OpenAPI definition per operation and no single downloadable file. `document.json` is those official definitions merged unchanged into one document (the per-store server variable is removed; the host comes from the account). Re-merge from the pages listed in https://x-series-api.lightspeedhq.com/llms.txt to update it.
+
+**Auth:** personal token. An admin creates one in the Retail web app (Setup > Personal API Tokens; see https://x-series-support.lightspeedhq.com/hc/en-us/articles/204886420-Retail-POS-X-Series-Personal-Tokens). Personal tokens are available to retailers on the Plus plan. Enter the store's domain prefix (the `example` in `example.retail.lightspeed.app`) and the token.
+
+**Known gaps:** OAuth 2.0 (authorization code) is supported by Lightspeed, but its token endpoint is per store (`https://<domain_prefix>.retail.lightspeed.app/api/1.0/token`, with the prefix returned only after authorization), and the framework only accepts static OAuth endpoints, so OAuth is not offered. This is a framework gap (oauth2 `tokenUrl`/`authorizationUrl` are static strings), recorded as a known coverage gap, not signed off as an accepted exception. The one operation without an operationId (`POST /loyalty/adjustments/bulk`) gets the generated tool name `loyaltyAdjustmentsBeta.postLoyaltyAdjustmentsBulk`. The API version is pinned to 2026-07. Legacy 0.9/2.0 endpoints, the Payments API and Client API are not included.

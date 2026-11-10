@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dictionaryapi",
+  "description": "Merriam-Webster Dictionary API: definitions, pronunciations, etymologies, synonyms and antonyms from the Collegiate, Learner's, Medical, Spanish-English and school references.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Merriam-Webster Dictionary API"
+  }
+}

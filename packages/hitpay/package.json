@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hitpay",
+  "description": "Accept payments and manage payment requests, charges, refunds, invoices, subscriptions, payouts and customers with HitPay.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HitPay"
+  }
+}

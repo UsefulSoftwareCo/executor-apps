@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/handwrite",
+  "description": "Handwrite.io: send robot-written handwritten cards and track orders, with handwriting and stationery lookups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Handwrite.io"
+  }
+}

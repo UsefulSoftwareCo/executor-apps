@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onelogin",
+  "description": "Users, roles, groups, apps, app rules, MFA, privileges, events, branding, SAML, smart hooks and the rest of the OneLogin API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "OneLogin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

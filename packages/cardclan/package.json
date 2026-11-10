@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cardclan",
+  "description": "Send personalized digital cards with CardClan: workspaces, cards, email accounts, card URLs, integration configs and workflow cards.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CardClan"
+  }
+}

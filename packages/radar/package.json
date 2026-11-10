@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/radar",
+  "description": "Radar location infrastructure: geocoding, search, routing, geofences, trips, users, events and beacons.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Radar"
+  }
+}

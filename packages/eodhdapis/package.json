@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/eodhdapis",
+  "description": "Financial market data from EODHD: end-of-day, intraday and live prices, fundamentals, news, technical indicators, options, screener and macro data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "EODHD APIs"
+  }
+}

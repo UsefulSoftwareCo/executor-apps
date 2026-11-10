@@ -1,0 +1,336 @@
+// Calendar tools shaped for agents: one agenda across every calendar of every linked account,
+// combined availability with free slots, and event writes that take plain fields.
+import { array, boolean, mutation, number, object, query, string } from "apps";
+import { always } from "apps/operations/approval";
+import {
+  calendarZone,
+  defined,
+  fanOut,
+  google,
+  parseTime,
+  select,
+  single,
+  zonedDate,
+  zonedTime,
+  type Base,
+  type Context,
+  type Source,
+  type Target,
+  type WriteContext,
+} from "./shared.js";
+
+const base = "https://www.googleapis.com/calendar/v3";
+const account = string().optional();
+const day = 24 * 60 * 60 * 1000;
+
+interface CalendarEntry {
+  readonly id: string;
+  readonly summary?: string;
+  readonly summaryOverride?: string;
+  readonly primary?: boolean;
+  readonly selected?: boolean;
+  readonly hidden?: boolean;
+  readonly accessRole?: string;
+}
+
+/** The calendars shown in the account's Calendar UI: selected and not hidden. */
+const shown = async (ctx: Base, target: Target, calendarIds: readonly string[] | undefined) => {
+  const { items = [] } = await google(ctx, target, `${base}/users/me/calendarList`, { search: { maxResults: 250 } });
+  const all = items as CalendarEntry[];
+  if (calendarIds?.length) return all.filter((entry) => calendarIds.includes(entry.id) || (entry.primary && calendarIds.includes("primary")));
+  return all.filter((entry) => entry.primary || (entry.selected && !entry.hidden));
+};
+
+/** A window from inputs a model passes: `from`/`to`, or `days` from `from` (default today), read in `zone`. */
+const window = (zone: string, input: { readonly from?: string; readonly to?: string; readonly days?: number }) => {
+  const start = parseTime(input.from ?? "now", zone);
+  if (input.to) return { start, end: parseTime(input.to, zone) };
+  const date = zonedDate(zone, start);
+  return { start, end: zonedTime(zone, date.year, date.month, date.day + (input.days ?? 7)) };
+};
+
+const self = (event: any) => event.attendees?.find((attendee: any) => attendee.self);
+
+const event = (target: Target, calendar: CalendarEntry, item: any) =>
+  defined({
+    account: target.email,
+    calendarId: calendar.id,
+    calendar: calendar.summaryOverride ?? calendar.summary ?? calendar.id,
+    eventId: item.id as string,
+    summary: (item.summary as string | undefined) ?? "(no title)",
+    start: (item.start?.dateTime ?? item.start?.date) as string,
+    end: (item.end?.dateTime ?? item.end?.date) as string,
+    allDay: item.start?.date !== undefined,
+    location: item.location as string | undefined,
+    meetLink: (item.hangoutLink ?? item.conferenceData?.entryPoints?.find((e: any) => e.entryPointType === "video")?.uri) as string | undefined,
+    organizer: item.organizer?.email as string | undefined,
+    attendees: (item.attendees?.length ?? 0) as number,
+    myResponse: self(item)?.responseStatus as string | undefined,
+    status: item.status as string,
+    link: item.htmlLink as string,
+    iCalUID: item.iCalUID as string,
+  });
+
+const sortKey = (start: string) => (start.length === 10 ? Date.parse(`${start}T00:00:00Z`) : Date.parse(start));
+
+const busyWindows = async (ctx: Base, targets: readonly Target[], start: number, end: number) =>
+  fanOut(targets, async (target) => {
+    const calendars = await shown(ctx, target, undefined);
+    const result = await google(ctx, target, `${base}/freeBusy`, {
+      method: "POST",
+      body: {
+        timeMin: new Date(start).toISOString(),
+        timeMax: new Date(end).toISOString(),
+        // Other people's calendars a user has merely subscribed to are not their own commitments.
+        items: calendars.filter((c) => c.primary || c.accessRole === "owner").map((c) => ({ id: c.id })),
+      },
+    });
+    return Object.values(result.calendars ?? {}).flatMap((calendar: any) =>
+      (calendar.busy ?? []).map((busy: { start: string; end: string }) => ({
+        account: target.email,
+        start: Date.parse(busy.start),
+        end: Date.parse(busy.end),
+      })),
+    );
+  });
+
+const merge = (intervals: readonly { readonly start: number; readonly end: number }[]) => {
+  const sorted = [...intervals].sort((a, b) => a.start - b.start);
+  const merged: { start: number; end: number }[] = [];
+  for (const interval of sorted) {
+    const last = merged.at(-1);
+    if (last && interval.start <= last.end) last.end = Math.max(last.end, interval.end);
+    else merged.push({ start: interval.start, end: interval.end });
+  }
+  return merged;
+};
+
+const iso = (zone: string, instant: number) => {
+  const text = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: zone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).format(new Date(instant));
+  return text.replace(" ", "T");
+};
+
+/** Events across targets' shown calendars, sorted, with shared meetings listed once. */
+export const listEvents = async (
+  ctx: Base,
+  targets: readonly Target[],
+  start: number,
+  end: number,
+  text?: string,
+  calendarIds?: readonly string[],
+) => {
+  const { items, errors } = await fanOut(targets, async (target) => {
+    const calendars = await shown(ctx, target, calendarIds);
+    const lists = await Promise.all(
+      calendars.map(async (calendar) => {
+        const { items = [] } = await google(ctx, target, `${base}/calendars/${encodeURIComponent(calendar.id)}/events`, {
+          search: {
+            timeMin: new Date(start).toISOString(),
+            timeMax: new Date(end).toISOString(),
+            singleEvents: true,
+            orderBy: "startTime",
+            maxResults: 250,
+            q: text,
+          },
+        });
+        return (items as any[]).filter((item) => item.status !== "cancelled").map((item) => event(target, calendar, item));
+      }),
+    );
+    return lists.flat();
+  });
+  const seen = new Set<string>();
+  const events = items
+    .sort((a, b) => sortKey(a.start) - sortKey(b.start))
+    .filter((item) => {
+      const key = `${item.iCalUID}|${item.start}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .map(({ iCalUID: _, ...item }) => item);
+  return { events, errors };
+};
+
+/** The curated tools and their router's metadata; `source` names the package's accounts. */
+export const calendar = (source: Source) => ({
+  tools: {
+    agenda: query(
+      {
+        description:
+          "List events across every calendar shown in each linked account's Google Calendar (or one account), merged and sorted by start time. Defaults to the next 7 days from now. Shared meetings that appear in several accounts are listed once. Optionally filter by free text (title, description, location, attendees).",
+        input: object({
+          account,
+          from: string().optional(),
+          to: string().optional(),
+          days: number().optional(),
+          query: string().optional(),
+          calendarIds: array(string()).optional(),
+          timeZone: string().optional(),
+        }),
+      },
+      async (ctx: Context, input) => {
+        const targets = await select(ctx, source, input.account);
+        const zone = input.timeZone ?? (await calendarZone(ctx, targets[0]!));
+        const { start, end } = window(zone, input);
+        const { events, errors } = await listEvents(ctx, targets, start, end, input.query, input.calendarIds);
+        return { timeZone: zone, from: new Date(start).toISOString(), to: new Date(end).toISOString(), events, errors };
+      },
+    ),
+    freeBusy: query(
+      {
+        description:
+          "Combined availability across every linked account (or one): busy intervals merged from each account's own calendars, and free slots of at least `minutes` within working hours (default 09:00-17:00 on weekdays, in the calendar's time zone). Use it to find a time that works across work and personal calendars.",
+        input: object({
+          account,
+          from: string().optional(),
+          to: string().optional(),
+          days: number().optional(),
+          minutes: number().optional(),
+          dayStart: string().optional(),
+          dayEnd: string().optional(),
+          includeWeekends: boolean().optional(),
+          timeZone: string().optional(),
+        }),
+      },
+      async (ctx: Context, input) => {
+        const targets = await select(ctx, source, input.account);
+        const zone = input.timeZone ?? (await calendarZone(ctx, targets[0]!));
+        const { start, end } = window(zone, input);
+        const { items, errors } = await busyWindows(ctx, targets, start, end);
+        const busy = merge(items);
+        const [startHour, startMinute] = (input.dayStart ?? "09:00").split(":").map(Number) as [number, number];
+        const [endHour, endMinute] = (input.dayEnd ?? "17:00").split(":").map(Number) as [number, number];
+        const minimum = (input.minutes ?? 30) * 60 * 1000;
+        const free: { start: string; end: string; minutes: number }[] = [];
+        for (let cursor = start; cursor < end; cursor += day) {
+          const date = zonedDate(zone, cursor);
+          const weekday = new Date(Date.UTC(date.year, date.month - 1, date.day)).getUTCDay();
+          if (!input.includeWeekends && (weekday === 0 || weekday === 6)) continue;
+          let from = Math.max(start, zonedTime(zone, date.year, date.month, date.day, startHour, startMinute ?? 0));
+          const until = Math.min(end, zonedTime(zone, date.year, date.month, date.day, endHour, endMinute ?? 0));
+          for (const interval of busy) {
+            if (interval.end <= from || interval.start >= until) continue;
+            if (interval.start - from >= minimum) free.push({ start: iso(zone, from), end: iso(zone, interval.start), minutes: (interval.start - from) / 60000 });
+            from = Math.max(from, interval.end);
+          }
+          if (until - from >= minimum) free.push({ start: iso(zone, from), end: iso(zone, until), minutes: (until - from) / 60000 });
+        }
+        return {
+          timeZone: zone,
+          accounts: targets.map((t) => t.email),
+          busy: busy.map((b) => ({ start: iso(zone, b.start), end: iso(zone, b.end) })),
+          free,
+          errors,
+        };
+      },
+    ),
+    calendars: query(
+      {
+        description: "List every linked account's calendars with their IDs, access role and whether they are shown.",
+        input: object({ account }),
+      },
+      async (ctx: Context, input) =>
+        fanOut(await select(ctx, source, input.account), async (target) => {
+          const { items = [] } = await google(ctx, target, `${base}/users/me/calendarList`, { search: { maxResults: 250 } });
+          return (items as CalendarEntry[]).map((c) => ({
+            account: target.email,
+            calendarId: c.id,
+            name: c.summaryOverride ?? c.summary ?? c.id,
+            primary: c.primary ?? false,
+            shown: c.primary || (c.selected === true && !c.hidden),
+            accessRole: c.accessRole,
+          })).map(defined);
+        }).then(({ items, errors }) => ({ calendars: items, errors })),
+    ),
+    createEvent: mutation(
+      {
+        description:
+          "Create an event. start and end take RFC 3339 times, local times (2026-10-14T15:00, read in the calendar's zone) or dates for an all-day event (end is the day after the last day). Set meet to add a Google Meet link; attendees get invitations.",
+        input: object({
+          account,
+          calendarId: string().optional(),
+          summary: string(),
+          start: string(),
+          end: string().optional(),
+          minutes: number().optional(),
+          description: string().optional(),
+          location: string().optional(),
+          attendees: array(string()).optional(),
+          meet: boolean().optional(),
+          timeZone: string().optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const zone = input.timeZone ?? (await calendarZone(ctx, target));
+        const allDay = /^\d{4}-\d{2}-\d{2}$/.test(input.start.trim());
+        const when = (value: string) => (allDay ? { date: value.trim() } : { dateTime: new Date(parseTime(value, zone)).toISOString(), timeZone: zone });
+        const startAt = parseTime(input.start, zone);
+        const end = input.end
+          ? when(input.end)
+          : allDay
+            ? (() => {
+                const next = zonedDate("UTC", Date.parse(`${input.start.trim()}T00:00:00Z`) + day);
+                return { date: `${next.year}-${String(next.month).padStart(2, "0")}-${String(next.day).padStart(2, "0")}` };
+              })()
+            : { dateTime: new Date(startAt + (input.minutes ?? 30) * 60000).toISOString(), timeZone: zone };
+        const created = await google(ctx, target, `${base}/calendars/${encodeURIComponent(input.calendarId ?? "primary")}/events`, {
+          method: "POST",
+          search: { conferenceDataVersion: input.meet ? 1 : undefined, sendUpdates: input.attendees?.length ? "all" : undefined },
+          body: {
+            summary: input.summary,
+            description: input.description,
+            location: input.location,
+            start: when(input.start),
+            end,
+            attendees: input.attendees?.map((email) => ({ email })),
+            ...(input.meet
+              ? { conferenceData: { createRequest: { requestId: crypto.randomUUID(), conferenceSolutionKey: { type: "hangoutsMeet" } } } }
+              : {}),
+          },
+        });
+        const { iCalUID: _, ...summary } = event(target, { id: input.calendarId ?? "primary" }, created);
+        return summary;
+      },
+    ),
+    respond: mutation(
+      {
+        description: 'Answer an invitation: response is "accepted", "declined" or "tentative", optionally with a note to the organizer.',
+        input: object({
+          account,
+          calendarId: string().optional(),
+          eventId: string({ minLength: 1 }),
+          response: string(),
+          comment: string().optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const path = `${base}/calendars/${encodeURIComponent(input.calendarId ?? "primary")}/events/${encodeURIComponent(input.eventId)}`;
+        const current = await google(ctx, target, path);
+        const me = (current.attendees ?? []).find((a: any) => a.self || a.email?.toLowerCase() === target.email.toLowerCase());
+        if (!me) throw new Error(`${target.email} is not an attendee of this event.`);
+        const status = input.response.trim().toLowerCase();
+        if (!["accepted", "declined", "tentative"].includes(status)) throw new Error('response must be "accepted", "declined" or "tentative".');
+        const attendees = current.attendees.map((a: any) => (a === me ? { ...a, responseStatus: status, ...(input.comment ? { comment: input.comment } : {}) } : a));
+        await google(ctx, target, path, { method: "PATCH", search: { sendUpdates: "all" }, body: { attendees } });
+        return { account: target.email, eventId: input.eventId, response: status };
+      },
+    ),
+  },
+  meta: {
+    title: "Google Calendar",
+    description: "Agenda and availability across every linked Google account, and simple event writes.",
+    instructions: `agenda and freeBusy span every linked account unless \`account\` (an address) is given. Times without an offset are read in the account's Calendar time zone. Event edits, recurrence and sharing are under ${source.api("calendar")}.`,
+  },
+});

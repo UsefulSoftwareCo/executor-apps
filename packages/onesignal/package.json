@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onesignal",
+  "description": "Send push notifications, email and SMS with OneSignal and manage apps, users, subscriptions, segments and live activities.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OneSignal"
+  }
+}

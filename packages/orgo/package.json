@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/orgo",
+  "description": "Create and control Orgo cloud computers for AI agents: computers, workspaces, screenshots, mouse and keyboard, shell, files and templates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Orgo"
+  }
+}

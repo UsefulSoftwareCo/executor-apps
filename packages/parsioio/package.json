@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/parsioio",
+  "description": "Extract data from emails, PDFs and documents with Parsio: mailboxes, documents, templates, webhooks and parsed data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Parsio"
+  }
+}

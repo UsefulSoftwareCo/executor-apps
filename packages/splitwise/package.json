@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/splitwise",
+  "description": "Splitwise users, groups, friends, expenses, comments and notifications.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Splitwise"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

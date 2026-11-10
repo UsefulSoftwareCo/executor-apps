@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/box",
+  "description": "Files, folders, collaborations, comments, tasks, metadata, search, shared links and the rest of the Box Platform API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Box"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

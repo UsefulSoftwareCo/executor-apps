@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/postaldataapi",
+  "description": "Validate and look up postal codes, cities, coordinates and regional metadata for 240+ countries with PostalDataPI.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Postal Data API"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

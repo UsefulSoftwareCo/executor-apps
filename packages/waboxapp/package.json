@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/waboxapp",
+  "description": "Send WhatsApp messages (text, images, links, files) and check account status with the waboxapp API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Waboxapp"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/datascope",
+  "description": "DataScope mobile forms: form answers, locations, lists, task assignments, signatures, files and tickets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DataScope"
+  }
+}

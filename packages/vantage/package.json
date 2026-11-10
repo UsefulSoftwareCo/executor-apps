@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/vantage",
+  "description": "Cloud cost reports, budgets, anomalies, recommendations, folders, tags and the rest of the Vantage REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Vantage"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

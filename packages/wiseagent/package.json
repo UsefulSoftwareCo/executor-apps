@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wiseagent",
+  "description": "Contacts, notes, tasks, calls, properties, calendar and marketing programs in the Wise Agent real estate CRM.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Wise Agent"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

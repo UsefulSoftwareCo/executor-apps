@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/loopreturns",
+  "description": "Loop Returns: returns, draft returns, orders, products, customers, inventory, labels, destinations and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Loop Returns"
+  }
+}

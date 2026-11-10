@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/etermin",
+  "description": "Manage eTermin appointment scheduling: appointments, contacts, calendars, services, working times and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "eTermin"
+  }
+}

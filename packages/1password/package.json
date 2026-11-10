@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/1password",
+  "description": "1Password Events API: audit events, sign-in attempts and item usages for a 1Password Business or Teams account.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "1Password"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/workato",
+  "description": "Workato Developer API: recipes, jobs, connections, projects and deployments, packages, lookup and data tables, properties, tags, API platform, on-prem agents and event streams.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Workato"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

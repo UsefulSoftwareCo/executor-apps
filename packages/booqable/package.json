@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/booqable",
+  "description": "Booqable rental software: orders, customers, products, bundles, stock, availability, pricing, payments, documents and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Booqable"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

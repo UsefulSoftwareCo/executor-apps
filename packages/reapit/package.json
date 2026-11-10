@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/reapit",
+  "description": "Reapit Foundations for estate agents: properties, contacts, applicants, vendors, landlords, tenancies, appointments, offers, enquiries, tasks, works orders, offices and negotiators.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Reapit"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gelato",
+  "description": "Gelato print-on-demand: create, quote, search and cancel orders, browse the product catalog, prices, stock and shipment methods, and manage store products.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gelato"
+  }
+}

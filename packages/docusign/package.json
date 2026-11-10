@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docusign",
+  "description": "DocuSign eSignature: envelopes, templates, recipients, documents, signing, folders, users, groups, brands and account settings.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DocuSign"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

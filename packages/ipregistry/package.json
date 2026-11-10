@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/ipregistry",
+  "description": "IP geolocation, network, company, carrier, threat, autonomous-system and user-agent intelligence with Ipregistry, through its official MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Ipregistry"
+  }
+}

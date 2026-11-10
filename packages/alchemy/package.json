@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/alchemy",
+  "description": "Blockchain data on 80+ networks with Alchemy: JSON-RPC and enhanced node methods, NFT API, token prices, and multi-chain portfolio data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Alchemy"
+  }
+}

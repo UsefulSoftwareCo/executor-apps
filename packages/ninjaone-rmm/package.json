@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ninjaone-rmm",
+  "description": "Organizations, devices, tickets, alerts, policies, scripting, patching and the rest of the NinjaOne RMM public API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "NinjaOne RMM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/markupai",
+  "description": "Run Markup AI content agents and manage brand terminology, personas, voice profiles and style guides.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Markup AI"
+  }
+}

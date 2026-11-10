@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-contacts",
+  "description": "Manage Google Contacts: people, contact groups, other contacts and directory search via the Google People API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Contacts"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

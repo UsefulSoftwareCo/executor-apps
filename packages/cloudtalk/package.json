@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloudtalk",
+  "description": "CloudTalk cloud call center: calls, contacts, agents, campaigns, numbers, SMS, tags, notes, call analytics, Conversation Intelligence, VoiceAgents and the Dialer.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CloudTalk"
+  }
+}

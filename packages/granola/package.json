@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/granola",
+  "description": "Granola meeting notes, transcripts and folders, through Granola's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Granola"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

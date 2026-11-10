@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/transporeon-carrier",
+  "description": "Transporeon Carrier Interface: transports, offers, bookings, deliveries, status updates, attachments and settlements.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Transporeon Carrier Interface"
+  }
+}

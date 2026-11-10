@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/textus",
+  "description": "Send and manage business text messages with TextUs: messages, contacts, conversations and account details.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TextUs"
+  }
+}

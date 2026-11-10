@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nablencentral",
+  "description": "N-able N-central remote monitoring and management: service organizations, customers, sites, devices, active issues, custom properties, scheduled tasks, maintenance windows, users and access groups.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "N-able N-central"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

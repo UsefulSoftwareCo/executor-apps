@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/seektable",
+  "description": "Export, list and email SeekTable reports and dashboards, and manage CSV cubes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SeekTable"
+  }
+}

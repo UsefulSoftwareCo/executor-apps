@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/7shifts",
+  "description": "Restaurant scheduling and labor management in 7shifts: locations, departments, roles, users, shifts, time punches, time off, availability, events, payroll periods and labor reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "7shifts"
+  }
+}

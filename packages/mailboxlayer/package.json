@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailboxlayer",
+  "description": "Mailboxlayer email validation: syntax, MX and SMTP checks, disposable, free and role address detection, typo suggestions and a deliverability score.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailboxlayer"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/postmark",
+  "description": "Send and track transactional email with Postmark: sending, templates, bounces, message search, stats, servers, domains and sender signatures.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Postmark"
+  }
+}

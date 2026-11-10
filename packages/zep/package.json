@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zep",
+  "description": "Zep context graphs and agent memory: users, threads, messages, graph search, nodes, edges, episodes and context templates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zep"
+  }
+}

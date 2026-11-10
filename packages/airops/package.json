@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/airops",
+  "description": "AirOps brand kits, knowledge bases, content workflows and AI visibility analytics, through AirOps' official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "AirOps"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

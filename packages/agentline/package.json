@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agentline",
+  "description": "Give AI agents real phone numbers: agents, numbers, calls, transcripts, SMS and webhooks with AgentLine.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AgentLine"
+  }
+}

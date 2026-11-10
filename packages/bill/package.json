@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bill",
+  "description": "BILL (bill.com) accounts payable, accounts receivable, spend and expense, and partner operations through the Connect v3 API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "BILL"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

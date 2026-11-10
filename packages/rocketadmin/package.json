@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rocketadmin",
+  "description": "Manage Rocketadmin admin panels: connections, tables and rows, groups, permissions, dashboards, saved queries and logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rocketadmin"
+  }
+}

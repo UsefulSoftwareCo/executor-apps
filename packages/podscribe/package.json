@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/podscribe",
+  "description": "Podcast advertising verification and attribution with Podscribe: campaigns, impressions, conversions, reports, show and episode search, transcripts, rankers and advertiser management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Podscribe"
+  }
+}

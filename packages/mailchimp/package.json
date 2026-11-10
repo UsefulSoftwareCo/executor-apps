@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailchimp",
+  "description": "Audiences, members, campaigns, templates, automations, reports, ecommerce stores and the rest of the Mailchimp Marketing API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mailchimp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

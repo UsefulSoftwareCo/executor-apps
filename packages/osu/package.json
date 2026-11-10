@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/osu",
+  "description": "osu! API v2: users, beatmaps, beatmapsets, scores, rankings, matches, chat, forum and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "osu!"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

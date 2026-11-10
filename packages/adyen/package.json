@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/adyen",
+  "description": "Adyen payments and platforms: Checkout, Management, Balance Platform, Legal Entity, Transfers and Data Protection APIs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Adyen"
+  }
+}

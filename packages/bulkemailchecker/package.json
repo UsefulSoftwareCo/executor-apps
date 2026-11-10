@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bulkemailchecker",
+  "description": "Verify email addresses in real time with Bulk Email Checker: deliverability, disposable, role and catch-all detection, and mail-server details.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bulk Email Checker"
+  }
+}

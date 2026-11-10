@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clicksend",
+  "description": "Send SMS, MMS, email, voice, fax and post with ClickSend, and manage contacts, lists, campaigns and account settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ClickSend"
+  }
+}

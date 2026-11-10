@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ghost-admin",
+  "description": "Ghost Admin API: posts, pages, tags, tiers, newsletters, offers, members, labels, users, themes, webhooks and site info.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ghost"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

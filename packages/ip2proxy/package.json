@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ip2proxy",
+  "description": "IP2Proxy web service (legacy, closed to new sign-ups; existing key holders only): detect VPNs, Tor exit nodes, public and residential proxies, data centers and search engine robots by IP address.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IP2Proxy"
+  }
+}

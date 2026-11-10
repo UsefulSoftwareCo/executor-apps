@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webvizio",
+  "description": "Webvizio projects and feedback tasks: task prompts, descriptions, screenshots, console, network, error and action logs, and closing tasks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Webvizio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

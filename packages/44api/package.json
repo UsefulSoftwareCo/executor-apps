@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/44api",
+  "description": "Validate VAT and tax identifiers in 50+ countries with 44API, get registry company details where available, and manage the account IP whitelist.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "44API"
+  }
+}

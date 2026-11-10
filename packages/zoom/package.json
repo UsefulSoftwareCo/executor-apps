@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zoom",
+  "description": "Zoom Meetings, Users, Phone, Team Chat, Rooms, Events, Contact Center, Calendar, Mail and the rest of the Zoom REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zoom"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

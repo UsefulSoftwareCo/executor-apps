@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/passslot",
+  "description": "Create and manage Apple Wallet passes with PassSlot: templates, passes, values, status, push updates, pass type IDs and scanners.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PassSlot"
+  }
+}

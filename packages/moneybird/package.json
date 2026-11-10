@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/moneybird",
+  "description": "Contacts, sales invoices, estimates, purchase documents, bank accounts, products, time entries and the rest of the Moneybird accounting API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Moneybird"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

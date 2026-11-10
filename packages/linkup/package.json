@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linkup",
+  "description": "Linkup web search API: agentic search, page fetch, research, batch tasks and credit balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Linkup"
+  }
+}

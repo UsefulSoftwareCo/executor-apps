@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/leapsome",
+  "description": "People enablement with Leapsome: goals, reviews, employees, absences, feedback, payroll and time tracking, plus SCIM user and group provisioning.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Leapsome"
+  }
+}

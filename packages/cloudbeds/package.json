@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloudbeds",
+  "description": "Hotel property management in Cloudbeds: reservations, guests, rooms, rates, availability, payments, housekeeping and groups.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cloudbeds"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

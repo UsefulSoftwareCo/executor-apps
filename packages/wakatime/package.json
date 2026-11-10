@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wakatime",
+  "description": "Coding time summaries, stats, durations, heartbeats, goals, projects, organizations and leaderboards from WakaTime.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "WakaTime"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

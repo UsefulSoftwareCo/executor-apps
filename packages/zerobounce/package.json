@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zerobounce",
+  "description": "ZeroBounce email validation: single and batch validation, bulk file lists, credits, API usage, activity data and email format finder, domain search and A.I. scoring.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ZeroBounce"
+  }
+}

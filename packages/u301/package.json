@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/u301",
+  "description": "Shorten links, delete them, list available domains and create QR codes with U301.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "U301"
+  }
+}

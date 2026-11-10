@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/miro",
+  "description": "Miro boards, items, sticky notes, shapes, connectors, tags, members, teams and organization APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Miro"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

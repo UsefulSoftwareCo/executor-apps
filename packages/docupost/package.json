@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docupost",
+  "description": "DocuPost print-and-mail: send letters (PDF or HTML) and postcards through the USPS.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DocuPost"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pinecone",
+  "description": "Pinecone vector database: indexes, collections, backups, vectors, bulk imports, embeddings, reranking and Assistant.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Pinecone"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

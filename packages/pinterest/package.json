@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pinterest",
+  "description": "Pins, boards, ads, catalogs, analytics and conversions through the Pinterest REST API v5.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Pinterest"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

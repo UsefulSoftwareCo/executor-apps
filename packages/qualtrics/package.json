@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/qualtrics",
+  "description": "Qualtrics surveys, questions, responses, distributions, mailing lists, directory contacts, users and event subscriptions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Qualtrics"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

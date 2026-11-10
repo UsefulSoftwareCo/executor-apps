@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/confluence",
+  "description": "Confluence Cloud pages, blog posts, spaces, comments, attachments, labels, folders, whiteboards, tasks and the rest of the Confluence Cloud REST API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Confluence"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,653 @@
+import {
+  accountRouter,
+  array,
+  decodeJson,
+  defineApp,
+  defineProvider,
+  json,
+  mutation,
+  number,
+  object,
+  query,
+  record,
+  router,
+  secrets,
+  string,
+} from "apps";
+import { always } from "apps/operations/approval";
+import { icons } from "./icon.js";
+
+const base = "https://api.tapfiliate.com/1.6";
+
+const tapfiliate = defineProvider({
+  name: "Tapfiliate",
+  hosts: ["api.tapfiliate.com"],
+  auth: {
+    apiKey: secrets({
+      label: "API key",
+      fields: object({ token: string({ minLength: 1 }) }),
+    }),
+  },
+  async health({ account, fetch, signal }) {
+    const response = await fetch(`${base}/programs/`, {
+      signal,
+      headers: { "X-Api-Key": account.fields.token },
+    });
+    await decodeJson(response, array(json()));
+  },
+});
+
+type Fetch = typeof fetch;
+type Params = Record<string, unknown>;
+
+function client(token: string, fetcher: Fetch, signal: AbortSignal | undefined) {
+  const url = (path: string, params: Params = {}) => {
+    const u = new URL(`${base}${path}`);
+    for (const [key, value] of Object.entries(params)) {
+      if (value !== undefined && value !== null) u.searchParams.set(key, String(value));
+    }
+    return u.toString();
+  };
+  const call = async (method: string, path: string, params: Params = {}, body?: unknown) => {
+    const response = await fetcher(url(path, params), {
+      method,
+      signal,
+      headers: {
+        "X-Api-Key": token,
+        accept: "application/json",
+        ...(body === undefined ? {} : { "content-type": "application/json" }),
+      },
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+    });
+    const text = await response.text();
+    if (!response.ok) throw new Error(`Tapfiliate returned ${response.status}: ${text.slice(0, 500)}`);
+    const next = /<[^>]*[?&]page=(\d+)[^>]*>;\s*rel="next"/.exec(response.headers.get("link") ?? "")?.[1];
+    const data: unknown = text.length === 0 ? { ok: true, status: response.status } : JSON.parse(text);
+    return next === undefined ? data : { data, nextPage: Number(next) };
+  };
+  return {
+    get: (path: string, params?: Params) => call("GET", path, params),
+    send: (method: "POST" | "PUT" | "PATCH" | "DELETE", path: string, body?: unknown, params?: Params) =>
+      call(method, path, params, body),
+  };
+}
+
+type Client = ReturnType<typeof client>;
+
+const page = number().optional();
+const bodyField = record(json());
+const enc = encodeURIComponent;
+
+function tools(c: Client) {
+  return router({
+    programs: router({
+      list: query(
+        { description: "List programs. Optional filters: assetId, page.", input: object({ assetId: string().optional(), page }) },
+        async (_ctx, { assetId, page }) => c.get("/programs/", { asset_id: assetId, page }),
+      ),
+      get: query(
+        { description: "Retrieve a program by its ID.", input: object({ programId: string({ minLength: 1 }) }) },
+        async (_ctx, { programId }) => c.get(`/programs/${enc(programId)}/`),
+      ),
+      listAffiliates: query(
+        {
+          description: "List affiliates in a program. Optional filters: sourceId, email, parentId, affiliateGroupId, page.",
+          input: object({
+            programId: string({ minLength: 1 }),
+            sourceId: string().optional(),
+            email: string().optional(),
+            parentId: string().optional(),
+            affiliateGroupId: string().optional(),
+            page,
+          }),
+        },
+        async (_ctx, { programId, sourceId, email, parentId, affiliateGroupId, page }) =>
+          c.get(`/programs/${enc(programId)}/affiliates/`, {
+            source_id: sourceId,
+            email,
+            parent_id: parentId,
+            affiliate_group_id: affiliateGroupId,
+            page,
+          }),
+      ),
+      getAffiliate: query(
+        {
+          description: "Retrieve one affiliate's membership of a program.",
+          input: object({ programId: string({ minLength: 1 }), affiliateId: string({ minLength: 1 }) }),
+        },
+        async (_ctx, { programId, affiliateId }) => c.get(`/programs/${enc(programId)}/affiliates/${enc(affiliateId)}/`),
+      ),
+      listCommissionTypes: query(
+        { description: "List the commission types of a program.", input: object({ programId: string({ minLength: 1 }) }) },
+        async (_ctx, { programId }) => c.get(`/programs/${enc(programId)}/commission-types/`),
+      ),
+      listLevels: query(
+        { description: "List the MLM levels of a program.", input: object({ programId: string({ minLength: 1 }) }) },
+        async (_ctx, { programId }) => c.get(`/programs/${enc(programId)}/levels/`),
+      ),
+      listBonuses: query(
+        { description: "List the bonuses of a program.", input: object({ programId: string({ minLength: 1 }) }) },
+        async (_ctx, { programId }) => c.get(`/programs/${enc(programId)}/bonuses/`),
+      ),
+      addAffiliate: mutation(
+        {
+          description:
+            "Add an affiliate to a program. body is the JSON payload, for example { affiliate: { id: \"...\" }, approved: true (default), false or null for pending, coupon?: \"...\" }.",
+          input: object({ programId: string({ minLength: 1 }), body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { programId, body }) => c.send("POST", `/programs/${enc(programId)}/affiliates/`, body),
+      ),
+      updateAffiliate: mutation(
+        {
+          description: "Update an affiliate's membership of a program. body: { coupon }.",
+          input: object({ programId: string({ minLength: 1 }), affiliateId: string({ minLength: 1 }), body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { programId, affiliateId, body }) =>
+          c.send("PATCH", `/programs/${enc(programId)}/affiliates/${enc(affiliateId)}/`, body),
+      ),
+      approveAffiliate: mutation(
+        {
+          description: "Approve an affiliate for a program.",
+          input: object({ programId: string({ minLength: 1 }), affiliateId: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { programId, affiliateId }) =>
+          c.send("PUT", `/programs/${enc(programId)}/affiliates/${enc(affiliateId)}/approved/`),
+      ),
+      disapproveAffiliate: mutation(
+        {
+          description: "Disapprove an affiliate for a program.",
+          input: object({ programId: string({ minLength: 1 }), affiliateId: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { programId, affiliateId }) =>
+          c.send("DELETE", `/programs/${enc(programId)}/affiliates/${enc(affiliateId)}/approved/`),
+      ),
+    }),
+    affiliates: router({
+      list: query(
+        {
+          description: "List affiliates. Filters: clickId, sourceId, referralCode (value of ref= in the referral link), email, parentId, affiliateGroupId, page.",
+          input: object({
+            clickId: string().optional(),
+            sourceId: string().optional(),
+            referralCode: string().optional(),
+            email: string().optional(),
+            parentId: string().optional(),
+            affiliateGroupId: string().optional(),
+            page,
+          }),
+        },
+        async (_ctx, { clickId, sourceId, referralCode, email, parentId, affiliateGroupId, page }) =>
+          c.get("/affiliates/", {
+            click_id: clickId,
+            source_id: sourceId,
+            referral_code: referralCode,
+            email,
+            parent_id: parentId,
+            affiliate_group_id: affiliateGroupId,
+            page,
+          }),
+      ),
+      get: query(
+        { description: "Retrieve an affiliate by ID.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/`),
+      ),
+      listCustomFields: query(
+        { description: "List the custom fields defined for affiliates.", input: object({}) },
+        async () => c.get("/affiliates/custom-fields/"),
+      ),
+      listPrograms: query(
+        { description: "List the programs (affiliations) an affiliate belongs to.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/programs/`),
+      ),
+      listBalances: query(
+        { description: "List an affiliate's balances.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/balances/`),
+      ),
+      listPayments: query(
+        { description: "List an affiliate's payments.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/payments/`),
+      ),
+      listPayoutMethods: query(
+        { description: "List an affiliate's payout methods.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/payout-methods/`),
+      ),
+      getPayoutMethod: query(
+        {
+          description: "Retrieve one payout method of an affiliate by payout method ID (for example paypal).",
+          input: object({ affiliateId: string({ minLength: 1 }), payoutMethodId: string({ minLength: 1 }) }),
+        },
+        async (_ctx, { affiliateId, payoutMethodId }) =>
+          c.get(`/affiliates/${enc(affiliateId)}/payout-methods/${enc(payoutMethodId)}/`),
+      ),
+      listNotes: query(
+        { description: "List notes on an affiliate.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/notes/`),
+      ),
+      getMetaData: query(
+        { description: "Retrieve all metadata of an affiliate.", input: object({ affiliateId: string({ minLength: 1 }) }) },
+        async (_ctx, { affiliateId }) => c.get(`/affiliates/${enc(affiliateId)}/meta-data/`),
+      ),
+      create: mutation(
+        {
+          description:
+            "Create an affiliate. body: { firstname, lastname, email, password?, address?, company?, custom_fields?, ... }.",
+          input: object({ body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { body }) => c.send("POST", "/affiliates/", body),
+      ),
+      delete: mutation(
+        { description: "Delete an affiliate.", input: object({ affiliateId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { affiliateId }) => c.send("DELETE", `/affiliates/${enc(affiliateId)}/`),
+      ),
+      setGroup: mutation(
+        {
+          description: "Put an affiliate in an affiliate group.",
+          input: object({ affiliateId: string({ minLength: 1 }), affiliateGroupId: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, affiliateGroupId }) =>
+          c.send("PUT", `/affiliates/${enc(affiliateId)}/group/`, { group_id: affiliateGroupId }),
+      ),
+      removeGroup: mutation(
+        { description: "Remove an affiliate from its group.", input: object({ affiliateId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { affiliateId }) => c.send("DELETE", `/affiliates/${enc(affiliateId)}/group/`),
+      ),
+      setParent: mutation(
+        {
+          description: "Set the MLM parent of an affiliate (parentAffiliateId is the parent's letter ID).",
+          input: object({ childAffiliateId: string({ minLength: 1 }), parentAffiliateId: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { childAffiliateId, parentAffiliateId }) =>
+          c.send("POST", `/affiliates/${enc(childAffiliateId)}/parent/`, { affiliate_id: parentAffiliateId }),
+      ),
+      removeParent: mutation(
+        { description: "Remove the MLM parent of an affiliate.", input: object({ childAffiliateId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { childAffiliateId }) => c.send("DELETE", `/affiliates/${enc(childAffiliateId)}/parent/`),
+      ),
+      createNote: mutation(
+        {
+          description: "Add a note to an affiliate.",
+          input: object({ affiliateId: string({ minLength: 1 }), message: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, message }) => c.send("POST", `/affiliates/${enc(affiliateId)}/notes/`, { message }),
+      ),
+      updateNote: mutation(
+        {
+          description: "Update an affiliate note.",
+          input: object({ affiliateId: string({ minLength: 1 }), noteId: string({ minLength: 1 }), message: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, noteId, message }) =>
+          c.send("PUT", `/affiliates/${enc(affiliateId)}/notes/${enc(noteId)}/`, { message }),
+      ),
+      deleteNote: mutation(
+        {
+          description: "Delete an affiliate note.",
+          input: object({ affiliateId: string({ minLength: 1 }), noteId: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, noteId }) => c.send("DELETE", `/affiliates/${enc(affiliateId)}/notes/${enc(noteId)}/`),
+      ),
+      replaceMetaData: mutation(
+        {
+          description: "Replace all metadata of an affiliate with the given key/value object.",
+          input: object({ affiliateId: string({ minLength: 1 }), metaData: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, metaData }) => c.send("PUT", `/affiliates/${enc(affiliateId)}/meta-data/`, metaData),
+      ),
+      setMetaDataKey: mutation(
+        {
+          description: "Set one metadata key on an affiliate.",
+          input: object({ affiliateId: string({ minLength: 1 }), key: string({ minLength: 1 }), value: json() }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, key, value }) =>
+          c.send("PUT", `/affiliates/${enc(affiliateId)}/meta-data/${enc(key)}/`, { value }),
+      ),
+      deleteMetaDataKey: mutation(
+        {
+          description: "Delete one metadata key of an affiliate.",
+          input: object({ affiliateId: string({ minLength: 1 }), key: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateId, key }) => c.send("DELETE", `/affiliates/${enc(affiliateId)}/meta-data/${enc(key)}/`),
+      ),
+    }),
+    affiliateGroups: router({
+      list: query(
+        { description: "List affiliate groups.", input: object({}) },
+        async () => c.get("/affiliate-groups/"),
+      ),
+      create: mutation(
+        { description: "Create an affiliate group. body: { title }.", input: object({ body: bodyField }), approval: always() },
+        async (_ctx, { body }) => c.send("POST", "/affiliate-groups/", body),
+      ),
+      update: mutation(
+        {
+          description: "Update an affiliate group. body: { title }.",
+          input: object({ affiliateGroupId: string({ minLength: 1 }), body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { affiliateGroupId, body }) => c.send("PATCH", `/affiliate-groups/${enc(affiliateGroupId)}/`, body),
+      ),
+    }),
+    affiliateProspects: router({
+      list: query(
+        { description: "List affiliate prospects. Optional filters: email, referralCode, programId, groupId.",
+          input: object({ email: string().optional(), referralCode: string().optional(), programId: string().optional(), groupId: string().optional() }),
+        },
+        async (_ctx, { email, referralCode, programId, groupId }) =>
+          c.get("/affiliate-prospects/", { email, referral_code: referralCode, program_id: programId, group_id: groupId }),
+      ),
+      get: query(
+        { description: "Retrieve an affiliate prospect.", input: object({ prospectId: string({ minLength: 1 }) }) },
+        async (_ctx, { prospectId }) => c.get(`/affiliate-prospects/${enc(prospectId)}/`),
+      ),
+      create: mutation(
+        {
+          description: "Create an affiliate prospect. body: { firstname, lastname (required), email?, company?: { name }, address?: { address, postal_code, city, country: { code }, state? }, program_id?, affiliate_group_id? }.",
+          input: object({ body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { body }) => c.send("POST", "/affiliate-prospects/", body),
+      ),
+      delete: mutation(
+        { description: "Delete an affiliate prospect.", input: object({ prospectId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { prospectId }) => c.send("DELETE", `/affiliate-prospects/${enc(prospectId)}/`),
+      ),
+    }),
+    customers: router({
+      list: query(
+        {
+          description: "List customers. Filters: programId, customerId (your own ID), affiliateId, dateFrom, dateTo (YYYY-MM-DD), page.",
+          input: object({
+            programId: string().optional(),
+            customerId: string().optional(),
+            affiliateId: string().optional(),
+            dateFrom: string().optional(),
+            dateTo: string().optional(),
+            page,
+          }),
+        },
+        async (_ctx, { programId, customerId, affiliateId, dateFrom, dateTo, page }) =>
+          c.get("/customers/", {
+            program_id: programId,
+            customer_id: customerId,
+            affiliate_id: affiliateId,
+            date_from: dateFrom,
+            date_to: dateTo,
+            page,
+          }),
+      ),
+      get: query(
+        { description: "Retrieve a customer by Tapfiliate ID (cu_...).", input: object({ id: string({ minLength: 1 }) }) },
+        async (_ctx, { id }) => c.get(`/customers/${enc(id)}/`),
+      ),
+      getMetaData: query(
+        { description: "Retrieve all metadata of a customer.", input: object({ id: string({ minLength: 1 }) }) },
+        async (_ctx, { id }) => c.get(`/customers/${enc(id)}/meta-data/`),
+      ),
+      create: mutation(
+        {
+          description:
+            "Create a customer. body: { customer_id (required), plus one attribution field: tracking_id, referral_code, click_id, coupon, or asset_id with source_id; status?, user_agent?, ip?, meta_data? }. Set overrideMaxCookieTime to true to ignore the cookie window.",
+          input: object({ body: bodyField, overrideMaxCookieTime: string().optional() }),
+          approval: always(),
+        },
+        async (_ctx, { body, overrideMaxCookieTime }) =>
+          c.send("POST", "/customers/", body, { override_max_cookie_time: overrideMaxCookieTime }),
+      ),
+      update: mutation(
+        {
+          description: "Update a customer. body: { customer_id?, meta_data? }.",
+          input: object({ id: string({ minLength: 1 }), body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { id, body }) => c.send("PATCH", `/customers/${enc(id)}/`, body),
+      ),
+      delete: mutation(
+        { description: "Delete a customer.", input: object({ id: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { id }) => c.send("DELETE", `/customers/${enc(id)}/`),
+      ),
+      cancel: mutation(
+        { description: "Cancel a customer.", input: object({ id: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { id }) => c.send("DELETE", `/customers/${enc(id)}/status/`),
+      ),
+      uncancel: mutation(
+        { description: "Uncancel a customer, returning it to its prior status.", input: object({ id: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { id }) => c.send("PUT", `/customers/${enc(id)}/status/`),
+      ),
+      replaceMetaData: mutation(
+        {
+          description: "Replace all metadata of a customer with the given key/value object.",
+          input: object({ id: string({ minLength: 1 }), metaData: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { id, metaData }) => c.send("PUT", `/customers/${enc(id)}/meta-data/`, metaData),
+      ),
+      setMetaDataKey: mutation(
+        {
+          description: "Set one metadata key on a customer.",
+          input: object({ id: string({ minLength: 1 }), key: string({ minLength: 1 }), value: json() }),
+          approval: always(),
+        },
+        async (_ctx, { id, key, value }) => c.send("PUT", `/customers/${enc(id)}/meta-data/${enc(key)}/`, { value }),
+      ),
+      deleteMetaDataKey: mutation(
+        {
+          description: "Delete one metadata key of a customer.",
+          input: object({ id: string({ minLength: 1 }), key: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { id, key }) => c.send("DELETE", `/customers/${enc(id)}/meta-data/${enc(key)}/`),
+      ),
+    }),
+    conversions: router({
+      list: query(
+        {
+          description:
+            "List conversions. Filters: programId, externalId, affiliateId, pending (true/false), dateFrom, dateTo (YYYY-MM-DD), page.",
+          input: object({
+            programId: string().optional(),
+            externalId: string().optional(),
+            affiliateId: string().optional(),
+            pending: string().optional(),
+            dateFrom: string().optional(),
+            dateTo: string().optional(),
+            page,
+          }),
+        },
+        async (_ctx, { programId, externalId, affiliateId, pending, dateFrom, dateTo, page }) =>
+          c.get("/conversions/", {
+            program_id: programId,
+            external_id: externalId,
+            affiliate_id: affiliateId,
+            pending,
+            date_from: dateFrom,
+            date_to: dateTo,
+            page,
+          }),
+      ),
+      get: query(
+        { description: "Retrieve a conversion by its numeric ID.", input: object({ conversionId: string({ minLength: 1 }) }) },
+        async (_ctx, { conversionId }) => c.get(`/conversions/${enc(conversionId)}/`),
+      ),
+      getMetaData: query(
+        { description: "Retrieve all metadata of a conversion.", input: object({ conversionId: string({ minLength: 1 }) }) },
+        async (_ctx, { conversionId }) => c.get(`/conversions/${enc(conversionId)}/meta-data/`),
+      ),
+      create: mutation(
+        {
+          description:
+            "Create a conversion. body needs one attribution field (customer_id, referral_code, click_id, coupon, tracking_id, or asset_id with source_id) plus external_id?, amount?, currency?, commission_type?, commissions?, meta_data?, program_group?, user_agent?, ip?.",
+          input: object({ body: bodyField, overrideMaxCookieTime: string().optional() }),
+          approval: always(),
+        },
+        async (_ctx, { body, overrideMaxCookieTime }) =>
+          c.send("POST", "/conversions/", body, { override_max_cookie_time: overrideMaxCookieTime }),
+      ),
+      update: mutation(
+        {
+          description: "Update a conversion. body: { amount?, external_id?, meta_data? }. Set recalculateCommissions to true to recompute commissions.",
+          input: object({ conversionId: string({ minLength: 1 }), body: bodyField, recalculateCommissions: string().optional() }),
+          approval: always(),
+        },
+        async (_ctx, { conversionId, body, recalculateCommissions }) =>
+          c.send("PATCH", `/conversions/${enc(conversionId)}/`, body, { recalculate_commissions: recalculateCommissions }),
+      ),
+      delete: mutation(
+        { description: "Delete a conversion.", input: object({ conversionId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { conversionId }) => c.send("DELETE", `/conversions/${enc(conversionId)}/`),
+      ),
+      addCommissions: mutation(
+        {
+          description: "Add commissions to a conversion. body: { conversion_sub_amount (required), commission_type?, comment? }.",
+          input: object({ conversionId: string({ minLength: 1 }), body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { conversionId, body }) => c.send("POST", `/conversions/${enc(conversionId)}/commissions/`, body),
+      ),
+      replaceMetaData: mutation(
+        {
+          description: "Replace all metadata of a conversion with the given key/value object.",
+          input: object({ conversionId: string({ minLength: 1 }), metaData: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { conversionId, metaData }) => c.send("PUT", `/conversions/${enc(conversionId)}/meta-data/`, metaData),
+      ),
+      setMetaDataKey: mutation(
+        {
+          description: "Set one metadata key on a conversion.",
+          input: object({ conversionId: string({ minLength: 1 }), key: string({ minLength: 1 }), value: json() }),
+          approval: always(),
+        },
+        async (_ctx, { conversionId, key, value }) =>
+          c.send("PUT", `/conversions/${enc(conversionId)}/meta-data/${enc(key)}/`, { value }),
+      ),
+      deleteMetaDataKey: mutation(
+        {
+          description: "Delete one metadata key of a conversion.",
+          input: object({ conversionId: string({ minLength: 1 }), key: string({ minLength: 1 }) }),
+          approval: always(),
+        },
+        async (_ctx, { conversionId, key }) => c.send("DELETE", `/conversions/${enc(conversionId)}/meta-data/${enc(key)}/`),
+      ),
+    }),
+    commissions: router({
+      list: query(
+        {
+          description:
+            "List commissions. Filters: affiliateId, status (approved, disapproved, pending), paid (1 or 0), page.",
+          input: object({
+            affiliateId: string().optional(),
+            status: string().optional(),
+            paid: string().optional(),
+            page,
+          }),
+        },
+        async (_ctx, { affiliateId, status, paid, page }) =>
+          c.get("/commissions/", { affiliate_id: affiliateId, status, paid, page }),
+      ),
+      get: query(
+        { description: "Retrieve a commission by its numeric ID.", input: object({ commissionId: string({ minLength: 1 }) }) },
+        async (_ctx, { commissionId }) => c.get(`/commissions/${enc(commissionId)}/`),
+      ),
+      update: mutation(
+        {
+          description: "Update a commission. body: { amount?, comment? }.",
+          input: object({ commissionId: string({ minLength: 1 }), body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { commissionId, body }) => c.send("PATCH", `/commissions/${enc(commissionId)}/`, body),
+      ),
+      approve: mutation(
+        { description: "Approve a commission.", input: object({ commissionId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { commissionId }) => c.send("PUT", `/commissions/${enc(commissionId)}/approved/`),
+      ),
+      disapprove: mutation(
+        { description: "Disapprove a commission.", input: object({ commissionId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { commissionId }) => c.send("DELETE", `/commissions/${enc(commissionId)}/approved/`),
+      ),
+    }),
+    payments: router({
+      list: query(
+        { description: "List payments.", input: object({ page }) },
+        async (_ctx, { page }) => c.get("/payments/", { page }),
+      ),
+      get: query(
+        { description: "Retrieve a payment by ID.", input: object({ paymentId: string({ minLength: 1 }) }) },
+        async (_ctx, { paymentId }) => c.get(`/payments/${enc(paymentId)}/`),
+      ),
+      listBalances: query(
+        { description: "List all non-zero affiliate balances (not paginated).", input: object({}) },
+        async () => c.get("/balances/"),
+      ),
+      create: mutation(
+        {
+          description:
+            "Pay out affiliate balances. Each payment needs affiliate_id, amount and currency. Pass several payments at once in payments.",
+          input: object({
+            payments: array(object({ affiliate_id: string({ minLength: 1 }), amount: number(), currency: string({ minLength: 3 }) })),
+          }),
+          approval: always(),
+        },
+        async (_ctx, { payments }) => c.send("POST", "/payments/", payments),
+      ),
+      cancel: mutation(
+        { description: "Cancel a payment; the amount returns to the affiliate's balance.", input: object({ paymentId: string({ minLength: 1 }) }), approval: always() },
+        async (_ctx, { paymentId }) => c.send("DELETE", `/payments/${enc(paymentId)}/`),
+      ),
+    }),
+    clicks: router({
+      list: query(
+        {
+          description: "List clicks (Enterprise plan only). Filters: programId, affiliateId, dateFrom, dateTo (YYYY-MM-DD), page.",
+          input: object({
+            programId: string().optional(),
+            affiliateId: string().optional(),
+            dateFrom: string().optional(),
+            dateTo: string().optional(),
+            page,
+          }),
+        },
+        async (_ctx, { programId, affiliateId, dateFrom, dateTo, page }) =>
+          c.get("/clicks/", { program_id: programId, affiliate_id: affiliateId, date_from: dateFrom, date_to: dateTo, page }),
+      ),
+      get: query(
+        { description: "Retrieve detailed information about a click by UUID (Enterprise plan only).", input: object({ id: string({ minLength: 1 }) }) },
+        async (_ctx, { id }) => c.get(`/clicks/${enc(id)}/`),
+      ),
+      create: mutation(
+        {
+          description: "Record a click. body: { referral_code (required), source_id?, meta_data?, referrer?, landing_page?, user_agent?, ip? }. Returns a click ID usable as click_id when creating a conversion.",
+          input: object({ body: bodyField }),
+          approval: always(),
+        },
+        async (_ctx, { body }) => c.send("POST", "/clicks/", body),
+      ),
+    }),
+  });
+}
+
+export default defineApp(
+  { accounts: { tapfiliate: tapfiliate.many() } },
+  async ({ accounts, fetch, signal }) => ({
+    tools: router(
+      await accountRouter(accounts.tapfiliate, (account) => tools(client(account.fields.token, fetch, signal)), { signal }),
+      {
+        title: "Tapfiliate",
+        description:
+          "Tapfiliate affiliate tracking: programs, affiliates and groups, prospects, customers, conversions, commissions, payments, balances and clicks.",
+        icons,
+      },
+    ),
+  }),
+);

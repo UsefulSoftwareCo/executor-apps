@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/browserless",
+  "description": "Cloud headless browsers from Browserless: a browser agent, smart scraping, crawling, search, site maps, exports, Lighthouse audits and account usage, through Browserless's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Browserless"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

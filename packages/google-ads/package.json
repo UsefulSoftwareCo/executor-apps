@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-ads",
+  "description": "Google Ads campaigns, GAQL reporting, mutations, keyword planning and audience insights through the Google Ads API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Ads"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

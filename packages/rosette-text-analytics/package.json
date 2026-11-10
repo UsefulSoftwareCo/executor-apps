@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rosette-text-analytics",
+  "description": "Multilingual text analytics with Rosette (Babel Street Analytics): language, entities, sentiment, categories, relationships, morphology, names and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rosette Text Analytics"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/buildium",
+  "description": "Manage Buildium property management data: rentals, leases, tenants, owners, associations, work orders, accounting and files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Buildium"
+  }
+}

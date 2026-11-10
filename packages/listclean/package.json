@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/listclean",
+  "description": "Verify email addresses and clean email lists with Listclean: single and batch verification, list uploads, downloads and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Listclean"
+  }
+}

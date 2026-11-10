@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nmkrstudio",
+  "description": "Create and sell Cardano NFT projects with NMKR Studio: projects, NFTs, uploads, minting, sales, payouts, wallets and payment transactions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NMKR Studio"
+  }
+}

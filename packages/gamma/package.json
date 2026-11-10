@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gamma",
+  "description": "Generate, edit, export and analyze presentations, documents, websites and social posts in Gamma through its official REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gamma"
+  }
+}

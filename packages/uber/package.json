@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/uber",
+  "description": "Uber Riders API: products, price and time estimates, ride requests, trip history, receipts, saved places and payment methods.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Uber"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

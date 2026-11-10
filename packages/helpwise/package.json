@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/helpwise",
+  "description": "Helpwise shared inbox: conversations, contacts, tags, custom fields, SMS and WhatsApp messages, emails, notes, mailboxes and reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Helpwise"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

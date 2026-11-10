@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/captions",
+  "description": "Captions (Mirage API): generate AI avatar and creator videos, text-to-speech and add styled captions to videos.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Captions"
+  }
+}

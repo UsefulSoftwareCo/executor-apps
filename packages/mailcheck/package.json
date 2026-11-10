@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailcheck",
+  "description": "Mailcheck email verification: check an email address or domain for syntax, MX records, SMTP validity, disposable and catch-all providers, with a trust rate.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailcheck"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/outline",
+  "description": "Outline team knowledge base: documents, collections, comments, shares, users, groups and search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Outline"
+  }
+}

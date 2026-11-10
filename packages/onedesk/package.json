@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onedesk",
+  "description": "OneDesk help desk and project management: items, projects, customers, users, teams, timesheets, conversations, invoices and quotes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OneDesk"
+  }
+}

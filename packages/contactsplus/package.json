@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/contactsplus",
+  "description": "Contacts, tags, teams and webhooks in Contacts+.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Contacts+"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

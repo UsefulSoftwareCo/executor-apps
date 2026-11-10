@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/finnhub",
+  "description": "Finnhub market data: quotes, candles, company profiles and fundamentals, news, earnings, economic data and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Finnhub"
+  }
+}

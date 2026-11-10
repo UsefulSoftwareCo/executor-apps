@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/namsor",
+  "description": "Classify personal names with NamSor: gender, origin, country, diaspora, US race/ethnicity, religion, caste and name parsing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NamSor"
+  }
+}

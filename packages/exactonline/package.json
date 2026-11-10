@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/exactonline",
+  "description": "Exact Online accounting and ERP: relations, contacts, items, sales and purchase documents, general ledger, journals, projects and employees.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Exact Online"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

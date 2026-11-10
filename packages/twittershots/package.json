@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twittershots",
+  "description": "TwitterShots: render public X (Twitter) posts as screenshots, fetch post content as Markdown, and check API quota.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TwitterShots"
+  }
+}

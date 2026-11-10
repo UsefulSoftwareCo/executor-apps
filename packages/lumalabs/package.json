@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lumalabs",
+  "description": "Generate and edit images and videos with Luma's Agents API: generations, reference file uploads and file management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Luma Labs"
+  }
+}

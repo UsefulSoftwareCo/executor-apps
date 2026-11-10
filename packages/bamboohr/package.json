@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bamboohr",
+  "description": "BambooHR employees, time off, time tracking, benefits, training, applicant tracking, files and company settings through the official BambooHR REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "BambooHR"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

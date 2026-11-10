@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/flatfile",
+  "description": "Manage Flatfile data import: spaces, workbooks, sheets, records, files, jobs, agents and environments.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Flatfile"
+  }
+}

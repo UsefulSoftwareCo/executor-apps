@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/draftable",
+  "description": "Compare PDF, Word, PowerPoint and text documents with the Draftable Compare API: create, list, fetch and delete comparisons and export them to PDF.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Draftable"
+  }
+}

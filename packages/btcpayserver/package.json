@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/btcpayserver",
+  "description": "Accept Bitcoin payments with a self-hosted BTCPay Server: stores, invoices, payment requests, pull payments, payouts, wallets, apps and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BTCPay Server"
+  }
+}

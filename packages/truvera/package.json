@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/truvera",
+  "description": "Issue, manage and verify verifiable credentials and decentralized identities with Truvera: DIDs, credentials, schemas, registries, presentations, templates and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Truvera"
+  }
+}

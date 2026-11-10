@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mihuai",
+  "description": "Mihu AI voice and messaging agents: agents, calls, WhatsApp, SMS, email, contacts, campaigns, conversations, phone numbers and workspace administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mihu AI"
+  }
+}

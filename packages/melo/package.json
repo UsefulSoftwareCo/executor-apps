@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/melo",
+  "description": "Search deduplicated French real estate listings and market indicators with the Melo (Stream Estate) API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Melo"
+  }
+}

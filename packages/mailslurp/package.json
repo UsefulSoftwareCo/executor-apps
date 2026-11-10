@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailslurp",
+  "description": "Programmable email and SMS inboxes with MailSlurp: create inboxes, send and receive email, wait for messages, webhooks, phone numbers and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MailSlurp"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lakeraguard",
+  "description": "Screen prompts, responses and tool calls with Lakera Guard and manage Lakera policies, projects, logs and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lakera Guard"
+  }
+}

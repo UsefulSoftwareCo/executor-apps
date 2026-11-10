@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dynamics365",
+  "description": "Dynamics 365 Sales, Customer Service and other Dataverse apps: accounts, contacts, leads, opportunities, cases, activities and any table through the Dataverse Web API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dynamics 365"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

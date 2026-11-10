@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/codereadr",
+  "description": "Manage CodeREADr barcode scanning services, validation databases, scans, users, devices and questions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CodeREADr"
+  }
+}

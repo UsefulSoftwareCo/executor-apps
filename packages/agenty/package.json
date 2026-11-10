@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agenty",
+  "description": "Run Agenty web scraping and browser automation agents: agents, jobs, lists, inputs, schedules, workflows, connections and team users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Agenty"
+  }
+}

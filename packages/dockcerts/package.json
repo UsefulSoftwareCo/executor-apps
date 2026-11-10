@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dockcerts",
+  "description": "Issue, verify and revoke verifiable credentials with Dock Certs (now Truvera): DIDs, credentials, schemas, registries, proof requests, templates, profiles and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Dock Certs"
+  }
+}

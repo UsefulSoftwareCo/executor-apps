@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/splice",
+  "description": "Search Splice's sound catalog, build and share stacks, and download sounds with credits, through Splice's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Splice"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

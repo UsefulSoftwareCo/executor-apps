@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gleif",
+  "description": "Look up Legal Entity Identifier (LEI) records, ownership relationships, issuers and reference data from the public GLEIF API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GLEIF"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

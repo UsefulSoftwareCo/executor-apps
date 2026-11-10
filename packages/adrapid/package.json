@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/adrapid",
+  "description": "Create banners as images, videos, PDFs and HTML5 from Adrapid templates: create and fetch banners and read account info.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Adrapid"
+  }
+}

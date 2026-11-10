@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lessonly",
+  "description": "Lessonly (Seismic Learning): users, groups, lessons, paths, tags and assignments.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lessonly"
+  }
+}

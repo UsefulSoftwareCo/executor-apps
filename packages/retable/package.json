@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/retable",
+  "description": "Manage Retable workspaces, projects, tables, columns and rows, and search table data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Retable"
+  }
+}

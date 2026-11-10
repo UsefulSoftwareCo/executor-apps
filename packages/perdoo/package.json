@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/perdoo",
+  "description": "Objectives, key results, initiatives, teams and the rest of Perdoo's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Perdoo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

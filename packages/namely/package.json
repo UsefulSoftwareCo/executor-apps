@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/namely",
+  "description": "Namely HR: employee profiles and custom profile fields, groups and teams, job titles and tiers, company resources and folders, announcements and home feed events, comments, likes, notifications and reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Namely"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

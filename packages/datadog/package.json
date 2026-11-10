@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/datadog",
+  "description": "Search and query Datadog logs, metrics, traces, monitors, incidents, dashboards, notebooks, RUM, security signals and more through Datadog's official MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Datadog"
+  }
+}

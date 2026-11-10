@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sap-business-one",
+  "description": "SAP Business One Service Layer: business partners, items, sales and purchasing documents, accounting, and any entity of one company database.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SAP Business One"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

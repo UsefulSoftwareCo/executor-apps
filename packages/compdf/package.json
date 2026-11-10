@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/compdf",
+  "description": "Convert, edit, secure and parse PDFs with the ComPDF cloud API: format conversion, page operations, watermark, encryption, compression and AI document parsing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ComPDF"
+  }
+}

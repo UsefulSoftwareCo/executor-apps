@@ -1,0 +1,57 @@
+import type { OpenapiToolNamesOptions } from "apps/openapi";
+
+// OpenHands Cloud publishes its OpenAPI document at app.all-hands.dev/openapi.json. The document declares no
+// servers and declares an X-Access-Token apiKey scheme, but the vendor docs (cloud-api) use
+// Authorization: Bearer <API key> (Settings > API Keys), so the scheme is overridden to HTTP bearer.
+export const options = {
+  source: { url: "https://app.all-hands.dev/openapi.json" },
+  allowedOrigin: "https://app.all-hands.dev",
+  baseUrl: "https://app.all-hands.dev",
+  securitySchemes: { APIKeyHeader: { type: "http", scheme: "bearer" } },
+  // The document declares no security; send the account's credential on every operation but the public ones below.
+  fallbackSecurity: [{ APIKeyHeader: [] }],
+  methods: { apiKey: [{ scheme: "APIKeyHeader", field: "token", part: "value", prefix: "" }] },
+  oauth: [],
+  // Public operations keep no security (catalog/status/openhands.json "credentialFree" says why).
+  patches: [
+    { op: "add", path: "/paths/~1alive/get/security", value: [] },
+    { op: "add", path: "/paths/~1api~1idp~1status/get/security", value: [] },
+    { op: "add", path: "/paths/~1api~1service~1health/get/security", value: [] },
+    { op: "add", path: "/paths/~1health/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1github~1callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp~1invite/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp-login/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp~1login/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp~1signup/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1keycloak~1callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1keycloak~1offline~1callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1{provider_id}~1callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1{provider_id}~1login/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1providers/get/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1device~1authorize/post/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1device~1token/post/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp~1invite/post/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp~1login/post/security", value: [] },
+    { op: "add", path: "/paths/~1oauth~1idp~1signup/post/security", value: [] },
+    { op: "add", path: "/paths/~1api~1v1~1web-client~1config/get/security", value: [] },
+    { op: "add", path: "/paths/~1server_info/get/security", value: [] },
+    { op: "add", path: "/paths/~1ready/get/security", value: [] },
+    { op: "add", path: "/paths/~1api~1billing~1success/get/security", value: [] },
+    { op: "add", path: "/paths/~1api~1billing~1cancel/get/security", value: [] },
+    { op: "add", path: "/paths/~1api~1organizations~1members~1invite~1accept/get/security", value: [] },
+    { op: "add", path: "/paths/~1saas/get/security", value: [] },
+    { op: "add", path: "/paths/~1integration~1github~1events/post/security", value: [] },
+    { op: "add", path: "/paths/~1integration~1gitlab~1events/post/security", value: [] },
+    { op: "add", path: "/paths/~1integration~1bitbucket~1events/post/security", value: [] },
+    { op: "add", path: "/paths/~1integration~1jira~1events/post/security", value: [] },
+    { op: "add", path: "/paths/~1integration~1jira~1callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1slack~1install/get/security", value: [] },
+    { op: "add", path: "/paths/~1slack~1install-callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1slack~1keycloak-callback/get/security", value: [] },
+    { op: "add", path: "/paths/~1slack~1on-event/post/security", value: [] },
+    { op: "add", path: "/paths/~1slack~1on-options-load/post/security", value: [] },
+    { op: "add", path: "/paths/~1slack~1on-form-interaction/post/security", value: [] },
+    { op: "add", path: "/paths/~1api~1service~1users~1{user_id}~1orgs~1{org_id}~1api-keys/post/security", value: [] },
+    { op: "add", path: "/paths/~1api~1service~1users~1{user_id}~1orgs~1{org_id}~1api-keys~1{key_name}/delete/security", value: [] },
+  ],
+} satisfies OpenapiToolNamesOptions;

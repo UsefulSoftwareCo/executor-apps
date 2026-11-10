@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/listennotes",
+  "description": "Search podcasts and episodes, browse the directory, and manage playlists with the Listen Notes API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Listen Notes"
+  }
+}

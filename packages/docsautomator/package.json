@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docsautomator",
+  "description": "Generate PDFs and Google Docs from templates, manage automations and e-signature sessions with DocsAutomator.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DocsAutomator"
+  }
+}

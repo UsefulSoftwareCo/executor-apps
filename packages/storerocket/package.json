@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/storerocket",
+  "description": "Manage StoreRocket store-locator projects and locations: list, read, create, update and delete locations, hours, custom fields and filters.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "StoreRocket"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

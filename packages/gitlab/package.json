@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gitlab",
+  "description": "Projects, merge requests, issues, pipelines, repositories, groups, users and the rest of the GitLab REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GitLab"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

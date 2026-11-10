@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nango",
+  "description": "Manage Nango integrations, connections, syncs, actions, records and Connect sessions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nango"
+  }
+}

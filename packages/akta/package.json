@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/akta",
+  "description": "Akta (akta.pro) private company intelligence: company search and enrichment, news, headcount, jobs, reviews, website traffic and company lists.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Akta"
+  }
+}

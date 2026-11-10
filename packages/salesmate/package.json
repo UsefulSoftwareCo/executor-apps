@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/salesmate",
+  "description": "Salesmate CRM: contacts, companies, deals, activities, products, notes and custom module records.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Salesmate"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/personio",
+  "description": "Personio HR: persons, employments, absences, attendances, org units, documents, recruiting, webhooks and reports via the Personio API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Personio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

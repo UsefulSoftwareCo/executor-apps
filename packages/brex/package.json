@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/brex",
+  "description": "Brex users, cards, transactions, budgets, expenses, vendors, transfers, accounting, custom fields, travel and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Brex"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

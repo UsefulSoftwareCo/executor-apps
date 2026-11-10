@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bonsai",
+  "description": "Bonsai managed Elasticsearch and OpenSearch hosting: list, create, resize and destroy clusters, and browse plans, regions and releases.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bonsai"
+  }
+}

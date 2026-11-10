@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zendesk",
+  "description": "Zendesk Support tickets, users, organizations, groups, views, macros, triggers and the Help Center articles API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zendesk"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

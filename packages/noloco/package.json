@@ -1,0 +1,14 @@
+{
+  "name": "@executor.sh/noloco",
+  "description": "Noloco apps: list tables and schemas and read, create, update and delete records.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Noloco"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

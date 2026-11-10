@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailgun",
+  "description": "Send and manage email with Mailgun (Send, Validate, Inspect and Optimize APIs): messages, domains, routes, webhooks, templates, mailing lists, suppressions, events, stats, IPs, keys, subaccounts, email validation, previews and deliverability monitoring.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailgun"
+  }
+}

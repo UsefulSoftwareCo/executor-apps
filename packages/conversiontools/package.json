@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/conversiontools",
+  "description": "Convert files between 100+ formats with Conversion Tools: upload files, create conversion tasks, check status and download results.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Conversion Tools"
+  }
+}

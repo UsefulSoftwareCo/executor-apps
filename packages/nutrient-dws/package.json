@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nutrient-dws",
+  "description": "Process documents with Nutrient DWS: build, convert, OCR, redact, watermark, sign PDFs, plus account usage and JWT tokens.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nutrient DWS"
+  }
+}

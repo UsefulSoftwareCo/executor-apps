@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-chat",
+  "description": "Google Chat spaces, messages, members, reactions, pins, read state, notification settings, availability and sidebar sections.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Chat"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

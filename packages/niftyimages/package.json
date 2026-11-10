@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/niftyimages",
+  "description": "Manage NiftyImages dynamic email images: images, timers, maps, fonts, and data stores and records.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NiftyImages"
+  }
+}

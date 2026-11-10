@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pandadoc",
+  "description": "Create, send, track and e-sign documents with PandaDoc: documents, templates, contacts, content library, forms, webhooks and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PandaDoc"
+  }
+}

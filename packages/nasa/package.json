@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nasa",
+  "description": "NASA open data: Astronomy Picture of the Day, near-Earth objects, space weather (DONKI), Mars rover photos, EPIC Earth imagery, EONET natural events, the image library, exoplanets and technology transfer.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NASA"
+  }
+}

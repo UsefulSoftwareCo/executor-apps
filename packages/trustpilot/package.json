@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/trustpilot",
+  "description": "Trustpilot business units, service and product reviews, invitations, locations and products.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Trustpilot"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

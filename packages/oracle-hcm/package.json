@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/oracle-hcm",
+  "description": "Oracle Fusion Cloud HCM: workers, employees, absences, jobs, grades, positions, departments, locations, recruiting and any other HCM REST resource.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Oracle HCM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

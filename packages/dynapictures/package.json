@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dynapictures",
+  "description": "Generate personalized images and PDFs from DynaPictures templates, run AI image generation, and manage workspaces, media assets and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DynaPictures"
+  }
+}

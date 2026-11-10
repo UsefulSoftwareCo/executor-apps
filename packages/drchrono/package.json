@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/drchrono",
+  "description": "Patients, appointments, clinical records, billing, labs, messages and tasks in the DrChrono EHR and practice management API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DrChrono"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

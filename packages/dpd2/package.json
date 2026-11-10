@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dpd2",
+  "description": "DPD (Digital Product Delivery): storefronts, products, purchases, customers and subscribers.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DPD"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fidelapi",
+  "description": "Fidel API: card-linking programs, brands, locations, cards, offers, transactions, webhooks and MIDs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fidel API"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bliro",
+  "description": "Bliro AI sales assistant: list the call recordings and summaries of your organization.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bliro"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

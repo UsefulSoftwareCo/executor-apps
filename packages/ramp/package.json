@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ramp",
+  "description": "Ramp corporate cards, transactions, bills, reimbursements, users, vendors, spend limits, accounting and the rest of the Ramp Developer API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ramp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

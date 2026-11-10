@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dailybot",
+  "description": "Dailybot standups and team collaboration: check-ins and responses, forms, teams, users, kudos, mood, bot messages, email and automations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Dailybot"
+  }
+}

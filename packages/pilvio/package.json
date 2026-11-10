@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pilvio",
+  "description": "Pilvio cloud: virtual machines, block and object storage, networks, floating IPs, firewalls, load balancers and billing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pilvio"
+  }
+}

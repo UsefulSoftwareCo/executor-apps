@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/quickbooks-time",
+  "description": "QuickBooks Time (formerly TSheets): timesheets, users, jobcodes, schedules, time off, locations, projects and reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "QuickBooks Time"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

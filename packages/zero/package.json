@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/zero",
+  "description": "Search and manage companies, contacts, deals, tasks, notes, lists, quotes, reports and outreach sequences in the Zero CRM, through Zero's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zero"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

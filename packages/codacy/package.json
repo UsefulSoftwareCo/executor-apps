@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/codacy",
+  "description": "Automated code quality and security: repositories, issues, pull requests, coverage, organizations, people and settings in Codacy.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Codacy"
+  }
+}

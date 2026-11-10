@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/deepimage",
+  "description": "Upscale, enhance, resize, remove or generate backgrounds on images with Deep Image's API, and check processing jobs and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Deep Image"
+  }
+}

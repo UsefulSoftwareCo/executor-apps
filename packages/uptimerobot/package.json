@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/uptimerobot",
+  "description": "Monitor uptime with UptimeRobot: monitors, incidents, status pages, maintenance windows, alert contacts, tags and integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "UptimeRobot"
+  }
+}

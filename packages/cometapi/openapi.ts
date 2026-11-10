@@ -1,0 +1,197 @@
+import type { OpenapiToolNamesOptions } from "apps/openapi";
+
+// CometAPI publishes one OpenAPI document per operation at apidoc.cometapi.com/api/openapi/<path>.openapi.json,
+// listed under "OpenAPI Specs" in https://apidoc.cometapi.com/llms.txt (154 documents). index.ts mounts each under
+// its own key, so they behave as one API. All documents accept the same API key. 147 are mounted. Left out: the five
+// api-keys management documents (/api/token/..., separate console personal access token) and the two whose only
+// operation can respond with text/event-stream (OpenAI image generations, Anthropic Messages), which a tool cannot return.
+export const paths = [
+  "3d/hunyuan/get-retrieve",
+  "3d/hunyuan/post-create",
+  "api-keys/get-current-api-key",
+  "audio/post-create-speech",
+  "audio/post-create-transcription",
+  "audio/post-create-translation",
+  "content-moderation/create-moderation",
+  "image/bria/get-query-status",
+  "image/bria/post-generate-image",
+  "image/bria/post-generate-vector-graphics-base",
+  "image/bria/post-image-editing",
+  "image/flux/get-flux-query",
+  "image/flux/post-flux-generate-image",
+  "image/gemini/post-gemini-generates-image",
+  "image/grok/post-image-editing",
+  "image/grok/post-image-generation",
+  "image/kling/get-omni-image",
+  "image/kling/post-image-expansion",
+  "image/kling/post-image-generation",
+  "image/kling/post-multi-image-to-image",
+  "image/kling/post-omni-image",
+  "image/kling/post-virtual-try-on",
+  "image/midjourney/post-action",
+  "image/midjourney/post-blend",
+  "image/midjourney/post-describe",
+  "image/midjourney/post-imagine",
+  "image/midjourney/post-modal",
+  "image/midjourney/post-submit-editor",
+  "image/midjourney/post-submit-video",
+  "image/midjourney/task-fetching-api/get-fetch-single-task",
+  "image/midjourney/task-fetching-api/post-list-by-condition",
+  "image/openai/get-image-generation-task",
+  "image/openai/post-image-editing",
+  "image/replicate/get-replicate-query",
+  "image/replicate/post-create-predictions-general",
+  "image/seededit-seedream/get-bytedance-image-generation-task",
+  "image/seededit-seedream/post-bytedance-image-editing",
+  "image/seededit-seedream/post-bytedance-image-generation",
+  "music/suno/get-custom-model-feed",
+  "music/suno/get-generate-mv",
+  "music/suno/get-get-midi",
+  "music/suno/get-get-wav",
+  "music/suno/get-lyrics-timeline",
+  "music/suno/get-open-upload",
+  "music/suno/get-query-single",
+  "music/suno/get-uncr-upload",
+  "music/suno/post-custom-model",
+  "music/suno/post-expand-style-tags",
+  "music/suno/post-full-track-separate",
+  "music/suno/post-generate-lyrics",
+  "music/suno/post-generate-music",
+  "music/suno/post-get-vox",
+  "music/suno/post-lyrics-mashup",
+  "music/suno/post-new-persona",
+  "music/suno/post-open-upload",
+  "music/suno/post-query-batch",
+  "music/suno/post-single-track-separate",
+  "music/suno/post-song-concat",
+  "music/suno/post-speed",
+  "music/suno/post-uncr-upload",
+  "music/suno/post-upload-music",
+  "music/suno/post-voice-create",
+  "music/suno/post-voice-one",
+  "music/suno/post-voice-phrase",
+  "music/suno/post-voice-verify",
+  "music/suno/post-voice-vox",
+  "overview/get-models",
+  "text/post-chat",
+  "text/post-embeddings",
+  "text/post-gemini-generating-content",
+  "text/post-responses",
+  "video/flux-3/get-retrieve-content",
+  "video/flux-3/get-retrieve",
+  "video/flux-3/post-create",
+  "video/happyhorse/get-retrieve-content",
+  "video/happyhorse/get-retrieve",
+  "video/happyhorse/post-create",
+  "video/kling/get-individual-queries",
+  "video/kling/get-omni-query",
+  "video/kling/model-routes/get-tasks",
+  "video/kling/model-routes/post-image-to-video",
+  "video/kling/model-routes/post-motion-control",
+  "video/kling/model-routes/post-omni-video",
+  "video/kling/model-routes/post-text-to-video",
+  "video/kling/multimodal-video-editing/post-add-video-selection",
+  "video/kling/multimodal-video-editing/post-clear-video-selection",
+  "video/kling/multimodal-video-editing/post-create-task",
+  "video/kling/multimodal-video-editing/post-delete-video-selection",
+  "video/kling/multimodal-video-editing/post-initialize-video-for-editing",
+  "video/kling/multimodal-video-editing/post-preview-selected-video-area",
+  "video/kling/post-avatar",
+  "video/kling/post-counterpart-creating-tasks",
+  "video/kling/post-image-recognize",
+  "video/kling/post-image-to-video",
+  "video/kling/post-lip-sync",
+  "video/kling/post-motion-control",
+  "video/kling/post-multi-image-to-video",
+  "video/kling/post-omni-video",
+  "video/kling/post-text-to-audio",
+  "video/kling/post-text-to-video",
+  "video/kling/post-tts",
+  "video/kling/post-video-effects",
+  "video/kling/post-video-extension",
+  "video/kling/post-video-to-audio",
+  "video/minimax-conch/get-minimax-conch-download",
+  "video/minimax-conch/get-minimax-conch-query",
+  "video/minimax-conch/post-minimax-conch-generation",
+  "video/minimax-h3/get-retrieve-content",
+  "video/minimax-h3/get-retrieve",
+  "video/minimax-h3/post-create",
+  "video/omni/get-retrieve-content",
+  "video/omni/get-retrieve",
+  "video/omni/post-create",
+  "video/runway/compatibility-format/post-act-one-expression-migration",
+  "video/runway/compatibility-format/post-feed-get-task",
+  "video/runway/compatibility-format/post-generate",
+  "video/runway/compatibility-format/post-image-to-video",
+  "video/runway/compatibility-format/post-video-to-video-style-redraw",
+  "video/runway/official-format/get-runway-to-get-task-details",
+  "video/runway/official-format/post-control-a-character",
+  "video/runway/official-format/post-convert-speech",
+  "video/runway/official-format/post-dub-audio",
+  "video/runway/official-format/post-generate-a-video-from-a-video",
+  "video/runway/official-format/post-generate-a-video-from-text",
+  "video/runway/official-format/post-generate-an-image-from-text",
+  "video/runway/official-format/post-generate-sound-effects",
+  "video/runway/official-format/post-generate-speech-from-text",
+  "video/runway/official-format/post-isolate-voice",
+  "video/runway/official-format/post-runway-images-raw-video",
+  "video/runway/official-format/post-upscale-a-video",
+  "video/seedance/get-seedance-query",
+  "video/seedance/post-seedance-create",
+  "video/sora-2/get-retrieve-content",
+  "video/sora-2/get-retrieve",
+  "video/sora-2/post-create",
+  "video/sora-2/post-remix",
+  "video/veo3/get-retrieve",
+  "video/veo3/post-create",
+  "video/vidu/get-retrieve-content",
+  "video/vidu/get-retrieve",
+  "video/vidu/post-create",
+  "video/wan/get-retrieve-content",
+  "video/wan/get-retrieve",
+  "video/wan/post-create",
+  "video/xai/get-get-video-generation-results",
+  "video/xai/post-video-edit",
+  "video/xai/post-video-generation",
+] as const;
+
+const camel = (path: string) =>
+  path
+    .split(/[\/-]+/)
+    .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+    .join("");
+
+// Tool-namespace key for each document, derived from its path (for example "video/kling/model-routes/get-tasks"
+// becomes "videoKlingModelRoutesGetTasks").
+export const specs: Record<string, string> = Object.fromEntries(paths.map((path) => [camel(path), path]));
+
+// The Gemini generateContent document declares an apiKey header scheme (x-goog-api-key) instead of bearerAuth;
+// CometAPI accepts the same key in that header (and also as a Bearer token).
+const headerSchemes: Record<string, string> = {
+  "text/post-gemini-generating-content": "x-goog-api-key",
+};
+
+const bearer = (path: string) =>
+  ({
+    source: { url: `https://apidoc.cometapi.com/api/openapi/${path}.openapi.json` },
+    allowedOrigin: "https://api.cometapi.com",
+    securitySchemes: { bearerAuth: { type: "http", scheme: "bearer" } },
+    methods: { apiKey: [{ scheme: "bearerAuth", field: "token", part: "value", prefix: "" }] },
+    oauth: [],
+  }) satisfies OpenapiToolNamesOptions;
+
+const header = (path: string, name: string) =>
+  ({
+    source: { url: `https://apidoc.cometapi.com/api/openapi/${path}.openapi.json` },
+    allowedOrigin: "https://api.cometapi.com",
+    securitySchemes: { apiKeyAuth: { type: "apiKey", in: "header", name } },
+    methods: { apiKey: [{ scheme: "apiKeyAuth", field: "token", part: "value", prefix: "" }] },
+    oauth: [],
+  }) satisfies OpenapiToolNamesOptions;
+
+export const optionsFor = (path: string): OpenapiToolNamesOptions => {
+  const name = headerSchemes[path];
+  return name ? header(path, name) : bearer(path);
+};
+
+export const options = optionsFor("text/post-chat");

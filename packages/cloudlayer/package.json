@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/cloudlayer",
+  "description": "Generate PDFs and images from URLs, HTML and templates, convert DOCX and PDF files, and manage jobs, assets and storage with cloudlayer.io, through its official MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Cloudlayer"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ngrok",
+  "description": "Manage ngrok with its cloud API: endpoints, tunnels, domains, reserved addresses, credentials, API keys, IP policies, traffic policies and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ngrok"
+  }
+}

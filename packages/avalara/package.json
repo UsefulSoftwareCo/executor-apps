@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/avalara",
+  "description": "Calculate and manage sales and use tax with Avalara AvaTax: transactions, companies, tax codes, nexus, certificates, items and filings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Avalara"
+  }
+}

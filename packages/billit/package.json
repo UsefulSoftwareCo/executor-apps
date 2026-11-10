@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/billit",
+  "description": "Billit invoicing and Peppol e-invoicing: orders, parties, products, documents, payments, cashbook and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Billit"
+  }
+}

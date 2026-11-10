@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/instagram",
+  "description": "Instagram professional accounts: profile, media, publishing, comments, insights, stories and direct messages through the Instagram API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Instagram"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

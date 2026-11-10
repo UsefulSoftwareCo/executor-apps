@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mocean",
+  "description": "Send SMS, verify phone numbers, look up numbers and place voice calls with Mocean.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mocean"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

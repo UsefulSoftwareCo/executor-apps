@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/benzinga",
+  "description": "Benzinga financial data: real-time news, calendars, analyst ratings, quotes, bars, fundamentals, movers, SEC filings, signals and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Benzinga"
+  }
+}

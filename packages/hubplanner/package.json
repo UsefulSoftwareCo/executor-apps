@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hubplanner",
+  "description": "Resource management and timesheets in Hub Planner (Resource Flow): projects, resources, bookings, time entries, vacations, clients, groups, tags and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hub Planner"
+  }
+}

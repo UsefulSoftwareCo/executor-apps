@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/crunchbase",
+  "description": "Search and retrieve Crunchbase company, people, funding and investor data through the Crunchbase Enterprise API v4.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Crunchbase"
+  }
+}

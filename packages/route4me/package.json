@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/route4me",
+  "description": "Route4Me route optimization: optimizations, routes, orders, address book, territories, avoidance zones, geocoding, tracking, activity feed, users and vehicles.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Route4Me"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

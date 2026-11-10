@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/directiq",
+  "description": "DirectIQ email marketing: contacts, contact lists, campaigns, templates, sender addresses and campaign reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DirectIQ"
+  }
+}

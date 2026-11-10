@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/coinranking",
+  "description": "Cryptocurrency prices, market caps, history, exchanges, markets, futures and indicators from the Coinranking API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Coinranking"
+  }
+}

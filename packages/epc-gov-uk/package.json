@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/epc-gov-uk",
+  "description": "Search and download England and Wales Energy Performance Certificates (domestic, non-domestic and display) from the UK government Get Energy Performance Data service.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Energy Performance Certificates (Gov.UK)"
+  }
+}

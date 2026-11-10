@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/audioscrape",
+  "description": "Audioscrape speaker-attributed audio, transcripts, entities and citations, through Audioscrape's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Audioscrape"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

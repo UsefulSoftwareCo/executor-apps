@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/xero",
+  "description": "Xero accounting: invoices, contacts, payments, bank transactions, journals, reports, files, fixed assets, projects and payroll.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Xero"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

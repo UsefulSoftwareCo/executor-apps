@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pomagrill",
+  "description": "Ingest documents and retrieve prompt-ready context with POMA Grill: projects, documents, search, jobs and usage.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "POMA Grill"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

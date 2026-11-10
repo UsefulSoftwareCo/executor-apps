@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apisports",
+  "description": "Sports data from API-Sports: football, basketball, NBA, baseball, hockey, handball, rugby, volleyball, AFL, NFL, Formula 1 and MMA.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "API-Sports"
+  }
+}

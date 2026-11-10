@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/acuityscheduling",
+  "description": "Appointments, appointment types, availability, calendars, clients, blocks, labels, forms, products, certificates and webhooks in Acuity Scheduling.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Acuity Scheduling"
+  }
+}

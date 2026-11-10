@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/boltiot",
+  "description": "Control Bolt IoT devices through Bolt Cloud: read and write pins, serial (UART) I/O, device status, version and restart.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bolt IoT"
+  }
+}

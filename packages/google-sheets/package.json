@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-sheets",
+  "description": "Create spreadsheets, read and write cell values, and edit sheets, formatting and structure with the Google Sheets API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Sheets"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

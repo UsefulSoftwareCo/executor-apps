@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/moretrees",
+  "description": "Plant trees and look up forests, projects and credit balances with the More Trees public API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "More Trees"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sentinelone",
+  "description": "SentinelOne Singularity management console: agents, threats, sites, accounts, groups, exclusions, Deep Visibility queries, activities and alerts.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SentinelOne"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

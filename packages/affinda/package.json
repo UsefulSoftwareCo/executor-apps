@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/affinda",
+  "description": "Affinda document AI: parse resumes, invoices, receipts and custom documents, manage workspaces, collections, data points, search and matching.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Affinda"
+  }
+}

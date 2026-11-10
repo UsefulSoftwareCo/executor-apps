@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/workramp",
+  "description": "WorkRamp (now Confirm) learning platform: users, groups, guides, training series, SCORM, events, webhooks and Academy contacts, registrations and certifications, through the official REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "WorkRamp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

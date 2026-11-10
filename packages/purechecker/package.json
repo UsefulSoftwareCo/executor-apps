@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/purechecker",
+  "description": "Verify single or bulk email addresses with PureChecker: syntax, domain, mailbox existence, disposable and risk signals.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PureChecker"
+  }
+}

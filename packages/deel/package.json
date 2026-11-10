@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/deel",
+  "description": "Contracts, workers, payroll, invoices, time off, timesheets and organization data in Deel.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Deel"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

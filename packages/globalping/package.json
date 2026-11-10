@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/globalping",
+  "description": "Run network measurements from probes worldwide with Globalping's official MCP server: ping, traceroute, MTR, DNS and HTTP tests, locations and rate limits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Globalping"
+  }
+}

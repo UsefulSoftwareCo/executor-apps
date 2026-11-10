@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/judgeme",
+  "description": "Judge.me product reviews: reviews, reviewers, replies, widgets, webhooks, shop settings.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Judge.me"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

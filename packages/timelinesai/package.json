@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/timelinesai",
+  "description": "Manage WhatsApp conversations with TimelinesAI: chats, messages, files, labels, notes, WhatsApp accounts and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TimelinesAI"
+  }
+}

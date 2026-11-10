@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/campayn",
+  "description": "Email marketing with Campayn: contact lists, contacts, signup forms, emails and email reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Campayn"
+  }
+}

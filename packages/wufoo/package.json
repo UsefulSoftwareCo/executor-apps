@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wufoo",
+  "description": "Wufoo online forms: forms and fields, entries, reports, widgets, users and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Wufoo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

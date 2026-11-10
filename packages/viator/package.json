@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/viator",
+  "description": "Search Viator tours, activities and experiences and read their details, through Viator's official public MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Viator"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

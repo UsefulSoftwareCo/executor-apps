@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/microsoft-teams",
+  "description": "Teams, channels, chats, messages, online meetings, presence and Teams apps through the Microsoft Graph API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Microsoft Teams"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

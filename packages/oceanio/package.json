@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/oceanio",
+  "description": "Ocean.io GTM intelligence: search, enrich and look up companies and people, reveal contact details, and manage segments and exclusion lists.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ocean.io"
+  }
+}

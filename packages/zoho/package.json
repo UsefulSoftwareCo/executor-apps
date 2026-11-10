@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zoho",
+  "description": "Zoho CRM: leads, contacts, accounts, deals, custom modules, COQL queries, bulk jobs, settings, users and the rest of the Zoho CRM REST API v8.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zoho"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/paystack",
+  "description": "Accept payments and manage transactions, customers, transfers, plans, subscriptions and refunds with Paystack.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Paystack"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/discolike",
+  "description": "Find and enrich B2B companies with DiscoLike: lookalike discovery, firmographics, contacts, email finding, scoring and saved queries.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DiscoLike"
+  }
+}

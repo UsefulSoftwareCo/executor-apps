@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ids-fulfillment",
+  "description": "IDS Fulfillment 3PL warehouse API: ship requests, inventory receipts, stock adjustments, items, storer inventory and order status.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IDS Fulfillment"
+  }
+}

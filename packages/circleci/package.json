@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/circleci",
+  "description": "Run and inspect CircleCI pipelines, workflows, jobs, projects, contexts, schedules, webhooks and insights.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CircleCI"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/vibe-prospecting",
+  "description": "Find, sample, enrich and export businesses and prospects with Explorium's B2B data in Vibe Prospecting, through its official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Vibe Prospecting"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

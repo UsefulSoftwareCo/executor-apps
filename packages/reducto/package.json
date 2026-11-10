@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/reducto",
+  "description": "Parse, extract, split, classify and edit documents with Reducto.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Reducto"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/whatsapp",
+  "description": "WhatsApp Business Platform Cloud API: send messages and templates, media, phone numbers, business profiles, templates, QR codes and webhooks subscriptions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "WhatsApp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

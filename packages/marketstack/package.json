@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/marketstack",
+  "description": "Stock market data from Marketstack: end-of-day, intraday and historical prices, tickers, exchanges, splits, dividends, indices, ETFs, bonds, commodities, currencies, timezones and company data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Marketstack"
+  }
+}

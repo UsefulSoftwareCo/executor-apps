@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sophos-central",
+  "description": "Sophos Central: endpoints, isolation, scans, tamper protection, groups, allow/block lists, policies, alerts, cases, SIEM feeds, XDR queries, directory, admins, firewalls, licenses and partner or organization tenants.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sophos Central"
+  }
+}

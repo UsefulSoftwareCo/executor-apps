@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/boloforms",
+  "description": "Send BoloForms (BoloSign) eSignature templates and forms out for signing and list signature documents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BoloForms"
+  }
+}

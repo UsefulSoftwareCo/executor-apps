@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/signnow",
+  "description": "Templates, documents, invites, embedded signing and signing status in SignNow, through SignNow's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SignNow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

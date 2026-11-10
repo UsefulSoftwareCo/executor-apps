@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/repairshopr",
+  "description": "Repair shop management in RepairShopr: customers, tickets, invoices, estimates, assets, inventory, appointments, payments and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "RepairShopr"
+  }
+}

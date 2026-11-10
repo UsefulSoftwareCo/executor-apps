@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/api2pdf",
+  "description": "Generate PDFs and images from HTML, URLs and Office files, merge and secure PDFs, and generate barcodes with Api2Pdf.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Api2Pdf"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pushpay-chms",
+  "description": "Pushpay ChMS (Church Community Builder) v2 API: individuals, families, groups, events, scheduling, forms, processes, notes and church settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pushpay ChMS"
+  }
+}

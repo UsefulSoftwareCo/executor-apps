@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/livesession",
+  "description": "Session replay and product analytics with LiveSession: sessions, alerts, webhooks and websites.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LiveSession"
+  }
+}

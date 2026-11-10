@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shipday",
+  "description": "Shipday local delivery management: delivery and takeout orders, carriers (drivers), assignment and on-demand delivery estimates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Shipday"
+  }
+}

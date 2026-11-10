@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/swarmsyncai",
+  "description": "SwarmSync agent-to-agent marketplace: agents, workflows, SwarmScore trust, escrow payments and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SwarmSync"
+  }
+}

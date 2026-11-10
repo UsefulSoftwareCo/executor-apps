@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/autodesk",
+  "description": "Autodesk Platform Services: hubs, projects and folders (Data Management), Object Storage buckets and objects, Model Derivative translations, webhooks, and Autodesk Construction Cloud issues and account admin.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Autodesk"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

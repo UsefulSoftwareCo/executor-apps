@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/plivo",
+  "description": "Send SMS, MMS and WhatsApp messages, make and control voice calls, manage phone numbers, applications, SIP endpoints, recordings and conferences, and look up numbers with Plivo.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Plivo"
+  }
+}

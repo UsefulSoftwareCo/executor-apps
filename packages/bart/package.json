@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bart",
+  "description": "BART (Bay Area Rapid Transit) real-time departures, trip planning, fares, schedules, stations, routes and service advisories.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BART"
+  }
+}

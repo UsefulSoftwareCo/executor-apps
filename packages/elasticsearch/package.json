@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/elasticsearch",
+  "description": "Search, index and manage data on an Elasticsearch cluster: documents, indices, search, aggregations, cluster, ingest, security and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Elasticsearch"
+  }
+}

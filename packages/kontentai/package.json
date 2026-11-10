@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kontentai",
+  "description": "Kontent.ai headless CMS: content items, language variants, content types, snippets, taxonomies, assets, languages, collections, workflows, spaces and webhooks through the Management API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kontent.ai"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/quipteams",
+  "description": "Quotes, assets, device actions, kits, employees and webhooks in quipteams IT asset management.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "quipteams"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

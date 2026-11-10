@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/square",
+  "description": "Payments, orders, customers, catalog, inventory, invoices, subscriptions, loyalty, bookings and the rest of the Square Connect API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Square"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

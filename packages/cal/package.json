@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cal",
+  "description": "Cal.com scheduling: bookings, event types, schedules, availability, calendars, teams, organizations and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cal.com"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

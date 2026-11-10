@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pdf4me",
+  "description": "Convert, merge, split, secure and extract data from PDF, Word, Excel and image files with PDF4me.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PDF4me"
+  }
+}

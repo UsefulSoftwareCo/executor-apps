@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/crewai",
+  "description": "Run deployed CrewAI AMP crews: discover inputs, kick off executions, check status and resume human-in-the-loop runs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CrewAI"
+  }
+}

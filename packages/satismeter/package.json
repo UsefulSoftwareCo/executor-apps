@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/satismeter",
+  "description": "Read SatisMeter surveys, responses and statistics, manage survey users and unsubscribes, and track user events.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SatisMeter"
+  }
+}

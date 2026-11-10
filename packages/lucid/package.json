@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/lucid",
+  "description": "Search, read, create, share and export Lucid documents and diagrams through Lucid's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Lucid"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

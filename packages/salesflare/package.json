@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/salesflare",
+  "description": "Salesflare CRM: contacts, accounts, opportunities, tasks, workflows, tags and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Salesflare"
+  }
+}

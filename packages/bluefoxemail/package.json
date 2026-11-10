@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bluefoxemail",
+  "description": "Send transactional and triggered email, run campaigns and manage contacts, subscriber lists, domains and sender identities with BlueFox Email.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BlueFox Email"
+  }
+}

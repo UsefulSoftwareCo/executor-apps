@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/polymarket-us",
+  "description": "Polymarket US prediction markets: events, markets, order books, series, sports, search, orders, portfolio, RFQs and combos.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Polymarket US"
+  }
+}

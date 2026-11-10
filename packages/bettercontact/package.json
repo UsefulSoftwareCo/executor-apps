@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bettercontact",
+  "description": "Waterfall email and phone enrichment, lead finder, company finder and profile lookups with BetterContact.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BetterContact"
+  }
+}

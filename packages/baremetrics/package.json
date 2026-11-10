@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/baremetrics",
+  "description": "Subscription analytics in Baremetrics: MRR, churn, customers, plans, subscriptions and revenue metrics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Baremetrics"
+  }
+}

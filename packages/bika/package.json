@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bika",
+  "description": "Bika.ai AI automation database: spaces, nodes, database records, fields, views, members, teams, roles, automations, embed links and outgoing webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bika.ai"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/planning-center-online",
+  "description": "Planning Center: People, Services, Giving, Calendar, Check-Ins, Groups, Publishing, Registrations and Webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Planning Center"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

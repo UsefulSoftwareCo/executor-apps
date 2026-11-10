@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/okta",
+  "description": "Users, groups, applications, policies, authorization servers, factors, logs and the rest of the Okta Admin Management API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Okta"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

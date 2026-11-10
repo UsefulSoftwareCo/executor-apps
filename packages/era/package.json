@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/era",
+  "description": "Personal finance in Era: accounts, balances, transactions, knowledge, connections and billing, through Era Context's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Era"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

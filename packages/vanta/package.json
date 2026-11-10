@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vanta",
+  "description": "Controls, tests, documents, vendors, people, risks, vulnerabilities and resources in a Vanta compliance tenant via the Manage Vanta API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Vanta"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

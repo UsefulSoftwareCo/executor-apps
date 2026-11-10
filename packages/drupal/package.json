@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/drupal",
+  "description": "Content, taxonomy, users, media, comments and any other entity of a Drupal site through its core JSON:API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Drupal"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

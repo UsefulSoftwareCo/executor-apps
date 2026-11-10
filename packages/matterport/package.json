@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/matterport",
+  "description": "Matterport 3D spaces: search and read models, details, assets, and edit model metadata through the Model GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Matterport"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

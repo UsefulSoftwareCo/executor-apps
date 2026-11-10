@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rkvst",
+  "description": "DataTrails (formerly RKVST) provenance and evidence management: assets, events, locations, access policies, compliance, SCITT statements, attachments and tenancy administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DataTrails (RKVST)"
+  }
+}

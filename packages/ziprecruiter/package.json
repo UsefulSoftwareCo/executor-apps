@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/ziprecruiter",
+  "description": "Search ZipRecruiter job listings by role, location and salary, through ZipRecruiter's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ZipRecruiter"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

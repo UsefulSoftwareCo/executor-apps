@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lokalise",
+  "description": "Manage Lokalise localization projects: keys, translations, files, tasks, contributors, languages, glossary, screenshots and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lokalise"
+  }
+}

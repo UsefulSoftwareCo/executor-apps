@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/browserbase",
+  "description": "Run and manage headless browser sessions with Browserbase: sessions, contexts, extensions, fetch, search, functions, secrets and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Browserbase"
+  }
+}

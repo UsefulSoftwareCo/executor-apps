@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onenote",
+  "description": "OneNote notebooks, section groups, sections and pages through Microsoft Graph.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "OneNote"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

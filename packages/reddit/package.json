@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/reddit",
+  "description": "Browse subreddits, search, read posts and comments, submit, comment, vote, save and message on Reddit.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Reddit"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

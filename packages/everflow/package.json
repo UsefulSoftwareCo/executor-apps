@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/everflow",
+  "description": "Everflow partner marketing platform: offers, partners, advertisers, tracking, conversions and reporting through the Network API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Everflow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

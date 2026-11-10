@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/siteleaf",
+  "description": "Siteleaf CMS: sites, pages, collections, documents, source files, jobs, users and roles.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Siteleaf"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

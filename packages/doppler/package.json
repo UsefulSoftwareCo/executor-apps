@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/doppler",
+  "description": "Manage secrets and config in Doppler: projects, environments, configs, secrets, service tokens, integrations, syncs, webhooks, groups and access.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Doppler"
+  }
+}

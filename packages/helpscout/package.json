@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/helpscout",
+  "description": "Help Scout inbox (conversations, customers, mailboxes, webhooks, reports) and Docs (articles, collections, categories).",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Help Scout"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

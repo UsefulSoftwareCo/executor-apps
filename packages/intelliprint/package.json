@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/intelliprint",
+  "description": "Send letters and postcards with Intelliprint hybrid mail: print jobs, backgrounds and mailing lists.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Intelliprint"
+  }
+}

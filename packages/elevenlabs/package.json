@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/elevenlabs",
+  "description": "ElevenLabs AI audio: text to speech, speech to text, voices, dubbing, sound effects, music, conversational agents and workspace management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ElevenLabs"
+  }
+}

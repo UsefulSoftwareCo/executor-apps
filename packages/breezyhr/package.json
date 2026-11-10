@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/breezyhr",
+  "description": "Recruiting and applicant tracking with Breezy HR: companies, positions, candidates, pipelines, questionnaires and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Breezy HR"
+  }
+}

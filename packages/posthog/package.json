@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/posthog",
+  "description": "Product analytics, HogQL/SQL queries, insights, dashboards, feature flags, experiments, surveys, session replay, error tracking, logs and more through PostHog's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "PostHog"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

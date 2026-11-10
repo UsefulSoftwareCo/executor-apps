@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/dynamicmockups",
+  "description": "Render product mockups with Dynamic Mockups through its official MCP server: catalogs, collections, renders, MockAnything AI, MotionMockups video and PSD uploads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Dynamic Mockups"
+  }
+}

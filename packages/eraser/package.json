@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/eraser",
+  "description": "Diagrams, files, folders and presets in an Eraser workspace through Eraser's remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Eraser"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/provenexpert",
+  "description": "ProvenExpert review platform: rating summary, survey and invitation management, widgets and (Enterprise) profiles and settings.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ProvenExpert"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

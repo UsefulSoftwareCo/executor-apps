@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/listmonk",
+  "description": "Manage a self-hosted listmonk newsletter server: subscribers, lists, campaigns, templates, media and bounces.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "listmonk"
+  }
+}

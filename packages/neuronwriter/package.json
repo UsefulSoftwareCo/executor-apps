@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/neuronwriter",
+  "description": "NeuronWriter semantic SEO content analysis: projects, keyword queries, term recommendations, content import and scoring.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "NeuronWriter"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

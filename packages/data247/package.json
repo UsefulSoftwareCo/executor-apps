@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/data247",
+  "description": "Phone, email, address and identity lookups, DNC checks and fraud screening with Data247, through Data247's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Data247"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

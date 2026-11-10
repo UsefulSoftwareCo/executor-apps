@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jev",
+  "description": "Evaluate text and structured state with Jev, TypeSafe AI's System One model: Noul, Choice and Score questions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Jev"
+  }
+}

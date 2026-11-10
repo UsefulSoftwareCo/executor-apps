@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/youcom",
+  "description": "You.com APIs for AI agents: real-time web search, page content extraction, cited answers, deep research, finance research, images and billing balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "You.com"
+  }
+}

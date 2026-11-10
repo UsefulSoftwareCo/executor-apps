@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/inworldai",
+  "description": "Inworld AI voice and inference: text-to-speech, voice cloning, speech-to-text, chat completions, video, routers and usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Inworld AI"
+  }
+}

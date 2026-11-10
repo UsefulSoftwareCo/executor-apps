@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/coingecko",
+  "description": "Cryptocurrency prices, market data, exchanges, NFTs and onchain DEX data from CoinGecko, for Demo and Pro API keys.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CoinGecko"
+  }
+}

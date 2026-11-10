@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vincere",
+  "description": "Vincere recruitment CRM: candidates, contacts, companies, jobs, applications, placements, activities and documents.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Vincere"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

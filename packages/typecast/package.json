@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/typecast",
+  "description": "Generate expressive speech and manage voices with Typecast: text to speech, streaming, timestamps, voice discovery, voice cloning and subscription info.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Typecast"
+  }
+}

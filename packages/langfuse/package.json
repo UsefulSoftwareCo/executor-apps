@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/langfuse",
+  "description": "Langfuse LLM observability: traces, observations, scores, datasets, prompts, sessions, models and annotation queues.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Langfuse"
+  }
+}

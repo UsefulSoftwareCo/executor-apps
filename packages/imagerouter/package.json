@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/imagerouter",
+  "description": "Generate images, videos and text with ImageRouter: image and video generation, image edits, chat, responses, models and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ImageRouter"
+  }
+}

@@ -1,0 +1,9 @@
+# Foursquare
+
+Foursquare Places API: search places worldwide, get place details, photos and tips, autocomplete, geotagging candidates (Snap to Place) and name/address matching.
+
+**Interface:** hand-written tools over the Places API at `https://places-api.foursquare.com` (version header `X-Places-Api-Version: 2025-06-17`). Foursquare publishes no standalone OpenAPI document: its docs site (https://docs.foursquare.com/fsq-developers-places/, index at `/llms.txt`) embeds a small per-endpoint OpenAPI fragment in each reference page, with no combined spec URL, and its MCP server is local-only (no hosted URL found). The endpoints are therefore written by hand from those pages, each checked against its reference page: `/places/search` (place-search), `/places/ask` (ask), `/places/{fsq_place_id}` (place-details), `/places/{fsq_place_id}/photos` (place-photos), `/places/{fsq_place_id}/tips` (place-tips), `/places/match` (place-match), `/autocomplete` (autocomplete), `/geotagging/candidates` (geotagging-candidates). Tools: `places.search`, `places.ask`, `places.get`, `places.photos`, `places.tips`, `places.match`, `autocomplete`, `geotagging.candidates`. All are read-only.
+
+**Auth:** a Service API key, sent as a Bearer token. Create one in the Foursquare developer console (https://foursquare.com/developers/home) under "Manage Your Service API Keys". The Places API has no OAuth.
+
+**Known gaps:** no write endpoints (geotagging confirm, place suggest/edit/flag), batch/offline jobs, Place Resolve (partner id lookup) or partner endpoints. The health check runs a one-result place search because Foursquare has no account endpoint. The legacy v2/v3 APIs (`api.foursquare.com`) are not covered. Search does not enforce the docs' mutually exclusive parameter pairs (open_now/open_at, exclude_fsq_chain_ids/exclude_all_chains); the API returns an error for them.

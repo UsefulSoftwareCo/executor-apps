@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/buildkite",
+  "description": "Pipelines, builds, jobs, agents, clusters and the rest of Buildkite's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Buildkite"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

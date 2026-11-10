@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/cults",
+  "description": "Browse and manage 3D printing models, creators, categories and sales on the Cults marketplace through its GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cults"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

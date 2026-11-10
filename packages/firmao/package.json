@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/firmao",
+  "description": "Firmao CRM and ERP: customers, contacts, projects, tasks, products, invoices, offers, agreements, sales notes, warehouse documents and time entries.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Firmao"
+  }
+}

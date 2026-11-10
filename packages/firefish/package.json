@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/firefish",
+  "description": "Firefish recruitment CRM: candidates, contacts, companies, leads, jobs, placements, shift bookings, timesheets, adverts, actions and call notes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Firefish"
+  }
+}

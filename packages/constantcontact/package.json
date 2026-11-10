@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/constantcontact",
+  "description": "Contacts, lists, tags, custom fields, email campaigns, reports, segments and bulk activities in Constant Contact.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Constant Contact"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

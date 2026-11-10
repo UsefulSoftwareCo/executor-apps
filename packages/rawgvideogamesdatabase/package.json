@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rawgvideogamesdatabase",
+  "description": "Search the RAWG video game database: games, platforms, genres, stores, developers, publishers, creators, tags, screenshots, achievements and related media.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "RAWG Video Games Database"
+  }
+}

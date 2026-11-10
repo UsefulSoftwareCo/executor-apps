@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twilio",
+  "description": "Twilio: SMS and MMS, voice calls, phone numbers, Verify, Lookup, Conversations, Studio, TaskRouter, Sync, Video and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Twilio"
+  }
+}

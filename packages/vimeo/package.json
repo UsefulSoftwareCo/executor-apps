@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vimeo",
+  "description": "Videos, folders, albums, channels, showcases, live events, comments, analytics and the rest of the Vimeo API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Vimeo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

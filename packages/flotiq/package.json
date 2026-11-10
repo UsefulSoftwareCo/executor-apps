@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/flotiq",
+  "description": "Flotiq headless CMS: content type definitions, content objects of any type, batch operations, versions, search and GraphQL.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Flotiq"
+  }
+}

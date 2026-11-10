@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/saperly",
+  "description": "Saperly phone carrier for AI agents: phone numbers, calls, SMS, voices, consent and usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Saperly"
+  }
+}

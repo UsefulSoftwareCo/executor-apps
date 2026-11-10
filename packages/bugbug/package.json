@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bugbug",
+  "description": "Manage and run BugBug browser tests: tests, suites, runs, steps, components, tags and project settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BugBug"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apaleo",
+  "description": "Apaleo property management: reservations, bookings, folios, invoices, inventory, rates, availability and reports across the Apaleo REST APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Apaleo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

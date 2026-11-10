@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twelvedata",
+  "description": "Financial market data from Twelve Data: time series, quotes, fundamentals, technical indicators, reference data for stocks, forex, crypto and ETFs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Twelve Data"
+  }
+}

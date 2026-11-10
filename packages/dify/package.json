@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dify",
+  "description": "Run Dify apps and manage knowledge bases through the Dify Service API: chat, completion, workflows, conversations, annotations, datasets and documents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Dify"
+  }
+}

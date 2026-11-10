@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/fullstory",
+  "description": "Search sessions, users, metrics, funnels and the Fullstory library, through Fullstory's official (beta) MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fullstory"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

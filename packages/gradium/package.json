@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gradium",
+  "description": "Gradium voice AI: text-to-speech, transcription, voice management, voice design and pronunciation dictionaries.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gradium"
+  }
+}

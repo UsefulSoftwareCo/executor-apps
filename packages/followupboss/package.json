@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/followupboss",
+  "description": "Follow Up Boss real estate CRM: people, events, deals, tasks, notes, calls, appointments, action plans, automations, pipelines, webhooks and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Follow Up Boss"
+  }
+}

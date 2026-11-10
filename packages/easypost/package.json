@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/easypost",
+  "description": "Shipping with EasyPost: addresses, parcels, shipments, rates, labels, trackers, batches, pickups, insurance, refunds, carrier accounts, webhooks and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "EasyPost"
+  }
+}

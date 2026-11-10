@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gagelist",
+  "description": "GageList calibration management: gage records, calibration records, manufacturers and account status via the GageList API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GageList"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

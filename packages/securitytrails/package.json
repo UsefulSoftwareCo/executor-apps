@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/securitytrails",
+  "description": "Domain, DNS, WHOIS, subdomain, SSL and IP intelligence from SecurityTrails, plus Attack Surface Intelligence projects and assets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SecurityTrails"
+  }
+}

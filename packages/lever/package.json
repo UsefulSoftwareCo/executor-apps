@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lever",
+  "description": "Recruiting with Lever: opportunities, postings, interviews, feedback, notes, offers, requisitions, stages, users and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Lever"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

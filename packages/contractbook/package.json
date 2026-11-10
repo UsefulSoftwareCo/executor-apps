@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/contractbook",
+  "description": "Create, send and sign contracts with Contractbook: documents, templates, spaces, automations and file uploads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Contractbook"
+  }
+}

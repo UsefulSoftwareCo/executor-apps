@@ -1,0 +1,14 @@
+{
+  "name": "@executor.sh/weightsandbiases",
+  "description": "Weights & Biases: projects, runs, sweeps, artifacts, reports, teams and organizations through the W&B GraphQL API, plus the official W&B MCP server for Weave traces.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Weights & Biases"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "graphql": "16.11.0"
+  }
+}

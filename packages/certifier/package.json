@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/certifier",
+  "description": "Certifier digital credentials: create, issue, send and search certificates and badges, manage groups and design templates, through Certifier's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Certifier"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

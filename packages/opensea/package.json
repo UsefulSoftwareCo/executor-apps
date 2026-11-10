@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/opensea",
+  "description": "Browse and trade NFTs on OpenSea: collections, NFTs, listings, offers, events, accounts, tokens and drops.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenSea"
+  }
+}

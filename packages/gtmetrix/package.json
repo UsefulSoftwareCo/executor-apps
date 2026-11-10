@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gtmetrix",
+  "description": "Test and monitor website speed with GTmetrix: tests, reports, pages, tags, performance alerts, locations and browsers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GTmetrix"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chaser",
+  "description": "Chaser accounts receivable automation: customers, invoices, credit notes, overpayments, contact persons, notes, chasing schedules, tasks and templates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Chaser"
+  }
+}

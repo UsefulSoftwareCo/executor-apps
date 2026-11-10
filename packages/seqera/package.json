@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/seqera",
+  "description": "Seqera Platform: launch and monitor Nextflow pipelines, compute environments, workspaces, datasets, runs and credentials.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Seqera"
+  }
+}

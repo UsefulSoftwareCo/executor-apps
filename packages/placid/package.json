@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/placid",
+  "description": "Placid creative automation: generate images, PDFs and videos from templates, and manage templates, collections and fonts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Placid"
+  }
+}

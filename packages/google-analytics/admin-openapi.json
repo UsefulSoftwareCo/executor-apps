@@ -1,0 +1,4608 @@
+{
+ "openapi": "3.0.3",
+ "info": {
+  "title": "Google Analytics Admin API",
+  "version": "v1beta (discovery revision 20261007)",
+  "description": "Manage properties in Google Analytics. Warning: Creating multiple Customer Applications, Accounts, or Projects to simulate or act as a single Customer Application, Account, or Project (respectively) or to circumvent Service-specific usage limits or quotas is a direct violation of Google Cloud Platform Terms of Service as well as Google APIs Terms of Service. These actions can result in immediate termination of your GCP project(s) without any warning."
+ },
+ "servers": [
+  {
+   "url": "https://analyticsadmin.googleapis.com"
+  }
+ ],
+ "security": [
+  {
+   "bearer": []
+  }
+ ],
+ "paths": {
+  "/v1beta/properties": {
+   "get": {
+    "operationId": "analyticsadmin.properties.list",
+    "description": "Returns child Properties under the specified parent Account. Properties will be excluded if the caller does not have access. Soft-deleted (ie: \"trashed\") properties are excluded by default. Returns an empty list if no relevant properties are found.",
+    "parameters": [
+     {
+      "name": "showDeleted",
+      "in": "query",
+      "required": false,
+      "description": "Whether to include soft-deleted (ie: \"trashed\") Properties in the results. Properties can be inspected to determine whether they are deleted or not.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "description": "Required. An expression for filtering the results of the request. Fields eligible for filtering are: `parent:`(The resource name of the parent account/property) or `ancestor:`(The resource name of the parent account) or `firebase_project:`(The id or number of the linked firebase project). Some examples of filters: ``` | Filter | Description | |-----------------------------|-------------------------------------------| | parent:accounts/123 | The account with account id: 123. | | parent:properties/123 | The property with property id: 123. | | ancestor:accounts/123 | The account with account id: 123. | | firebase_project:project-id | The firebase project with id: project-id. | | firebase_project:123 | The firebase project with number: 123. | ```",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListProperties` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListProperties` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListPropertiesResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.create",
+    "description": "Creates a Google Analytics property with the specified location and attributes.",
+    "parameters": [
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}:acknowledgeUserDataCollection": {
+   "post": {
+    "operationId": "analyticsadmin.properties.acknowledgeUserDataCollection",
+    "description": "Acknowledges the terms of user data collection for the specified property. This acknowledgement must be completed (either in the Google Analytics UI or through this API) before MeasurementProtocolSecret resources may be created.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAcknowledgeUserDataCollectionResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAcknowledgeUserDataCollectionRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/dataRetentionSettings": {
+   "get": {
+    "operationId": "analyticsadmin.properties.getDataRetentionSettings",
+    "description": "Returns the singleton data retention settings for this property.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataRetentionSettings"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.updateDataRetentionSettings",
+    "description": "Updates the singleton data retention settings for this property.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Field names must be in snake case (e.g., \"field_to_update\"). Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataRetentionSettings"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataRetentionSettings"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}": {
+   "delete": {
+    "operationId": "analyticsadmin.properties.delete",
+    "description": "Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "get": {
+    "operationId": "analyticsadmin.properties.get",
+    "description": "Lookup for a single GA Property.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.patch",
+    "description": "Updates a property.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Field names must be in snake case (e.g., \"field_to_update\"). Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}:runAccessReport": {
+   "post": {
+    "operationId": "analyticsadmin.properties.runAccessReport",
+    "description": "Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. Reports may be requested for any property, but dimensions that aren't related to quota can only be requested on Google Analytics 360 properties. This method is only available to Administrators. These data access records include GA UI Reporting, GA UI Explorations, GA Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents). To give your feedback on this API, complete the [Google Analytics Access Reports feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform) form.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaRunAccessReportResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaRunAccessReportRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/conversionEvents": {
+   "get": {
+    "operationId": "analyticsadmin.properties.conversionEvents.list",
+    "description": "Deprecated: Use `ListKeyEvents` instead. Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.",
+    "parameters": [
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListConversionEvents` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListConversionEvents` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListConversionEventsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.conversionEvents.create",
+    "description": "Deprecated: Use `CreateKeyEvent` instead. Creates a conversion event with the specified attributes.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/conversionEvents/{conversionEventsId}": {
+   "get": {
+    "operationId": "analyticsadmin.properties.conversionEvents.get",
+    "description": "Deprecated: Use `GetKeyEvent` instead. Retrieve a single conversion event.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "conversionEventsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment conversionEventsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.conversionEvents.patch",
+    "description": "Deprecated: Use `UpdateKeyEvent` instead. Updates a conversion event with the specified attributes.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Field names must be in snake case (e.g., \"field_to_update\"). Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "conversionEventsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment conversionEventsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "operationId": "analyticsadmin.properties.conversionEvents.delete",
+    "description": "Deprecated: Use `DeleteKeyEvent` instead. Deletes a conversion event in a property.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "conversionEventsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment conversionEventsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/keyEvents/{keyEventsId}": {
+   "delete": {
+    "operationId": "analyticsadmin.properties.keyEvents.delete",
+    "description": "Deletes a Key Event.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "keyEventsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment keyEventsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.keyEvents.patch",
+    "description": "Updates a Key Event.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Field names must be in snake case (e.g., \"field_to_update\"). Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "keyEventsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment keyEventsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEvent"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEvent"
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "operationId": "analyticsadmin.properties.keyEvents.get",
+    "description": "Retrieves a single Key Event.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "keyEventsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment keyEventsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEvent"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/keyEvents": {
+   "post": {
+    "operationId": "analyticsadmin.properties.keyEvents.create",
+    "description": "Creates a Key Event.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEvent"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEvent"
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "operationId": "analyticsadmin.properties.keyEvents.list",
+    "description": "Returns a list of Key Events in the specified parent property. Returns an empty list if no Key Events are found.",
+    "parameters": [
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListKeyEvents` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListKeyEvents` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListKeyEventsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/googleAdsLinks/{googleAdsLinksId}": {
+   "patch": {
+    "operationId": "analyticsadmin.properties.googleAdsLinks.patch",
+    "description": "Updates a GoogleAdsLink on a property",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Field names must be in snake case (e.g., \"field_to_update\"). Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "googleAdsLinksId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment googleAdsLinksId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaGoogleAdsLink"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaGoogleAdsLink"
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "operationId": "analyticsadmin.properties.googleAdsLinks.delete",
+    "description": "Deletes a GoogleAdsLink on a property",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "googleAdsLinksId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment googleAdsLinksId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/googleAdsLinks": {
+   "post": {
+    "operationId": "analyticsadmin.properties.googleAdsLinks.create",
+    "description": "Creates a GoogleAdsLink.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaGoogleAdsLink"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaGoogleAdsLink"
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "operationId": "analyticsadmin.properties.googleAdsLinks.list",
+    "description": "Lists GoogleAdsLinks on a property.",
+    "parameters": [
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListGoogleAdsLinks` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListGoogleAdsLinks` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListGoogleAdsLinksResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/firebaseLinks": {
+   "get": {
+    "operationId": "analyticsadmin.properties.firebaseLinks.list",
+    "description": "Lists FirebaseLinks on a property. Properties can have at most one FirebaseLink.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListFirebaseLinks` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListFirebaseLinks` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListFirebaseLinksResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.firebaseLinks.create",
+    "description": "Creates a FirebaseLink. Properties can have at most one FirebaseLink.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaFirebaseLink"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaFirebaseLink"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/firebaseLinks/{firebaseLinksId}": {
+   "delete": {
+    "operationId": "analyticsadmin.properties.firebaseLinks.delete",
+    "description": "Deletes a FirebaseLink on a property",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "firebaseLinksId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment firebaseLinksId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/customMetrics/{customMetricsId}": {
+   "get": {
+    "operationId": "analyticsadmin.properties.customMetrics.get",
+    "description": "Lookup for a single CustomMetric.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "customMetricsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment customMetricsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomMetric"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.customMetrics.patch",
+    "description": "Updates a CustomMetric on a property.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "customMetricsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment customMetricsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomMetric"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomMetric"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/customMetrics/{customMetricsId}:archive": {
+   "post": {
+    "operationId": "analyticsadmin.properties.customMetrics.archive",
+    "description": "Archives a CustomMetric on a property.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "customMetricsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment customMetricsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaArchiveCustomMetricRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/customMetrics": {
+   "get": {
+    "operationId": "analyticsadmin.properties.customMetrics.list",
+    "description": "Lists CustomMetrics on a property.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "A page token, received from a previous `ListCustomMetrics` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListCustomMetrics` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListCustomMetricsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.customMetrics.create",
+    "description": "Creates a CustomMetric.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomMetric"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomMetric"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/dataStreams/{dataStreamsId}": {
+   "get": {
+    "operationId": "analyticsadmin.properties.dataStreams.get",
+    "description": "Lookup for a single DataStream.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.dataStreams.patch",
+    "description": "Updates a DataStream on a property.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "operationId": "analyticsadmin.properties.dataStreams.delete",
+    "description": "Deletes a DataStream on a property.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/dataStreams": {
+   "get": {
+    "operationId": "analyticsadmin.properties.dataStreams.list",
+    "description": "Lists DataStreams on a property.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "A page token, received from a previous `ListDataStreams` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListDataStreams` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListDataStreamsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.dataStreams.create",
+    "description": "Creates a DataStream.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/dataStreams/{dataStreamsId}/measurementProtocolSecrets/{measurementProtocolSecretsId}": {
+   "get": {
+    "operationId": "analyticsadmin.properties.dataStreams.measurementProtocolSecrets.get",
+    "description": "Lookup for a single MeasurementProtocolSecret.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "measurementProtocolSecretsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment measurementProtocolSecretsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "delete": {
+    "operationId": "analyticsadmin.properties.dataStreams.measurementProtocolSecrets.delete",
+    "description": "Deletes target MeasurementProtocolSecret.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "measurementProtocolSecretsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment measurementProtocolSecretsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.properties.dataStreams.measurementProtocolSecrets.patch",
+    "description": "Updates a measurement protocol secret.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Omitted fields will not be updated.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "measurementProtocolSecretsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment measurementProtocolSecretsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/dataStreams/{dataStreamsId}/measurementProtocolSecrets": {
+   "get": {
+    "operationId": "analyticsadmin.properties.dataStreams.measurementProtocolSecrets.list",
+    "description": "Returns child MeasurementProtocolSecrets under the specified parent Property.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. If unspecified, at most 10 resources will be returned. The maximum value is 10. Higher values will be coerced to the maximum.",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListMeasurementProtocolSecrets` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListMeasurementProtocolSecrets` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListMeasurementProtocolSecretsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.dataStreams.measurementProtocolSecrets.create",
+    "description": "Creates a measurement protocol secret.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "dataStreamsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment dataStreamsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/customDimensions/{customDimensionsId}:archive": {
+   "post": {
+    "operationId": "analyticsadmin.properties.customDimensions.archive",
+    "description": "Archives a CustomDimension on a property.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "customDimensionsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment customDimensionsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaArchiveCustomDimensionRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/properties/{propertiesId}/customDimensions/{customDimensionsId}": {
+   "patch": {
+    "operationId": "analyticsadmin.properties.customDimensions.patch",
+    "description": "Updates a CustomDimension on a property.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "customDimensionsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment customDimensionsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomDimension"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomDimension"
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "operationId": "analyticsadmin.properties.customDimensions.get",
+    "description": "Lookup for a single CustomDimension.",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "customDimensionsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment customDimensionsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomDimension"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/properties/{propertiesId}/customDimensions": {
+   "get": {
+    "operationId": "analyticsadmin.properties.customDimensions.list",
+    "description": "Lists CustomDimensions on a property.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. If unspecified, at most 50 resources will be returned. The maximum value is 200 (higher values will be coerced to the maximum).",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListCustomDimensions` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListCustomDimensions` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListCustomDimensionsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "analyticsadmin.properties.customDimensions.create",
+    "description": "Creates a CustomDimension. Warning: It's not permissible to use this method to collect data on individual users. In particular, sending user IDs in custom dimensions violates the [Google Analytics Terms of Service](https://www.google.com/analytics/terms/).",
+    "parameters": [
+     {
+      "name": "propertiesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment propertiesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomDimension"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomDimension"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/accountSummaries": {
+   "get": {
+    "operationId": "analyticsadmin.accountSummaries.list",
+    "description": "Returns summaries of all accounts accessible by the caller.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of AccountSummary resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListAccountSummaries` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAccountSummaries` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListAccountSummariesResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/accounts/{accountsId}:searchChangeHistoryEvents": {
+   "post": {
+    "operationId": "analyticsadmin.accounts.searchChangeHistoryEvents",
+    "description": "Searches through all changes to an account or its children given the specified set of filters. Only returns the subset of changes supported by the API. The UI may return additional changes.",
+    "parameters": [
+     {
+      "name": "accountsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment accountsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaSearchChangeHistoryEventsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaSearchChangeHistoryEventsRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/accounts/{accountsId}": {
+   "delete": {
+    "operationId": "analyticsadmin.accounts.delete",
+    "description": "Marks target Account as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted accounts. However, they can be restored using the Trash Can UI. If the accounts are not restored before the expiration time, the account and all child resources (eg: Properties, GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
+    "parameters": [
+     {
+      "name": "accountsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment accountsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleProtobufEmpty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "get": {
+    "operationId": "analyticsadmin.accounts.get",
+    "description": "Lookup for a single Account.",
+    "parameters": [
+     {
+      "name": "accountsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment accountsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccount"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "patch": {
+    "operationId": "analyticsadmin.accounts.patch",
+    "description": "Updates an account.",
+    "parameters": [
+     {
+      "name": "updateMask",
+      "in": "query",
+      "required": false,
+      "description": "Required. The list of fields to be updated. Field names must be in snake case (for example, \"field_to_update\"). Omitted fields will not be updated. To replace the entire entity, use one path with the string \"*\" to match all fields.",
+      "schema": {
+       "type": "string",
+       "format": "google-fieldmask"
+      }
+     },
+     {
+      "name": "accountsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment accountsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccount"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccount"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/accounts/{accountsId}/dataSharingSettings": {
+   "get": {
+    "operationId": "analyticsadmin.accounts.getDataSharingSettings",
+    "description": "Get data sharing settings on an account. Data sharing settings are singletons.",
+    "parameters": [
+     {
+      "name": "accountsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment accountsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataSharingSettings"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1beta/accounts/{accountsId}:runAccessReport": {
+   "post": {
+    "operationId": "analyticsadmin.accounts.runAccessReport",
+    "description": "Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. Reports may be requested for any property, but dimensions that aren't related to quota can only be requested on Google Analytics 360 properties. This method is only available to Administrators. These data access records include GA UI Reporting, GA UI Explorations, GA Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents). To give your feedback on this API, complete the [Google Analytics Access Reports feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform) form.",
+    "parameters": [
+     {
+      "name": "accountsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment accountsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaRunAccessReportResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaRunAccessReportRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/accounts:provisionAccountTicket": {
+   "post": {
+    "operationId": "analyticsadmin.accounts.provisionAccountTicket",
+    "description": "Requests a ticket for creating an account.",
+    "parameters": [
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProvisionAccountTicketResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProvisionAccountTicketRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/accounts": {
+   "get": {
+    "operationId": "analyticsadmin.accounts.list",
+    "description": "Returns all accounts accessible by the caller. Note that these accounts might not currently have GA properties. Soft-deleted (ie: \"trashed\") accounts are excluded by default. Returns an empty list if no relevant accounts are found. Note: The easiest way to retrieve a list of all properties you have access to is by using `ListAccountSummaries`.",
+    "parameters": [
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `ListAccounts` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAccounts` must match the call that provided the page token.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "showDeleted",
+      "in": "query",
+      "required": false,
+      "description": "Whether to include soft-deleted (ie: \"trashed\") Accounts in the results. Accounts can be inspected to determine whether they are deleted or not.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaListAccountsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "GoogleAnalyticsAdminV1betaAccessNumericFilter": {
+    "description": "Filters for numeric or date values.",
+    "type": "object",
+    "properties": {
+     "operation": {
+      "description": "The operation type for this filter.",
+      "type": "string",
+      "enum": [
+       "OPERATION_UNSPECIFIED",
+       "EQUAL",
+       "LESS_THAN",
+       "LESS_THAN_OR_EQUAL",
+       "GREATER_THAN",
+       "GREATER_THAN_OR_EQUAL"
+      ]
+     },
+     "value": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaNumericValue"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaDataRetentionSettings": {
+    "description": "Settings values for data retention. This is a singleton resource.",
+    "type": "object",
+    "properties": {
+     "eventDataRetention": {
+      "description": "Required. The length of time that event-level data is retained.",
+      "type": "string",
+      "enum": [
+       "RETENTION_DURATION_UNSPECIFIED",
+       "TWO_MONTHS",
+       "FOURTEEN_MONTHS",
+       "TWENTY_SIX_MONTHS",
+       "THIRTY_EIGHT_MONTHS",
+       "FIFTY_MONTHS"
+      ]
+     },
+     "name": {
+      "description": "Identifier. Resource name for this DataRetentionSetting resource. Format: properties/{property}/dataRetentionSettings",
+      "type": "string"
+     },
+     "userDataRetention": {
+      "description": "Required. The length of time that user-level data is retained.",
+      "type": "string",
+      "enum": [
+       "RETENTION_DURATION_UNSPECIFIED",
+       "TWO_MONTHS",
+       "FOURTEEN_MONTHS",
+       "TWENTY_SIX_MONTHS",
+       "THIRTY_EIGHT_MONTHS",
+       "FIFTY_MONTHS"
+      ]
+     },
+     "resetUserDataOnNewActivity": {
+      "description": "If true, reset the retention period for the user identifier with every event from that user.",
+      "type": "boolean"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaArchiveCustomDimensionRequest": {
+    "description": "Request message for ArchiveCustomDimension RPC.",
+    "type": "object",
+    "properties": {}
+   },
+   "GoogleAnalyticsAdminV1betaPropertySummary": {
+    "description": "A virtual resource representing metadata for a Google Analytics property.",
+    "type": "object",
+    "properties": {
+     "propertyType": {
+      "description": "The property's property type.",
+      "type": "string",
+      "enum": [
+       "PROPERTY_TYPE_UNSPECIFIED",
+       "PROPERTY_TYPE_ORDINARY",
+       "PROPERTY_TYPE_SUBPROPERTY",
+       "PROPERTY_TYPE_ROLLUP"
+      ]
+     },
+     "displayName": {
+      "description": "Display name for the property referred to in this property summary.",
+      "type": "string"
+     },
+     "parent": {
+      "description": "Resource name of this property's logical parent. Note: The Property-Moving UI can be used to change the parent. Format: accounts/{account}, properties/{property} Example: \"accounts/100\", \"properties/200\"",
+      "type": "string"
+     },
+     "canEdit": {
+      "description": "If true, then the user has a Google Analytics role that permits them to edit the property.",
+      "type": "boolean"
+     },
+     "property": {
+      "description": "Resource name of property referred to by this property summary Format: properties/{property_id} Example: \"properties/1000\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaGoogleAdsLink": {
+    "description": "A link between a Google Analytics property and a Google Ads account.",
+    "type": "object",
+    "properties": {
+     "customerId": {
+      "description": "Immutable. Google Ads customer ID.",
+      "type": "string"
+     },
+     "adsPersonalizationEnabled": {
+      "description": "Enable personalized advertising features with this integration. Automatically publish my Google Analytics audience lists and Google Analytics remarketing events/parameters to the linked Google Ads account. If this field is not set on create/update, it will be defaulted to true.",
+      "type": "boolean"
+     },
+     "createTime": {
+      "description": "Output only. Time when this link was originally created.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "creatorEmailAddress": {
+      "description": "Output only. Email address of the user that created the link. An empty string will be returned if the email address can't be retrieved.",
+      "type": "string"
+     },
+     "canManageClients": {
+      "description": "Output only. If true, this link is for a Google Ads manager account.",
+      "type": "boolean"
+     },
+     "name": {
+      "description": "Identifier. Format: properties/{propertyId}/googleAdsLinks/{googleAdsLinkId} Note: googleAdsLinkId is not the Google Ads customer ID.",
+      "type": "string"
+     },
+     "updateTime": {
+      "description": "Output only. Time when this link was last updated.",
+      "type": "string",
+      "format": "google-datetime"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessMetricHeader": {
+    "description": "Describes a metric column in the report. Visible metrics requested in a report produce column entries within rows and MetricHeaders. However, metrics used exclusively within filters or expressions do not produce columns in a report; correspondingly, those metrics do not produce headers.",
+    "type": "object",
+    "properties": {
+     "metricName": {
+      "description": "The metric's name; for example 'accessCount'.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessFilterExpressionList": {
+    "description": "A list of filter expressions.",
+    "type": "object",
+    "properties": {
+     "expressions": {
+      "description": "A list of filter expressions.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilterExpression"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListFirebaseLinksResponse": {
+    "description": "Response message for ListFirebaseLinks RPC",
+    "type": "object",
+    "properties": {
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages. Currently, Google Analytics supports only one FirebaseLink per property, so this will never be populated.",
+      "type": "string"
+     },
+     "firebaseLinks": {
+      "description": "List of FirebaseLinks. This will have at most one value.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaFirebaseLink"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListKeyEventsResponse": {
+    "description": "Response message for ListKeyEvents RPC.",
+    "type": "object",
+    "properties": {
+     "keyEvents": {
+      "description": "The requested Key Events",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEvent"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessDimensionValue": {
+    "description": "The value of a dimension.",
+    "type": "object",
+    "properties": {
+     "value": {
+      "description": "The dimension value. For example, this value may be 'France' for the 'country' dimension.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaDataStreamIosAppStreamData": {
+    "description": "Data specific to iOS app streams.",
+    "type": "object",
+    "properties": {
+     "firebaseAppId": {
+      "description": "Output only. ID of the corresponding iOS app in Firebase, if any. This ID can change if the iOS app is deleted and recreated.",
+      "type": "string"
+     },
+     "bundleId": {
+      "description": "Required. Immutable. The Apple App Store Bundle ID for the app Example: \"com.example.myiosapp\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccountSummary": {
+    "description": "A virtual resource representing an overview of an account and all its child Google Analytics properties.",
+    "type": "object",
+    "properties": {
+     "displayName": {
+      "description": "Display name for the account referred to in this account summary.",
+      "type": "string"
+     },
+     "name": {
+      "description": "Identifier. Resource name for this account summary. Format: accountSummaries/{account_id} Example: \"accountSummaries/1000\"",
+      "type": "string"
+     },
+     "propertySummaries": {
+      "description": "List of summaries for child accounts of this account.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaPropertySummary"
+      }
+     },
+     "account": {
+      "description": "Resource name of account referred to by this account summary Format: accounts/{account_id} Example: \"accounts/1000\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaProperty": {
+    "description": "A resource message representing a Google Analytics property.",
+    "type": "object",
+    "properties": {
+     "expireTime": {
+      "description": "Output only. If set, the time at which this trashed property will be permanently deleted. If not set, then this property is not currently in the trash can and is not slated to be deleted.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "timeZone": {
+      "description": "Required. Reporting Time Zone, used as the day boundary for reports, regardless of where the data originates. If the time zone honors DST, Analytics will automatically adjust for the changes. NOTE: Changing the time zone only affects data going forward, and is not applied retroactively. Format: https://www.iana.org/time-zones Example: \"America/Los_Angeles\"",
+      "type": "string"
+     },
+     "parent": {
+      "description": "Immutable. Resource name of this property's logical parent. Note: The Property-Moving UI can be used to change the parent. Format: accounts/{account}, properties/{property} Example: \"accounts/100\", \"properties/101\"",
+      "type": "string"
+     },
+     "createTime": {
+      "description": "Output only. Time when the entity was originally created.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "account": {
+      "description": "Immutable. The resource name of the parent account Format: accounts/{account_id} Example: \"accounts/123\"",
+      "type": "string"
+     },
+     "updateTime": {
+      "description": "Output only. Time when entity payload fields were last updated.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "propertyType": {
+      "description": "Immutable. The property type for this Property resource. When creating a property, if the type is \"PROPERTY_TYPE_UNSPECIFIED\", then \"ORDINARY_PROPERTY\" will be implied.",
+      "type": "string",
+      "enum": [
+       "PROPERTY_TYPE_UNSPECIFIED",
+       "PROPERTY_TYPE_ORDINARY",
+       "PROPERTY_TYPE_SUBPROPERTY",
+       "PROPERTY_TYPE_ROLLUP"
+      ]
+     },
+     "industryCategory": {
+      "description": "Industry associated with this property Example: AUTOMOTIVE, FOOD_AND_DRINK",
+      "type": "string",
+      "enum": [
+       "INDUSTRY_CATEGORY_UNSPECIFIED",
+       "AUTOMOTIVE",
+       "BUSINESS_AND_INDUSTRIAL_MARKETS",
+       "FINANCE",
+       "HEALTHCARE",
+       "TECHNOLOGY",
+       "TRAVEL",
+       "OTHER",
+       "ARTS_AND_ENTERTAINMENT",
+       "BEAUTY_AND_FITNESS",
+       "BOOKS_AND_LITERATURE",
+       "FOOD_AND_DRINK",
+       "GAMES",
+       "HOBBIES_AND_LEISURE",
+       "HOME_AND_GARDEN",
+       "INTERNET_AND_TELECOM",
+       "LAW_AND_GOVERNMENT",
+       "NEWS",
+       "ONLINE_COMMUNITIES",
+       "PEOPLE_AND_SOCIETY",
+       "PETS_AND_ANIMALS",
+       "REAL_ESTATE",
+       "REFERENCE",
+       "SCIENCE",
+       "SPORTS",
+       "JOBS_AND_EDUCATION",
+       "SHOPPING"
+      ]
+     },
+     "currencyCode": {
+      "description": "The currency type used in reports involving monetary values. Format: https://en.wikipedia.org/wiki/ISO_4217 Examples: \"USD\", \"EUR\", \"JPY\"",
+      "type": "string"
+     },
+     "displayName": {
+      "description": "Required. Human-readable display name for this property. The max allowed display name length is 100 UTF-16 code units.",
+      "type": "string"
+     },
+     "serviceLevel": {
+      "description": "Output only. The Google Analytics service level that applies to this property.",
+      "type": "string",
+      "enum": [
+       "SERVICE_LEVEL_UNSPECIFIED",
+       "GOOGLE_ANALYTICS_STANDARD",
+       "GOOGLE_ANALYTICS_360"
+      ]
+     },
+     "deleteTime": {
+      "description": "Output only. If set, the time at which this property was trashed. If not set, then this property is not currently in the trash can.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "name": {
+      "description": "Identifier. Resource name of this property. Format: properties/{property_id} Example: \"properties/1000\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessBetweenFilter": {
+    "description": "To express that the result needs to be between two numbers (inclusive).",
+    "type": "object",
+    "properties": {
+     "fromValue": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaNumericValue"
+     },
+     "toValue": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaNumericValue"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaDataStream": {
+    "description": "A resource message representing a data stream.",
+    "type": "object",
+    "properties": {
+     "webStreamData": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStreamWebStreamData"
+     },
+     "type": {
+      "description": "Required. Immutable. The type of this DataStream resource.",
+      "type": "string",
+      "enum": [
+       "DATA_STREAM_TYPE_UNSPECIFIED",
+       "WEB_DATA_STREAM",
+       "ANDROID_APP_DATA_STREAM",
+       "IOS_APP_DATA_STREAM"
+      ]
+     },
+     "updateTime": {
+      "description": "Output only. Time when stream payload fields were last updated.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "iosAppStreamData": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStreamIosAppStreamData"
+     },
+     "createTime": {
+      "description": "Output only. Time when this stream was originally created.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "displayName": {
+      "description": "Human-readable display name for the Data Stream. Required for web data streams. The max allowed display name length is 255 UTF-16 code units.",
+      "type": "string"
+     },
+     "androidAppStreamData": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStreamAndroidAppStreamData"
+     },
+     "name": {
+      "description": "Identifier. Resource name of this Data Stream. Format: properties/{property_id}/dataStreams/{stream_id} Example: \"properties/1000/dataStreams/2000\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaCustomDimension": {
+    "description": "A definition for a CustomDimension.",
+    "type": "object",
+    "properties": {
+     "displayName": {
+      "description": "Required. Display name for this custom dimension as shown in the Analytics UI. Max length of 82 characters, alphanumeric plus space and underscore starting with a letter. Legacy system-generated display names may contain square brackets, but updates to this field will never permit square brackets.",
+      "type": "string"
+     },
+     "scope": {
+      "description": "Required. Immutable. The scope of this dimension.",
+      "type": "string",
+      "enum": [
+       "DIMENSION_SCOPE_UNSPECIFIED",
+       "EVENT",
+       "USER",
+       "ITEM"
+      ]
+     },
+     "name": {
+      "description": "Identifier. Resource name for this CustomDimension resource. Format: properties/{property}/customDimensions/{customDimension}",
+      "type": "string"
+     },
+     "disallowAdsPersonalization": {
+      "description": "Optional. If set to true, sets this dimension as NPA and excludes it from ads personalization. This is currently only supported by user-scoped custom dimensions.",
+      "type": "boolean"
+     },
+     "parameterName": {
+      "description": "Required. Immutable. Tagging parameter name for this custom dimension. If this is a user-scoped dimension, then this is the user property name. If this is an event-scoped dimension, then this is the event parameter name. If this is an item-scoped dimension, then this is the parameter name found in the eCommerce items array. May only contain alphanumeric and underscore characters, starting with a letter. Max length of 24 characters for user-scoped dimensions, 40 characters for event-scoped dimensions.",
+      "type": "string"
+     },
+     "description": {
+      "description": "Optional. Description for this custom dimension. Max length of 150 characters.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessDateRange": {
+    "description": "A contiguous range of days: startDate, startDate + 1, ..., endDate.",
+    "type": "object",
+    "properties": {
+     "startDate": {
+      "description": "The inclusive start date for the query in the format `YYYY-MM-DD`. Cannot be after `endDate`. The format `NdaysAgo`, `yesterday`, or `today` is also accepted, and in that case, the date is inferred based on the current time in the request's time zone.",
+      "type": "string"
+     },
+     "endDate": {
+      "description": "The inclusive end date for the query in the format `YYYY-MM-DD`. Cannot be before `startDate`. The format `NdaysAgo`, `yesterday`, or `today` is also accepted, and in that case, the date is inferred based on the current time in the request's time zone.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListDataStreamsResponse": {
+    "description": "Response message for ListDataStreams RPC.",
+    "type": "object",
+    "properties": {
+     "dataStreams": {
+      "description": "List of DataStreams.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaSearchChangeHistoryEventsResponse": {
+    "description": "Response message for SearchAccounts RPC.",
+    "type": "object",
+    "properties": {
+     "changeHistoryEvents": {
+      "description": "Results that were accessible to the caller.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaChangeHistoryEvent"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccount": {
+    "description": "A resource message representing a Google Analytics account.",
+    "type": "object",
+    "properties": {
+     "updateTime": {
+      "description": "Output only. Time when account payload fields were last updated.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "name": {
+      "description": "Identifier. Resource name of this account. Format: accounts/{account} Example: \"accounts/100\"",
+      "type": "string"
+     },
+     "createTime": {
+      "description": "Output only. Time when this account was originally created.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "displayName": {
+      "description": "Required. Human-readable display name for this account.",
+      "type": "string"
+     },
+     "deleted": {
+      "description": "Output only. Indicates whether this Account is soft-deleted or not. Deleted accounts are excluded from List results unless specifically requested.",
+      "type": "boolean"
+     },
+     "gmpOrganization": {
+      "description": "Output only. The URI for a Google Marketing Platform organization resource. Only set when this account is connected to a GMP organization. Format: marketingplatformadmin.googleapis.com/organizations/{org_id}",
+      "type": "string"
+     },
+     "regionCode": {
+      "description": "Country of business. Must be a Unicode CLDR region code.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessQuotaStatus": {
+    "description": "Current state for a particular quota group.",
+    "type": "object",
+    "properties": {
+     "consumed": {
+      "description": "Quota consumed by this request.",
+      "type": "integer",
+      "format": "int32"
+     },
+     "remaining": {
+      "description": "Quota remaining after this request.",
+      "type": "integer",
+      "format": "int32"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAcknowledgeUserDataCollectionRequest": {
+    "description": "Request message for AcknowledgeUserDataCollection RPC.",
+    "type": "object",
+    "properties": {
+     "acknowledgement": {
+      "description": "Required. An acknowledgement that the caller of this method understands the terms of user data collection. This field must contain the exact value: \"I acknowledge that I have the necessary privacy disclosures and rights from my end users for the collection and processing of their data, including the association of such data with the visitation information Google Analytics collects from my site and/or app property.\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListAccountSummariesResponse": {
+    "description": "Response message for ListAccountSummaries RPC.",
+    "type": "object",
+    "properties": {
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     },
+     "accountSummaries": {
+      "description": "Account summaries of all accounts the caller has access to.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccountSummary"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessOrderByDimensionOrderBy": {
+    "description": "Sorts by dimension values.",
+    "type": "object",
+    "properties": {
+     "orderType": {
+      "description": "Controls the rule for dimension value ordering.",
+      "type": "string",
+      "enum": [
+       "ORDER_TYPE_UNSPECIFIED",
+       "ALPHANUMERIC",
+       "CASE_INSENSITIVE_ALPHANUMERIC",
+       "NUMERIC"
+      ]
+     },
+     "dimensionName": {
+      "description": "A dimension name in the request to order by.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListGoogleAdsLinksResponse": {
+    "description": "Response message for ListGoogleAdsLinks RPC.",
+    "type": "object",
+    "properties": {
+     "googleAdsLinks": {
+      "description": "List of GoogleAdsLinks.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaGoogleAdsLink"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaProvisionAccountTicketRequest": {
+    "description": "Request message for ProvisionAccountTicket RPC.",
+    "type": "object",
+    "properties": {
+     "redirectUri": {
+      "description": "Redirect URI where the user will be sent after accepting Terms of Service. Must be configured in Cloud Console as a Redirect URI.",
+      "type": "string"
+     },
+     "account": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccount"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessOrderBy": {
+    "description": "Order bys define how rows will be sorted in the response. For example, ordering rows by descending access count is one ordering, and ordering rows by the country string is a different ordering.",
+    "type": "object",
+    "properties": {
+     "dimension": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessOrderByDimensionOrderBy"
+     },
+     "desc": {
+      "description": "If true, sorts by descending order. If false or unspecified, sorts in ascending order.",
+      "type": "boolean"
+     },
+     "metric": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessOrderByMetricOrderBy"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessMetric": {
+    "description": "The quantitative measurements of a report. For example, the metric `accessCount` is the total number of data access records.",
+    "type": "object",
+    "properties": {
+     "metricName": {
+      "description": "The API name of the metric. See [Data Access Schema](https://developers.google.com/analytics/devguides/config/admin/v1/access-api-schema) for the list of metrics supported in this API. Metrics are referenced by name in `metricFilter` & `orderBys`.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaChangeHistoryChangeChangeHistoryResource": {
+    "description": "A snapshot of a resource as before or after the result of a change in change history.",
+    "type": "object",
+    "properties": {
+     "googleAdsLink": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaGoogleAdsLink"
+     },
+     "account": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccount"
+     },
+     "conversionEvent": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+     },
+     "measurementProtocolSecret": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+     },
+     "dataRetentionSettings": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataRetentionSettings"
+     },
+     "firebaseLink": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaFirebaseLink"
+     },
+     "dataStream": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaDataStream"
+     },
+     "property": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaDataStreamAndroidAppStreamData": {
+    "description": "Data specific to Android app streams.",
+    "type": "object",
+    "properties": {
+     "packageName": {
+      "description": "Immutable. The package name for the app being measured. Example: \"com.example.myandroidapp\"",
+      "type": "string"
+     },
+     "firebaseAppId": {
+      "description": "Output only. ID of the corresponding Android app in Firebase, if any. This ID can change if the Android app is deleted and recreated.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListCustomDimensionsResponse": {
+    "description": "Response message for ListCustomDimensions RPC.",
+    "type": "object",
+    "properties": {
+     "customDimensions": {
+      "description": "List of CustomDimensions.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomDimension"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessStringFilter": {
+    "description": "The filter for strings.",
+    "type": "object",
+    "properties": {
+     "matchType": {
+      "description": "The match type for this filter.",
+      "type": "string",
+      "enum": [
+       "MATCH_TYPE_UNSPECIFIED",
+       "EXACT",
+       "BEGINS_WITH",
+       "ENDS_WITH",
+       "CONTAINS",
+       "FULL_REGEXP",
+       "PARTIAL_REGEXP"
+      ]
+     },
+     "value": {
+      "description": "The string value used for the matching.",
+      "type": "string"
+     },
+     "caseSensitive": {
+      "description": "If true, the string value is case sensitive.",
+      "type": "boolean"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListMeasurementProtocolSecretsResponse": {
+    "description": "Response message for ListMeasurementProtocolSecret RPC",
+    "type": "object",
+    "properties": {
+     "measurementProtocolSecrets": {
+      "description": "A list of secrets for the parent stream specified in the request.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaMeasurementProtocolSecret"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaConversionEventDefaultConversionValue": {
+    "description": "Defines a default value/currency for a conversion event. Both value and currency must be provided.",
+    "type": "object",
+    "properties": {
+     "currencyCode": {
+      "description": "When a conversion event for this event_name has no set currency, this currency will be applied as the default. Must be in ISO 4217 currency code format. See https://en.wikipedia.org/wiki/ISO_4217 for more information.",
+      "type": "string"
+     },
+     "value": {
+      "description": "This value will be used to populate the value for all conversions of the specified event_name where the event \"value\" parameter is unset.",
+      "type": "number",
+      "format": "double"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaArchiveCustomMetricRequest": {
+    "description": "Request message for ArchiveCustomMetric RPC.",
+    "type": "object",
+    "properties": {}
+   },
+   "GoogleAnalyticsAdminV1betaAcknowledgeUserDataCollectionResponse": {
+    "description": "Response message for AcknowledgeUserDataCollection RPC.",
+    "type": "object",
+    "properties": {}
+   },
+   "GoogleAnalyticsAdminV1betaDataStreamWebStreamData": {
+    "description": "Data specific to web streams.",
+    "type": "object",
+    "properties": {
+     "defaultUri": {
+      "description": "Domain name of the web app being measured, or empty. Example: \"http://www.google.com\", \"https://www.google.com\"",
+      "type": "string"
+     },
+     "firebaseAppId": {
+      "description": "Output only. ID of the corresponding web app in Firebase, if any. This ID can change if the web app is deleted and recreated.",
+      "type": "string"
+     },
+     "measurementId": {
+      "description": "Output only. Analytics Measurement ID. Example: \"G-1A2BCD345E\"",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaChangeHistoryEvent": {
+    "description": "A set of changes within a Google Analytics account or its child properties that resulted from the same cause. Common causes would be updates made in the Google Analytics UI, changes from customer support, or automatic Google Analytics system changes.",
+    "type": "object",
+    "properties": {
+     "changesFiltered": {
+      "description": "If true, then the list of changes returned was filtered, and does not represent all changes that occurred in this event.",
+      "type": "boolean"
+     },
+     "userActorEmail": {
+      "description": "Email address of the Google account that made the change. This will be a valid email address if the actor field is set to USER, and empty otherwise. Google accounts that have been deleted will cause an error.",
+      "type": "string"
+     },
+     "actorType": {
+      "description": "The type of actor that made this change.",
+      "type": "string",
+      "enum": [
+       "ACTOR_TYPE_UNSPECIFIED",
+       "USER",
+       "SYSTEM",
+       "SUPPORT"
+      ]
+     },
+     "id": {
+      "description": "ID of this change history event. This ID is unique across Google Analytics.",
+      "type": "string"
+     },
+     "changeTime": {
+      "description": "Time when change was made.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "changes": {
+      "description": "A list of changes made in this change history event that fit the filters specified in SearchChangeHistoryEventsRequest.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaChangeHistoryChange"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaNumericValue": {
+    "description": "To represent a number.",
+    "type": "object",
+    "properties": {
+     "doubleValue": {
+      "description": "Double value",
+      "type": "number",
+      "format": "double"
+     },
+     "int64Value": {
+      "description": "Integer value",
+      "type": "string",
+      "format": "int64"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListCustomMetricsResponse": {
+    "description": "Response message for ListCustomMetrics RPC.",
+    "type": "object",
+    "properties": {
+     "customMetrics": {
+      "description": "List of CustomMetrics.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaCustomMetric"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaRunAccessReportRequest": {
+    "description": "The request for a Data Access Record Report.",
+    "type": "object",
+    "properties": {
+     "dateRanges": {
+      "description": "Date ranges of access records to read. If multiple date ranges are requested, each response row will contain a zero based date range index. If two date ranges overlap, the access records for the overlapping days is included in the response rows for both date ranges. Requests are allowed up to 2 date ranges.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessDateRange"
+      }
+     },
+     "orderBys": {
+      "description": "Specifies how rows are ordered in the response.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessOrderBy"
+      }
+     },
+     "expandGroups": {
+      "description": "Optional. Decides whether to return the users within user groups. This field works only when include_all_users is set to true. If true, it will return all users with access to the specified property or account. If false, only the users with direct access will be returned.",
+      "type": "boolean"
+     },
+     "limit": {
+      "description": "The number of rows to return. If unspecified, 10,000 rows are returned. The API returns a maximum of 100,000 rows per request, no matter how many you ask for. `limit` must be positive. The API may return fewer rows than the requested `limit`, if there aren't as many remaining rows as the `limit`. For instance, there are fewer than 300 possible values for the dimension `country`, so when reporting on only `country`, you can't get more than 300 rows, even if you set `limit` to a higher value. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).",
+      "type": "string",
+      "format": "int64"
+     },
+     "metrics": {
+      "description": "The metrics requested and displayed in the response. Requests are allowed up to 10 metrics.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessMetric"
+      }
+     },
+     "offset": {
+      "description": "The row count of the start row. The first row is counted as row 0. If offset is unspecified, it is treated as 0. If offset is zero, then this method will return the first page of results with `limit` entries. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).",
+      "type": "string",
+      "format": "int64"
+     },
+     "includeAllUsers": {
+      "description": "Optional. Determines whether to include users who have never made an API call in the response. If true, all users with access to the specified property or account are included in the response, regardless of whether they have made an API call or not. If false, only the users who have made an API call will be included.",
+      "type": "boolean"
+     },
+     "dimensions": {
+      "description": "The dimensions requested and displayed in the response. Requests are allowed up to 9 dimensions.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessDimension"
+      }
+     },
+     "returnEntityQuota": {
+      "description": "Toggles whether to return the current state of this Analytics Property's quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level requests, this field must be false.",
+      "type": "boolean"
+     },
+     "dimensionFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilterExpression"
+     },
+     "metricFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilterExpression"
+     },
+     "timeZone": {
+      "description": "This request's time zone if specified. If unspecified, the property's time zone is used. The request's time zone is used to interpret the start & end dates of the report. Formatted as strings from the IANA Time Zone database (https://www.iana.org/time-zones); for example \"America/New_York\" or \"Asia/Tokyo\".",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessMetricValue": {
+    "description": "The value of a metric.",
+    "type": "object",
+    "properties": {
+     "value": {
+      "description": "The measurement value. For example, this value may be '13'.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaKeyEventDefaultValue": {
+    "description": "Defines a default value/currency for a key event.",
+    "type": "object",
+    "properties": {
+     "numericValue": {
+      "description": "Required. This will be used to populate the \"value\" parameter for all occurrences of this Key Event (specified by event_name) where that parameter is unset.",
+      "type": "number",
+      "format": "double"
+     },
+     "currencyCode": {
+      "description": "Required. When an occurrence of this Key Event (specified by event_name) has no set currency this currency will be applied as the default. Must be in ISO 4217 currency code format. See https://en.wikipedia.org/wiki/ISO_4217 for more information.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessInListFilter": {
+    "description": "The result needs to be in a list of string values.",
+    "type": "object",
+    "properties": {
+     "caseSensitive": {
+      "description": "If true, the string value is case sensitive.",
+      "type": "boolean"
+     },
+     "values": {
+      "description": "The list of string values. Must be non-empty.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessDimension": {
+    "description": "Dimensions are attributes of your data. For example, the dimension `userEmail` indicates the email of the user that accessed reporting data. Dimension values in report responses are strings.",
+    "type": "object",
+    "properties": {
+     "dimensionName": {
+      "description": "The API name of the dimension. See [Data Access Schema](https://developers.google.com/analytics/devguides/config/admin/v1/access-api-schema) for the list of dimensions supported in this API. Dimensions are referenced by name in `dimensionFilter` and `orderBys`.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListConversionEventsResponse": {
+    "description": "Response message for ListConversionEvents RPC.",
+    "type": "object",
+    "properties": {
+     "conversionEvents": {
+      "description": "The requested conversion events",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEvent"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaChangeHistoryChange": {
+    "description": "A description of a change to a single Google Analytics resource.",
+    "type": "object",
+    "properties": {
+     "resource": {
+      "description": "Resource name of the resource whose changes are described by this entry.",
+      "type": "string"
+     },
+     "action": {
+      "description": "The type of action that changed this resource.",
+      "type": "string",
+      "enum": [
+       "ACTION_TYPE_UNSPECIFIED",
+       "CREATED",
+       "UPDATED",
+       "DELETED"
+      ]
+     },
+     "resourceBeforeChange": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaChangeHistoryChangeChangeHistoryResource"
+     },
+     "resourceAfterChange": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaChangeHistoryChangeChangeHistoryResource"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessOrderByMetricOrderBy": {
+    "description": "Sorts by metric values.",
+    "type": "object",
+    "properties": {
+     "metricName": {
+      "description": "A metric name in the request to order by.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessRow": {
+    "description": "Access report data for each row.",
+    "type": "object",
+    "properties": {
+     "metricValues": {
+      "description": "List of metric values. These values are in the same order as specified in the request.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessMetricValue"
+      }
+     },
+     "dimensionValues": {
+      "description": "List of dimension values. These values are in the same order as specified in the request.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessDimensionValue"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaRunAccessReportResponse": {
+    "description": "The customized Data Access Record Report response.",
+    "type": "object",
+    "properties": {
+     "dimensionHeaders": {
+      "description": "The header for a column in the report that corresponds to a specific dimension. The number of DimensionHeaders and ordering of DimensionHeaders matches the dimensions present in rows.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessDimensionHeader"
+      }
+     },
+     "metricHeaders": {
+      "description": "The header for a column in the report that corresponds to a specific metric. The number of MetricHeaders and ordering of MetricHeaders matches the metrics present in rows.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessMetricHeader"
+      }
+     },
+     "rows": {
+      "description": "Rows of dimension value combinations and metric values in the report.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessRow"
+      }
+     },
+     "rowCount": {
+      "description": "The total number of rows in the query result. `rowCount` is independent of the number of rows returned in the response, the `limit` request parameter, and the `offset` request parameter. For example if a query returns 175 rows and includes `limit` of 50 in the API request, the response will contain `rowCount` of 175 but only 50 rows. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).",
+      "type": "integer",
+      "format": "int32"
+     },
+     "quota": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessQuota"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaKeyEvent": {
+    "description": "A key event in a Google Analytics property.",
+    "type": "object",
+    "properties": {
+     "name": {
+      "description": "Output only. Resource name of this key event. Format: properties/{property}/keyEvents/{key_event}",
+      "type": "string"
+     },
+     "custom": {
+      "description": "Output only. If set to true, this key event refers to a custom event. If set to false, this key event refers to a default event in GA. Default events typically have special meaning in GA. Default events are usually created for you by the GA system, but in some cases can be created by property admins. Custom events count towards the maximum number of custom key events that may be created per property.",
+      "type": "boolean"
+     },
+     "deletable": {
+      "description": "Output only. If set to true, this event can be deleted.",
+      "type": "boolean"
+     },
+     "defaultValue": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaKeyEventDefaultValue"
+     },
+     "countingMethod": {
+      "description": "Required. The method by which Key Events will be counted across multiple events within a session.",
+      "type": "string",
+      "enum": [
+       "COUNTING_METHOD_UNSPECIFIED",
+       "ONCE_PER_EVENT",
+       "ONCE_PER_SESSION"
+      ]
+     },
+     "createTime": {
+      "description": "Output only. Time when this key event was created in the property.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "eventName": {
+      "description": "Immutable. The event name for this key event. Examples: 'click', 'purchase'",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListAccountsResponse": {
+    "description": "Request message for ListAccounts RPC.",
+    "type": "object",
+    "properties": {
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     },
+     "accounts": {
+      "description": "Results that were accessible to the caller.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccount"
+      }
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaCustomMetric": {
+    "description": "A definition for a custom metric.",
+    "type": "object",
+    "properties": {
+     "measurementUnit": {
+      "description": "Required. The type for the custom metric's value.",
+      "type": "string",
+      "enum": [
+       "MEASUREMENT_UNIT_UNSPECIFIED",
+       "STANDARD",
+       "CURRENCY",
+       "FEET",
+       "METERS",
+       "KILOMETERS",
+       "MILES",
+       "MILLISECONDS",
+       "SECONDS",
+       "MINUTES",
+       "HOURS"
+      ]
+     },
+     "displayName": {
+      "description": "Required. Display name for this custom metric as shown in the Analytics UI. Max length of 82 characters, alphanumeric plus space and underscore starting with a letter. Legacy system-generated display names may contain square brackets, but updates to this field will never permit square brackets.",
+      "type": "string"
+     },
+     "restrictedMetricType": {
+      "description": "Optional. Types of restricted data that this metric may contain. Required for metrics with CURRENCY measurement unit. Must be empty for metrics with a non-CURRENCY measurement unit.",
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
+        "COST_DATA",
+        "REVENUE_DATA"
+       ]
+      }
+     },
+     "description": {
+      "description": "Optional. Description for this custom dimension. Max length of 150 characters.",
+      "type": "string"
+     },
+     "scope": {
+      "description": "Required. Immutable. The scope of this custom metric.",
+      "type": "string",
+      "enum": [
+       "METRIC_SCOPE_UNSPECIFIED",
+       "EVENT"
+      ]
+     },
+     "name": {
+      "description": "Identifier. Resource name for this CustomMetric resource. Format: properties/{property}/customMetrics/{customMetric}",
+      "type": "string"
+     },
+     "parameterName": {
+      "description": "Required. Immutable. Tagging name for this custom metric. If this is an event-scoped metric, then this is the event parameter name. May only contain alphanumeric and underscore charactes, starting with a letter. Max length of 40 characters for event-scoped metrics.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleProtobufEmpty": {
+    "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
+    "type": "object",
+    "properties": {}
+   },
+   "GoogleAnalyticsAdminV1betaAccessDimensionHeader": {
+    "description": "Describes a dimension column in the report. Dimensions requested in a report produce column entries within rows and DimensionHeaders. However, dimensions used exclusively within filters or expressions do not produce columns in a report; correspondingly, those dimensions do not produce headers.",
+    "type": "object",
+    "properties": {
+     "dimensionName": {
+      "description": "The dimension's name; for example 'userEmail'.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessQuota": {
+    "description": "Current state of all quotas for this Analytics property. If any quota for a property is exhausted, all requests to that property will return Resource Exhausted errors.",
+    "type": "object",
+    "properties": {
+     "serverErrorsPerProjectPerHour": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessQuotaStatus"
+     },
+     "concurrentRequests": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessQuotaStatus"
+     },
+     "tokensPerProjectPerHour": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessQuotaStatus"
+     },
+     "tokensPerHour": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessQuotaStatus"
+     },
+     "tokensPerDay": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessQuotaStatus"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaDataSharingSettings": {
+    "description": "A resource message representing data sharing settings of a Google Analytics account.",
+    "type": "object",
+    "properties": {
+     "sharingWithGoogleProductsEnabled": {
+      "description": "Allows Google to use the data to improve other Google products or services. This fields maps to the \"Google products & services\" field in the Google Analytics Admin UI.",
+      "type": "boolean"
+     },
+     "name": {
+      "description": "Identifier. Resource name. Format: accounts/{account}/dataSharingSettings Example: \"accounts/1000/dataSharingSettings\"",
+      "type": "string"
+     },
+     "sharingWithGoogleAssignedSalesEnabled": {
+      "description": "Allows Google access to your Google Analytics account data, including account usage and configuration data, product spending, and users associated with your Google Analytics account, so that Google can help you make the most of Google products, providing you with insights, offers, recommendations, and optimization tips across Google Analytics and other Google products for business. This field maps to the \"Recommendations for your business\" field in the Google Analytics Admin UI.",
+      "type": "boolean"
+     },
+     "sharingWithGoogleAnySalesEnabled": {
+      "description": "Deprecated. This field is no longer used and always returns false.",
+      "type": "boolean"
+     },
+     "sharingWithGoogleSupportEnabled": {
+      "description": "Allows Google technical support representatives access to your Google Analytics data and account when necessary to provide service and find solutions to technical issues. This field maps to the \"Technical support\" field in the Google Analytics Admin UI.",
+      "type": "boolean"
+     },
+     "sharingWithOthersEnabled": {
+      "description": "Enable features like predictions, modeled data, and benchmarking that can provide you with richer business insights when you contribute aggregated measurement data. The data you share (including information about the property from which it is shared) is aggregated and de-identified before being used to generate business insights. This field maps to the \"Modeling contributions & business insights\" field in the Google Analytics Admin UI.",
+      "type": "boolean"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessFilter": {
+    "description": "An expression to filter dimension or metric values.",
+    "type": "object",
+    "properties": {
+     "fieldName": {
+      "description": "The dimension name or metric name.",
+      "type": "string"
+     },
+     "numericFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessNumericFilter"
+     },
+     "betweenFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessBetweenFilter"
+     },
+     "inListFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessInListFilter"
+     },
+     "stringFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessStringFilter"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaAccessFilterExpression": {
+    "description": "Expresses dimension or metric filters. The fields in the same expression need to be either all dimensions or all metrics.",
+    "type": "object",
+    "properties": {
+     "accessFilter": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilter"
+     },
+     "notExpression": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilterExpression"
+     },
+     "andGroup": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilterExpressionList"
+     },
+     "orGroup": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaAccessFilterExpressionList"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaMeasurementProtocolSecret": {
+    "description": "A secret value used for sending hits to Measurement Protocol.",
+    "type": "object",
+    "properties": {
+     "secretValue": {
+      "description": "Output only. The measurement protocol secret value. Pass this value to the api_secret field of the Measurement Protocol API when sending hits to this secret's parent property.",
+      "type": "string"
+     },
+     "name": {
+      "description": "Identifier. Resource name of this secret. This secret may be a child of any type of stream. Format: properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets/{measurementProtocolSecret}",
+      "type": "string"
+     },
+     "displayName": {
+      "description": "Required. Human-readable display name for this secret.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaFirebaseLink": {
+    "description": "A link between a Google Analytics property and a Firebase project.",
+    "type": "object",
+    "properties": {
+     "project": {
+      "description": "Immutable. Firebase project resource name. When creating a FirebaseLink, you may provide this resource name using either a project number or project ID. Once this resource has been created, returned FirebaseLinks will always have a project_name that contains a project number. Format: 'projects/{project number}' Example: 'projects/1234'",
+      "type": "string"
+     },
+     "createTime": {
+      "description": "Output only. Time when this FirebaseLink was originally created.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "name": {
+      "description": "Identifier. Example format: properties/1234/firebaseLinks/5678",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaSearchChangeHistoryEventsRequest": {
+    "description": "Request message for SearchChangeHistoryEvents RPC.",
+    "type": "object",
+    "properties": {
+     "pageToken": {
+      "description": "Optional. A page token, received from a previous `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `SearchChangeHistoryEvents` must match the call that provided the page token.",
+      "type": "string"
+     },
+     "resourceType": {
+      "description": "Optional. If set, only return changes if they are for a resource that matches at least one of these types.",
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED",
+        "ACCOUNT",
+        "PROPERTY",
+        "FIREBASE_LINK",
+        "GOOGLE_ADS_LINK",
+        "GOOGLE_SIGNALS_SETTINGS",
+        "CONVERSION_EVENT",
+        "MEASUREMENT_PROTOCOL_SECRET",
+        "CUSTOM_DIMENSION",
+        "CUSTOM_METRIC",
+        "DATA_RETENTION_SETTINGS",
+        "DISPLAY_VIDEO_360_ADVERTISER_LINK",
+        "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL",
+        "DATA_STREAM",
+        "ATTRIBUTION_SETTINGS"
+       ]
+      }
+     },
+     "actorEmail": {
+      "description": "Optional. If set, only return changes if they are made by a user in this list.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "property": {
+      "description": "Optional. Resource name for a child property. If set, only return changes made to this property or its child resources. Format: properties/{propertyId} Example: `properties/100`",
+      "type": "string"
+     },
+     "earliestChangeTime": {
+      "description": "Optional. If set, only return changes made after this time (inclusive).",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "action": {
+      "description": "Optional. If set, only return changes that match one or more of these types of actions.",
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "ACTION_TYPE_UNSPECIFIED",
+        "CREATED",
+        "UPDATED",
+        "DELETED"
+       ]
+      }
+     },
+     "pageSize": {
+      "description": "Optional. The maximum number of ChangeHistoryEvent items to return. If unspecified, at most 50 items will be returned. The maximum value is 200 (higher values will be coerced to the maximum). Note that the service may return a page with fewer items than this value specifies (potentially even zero), and that there still may be additional pages. If you want a particular number of items, you'll need to continue requesting additional pages using `page_token` until you get the needed number.",
+      "type": "integer",
+      "format": "int32"
+     },
+     "latestChangeTime": {
+      "description": "Optional. If set, only return changes made before this time (inclusive).",
+      "type": "string",
+      "format": "google-datetime"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaProvisionAccountTicketResponse": {
+    "description": "Response message for ProvisionAccountTicket RPC.",
+    "type": "object",
+    "properties": {
+     "accountTicketId": {
+      "description": "The param to be passed in the ToS link.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaListPropertiesResponse": {
+    "description": "Response message for ListProperties RPC.",
+    "type": "object",
+    "properties": {
+     "properties": {
+      "description": "Results that matched the filter criteria and were accessible to the caller.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaProperty"
+      }
+     },
+     "nextPageToken": {
+      "description": "A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "GoogleAnalyticsAdminV1betaConversionEvent": {
+    "description": "A conversion event in a Google Analytics property.",
+    "type": "object",
+    "properties": {
+     "eventName": {
+      "description": "Immutable. The event name for this conversion event. Examples: 'click', 'purchase'",
+      "type": "string"
+     },
+     "createTime": {
+      "description": "Output only. Time when this conversion event was created in the property.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "custom": {
+      "description": "Output only. If set to true, this conversion event refers to a custom event. If set to false, this conversion event refers to a default event in GA. Default events typically have special meaning in GA. Default events are usually created for you by the GA system, but in some cases can be created by property admins. Custom events count towards the maximum number of custom conversion events that may be created per property.",
+      "type": "boolean"
+     },
+     "defaultConversionValue": {
+      "$ref": "#/components/schemas/GoogleAnalyticsAdminV1betaConversionEventDefaultConversionValue"
+     },
+     "countingMethod": {
+      "description": "Optional. The method by which conversions will be counted across multiple events within a session. If this value is not provided, it will be set to `ONCE_PER_EVENT`.",
+      "type": "string",
+      "enum": [
+       "CONVERSION_COUNTING_METHOD_UNSPECIFIED",
+       "ONCE_PER_EVENT",
+       "ONCE_PER_SESSION"
+      ]
+     },
+     "name": {
+      "description": "Identifier. Resource name of this conversion event. Format: properties/{property}/conversionEvents/{conversion_event}",
+      "type": "string"
+     },
+     "deletable": {
+      "description": "Output only. If set, this event can currently be deleted with DeleteConversionEvent.",
+      "type": "boolean"
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "bearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

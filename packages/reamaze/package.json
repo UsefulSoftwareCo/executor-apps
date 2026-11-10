@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/reamaze",
+  "description": "Re:amaze customer support: conversations, messages, contacts, notes, help articles, channels, response templates, staff, reports, satisfaction ratings and status page incidents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Re:amaze"
+  }
+}

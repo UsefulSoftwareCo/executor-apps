@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sensibo",
+  "description": "Control Sensibo smart AC controllers: devices, AC state, timers, schedules, smart mode and historical measurements.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sensibo"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/icypeas",
+  "description": "Find and verify professional emails, scrape profiles and companies, and search the lead database with Icypeas.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Icypeas"
+  }
+}

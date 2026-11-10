@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/safetyculture",
+  "description": "SafetyCulture (now Mitti): inspections, templates, actions, issues, assets, sites, users, groups, training, documents and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SafetyCulture"
+  }
+}

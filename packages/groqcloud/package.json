@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/groqcloud",
+  "description": "Run fast LLM inference on GroqCloud: chat completions, responses, audio, embeddings, reranking, models, files, batches and fine-tunings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GroqCloud"
+  }
+}

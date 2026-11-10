@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jira",
+  "description": "Jira Cloud issues, projects, search with JQL, users, workflows, fields, filters, dashboards and the rest of the Jira Cloud platform REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Jira"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/checkoutcom",
+  "description": "Checkout.com payments: payments, payment sessions and links, instruments, customers, disputes, balances, workflows, payouts, forex and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Checkout.com"
+  }
+}

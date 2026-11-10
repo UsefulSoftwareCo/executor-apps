@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cambai",
+  "description": "Dub, transcribe, translate and synthesize speech with CAMB.AI: TTS, voices, dubbing, subtitles, stories and sound effects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CAMB.AI"
+  }
+}

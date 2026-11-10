@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailercheck",
+  "description": "Verify email addresses and email lists with MailerCheck: real-time and async checks, list upload, verification, results and credit balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MailerCheck"
+  }
+}

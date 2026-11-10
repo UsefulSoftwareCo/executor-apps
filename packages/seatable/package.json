@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/seatable",
+  "description": "SeaTable no-code database: rows, tables, columns, views, links, SQL queries, comments, notifications, snapshots and file uploads for a base.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SeaTable"
+  }
+}

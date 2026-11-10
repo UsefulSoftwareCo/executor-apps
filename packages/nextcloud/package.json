@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nextcloud",
+  "description": "Nextcloud files (WebDAV), users, groups, shares, Talk, notifications, status and server apps through the OCS API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Nextcloud"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

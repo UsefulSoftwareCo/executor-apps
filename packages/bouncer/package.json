@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bouncer",
+  "description": "Verify email addresses and domains with Bouncer: real-time, batch and synchronous batch verification, toxicity lists and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bouncer"
+  }
+}

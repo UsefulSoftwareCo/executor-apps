@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailboxvalidator",
+  "description": "MailboxValidator email verification: syntax, MX and SMTP checks, mailbox existence, disposable, free, role and catch-all detection.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MailboxValidator"
+  }
+}

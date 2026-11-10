@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/scrapingbee",
+  "description": "Scrape web pages, search Google, Amazon, Walmart and YouTube, and ask AI models through ScrapingBee's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ScrapingBee"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

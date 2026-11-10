@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linq",
+  "description": "Send and manage iMessage, RCS and SMS conversations with the Linq Partner API: chats, messages, attachments, phone numbers, webhooks and payments.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Linq"
+  }
+}

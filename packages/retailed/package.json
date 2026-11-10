@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/retailed",
+  "description": "Retail and resale marketplace data from Retailed: StockX, GOAT, Chrono24 and 50+ retail sites, plus its product database.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Retailed"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/greenhouse",
+  "description": "Greenhouse recruiting through the Harvest v3 API: candidates, applications, jobs, interviews, scorecards, offers, users and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Greenhouse"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

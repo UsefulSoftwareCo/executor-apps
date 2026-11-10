@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/screenshotfyi",
+  "description": "Capture website screenshots with Screenshot.fyi: viewport size, full page, dark mode, format and cookie-banner removal.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Screenshot.fyi"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rootly",
+  "description": "Manage incidents, alerts, on-call, retrospectives, status pages and workflows in Rootly.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rootly"
+  }
+}

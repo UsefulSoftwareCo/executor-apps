@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/discord",
+  "description": "Guilds, channels, messages, members, roles, threads, webhooks, application commands and the rest of the Discord REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Discord"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

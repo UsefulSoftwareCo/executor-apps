@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailcoach",
+  "description": "Email lists, subscribers, campaigns, templates, automation mails, transactional email and imports in Mailcoach.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailcoach"
+  }
+}

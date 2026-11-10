@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/honeyhive",
+  "description": "HoneyHive AI observability and evaluation: events, sessions, datasets, datapoints, metrics, experiment runs, queues, configurations, plus projects, workspaces and alerts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HoneyHive"
+  }
+}

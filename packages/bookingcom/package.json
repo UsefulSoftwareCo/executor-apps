@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bookingcom",
+  "description": "Booking.com Demand API: search accommodations and car rentals, check availability, create and manage orders, and message guests.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Booking.com"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

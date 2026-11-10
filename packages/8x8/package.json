@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/8x8",
+  "description": "8x8 Admin Provisioning (users, sites, ring groups, phone numbers, addresses, operations), Audit records and Contact Center real-time and historical analytics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "8x8"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

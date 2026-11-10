@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/segment",
+  "description": "Twilio Segment workspace management: sources, destinations, warehouses, tracking plans, functions, transformations, audiences, users and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Segment"
+  }
+}

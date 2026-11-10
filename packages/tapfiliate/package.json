@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tapfiliate",
+  "description": "Tapfiliate affiliate tracking: programs, affiliates, customers, conversions, commissions, payments, clicks and prospects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Tapfiliate"
+  }
+}

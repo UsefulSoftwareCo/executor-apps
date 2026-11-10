@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/docsbotai",
+  "description": "Administer DocsBot AI teams, bots, sources, conversations, leads and webhooks through DocsBot's official admin MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DocsBot AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

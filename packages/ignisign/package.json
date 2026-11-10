@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ignisign",
+  "description": "Electronic signatures with IgniSign: signature requests, documents, signers, signer profiles, webhooks, signature proofs, seals and log capsules.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IgniSign"
+  }
+}

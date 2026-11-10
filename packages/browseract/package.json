@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/browseract",
+  "description": "Run BrowserAct browser-automation bots and official templates, and track tasks, bots and proxy regions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BrowserAct"
+  }
+}

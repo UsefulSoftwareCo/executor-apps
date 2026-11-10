@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webscrapingai",
+  "description": "Scrape web pages with WebScraping.AI: HTML, text, selected elements, Google SERP, structured data and AI question answering and field extraction.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "WebScraping.AI"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-meet",
+  "description": "Google Meet spaces, members, conference records, participants, recordings, transcripts and smart notes.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Meet"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

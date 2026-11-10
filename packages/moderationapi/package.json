@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/moderationapi",
+  "description": "Moderate text and images, manage review queues, authors, actions, wordlists and webhooks with Moderation API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Moderation API"
+  }
+}

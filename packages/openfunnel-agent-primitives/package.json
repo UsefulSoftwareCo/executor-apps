@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/openfunnel-agent-primitives",
+  "description": "Find, research, qualify and enrich companies and people for GTM with OpenFunnel: lookalike and tech-stack search, deep research, enrichment, signals, audiences and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenFunnel Agent Primitives"
+  }
+}

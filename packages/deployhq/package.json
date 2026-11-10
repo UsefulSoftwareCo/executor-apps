@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/deployhq",
+  "description": "DeployHQ projects, servers, deployments, repositories, build pipelines, environment variables and account settings through the official DeployHQ REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DeployHQ"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

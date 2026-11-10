@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/v0",
+  "description": "Generate and manage web apps with v0: chats, messages, versions, projects, deployments, hooks, environment variables and MCP servers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "v0"
+  }
+}

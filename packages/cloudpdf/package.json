@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloudpdf",
+  "description": "CloudPDF documents, file versions, webhooks and account usage through CloudPDF's Server API 2.0.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "CloudPDF"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

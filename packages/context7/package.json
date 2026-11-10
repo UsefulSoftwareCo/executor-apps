@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/context7",
+  "description": "Look up up-to-date library documentation and manage Context7 libraries: search libraries, fetch docs context, add repositories, websites and files, and check usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Context7"
+  }
+}

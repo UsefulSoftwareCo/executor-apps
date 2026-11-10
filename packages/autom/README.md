@@ -1,0 +1,9 @@
+# Autom
+
+Autom is a SERP API returning structured search results from Google (web, light, AI Mode, images, videos, news, shopping, jobs, maps, autocomplete), Bing and Brave. This package exposes every documented endpoint as a tool, plus usage, platform stats and the country, language and location finders.
+
+**Interface:** hand-written tools over Autom's official REST API (`https://api.autom.dev/v1/...`, reference at https://docs.autom.dev/llms.txt). Autom publishes no OpenAPI document at a stable public URL; the spec is only embedded in its docs site, so the 19 endpoints are written by hand from the docs. Each search tool takes `query` and a `params` object for the endpoint's optional parameters (`page`, `gl`, `hl`, `location`, ...), listed in each tool's description. Autom also runs an official remote MCP server at `https://mcp.autom.dev/`. It accepts the `x-api-key` header (per https://docs.autom.dev/mcp) and also advertises OAuth through protected-resource metadata; the vendor describes its tools as mapping one-to-one to the REST operations and publishes no tool list. Because the list cannot be inspected without a real credential, its tools could not be checked against the 19 hand-written ones, so the hand-written tools were kept and the MCP is not mounted.
+
+**Auth:** API key. Create one in the dashboard at https://app.autom.dev (API Keys, New); the secret is shown once. It is sent as the `x-api-key` header to `api.autom.dev`. Autom has no user-created OAuth apps for the REST API.
+
+**Notes:** every tool is a read-only GET, so none require approval. Calls consume credits (1 per search, 3 for AI Mode; finders, usage and stats are free). The async mode (`is_async`) and the `/jobs/{job_id}` poller are reachable through `params` but have no dedicated tool. Google Videos requires `page` in `params`.

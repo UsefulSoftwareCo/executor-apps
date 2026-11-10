@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/emarsys",
+  "description": "SAP Emarsys marketing platform: contacts, fields, contact lists, segments, email campaigns, reports, external events, programs and exports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Emarsys"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

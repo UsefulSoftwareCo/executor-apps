@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/prismic",
+  "description": "Search and manage Prismic content, assets and releases, through Prismic's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Prismic"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

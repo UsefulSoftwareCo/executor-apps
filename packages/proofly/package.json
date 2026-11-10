@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/proofly",
+  "description": "Read Proofly social proof campaigns, notifications, leads and activity, and toggle campaigns on or off.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Proofly"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/photoroom",
+  "description": "Edit images with PhotoRoom: background removal, AI backgrounds, shadows, relighting, upscaling, virtual models and account credit usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PhotoRoom"
+  }
+}

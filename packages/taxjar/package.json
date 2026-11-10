@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/taxjar",
+  "description": "Calculate sales tax and manage orders, refunds and customers in TaxJar: rates, tax categories, nexus regions, address validation.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TaxJar"
+  }
+}

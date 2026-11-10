@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/auvik",
+  "description": "Auvik network management: devices, networks, interfaces, configurations, alerts, tenants, statistics and SaaS management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Auvik"
+  }
+}

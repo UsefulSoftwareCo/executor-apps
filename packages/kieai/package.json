@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kieai",
+  "description": "Generate images, video, music and speech with Veo, Kling, Runway, Suno, Flux and more, and call Claude, GPT, Gemini and Grok chat models, with one Kie.ai API key.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kie.ai"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/signwell",
+  "description": "SignWell e-signatures: create, send, track and download documents, manage templates, bulk sends and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SignWell"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/disqus",
+  "description": "Disqus forums, threads, posts, users, moderators, categories and blacklists/whitelists through the Disqus API 3.0.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Disqus"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

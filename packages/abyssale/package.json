@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/abyssale",
+  "description": "Generate images, videos, GIFs, HTML5 banners and print PDFs with Abyssale: designs, projects, templates, imports, fonts and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Abyssale"
+  }
+}

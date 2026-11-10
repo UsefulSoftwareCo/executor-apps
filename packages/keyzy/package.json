@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/keyzy",
+  "description": "Software licensing with Keyzy: register, validate, upgrade and delete licenses and manage device activations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Keyzy"
+  }
+}

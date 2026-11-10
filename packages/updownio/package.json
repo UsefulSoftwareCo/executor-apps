@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/updownio",
+  "description": "Updown.io website monitoring: checks, downtimes, metrics, alert recipients, status pages and monitoring node IPs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Updown.io"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

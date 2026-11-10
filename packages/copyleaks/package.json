@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/copyleaks",
+  "description": "Copyleaks plagiarism, AI text and image detection, grammar checking and text moderation: credits, scans, exports and reference lists.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Copyleaks"
+  }
+}

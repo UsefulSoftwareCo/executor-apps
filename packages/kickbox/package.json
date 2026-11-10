@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kickbox",
+  "description": "Kickbox email verification: verify single addresses, run batch list verification jobs and check disposable domains.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kickbox"
+  }
+}

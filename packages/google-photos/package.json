@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-photos",
+  "description": "Google Photos: albums, media items and the Photos Picker via the Google Photos Library and Picker APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Photos"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

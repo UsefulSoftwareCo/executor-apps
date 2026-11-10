@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gettyimages",
+  "description": "Search and license Getty Images stock photos, editorial images and video, manage boards and downloads, and generate AI images.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Getty Images"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

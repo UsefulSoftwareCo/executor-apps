@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/moz",
+  "description": "Moz SEO data and Moz Local through Moz's official MCP servers: site metrics, links, keywords, rankings, locations and listings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Moz"
+  }
+}

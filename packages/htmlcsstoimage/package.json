@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/htmlcsstoimage",
+  "description": "Render HTML, CSS and public URLs to images and PDFs, and manage templates, proxies, storage and OG images, through HTML/CSS to Image's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "HTML/CSS to Image"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

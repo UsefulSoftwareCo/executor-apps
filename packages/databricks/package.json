@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/databricks",
+  "description": "Run SQL, manage clusters, jobs, pipelines, Unity Catalog, warehouses, Genie, model serving, vector search and the rest of the Databricks workspace REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Databricks"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

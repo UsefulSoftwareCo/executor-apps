@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/facebook",
+  "description": "Facebook Pages: posts, photos, videos, comments, reactions, insights and Messenger conversations through the Graph API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Facebook"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

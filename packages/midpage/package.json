@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/midpage",
+  "description": "Legal research over U.S. case law, statutes and regulations in Midpage, through its official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Midpage"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

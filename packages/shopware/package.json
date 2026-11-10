@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shopware",
+  "description": "Products, orders, customers, categories, media, stock and the rest of the Shopware 6 Admin API for a Shopware shop.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Shopware"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

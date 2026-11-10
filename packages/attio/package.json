@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/attio",
+  "description": "Attio CRM: records, objects, lists, entries, notes, tasks, comments, meetings and workspace members.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Attio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

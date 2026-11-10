@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/northflank",
+  "description": "Deploy and operate workloads on Northflank: projects, services, jobs, addons, pipelines, secrets, domains and cloud integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Northflank"
+  }
+}

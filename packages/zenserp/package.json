@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zenserp",
+  "description": "Real-time Google, Bing and Yandex search results as JSON with Zenserp: web search, reverse image search, Google Trends, Shopping product details, batches and locations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zenserp"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-apps-script",
+  "description": "Manage Apps Script projects, source, versions and deployments; read processes and metrics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Apps Script"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

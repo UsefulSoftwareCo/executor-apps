@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/raindrop",
+  "description": "Search, save and organize Raindrop.io bookmarks, collections, tags and highlights, through Raindrop's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Raindrop.io"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

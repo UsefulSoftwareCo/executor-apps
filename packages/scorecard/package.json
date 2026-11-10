@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/scorecard",
+  "description": "Scorecard evaluation projects, testsets, testcases, systems, metrics, runs and records, through Scorecard's REST API (OpenAPI) or its official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Scorecard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

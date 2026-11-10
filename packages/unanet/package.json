@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/unanet",
+  "description": "Unanet CRM (Cosential Compass): projects, companies, contacts, opportunities and activities through the Compass v1 and CRM v2 REST APIs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Unanet"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/justoneapi",
+  "description": "Public social media, creator, entertainment and ecommerce data from Just One API: Xiaohongshu, Douyin, Weibo, Bilibili, Taobao, TikTok, YouTube and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Just One API"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lightfield",
+  "description": "Work with the Lightfield CRM: accounts, contacts, opportunities, meetings, notes, tasks, lists, emails, files and sequences.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lightfield"
+  }
+}

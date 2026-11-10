@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clover",
+  "description": "Clover merchants, inventory, orders, payments, customers, employees, cash events, devices, apps and billing through the Platform REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Clover"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

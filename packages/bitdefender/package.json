@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bitdefender",
+  "description": "Manage Bitdefender GravityZone endpoints, policies, packages, quarantine, reports, licensing and incidents through the GravityZone Public API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bitdefender"
+  }
+}

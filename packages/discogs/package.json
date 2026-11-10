@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/discogs",
+  "description": "Search the Discogs music database and manage collections, wantlists, lists and marketplace listings and orders.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Discogs"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

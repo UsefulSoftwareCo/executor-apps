@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/wordpresscom",
+  "description": "Manage WordPress.com and Jetpack-connected sites, posts, pages, media, comments and stats through the official WordPress.com MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "WordPress.com"
+  }
+}

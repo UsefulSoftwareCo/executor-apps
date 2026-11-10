@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/krakenio",
+  "description": "Kraken.io image optimization: compress, resize and convert images from a URL or uploaded data, and check account quota.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Kraken.io"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/meshy",
+  "description": "Generate 3D models, textures, images, rigs and animations with Meshy: text-to-3D, image-to-3D, retexture, remesh, rigging, print tools and credit balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Meshy"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sevdesk",
+  "description": "Accounting for sevdesk: contacts, invoices, credit notes, orders, vouchers, transactions, check accounts, parts, tags and exports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "sevdesk"
+  }
+}

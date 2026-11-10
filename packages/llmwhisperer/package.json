@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/llmwhisperer",
+  "description": "Convert PDFs, scans, images and Office files to LLM-ready text with LLMWhisperer from Unstract.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LLMWhisperer"
+  }
+}

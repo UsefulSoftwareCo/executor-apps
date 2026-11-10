@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apexverify",
+  "description": "Verify and normalize email addresses and phone numbers with ApexVerify, singly or in batches, and check account credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ApexVerify"
+  }
+}

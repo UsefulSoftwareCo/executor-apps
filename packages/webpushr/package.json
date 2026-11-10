@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webpushr",
+  "description": "Send web push notifications with Webpushr to all subscribers, a subscriber, segments or custom attributes, and read campaign status and subscriber counts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Webpushr"
+  }
+}

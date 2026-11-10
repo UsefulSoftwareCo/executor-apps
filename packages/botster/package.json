@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/botster",
+  "description": "Run Botster data-extraction bots, track jobs and fetch run results, and check credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Botster"
+  }
+}

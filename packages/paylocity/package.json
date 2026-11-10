@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/paylocity",
+  "description": "Paylocity WebLink API: employees, earnings, deductions, taxes, direct deposit, pay statements, onboarding and company codes.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Paylocity"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

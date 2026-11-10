@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/amcards",
+  "description": "AMcards: send handwritten-style greeting cards and manage contacts, groups, cards, mailings, campaigns, templates and gifts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Amcards"
+  }
+}

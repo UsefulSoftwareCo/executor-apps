@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shortpixel",
+  "description": "Compress, resize, convert and upscale images with the ShortPixel Reducer API, and check API credit usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ShortPixel"
+  }
+}

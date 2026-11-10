@@ -1,0 +1,84 @@
+// Sheets tools shaped for agents: read a range (or a whole tab) as rows, and append or write rows,
+// without A1 bookkeeping for the common case.
+import { array, json, mutation, object, query, string } from "apps";
+import { always } from "apps/operations/approval";
+import { google, single, type Base, type Context, type Source, type Target, type WriteContext } from "./shared.js";
+
+const base = "https://sheets.googleapis.com/v4/spreadsheets";
+const account = string().optional();
+const spreadsheetId = string({ minLength: 1 });
+
+const tabs = async (ctx: Base, target: Target, id: string) => {
+  const meta = await google(ctx, target, `${base}/${encodeURIComponent(id)}`, {
+    search: { fields: "properties.title,sheets.properties(sheetId,title,gridProperties(rowCount,columnCount))" },
+  });
+  return {
+    title: meta.properties?.title as string,
+    tabs: ((meta.sheets ?? []) as any[]).map((sheet) => ({
+      title: sheet.properties.title as string,
+      rows: sheet.properties.gridProperties?.rowCount as number,
+      columns: sheet.properties.gridProperties?.columnCount as number,
+    })),
+  };
+};
+
+/** A tab name alone is a valid A1 range; quote it so spaces and punctuation survive. */
+const tabRange = (title: string) => `'${title.replaceAll("'", "''")}'`;
+
+/** The curated tools and their router's metadata; `source` names the package's accounts. */
+export const sheets = (source: Source) => ({
+  tools: {
+    read: query(
+      {
+        description:
+          "Read a spreadsheet: its tabs, and the values of `range` (A1 notation such as Sheet1!A1:D20, or just a tab name). Without a range, reads the first tab. Values are formatted as shown in Sheets.",
+        input: object({ account, spreadsheetId, range: string().optional() }),
+      },
+      async (ctx: Context, input) => {
+        const target = await single(ctx, source, input.account);
+        const info = await tabs(ctx, target, input.spreadsheetId);
+        const range = input.range ?? (info.tabs[0] ? tabRange(info.tabs[0].title) : "A1:Z1000");
+        const values = await google(ctx, target, `${base}/${encodeURIComponent(input.spreadsheetId)}/values/${encodeURIComponent(range)}`);
+        return { account: target.email, ...info, range: values.range as string, rows: (values.values ?? []) as unknown[][] };
+      },
+    ),
+    append: mutation(
+      {
+        description:
+          "Append rows after the last row of a table: `range` is a tab name or the table's range. Each row is an array of cell values; strings starting with = are formulas.",
+        input: object({ account, spreadsheetId, range: string({ minLength: 1 }), rows: array(array(json())) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const result = await google(ctx, target, `${base}/${encodeURIComponent(input.spreadsheetId)}/values/${encodeURIComponent(input.range)}:append`, {
+          method: "POST",
+          search: { valueInputOption: "USER_ENTERED", insertDataOption: "INSERT_ROWS" },
+          body: { values: input.rows },
+        });
+        return { account: target.email, updatedRange: result.updates?.updatedRange, updatedRows: result.updates?.updatedRows };
+      },
+    ),
+    write: mutation(
+      {
+        description: "Overwrite the cells of `range` (A1 notation, starting cell is enough) with rows of values; strings starting with = are formulas.",
+        input: object({ account, spreadsheetId, range: string({ minLength: 1 }), rows: array(array(json())) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const result = await google(ctx, target, `${base}/${encodeURIComponent(input.spreadsheetId)}/values/${encodeURIComponent(input.range)}`, {
+          method: "PUT",
+          search: { valueInputOption: "USER_ENTERED" },
+          body: { values: input.rows },
+        });
+        return { account: target.email, updatedRange: result.updatedRange, updatedCells: result.updatedCells };
+      },
+    ),
+  },
+  meta: {
+    title: "Google Sheets",
+    description: "Read and add rows to spreadsheets.",
+    instructions: `The spreadsheet ID is the long part of its URL; Drive search finds spreadsheets by name. Formatting, charts and batch updates are under ${source.api("sheets")}.`,
+  },
+});

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wealthbox",
+  "description": "Contacts, tasks, events, notes, opportunities, projects, workflows and households in the Wealthbox CRM.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Wealthbox"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

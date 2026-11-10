@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/firstbase",
+  "description": "Manage Firstbase device lifecycle: catalog, inventory, orders, shipments, returns, replacements, offices, new joiners and SCIM users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Firstbase"
+  }
+}

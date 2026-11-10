@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webex",
+  "description": "Webex messaging, meetings, admin, devices and calling REST APIs: spaces, messages, people, meetings, recordings, transcripts, webhooks, workspaces and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Webex"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

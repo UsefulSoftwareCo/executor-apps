@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/roam",
+  "description": "Roam HQ virtual office: chats and messages, groups, users and status, meetings and transcripts, magicasts, lobbies, On-Air events and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Roam"
+  }
+}

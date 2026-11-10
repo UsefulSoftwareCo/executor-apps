@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/anthropicadministrator",
+  "description": "Manage an Anthropic organization with the Admin API: members, invites, workspaces, workspace members, API keys, usage and cost reports, Claude Code analytics and rate limits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Anthropic Administrator"
+  }
+}

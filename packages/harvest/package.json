@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/harvest",
+  "description": "Harvest time tracking and invoicing: clients, projects, tasks, time entries, expenses, invoices, estimates, users and reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Harvest"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

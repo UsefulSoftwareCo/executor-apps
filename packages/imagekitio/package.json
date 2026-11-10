@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/imagekitio",
+  "description": "Manage ImageKit media: files, folders, versions, tags, metadata, cache purge, bulk jobs, saved extensions, named transformations and account usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "ImageKit"
+  }
+}

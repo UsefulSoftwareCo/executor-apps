@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/didit",
+  "description": "Identity verification with Didit: KYC sessions, workflows, ID verification, liveness, face match, AML screening, business (KYB) verification and transaction monitoring.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Didit"
+  }
+}

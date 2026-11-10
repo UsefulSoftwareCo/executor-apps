@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/yotpo",
+  "description": "Sync and manage a Yotpo store through the Core API: products, variants, collections, orders, fulfillments, customers and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Yotpo"
+  }
+}

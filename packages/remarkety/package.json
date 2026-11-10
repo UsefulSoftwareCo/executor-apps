@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/remarkety",
+  "description": "Read Remarkety customers and send e-commerce events (customers, orders, products, carts, newsletter consent) to Remarkety.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Remarkety"
+  }
+}

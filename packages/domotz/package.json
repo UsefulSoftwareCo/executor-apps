@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/domotz",
+  "description": "Monitor and manage networks with Domotz: collectors, devices, alerts, sites, topology and IT operations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Domotz"
+  }
+}

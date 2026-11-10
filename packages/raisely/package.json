@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/raisely",
+  "description": "Manage Raisely fundraising: campaigns, profiles, donations, users, subscriptions, events and exports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Raisely"
+  }
+}

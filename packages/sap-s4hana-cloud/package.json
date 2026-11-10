@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sap-s4hana-cloud",
+  "description": "SAP S/4HANA Cloud OData APIs: business partners, sales and purchase orders, products, invoices and any OData service.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SAP S/4HANA Cloud"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

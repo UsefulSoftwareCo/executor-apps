@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sympla",
+  "description": "Manage Sympla events: events, orders, participants, presentations and participant check-in.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sympla"
+  }
+}

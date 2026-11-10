@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/marketo",
+  "description": "Adobe Marketo Engage: leads, lists, programs, campaigns, bulk exports and imports, assets (emails, forms, landing pages, files) and user management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Marketo"
+  }
+}

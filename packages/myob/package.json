@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/myob",
+  "description": "MYOB AccountRight accounting: chart of accounts, customers, suppliers, invoices, bills, payments, inventory, banking and journals.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MYOB"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

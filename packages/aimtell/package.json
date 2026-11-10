@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/aimtell",
+  "description": "Manage Aimtell web push notifications: websites, campaigns, segments, subscribers, opt-in prompts, pixels, analytics and logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AimTell"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-cloud-vision",
+  "description": "Analyse images and PDFs with Google Cloud Vision: labels, OCR, faces, landmarks, logos, safe search, web detection, and Product Search catalogs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Cloud Vision"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

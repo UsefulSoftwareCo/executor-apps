@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/airwallex",
+  "description": "Airwallex balances, payments, transfers, cards, billing and spend, through Airwallex's official AgentOS MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Airwallex"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

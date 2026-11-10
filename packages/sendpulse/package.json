@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sendpulse",
+  "description": "SendPulse: email campaigns, SMTP, SMS, Viber, web push, pop-ups, chatbots, CRM, Automation 360, LiveChat and email verification.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SendPulse"
+  }
+}

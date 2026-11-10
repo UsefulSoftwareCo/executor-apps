@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/formilla",
+  "description": "Create or update customer contacts in Formilla live chat and marketing automation through its Secure Token REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Formilla"
+  }
+}

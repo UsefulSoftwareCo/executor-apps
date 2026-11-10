@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/veryfi",
+  "description": "Extract structured data from receipts, invoices, bank statements, checks, W-2/W-9/W-8 forms and business cards with Veryfi OCR.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Veryfi OCR"
+  }
+}

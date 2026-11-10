@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agentql",
+  "description": "Extract structured data from web pages with AgentQL queries or natural-language prompts, create remote browser sessions, and read usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AgentQL"
+  }
+}

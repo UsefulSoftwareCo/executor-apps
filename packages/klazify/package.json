@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/klazify",
+  "description": "Klazify: classify websites into IAB categories and look up company data, logos, tech stack, social links, traffic and domain expiration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Klazify"
+  }
+}

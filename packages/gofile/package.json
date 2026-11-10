@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gofile",
+  "description": "Upload, organize and share files and folders on Gofile: folders, direct links, copy, move, search and account details.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gofile"
+  }
+}

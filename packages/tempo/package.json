@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tempo",
+  "description": "Time tracking for Jira: worklogs, accounts, customers, teams, plans, timesheet approvals, periods and work attributes.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Tempo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

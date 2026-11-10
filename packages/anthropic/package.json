@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/anthropic",
+  "description": "Use the Claude API: Messages, token counting, models, message batches and files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Anthropic"
+  }
+}

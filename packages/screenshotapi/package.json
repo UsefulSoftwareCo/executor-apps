@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/screenshotapi",
+  "description": "Render web pages and custom HTML to PNG, JPG, WebP, PDF, scrolling video or extracted HTML, text and Markdown with ScreenshotAPI, including paid bulk jobs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Screenshot API"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

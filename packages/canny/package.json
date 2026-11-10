@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/canny",
+  "description": "Canny customer feedback: boards, posts, comments, votes, tags, categories, users, companies, changelog entries and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Canny"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/swoogo",
+  "description": "Swoogo event management: events, registrants, sessions, speakers, sponsors, contacts, packages, discount codes, transactions and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Swoogo"
+  }
+}

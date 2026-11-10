@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/piggy",
+  "description": "Piggy (now Leat) loyalty platform: contacts, credits, rewards, vouchers, giftcards, prepaid, orders, promotions and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Piggy"
+  }
+}

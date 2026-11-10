@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/3cx",
+  "description": "Users, extensions, queues, trunks, calls, contacts, call history and the rest of the 3CX XAPI for a 3CX V20 phone system.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "3CX"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

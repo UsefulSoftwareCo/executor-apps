@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/aeroleads",
+  "description": "Look up B2B prospect profiles, business emails and phone numbers from a LinkedIn URL, and verify email addresses, with AeroLeads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AeroLeads"
+  }
+}

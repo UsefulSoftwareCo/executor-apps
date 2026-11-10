@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/imejisio",
+  "description": "Design and render images and PDFs from templates in Imejis.io, through Imejis's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Imejis.io"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

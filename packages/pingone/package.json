@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pingone",
+  "description": "Manage Ping Identity PingOne: environments, users, groups, populations, applications, policies, sessions and audit activities.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PingOne"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/edworking",
+  "description": "Projects, tasks, messages, chats and files in Edworking through its GraphQL API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Edworking"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/gocardless",
+  "description": "GoCardless payments (direct debit and bank payments), through GoCardless's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GoCardless"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

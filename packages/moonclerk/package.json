@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/moonclerk",
+  "description": "Read MoonClerk recurring and one-time payment data: forms, customers (plans) and payments.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MoonClerk"
+  }
+}

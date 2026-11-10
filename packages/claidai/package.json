@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/claidai",
+  "description": "Edit and enhance images with Claid.ai: upscaling, background removal, resizing, generative edits, batch jobs and storage connectors.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Claid.ai"
+  }
+}

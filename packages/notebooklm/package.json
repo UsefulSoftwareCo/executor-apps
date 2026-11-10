@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/notebooklm",
+  "description": "Create, share and delete NotebookLM Enterprise notebooks, add and remove sources, and generate audio overviews.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "NotebookLM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pennylane",
+  "description": "Pennylane accounting: customer and supplier invoices, ledger entries, transactions, customers, suppliers, products and more via the Company API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Pennylane"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

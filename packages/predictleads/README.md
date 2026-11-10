@@ -1,0 +1,11 @@
+# PredictLeads
+
+Company intelligence from PredictLeads: companies and extended company records, similar companies, job openings, technology detections, news and financing events, SEC filings, connections, subpages, GitHub repositories, products, startup platform posts, followed companies, and your API subscription and request logs. 35 tools, including the discover (search) endpoints.
+
+**Interface:** OpenAPI 3.1, PredictLeads' official definition at https://docs.predictleads.com/schemas/open_api_schema.json (API base `https://predictleads.com/api/v3`). The definition keeps error and shared schemas under non-standard `x-errorSchemas` and `x-subSchemas` component keys, which the framework cannot resolve, so `normalize.ts` moves them under `components/schemas` before compiling. `scripts/check.sh` compiles the raw URL and therefore reports 34 skipped `schema_reference` operations; with the normalized document all 35 operations compile and none are skipped.
+
+**Auth:** API key and API token (both required), sent as the `X-Api-Key` and `X-Api-Token` headers. Find both on the "Your Subscription Plans" page of your PredictLeads account (https://predictleads.com). Following and unfollowing a company are mutations and require approval.
+
+**Known gaps:** PredictLeads also documents two OAuth2 flows. Client credentials (token URL `https://oauth.predictleads.com/token`, client ID = your API key, client secret = your API token) reuse the same two values this package already collects, so the header method covers them and no oauth2 provider is declared. The authorization-code flow with dynamic client registration is meant for OAuth client apps and is not offered. Webhooks and flat files are sales-arranged and not covered. Most calls cost credits against the monthly plan limit (HTTP 402 when exhausted).
+
+**Official MCP server:** PredictLeads runs one at `https://mcp.predictleads.com/` (probed with `scripts/mcp-probe.ts`: 401 Bearer challenge, OAuth with dynamic client registration via `https://oauth.predictleads.com/`; the same API key/token headers also work per the docs). Its docs state every MCP tool is one API endpoint with the same parameters, so it exposes no more than the OpenAPI definition and is not mounted. The tool list was not enumerated because that needs credentials.

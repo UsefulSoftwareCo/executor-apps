@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/blackbaud",
+  "description": "Raiser's Edge NXT constituents, gifts, events and donor data, through Blackbaud's official SKY MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Blackbaud"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

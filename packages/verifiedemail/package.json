@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/verifiedemail",
+  "description": "Verify email addresses and manage lists, downloads, widgets and API keys with VerifiedEmail.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "VerifiedEmail"
+  }
+}

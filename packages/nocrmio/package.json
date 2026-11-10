@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nocrmio",
+  "description": "noCRM.io lead management: leads, comments, client folders, pipelines, users, teams, prospecting lists and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "NoCRM.io"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

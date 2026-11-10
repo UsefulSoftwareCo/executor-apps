@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/worksnaps",
+  "description": "Time tracking in Worksnaps: projects, tasks, users, assignments, time entries and time reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Worksnaps"
+  }
+}

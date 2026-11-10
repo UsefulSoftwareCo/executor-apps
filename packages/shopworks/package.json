@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shopworks",
+  "description": "ShopWorks ManageOrders: read orders, line items, payments, tracking numbers and inventory levels.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ShopWorks"
+  }
+}

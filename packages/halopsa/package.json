@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/halopsa",
+  "description": "Halo PSA: tickets, actions, clients, sites, users, agents, assets, projects, opportunities, quotes, invoices, contracts, knowledge base and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Halo PSA"
+  }
+}

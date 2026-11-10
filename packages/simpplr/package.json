@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/simpplr",
+  "description": "Sites, pages, events, albums, feeds, comments, audiences, tasks, people attributes, files and analytics exports in Simpplr, through its B2B API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Simpplr"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

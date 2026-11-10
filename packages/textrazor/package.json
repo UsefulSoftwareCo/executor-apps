@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/textrazor",
+  "description": "TextRazor natural language processing: extract entities, topics, relations and more from text or URLs, classify content, and manage custom entity dictionaries and classifiers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TextRazor"
+  }
+}

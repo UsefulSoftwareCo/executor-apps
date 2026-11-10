@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wrike",
+  "description": "Tasks, folders, projects, spaces, comments, timelogs, custom fields, users and the rest of the Wrike REST API v4.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Wrike"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

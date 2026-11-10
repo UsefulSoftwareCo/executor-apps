@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/quickbooks",
+  "description": "QuickBooks Online accounting: customers, vendors, invoices, bills, payments, items, accounts, journal entries, taxes, time tracking and financial reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "QuickBooks"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

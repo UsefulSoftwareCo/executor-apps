@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/extrovert",
+  "description": "Manage Extrovert LinkedIn engagement: campaigns, prospects and lists, monitored topics, voices, styles and comment examples.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Extrovert"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onesimpleapi",
+  "description": "OneSimpleAPI utility APIs: screenshots, PDFs, QR codes, URL shortening, page info, email validation, exchange rates, image tools and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OneSimpleAPI"
+  }
+}

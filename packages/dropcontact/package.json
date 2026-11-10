@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/dropcontact",
+  "description": "Find and verify B2B emails and enrich contacts and companies with Dropcontact, through Dropcontact's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dropcontact"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

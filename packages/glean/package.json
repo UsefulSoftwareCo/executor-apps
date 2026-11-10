@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/glean",
+  "description": "Glean enterprise search, chat, agents, collections, answers and the document Indexing API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Glean"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

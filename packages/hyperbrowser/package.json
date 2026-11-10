@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hyperbrowser",
+  "description": "Cloud browsers for AI agents: sessions, scrape, crawl, extract, browser agents, web search, sandboxes and profiles on Hyperbrowser.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hyperbrowser"
+  }
+}

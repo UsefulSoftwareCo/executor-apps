@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/read-ai",
+  "description": "Meeting transcripts, summaries, action items and analytics in Read AI, through Read AI's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Read AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

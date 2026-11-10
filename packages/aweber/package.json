@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/aweber",
+  "description": "AWeber email marketing through AWeber's official remote MCP server: lists, subscribers, tags, custom fields, segments, broadcasts and stats.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "AWeber"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

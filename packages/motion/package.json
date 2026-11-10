@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/motion",
+  "description": "Motion AI calendar and project management: tasks, recurring tasks, projects, comments, custom fields, schedules and workspaces.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Motion"
+  }
+}

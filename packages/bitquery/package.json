@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/bitquery",
+  "description": "Indexed on-chain data for 40+ blockchains through Bitquery's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bitquery"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

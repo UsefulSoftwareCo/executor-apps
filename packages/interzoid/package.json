@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/interzoid",
+  "description": "Interzoid data quality APIs: matching, standardization, verification and enrichment of companies, names, addresses, emails and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Interzoid"
+  }
+}

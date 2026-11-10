@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/huntress",
+  "description": "Huntress managed security: accounts, organizations, agents, incident reports, remediations, signals, escalations, identities, external ports, reports and invoices.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Huntress"
+  }
+}

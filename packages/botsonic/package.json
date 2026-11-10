@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/botsonic",
+  "description": "Manage Botsonic AI chatbots: bots, knowledge base data, FAQs, starter questions, conversations and chat responses.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Botsonic"
+  }
+}

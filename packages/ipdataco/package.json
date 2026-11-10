@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ipdataco",
+  "description": "Look up the location, ASN, company, carrier, time zone, currency and threat profile of IP addresses with ipdata.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ipdata.co"
+  }
+}

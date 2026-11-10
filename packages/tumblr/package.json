@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tumblr",
+  "description": "Read and publish Tumblr posts, manage blogs, followers, likes, queue, drafts and notifications through the Tumblr API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Tumblr"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

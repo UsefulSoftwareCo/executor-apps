@@ -1,0 +1,22 @@
+# Zoho
+
+Covers the Zoho CRM REST API v8 (449 tools): records in every module (leads, contacts, accounts, deals and custom modules), related records, notes, attachments, tags, COQL queries, bulk read and write, mass update/delete/convert, composite requests, email and sending, modules, fields, layouts, custom views, pipelines, workflows and automation, cadences, assignment and scoring rules, roles, profiles, users, territories, currencies, org settings, webhooks and notifications. Other Zoho products (Books, Inventory, Invoice, Mail, Bigin...) are separate packages.
+
+## Interface
+
+OpenAPI, from Zoho's own definitions at <https://github.com/zoho/crm-oas> (`v8.0/`, documented at <https://www.zoho.com/crm/developer/docs/api/v8/openapi-specification.html>). Zoho publishes one OpenAPI file per resource and no combined file, so `document.json` is those files merged by `generate.py` (components are prefixed with the resource name; operations are otherwise untouched, with the Zoho_Auth header scheme applied). `document.json` was generated from commit [`a6687fc`](https://github.com/zoho/crm-oas/commit/a6687fc961acdaa52592d39c5c7e4385e5b4c289) of that repository (committed 2026-09-02, fetched 2026-10-12; regenerating from that commit gives a byte-identical file). The repository publishes no license on GitHub, so the merged definitions are redistributed as Zoho's own published API description with no license grant. To refresh it, clone the repo into a fresh directory and run `python3 generate.py <clone> document.json` (needs PyYAML). The definitions name only the US host; `index.ts` pins the account's own data center as the only origin that receives credentials.
+
+## Auth
+
+OAuth 2.0 only. A pasted access token lasts one hour, so no API-key method is offered. There is one method per Zoho data center: US, EU, India, Australia, Japan, Canada, Saudi Arabia and China. Pick the method matching the domain of your Zoho CRM (`crm.zoho.eu` is EU).
+
+Create the client in the Zoho API Console for your data center (<https://api-console.zoho.com>, or the `.eu`, `.in`, ... equivalent): a Server-based Application, with Executor's redirect URI shown on the connect page as the authorized redirect URI. Paste its client ID and secret into the connect page. Scopes requested: `ZohoCRM.modules.ALL`, `settings.ALL`, `users.ALL`, `org.ALL`, `bulk.ALL`, `coql.READ`, `notifications.READ`, `notifications.CREATE`, `notifications.UPDATE`, `notifications.DELETE`, `features.READ`, `send_mail.all.CREATE`, `Files.CREATE`, `Files.READ`, with `access_type=offline` and `prompt=consent` so Zoho returns a refresh token. Tokens go in the `Authorization: Zoho-oauthtoken <token>` header.
+
+## Notes and gaps
+
+- The published definitions are generic: custom fields of your org are not listed, read them with the fields tools.
+- Zoho limits API credits per day by edition.
+- Scopes were checked against Zoho's scope reference (<https://www.zoho.com/crm/developer/docs/api/v8/scopes.html>), which lists notifications as READ, CREATE, UPDATE and DELETE only (no `.ALL`), the Files API page (`ZohoCRM.Files.READ` for GET /files, `ZohoCRM.Files.CREATE` for POST /files) and the Features API page (`ZohoCRM.features.READ`). Scopes for modules not covered by the list (for example Zia or composite requests) rely on `modules.ALL`/`settings.ALL`; a call that Zoho rejects with `OAUTH_SCOPE_MISMATCH` needs its scope added.
+- Some operations come from Zoho's official OAS but have no page in the public v8 docs that could be fetched: the `/__` paths `/__apis`, `/__composite_requests`, `/__zia_org_enrichment` (Zia organization enrichment) and `/{module}/{record}/__email_drafts`, `__timeline`, `__emails_sharing_details`, `/Leads/{id}/__conversion_options`, `/settings/territories/{id}/__child_territories`. `/__features` is documented publicly. They are kept because Zoho ships them in its own definitions, but treat them as possibly unstable; they may return errors on editions or orgs without the feature.
+- Three operations are skipped because their schemas use `$ref`s into a nested property (`#/components/schemas/<name>/properties/...`), which Executor's OpenAPI compiler does not support: `POST /{module}/upsert` (upsertRecords) and `POST`/`PUT /{moduleApiName}/{recordId}/actions/share` (create/updateShareRecords). Use the regular insert/update record tools instead.
+- Mutations ask for approval on every call.

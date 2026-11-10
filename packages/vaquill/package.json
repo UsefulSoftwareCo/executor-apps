@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vaquill",
+  "description": "Search and read US statutes, resolve legal citations, and manage change watches with Vaquill.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Vaquill"
+  }
+}

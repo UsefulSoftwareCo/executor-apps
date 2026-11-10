@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/simplesat",
+  "description": "Customer satisfaction surveys with Simplesat: surveys, questions, responses, answers, customers and team members.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Simplesat"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jobnimbus",
+  "description": "JobNimbus CRM for contractors: contacts, jobs, tasks, activities, estimates, invoices, work and material orders, products, payments, files and account settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "JobNimbus"
+  }
+}

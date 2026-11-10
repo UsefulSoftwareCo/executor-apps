@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fitbit",
+  "description": "Fitbit and Google Health data through the Google Health API: steps, sleep, heart rate, exercise, weight, nutrition, profile, settings and devices.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fitbit"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

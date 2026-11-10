@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mural",
+  "description": "Murals, widgets, rooms, workspaces, templates and users from the Mural public API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mural"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

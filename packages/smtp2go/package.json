@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/smtp2go",
+  "description": "Send email and SMS with SMTP2GO and manage sender domains, SMTP users, API keys, templates, webhooks, suppressions, activity and statistics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SMTP2GO"
+  }
+}

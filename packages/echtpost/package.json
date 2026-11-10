@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/echtpost",
+  "description": "Send real postcards with EchtPost: cards, contacts, groups, templates, motives and credits.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "EchtPost"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

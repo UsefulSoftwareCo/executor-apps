@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/spydra",
+  "description": "Manage Spydra OpenRWA token stores: assets, tokens, token sales, investors, investments, payouts and chains.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Spydra"
+  }
+}

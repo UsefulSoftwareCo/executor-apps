@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/happyscribe",
+  "description": "Transcribe, subtitle and translate audio and video with Happy Scribe: orders, transcriptions, exports, meeting notetaker, glossaries, style guides and workspace members.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Happy Scribe"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/landbot",
+  "description": "Landbot chatbots: customers, conversations, channels, WhatsApp templates, webhooks, bots and AI agents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Landbot"
+  }
+}

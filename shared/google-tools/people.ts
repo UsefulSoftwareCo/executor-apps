@@ -1,0 +1,73 @@
+// Contacts tools shaped for agents: one search across saved contacts, people you have emailed and
+// the Workspace directory, for every linked account.
+import { number, object, query, string } from "apps";
+import { defined, fanOut, google, select, type Base, type Context, type Source, type Target } from "./shared.js";
+
+const base = "https://people.googleapis.com/v1";
+const mask = "names,emailAddresses,phoneNumbers,organizations";
+
+const person = (target: Target, source: string, item: any) =>
+  defined({
+    account: target.email,
+    source,
+    resourceName: item.resourceName as string,
+    name: (item.names?.[0]?.displayName ?? "") as string,
+    emails: ((item.emailAddresses ?? []) as { value: string }[]).map((e) => e.value),
+    phones: ((item.phoneNumbers ?? []) as { value: string }[]).map((p) => p.value),
+    organization: [item.organizations?.[0]?.title, item.organizations?.[0]?.name].filter(Boolean).join(", ") || undefined,
+  });
+
+/** Saved contacts, other contacts and (on Workspace accounts) the directory, for one account. */
+export const findPeople = async (ctx: Base, target: Target, text: string, max: number) => {
+  // Google asks for an empty warm-up search before the first real one; without it results can be empty.
+  await Promise.all([
+    google(ctx, target, `${base}/people:searchContacts`, { search: { query: "", readMask: "names" } }),
+    google(ctx, target, `${base}/otherContacts:search`, { search: { query: "", readMask: "names" } }),
+  ]);
+  const [saved, other, directory] = await Promise.allSettled([
+    google(ctx, target, `${base}/people:searchContacts`, { search: { query: text, readMask: mask, pageSize: max } }),
+    google(ctx, target, `${base}/otherContacts:search`, { search: { query: text, readMask: "names,emailAddresses,phoneNumbers", pageSize: max } }),
+    google(ctx, target, `${base}/people:searchDirectoryPeople`, {
+      search: { query: text, readMask: mask, pageSize: max, sources: "DIRECTORY_SOURCE_TYPE_DOMAIN_PROFILE" },
+    }),
+  ]);
+  if (saved.status === "rejected") throw saved.reason;
+  const found = [
+    ...((saved.value.results ?? []) as { person: unknown }[]).map((r) => person(target, "contacts", r.person)),
+    ...(other.status === "fulfilled" ? ((other.value.results ?? []) as { person: unknown }[]).map((r) => person(target, "other", r.person)) : []),
+    // Consumer accounts have no directory; that search fails and is left out.
+    ...(directory.status === "fulfilled" ? ((directory.value.people ?? []) as unknown[]).map((p) => person(target, "directory", p)) : []),
+  ];
+  const seen = new Set<string>();
+  return found
+    .filter((p) => {
+      const key = p.emails[0]?.toLowerCase() ?? p.resourceName;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, max);
+};
+
+/** The curated tools and their router's metadata; `source` names the package's accounts. */
+export const contacts = (source: Source) => ({
+  tools: {
+    search: query(
+      {
+        description:
+          "Find people by name, email or phone across every linked Google account (or one): saved contacts, people you have emailed (other contacts) and the Workspace directory. Use it to turn a name into an email address.",
+        input: object({ query: string({ minLength: 1 }), account: string().optional(), max: number().optional() }),
+      },
+      async (ctx: Context, input) => {
+        const max = Math.min(Math.max(input.max ?? 10, 1), 30);
+        const { items, errors } = await fanOut(await select(ctx, source, input.account), (target) => findPeople(ctx, target, input.query, max));
+        return { people: items, errors };
+      },
+    ),
+  },
+  meta: {
+    title: "Google Contacts",
+    description: "Find people across every linked Google account.",
+    instructions: `Contact edits and groups are under ${source.api("contacts")}.`,
+  },
+});

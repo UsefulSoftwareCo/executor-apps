@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailbluster",
+  "description": "Manage MailBluster leads, custom fields, products and orders for email marketing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MailBluster"
+  }
+}

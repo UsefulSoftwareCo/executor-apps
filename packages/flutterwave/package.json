@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/flutterwave",
+  "description": "Flutterwave payments: transactions, refunds, transfers, beneficiaries, payment plans, subscriptions, subaccounts, virtual accounts, bills, banks, balances and settlements.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Flutterwave"
+  }
+}

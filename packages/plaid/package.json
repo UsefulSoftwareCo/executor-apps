@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/plaid",
+  "description": "Plaid: the Plaid REST API (Link, Auth, Transactions, Balance, Identity, Transfer and more) plus the Plaid Dashboard MCP server for Item diagnostics and analytics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Plaid"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

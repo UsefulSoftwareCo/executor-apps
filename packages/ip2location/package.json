@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ip2location",
+  "description": "IP2Location.io: IP geolocation and proxy detection, bulk lookups, domain WHOIS and hosted-domain lookups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IP2Location"
+  }
+}

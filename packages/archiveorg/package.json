@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/archiveorg",
+  "description": "Search the Internet Archive, read item metadata, query the Wayback Machine, and manage items, files, reviews and tasks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Archive.org"
+  }
+}

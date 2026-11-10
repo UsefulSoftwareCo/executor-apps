@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/brandfetch",
+  "description": "Look up brand data with Brandfetch: logos, colors, fonts, images and company details by domain, ticker, ISIN or crypto symbol, plus brand search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Brandfetch"
+  }
+}

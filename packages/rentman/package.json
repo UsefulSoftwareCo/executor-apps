@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rentman",
+  "description": "Plan and run equipment rental and crew projects with Rentman: projects, contacts, crew, equipment, planning, invoices and files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rentman"
+  }
+}

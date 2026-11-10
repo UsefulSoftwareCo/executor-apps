@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/speechmatics",
+  "description": "Speechmatics speech-to-text: submit batch transcription jobs, track them, fetch transcripts and read usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Speechmatics"
+  }
+}

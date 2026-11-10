@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/checkr",
+  "description": "Checkr background screening: candidates, reports, invitations, screenings, adverse actions, packages and accounts.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Checkr"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

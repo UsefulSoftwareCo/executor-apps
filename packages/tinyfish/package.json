@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tinyfish",
+  "description": "TinyFish web agents: browser automation runs, web search, page fetch and extraction, research, remote browser sessions, browser profiles and vault.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TinyFish"
+  }
+}

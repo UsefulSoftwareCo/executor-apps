@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/moco",
+  "description": "MOCO business management: projects, time tracking, invoices, offers, expenses, planning, contacts and staff.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Moco"
+  }
+}

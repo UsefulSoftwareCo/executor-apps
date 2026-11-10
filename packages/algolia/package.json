@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/algolia",
+  "description": "Algolia: search and manage indices, records, settings, rules and API keys, plus Recommend, Analytics, A/B testing, Insights, Monitoring, Ingestion, Personalization and Query Suggestions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Algolia"
+  }
+}

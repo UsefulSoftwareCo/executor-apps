@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hellotracks",
+  "description": "Hellotracks field workforce management: jobs, members, places, live locations, GPS tracks, route optimization, reports and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hellotracks"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

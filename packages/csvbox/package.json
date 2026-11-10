@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/csvbox",
+  "description": "Manage CSVBox importer sheets (columns, validation, destinations, webhooks) and submit spreadsheet files to them through the File API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CSVBox"
+  }
+}

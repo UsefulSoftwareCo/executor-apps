@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/outlook",
+  "description": "Outlook mail, folders, calendars, events and contacts through Microsoft Graph.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Outlook"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

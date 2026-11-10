@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/coassemble",
+  "description": "Coassemble: list, generate, publish and manage training courses, plus the clients and users that own them.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Coassemble"
+  }
+}

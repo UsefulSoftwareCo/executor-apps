@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gigasheet",
+  "description": "Work with big-data spreadsheets in Gigasheet: upload files, filter, group, enrich, export and share datasets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gigasheet"
+  }
+}

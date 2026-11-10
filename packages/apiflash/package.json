@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apiflash",
+  "description": "Capture website screenshots with ApiFlash: viewport, full page, element, mobile and geolocation emulation, ad and cookie-banner blocking, and quota checks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ApiFlash"
+  }
+}

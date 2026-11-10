@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloudentity",
+  "description": "Manage a Cloudentity (SecureAuth Connect) tenant: workspaces, clients, identity pools and providers, policies, scopes, consents and more via the Admin API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Cloudentity"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/unleash",
+  "description": "Manage Unleash feature flags: projects, flags, environments, strategies, segments, API tokens, users and metrics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Unleash"
+  }
+}

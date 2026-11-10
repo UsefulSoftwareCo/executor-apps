@@ -1,0 +1,2249 @@
+[
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1/get/parameters",
+    "value": [
+      {
+        "name": "uuid",
+        "in": "query",
+        "description": "UUID of an occurrence in the item\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "counter",
+        "in": "query",
+        "description": "Project counter of the item\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1items/get/parameters",
+    "value": [
+      {
+        "name": "project_ids",
+        "in": "query",
+        "description": "Project IDs to search when using an Account Access Token. Specify multiple times to search multiple projects. If omitted, the search runs across all projects available to the token. Ignored when using a Project Access Token, which always searches its own project.",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "style": "form",
+        "explode": true
+      },
+      {
+        "name": "assigned_user",
+        "in": "query",
+        "description": "If not empty, only items assigned to the specified user will be returned. Must be a valid Rollbar username, or you can use the keywords `assigned` (items that are assigned to any user or team) or `unassigned` (items with no assigned user or team).",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "assigned_team",
+        "in": "query",
+        "description": "If not empty, only items assigned to the specified team will be returned. Must be a valid Rollbar team name. Specify multiple times to filter by multiple teams. Cannot be combined with `assigned_user`.",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "style": "form",
+        "explode": true
+      },
+      {
+        "name": "environment",
+        "in": "query",
+        "description": "If not empty, only items in the specified environment will be returned. Specify multiple times to filter by multiple environments.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "framework",
+        "in": "query",
+        "description": "If not empty, only items in the specified framework will be returned. Specify multiple times to filter by multiple frameworks.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ids",
+        "in": "query",
+        "description": "(comma-separated list of integers) if not empty, list of item IDs to return, instead of using all items in the project",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      {
+        "name": "level",
+        "in": "query",
+        "description": "If not empty, only items with the specified level will be returned. Valid values: `debug`, `info`, `warning`, `error`, `critical`. Specifiy multiple times to filter by multiple levels.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. 100 items are returned per page by default.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "query",
+        "in": "query",
+        "description": "A search string, using the same format as the search box on the Items page.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "status",
+        "in": "query",
+        "description": "If not empty, only items with the specified status will be returned. Valid values: `active`, `resolved`, `muted`, `archived`. Specify multiple times to filter by multiple statuses.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "is_snoozed",
+        "in": "query",
+        "description": "If true, only snoozed items will be returned. If false, snoozed items will be excluded.",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1{itemid}/get/parameters",
+    "value": [
+      {
+        "name": "itemid",
+        "in": "path",
+        "description": "Unique ID of the item\n\n`itemid` must be an item ID for an item in the project.\nThese IDs are returned as the id field in other API calls.\n\nNote that they are NOT found in in URLs like\nhttps://rollbar.com/myaccount/myproject/items/456/ – that is the project counter.\n",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1{itemid}/patch/parameters",
+    "value": [
+      {
+        "name": "itemid",
+        "in": "path",
+        "description": "System-wide id (not project counter) of the item to be modified.",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1{item_id}~1events/get/parameters",
+    "value": [
+      {
+        "name": "item_id",
+        "in": "path",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "required": true,
+        "description": "The item ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. The default number of elements returned per page is 20. Set the limit parameter to update that.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Sets the limit for number of items returned per page. Default is 20 and the max is 5000.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "type",
+        "in": "query",
+        "description": "Filter the history to one or more event types. Repeat the parameter for multiple types.\nOmit it to return all item history event types.\nRequesting `item_snooze_history` requires the snooze feature to be enabled for the account.\n",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "item_comment",
+              "item_level_history",
+              "item_status_history",
+              "item_snooze_history",
+              "item_assigned_user_history",
+              "item_assigned_team_history",
+              "item_title_history",
+              "item_group_history",
+              "item_merge_history"
+            ]
+          }
+        },
+        "style": "form",
+        "explode": true
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1{item_id}~1comments/get/parameters",
+    "value": [
+      {
+        "name": "item_id",
+        "in": "path",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "required": true,
+        "description": "The item ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. The default number of elements returned per page is 20. Set the limit parameter to update that.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Sets the limit for number of items returned per page. Default is 20 and the max is 5000.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "type",
+        "in": "query",
+        "description": "Deprecated legacy filter for the underlying comment source. Omit to return both regular comments and resolve notes.",
+        "required": false,
+        "deprecated": true,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "comment",
+            "resolve_note"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1instances/get/parameters",
+    "value": [
+      {
+        "name": "last_id",
+        "in": "query",
+        "description": "Instead of using the page number, you can pass the ID of the last occurrence listed on the page and it will be return the next 20 instances after that last occurrence ID. Overrides the page number if both are present.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": null
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. The default number of elements returned per page is 20. Set the limit parameter to update that.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Sets the limit for number of items returned per page. Default is 20 and the max is 5000.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1item~1{item_id}~1instances/get/parameters",
+    "value": [
+      {
+        "name": "item_id",
+        "in": "path",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "required": true,
+        "description": "The item ID"
+      },
+      {
+        "name": "last_id",
+        "in": "query",
+        "description": "Instead of using the page number, you can pass the ID of the last occurrence listed on the page and it will be return the next 20 instances after that last occurrence ID. Overrides the page number if both are present.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": null
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. The default number of elements returned per page is 20. Set the limit parameter to update that.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Sets the limit for number of items returned per page. Default is 20 and the max is 5000.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1instance~1{instance_id}/get/parameters",
+    "value": [
+      {
+        "name": "instance_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The occurrence ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1instance~1{instance_id}/delete/parameters",
+    "value": [
+      {
+        "name": "instance_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The occurrence ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1environment~1{environment}~1session~1{sessionId}~1replay~1{replayId}/get/parameters",
+    "value": [
+      {
+        "name": "environment",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "description": "The environment slug for the session replay"
+      },
+      {
+        "name": "sessionId",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "description": "The session identifier provided in the replay payload"
+      },
+      {
+        "name": "replayId",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "description": "The replay identifier generated for the session payload"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1environment~1{environment}~1session~1{sessionId}~1replay~1{replayId}/delete/parameters",
+    "value": [
+      {
+        "name": "environment",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "description": "The environment slug for the session replay"
+      },
+      {
+        "name": "sessionId",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "description": "The session identifier provided in the replay payload"
+      },
+      {
+        "name": "replayId",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true,
+        "description": "The replay identifier generated for the session payload"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1metrics~1items/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1metrics~1occurrences/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1metrics~1ttr/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1deploy/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1deploy~1{deploy_id}/get/parameters",
+    "value": [
+      {
+        "name": "deploy_id",
+        "in": "path",
+        "description": "System-wide id of the deploy",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1deploy~1{deploy_id}/patch/parameters",
+    "value": [
+      {
+        "name": "deploy_id",
+        "in": "path",
+        "description": "ID of the deploy to update",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1deploys/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. Twenty deploys are returned per page by default.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Sets the limit for number of items returned per page. Default is 20 and the max is 5000.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1environments/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Sets the limit for number of items returned per page. Default is 20 and the max is 5000.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. The default number of elements returned per page is 20. Set the limit parameter to update that.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1sourcemap/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1dsym/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1proguard/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1fluttersymbols/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1rql~1job~1{job_id}/get/parameters",
+    "value": [
+      {
+        "name": "job_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "expand",
+        "in": "query",
+        "description": "If the value is `result`, the response will contain the job result",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1rql~1jobs~1/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1rql~1jobs~1/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number starting from 1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1rql~1job~1{job_id}~1result/get/parameters",
+    "value": [
+      {
+        "name": "job_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "expand",
+        "in": "query",
+        "description": "If the value is `job`, the response will contain the RQL job resource",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1rql~1job~1{job_id}~1cancel/post/parameters",
+    "value": [
+      {
+        "name": "job_id",
+        "in": "path",
+        "description": "system-wide ID of the job to be canceled",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1reports~1top_active_items/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "hours",
+        "in": "query",
+        "description": "Number of recent hours to consider. Min `1`, max `168`.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 24
+        }
+      },
+      {
+        "name": "environments",
+        "in": "query",
+        "description": "Comma-separated list of environments to consider. If empty, then returns results for \"any environment\".",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "sort",
+        "in": "query",
+        "description": "To sort by occurrences only and not by item level, add `sort=occurrences`. This is the only accepted value for sort at this time, any other value will return an error.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "occurrences"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1reports~1occurrence_counts/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "bucket_size",
+        "in": "query",
+        "description": "Size of each bucket, in seconds. Valid values are `60` (minute), `3600` (hour), and `86400` (day). Timezone for all buckets is GMT.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "86400"
+        }
+      },
+      {
+        "name": "environments",
+        "in": "query",
+        "description": "Comma-separated list of environments to filter by.  Empty means \"any environment\".",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "min_level",
+        "in": "query",
+        "description": "Minimum item level to filter by. One of `debug`, `info`, `warning`, `error`, or `critical`.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "error"
+        }
+      },
+      {
+        "name": "max_level",
+        "in": "query",
+        "description": "Maximum item level to filter by. One of `debug`, `info`, `warning`, `error`, or `critical`",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "item_id",
+        "in": "query",
+        "description": "Item ID to filter by.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1reports~1activated_counts/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "bucket_size",
+        "in": "query",
+        "description": "Size of each bucket, in seconds. Only valid value is `86400` (day). Data wil be returned in the project timezone.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "buckets",
+        "in": "query",
+        "description": "Number of buckets to return. Must be in range `[2, 366]`.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 60
+        }
+      },
+      {
+        "name": "environments",
+        "in": "query",
+        "description": "Comma-separated list of environments to filter by.  Empty means \"any environment\".",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1projects/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1projects/get/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}/delete/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1access_tokens/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1access_tokens/post/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The project ID"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1access_token~1{token_identifier}/patch/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "token_identifier",
+        "in": "path",
+        "description": "For a legacy token, this field will be interpreted as the `access_token`; otherwise, it will be treated as the `public_id`.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1access_token~1{token_identifier}/delete/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "token_identifier",
+        "in": "path",
+        "description": "For a legacy token, this field will be interpreted as the `access_token`; otherwise, it will be treated as the `public_id`.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1access_token/patch/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1access_token/delete/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1teams/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1teams/get/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}/get/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}/delete/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1users/get/parameters",
+    "value": [
+      {
+        "name": "email",
+        "in": "query",
+        "description": "Filter the list of users by email address",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1user~1{user_id}/get/parameters",
+    "value": [
+      {
+        "name": "user_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1users/get/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Results are returned in sets of 5000.  Access more results by specifying `page=2`, etc.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1user~1{user_id}/get/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "user_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1user~1{user_id}/put/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "user_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1user~1{user_id}/delete/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "user_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1user~1{user_id}~1teams/get/parameters",
+    "value": [
+      {
+        "name": "user_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1invites/get/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Returns up to 5000 results. Add `&page=2` to the URL to go to the next page.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1invites/post/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1invite~1{invite_id}/get/parameters",
+    "value": [
+      {
+        "name": "invite_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1invite~1{invite_id}/delete/parameters",
+    "value": [
+      {
+        "name": "invite_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1projects/get/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1project~1{project_id}~1teams/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "exclude_builtin_teams",
+        "in": "query",
+        "description": "When set to `true` (preferred) or legacy integer `1`, excludes built-in teams (Owners, Everyone) from the response. Prefer `exclude_owners_team` when you only want to omit Owners.",
+        "required": false,
+        "schema": {
+          "type": [
+            "boolean",
+            "integer"
+          ],
+          "enum": [
+            false,
+            true,
+            0,
+            1
+          ],
+          "default": false
+        }
+      },
+      {
+        "name": "exclude_owners_team",
+        "in": "query",
+        "description": "When set to `true` (preferred) or legacy integer `1`, excludes the Owners team from the response while keeping the Everyone team.",
+        "required": false,
+        "schema": {
+          "type": [
+            "boolean",
+            "integer"
+          ],
+          "enum": [
+            false,
+            true,
+            0,
+            1
+          ],
+          "default": false
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1project~1{project_id}/get/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1project~1{project_id}/put/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1team~1{team_id}~1project~1{project_id}/delete/parameters",
+    "value": [
+      {
+        "name": "team_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "project_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1user~1{user_id}~1projects/get/parameters",
+    "value": [
+      {
+        "name": "user_id",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1people~1delete_jobs~1/post/parameters",
+    "value": [
+      {
+        "name": "username",
+        "in": "query",
+        "description": "`username` value of the person to be deleted.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "email",
+        "in": "query",
+        "description": "`email` value of the person to be deleted.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "id",
+        "in": "query",
+        "description": "`id` value of the person to be deleted.",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1people~1delete_jobs~1{job_id}/get/parameters",
+    "value": [
+      {
+        "name": "job_id",
+        "in": "path",
+        "description": "The id of the deletion job (from the response to a `POST` to `delete_jobs`)",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack/put/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook/put/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack~1rules/post/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack~1rules/put/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack~1rules/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack~1rule~1{rule_id}/get/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack~1rule~1{rule_id}/put/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1slack~1rule~1{rule_id}/delete/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty/post/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty/put/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty~1rules/put/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty~1rules/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty~1rule~1{rule_id}/get/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty~1rule~1{rule_id}/put/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1pagerduty~1rule~1{rule_id}/delete/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email/put/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email~1rules/post/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email~1rules/put/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email~1rules/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email~1rule~1{rule_id}/get/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email~1rule~1{rule_id}/put/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1email~1rule~1{rule_id}/delete/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook~1rules/post/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook~1rules/put/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook~1rules/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook~1rule~1{rule_id}/get/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook~1rule~1{rule_id}/put/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1notifications~1webhook~1rule~1{rule_id}/delete/parameters",
+    "value": [
+      {
+        "name": "rule_id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The notification rule ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1versions~1{version}/get/parameters",
+    "value": [
+      {
+        "name": "version",
+        "in": "path",
+        "description": "The code version sent on the occurrence payload\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "v2.5.0"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "environment",
+        "in": "query",
+        "description": "The environment where the code version is detected",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "production"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1versions~1{version}~1items/get/parameters",
+    "value": [
+      {
+        "name": "version",
+        "in": "path",
+        "description": "The code version sent on the occurrence payload\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "v2.5.0"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "environment",
+        "in": "query",
+        "description": "For one code version list the items only for this environment",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "production"
+      },
+      {
+        "name": "event",
+        "in": "query",
+        "description": "Filter the list of items by the item event produced on the code version. One item can have one of these events in one version:\n\n  - `new` for new items in the code version\n  - `repeated` for an item that already existed in preivous versions\n  - `reactivated` an item that was resolved but was reactivated in the code version\n  - `resolved` an item resolved in one specific version\n",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "new",
+            "repeated",
+            "reactivated",
+            "resolved"
+          ]
+        },
+        "example": "new"
+      },
+      {
+        "name": "level",
+        "in": "query",
+        "description": "Filter the list of items by level. Multiple levels can be used, and all items for all levels will be returned if no one is specified.",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "debug",
+              "info",
+              "warning",
+              "error",
+              "critical"
+            ]
+          }
+        },
+        "example": [
+          "error",
+          "critical"
+        ]
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "Page number, starting from 1. The default number of elements returned per page is 20. Set the limit parameter to update that.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1service_links/get/parameters",
+    "value": [
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1service_links/post/parameters",
+    "value": []
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1service_links~1{id}/put/parameters",
+    "value": [
+      {
+        "name": "id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The service link ID"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1service_links~1{id}/get/parameters",
+    "value": [
+      {
+        "name": "id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The service link ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1api~11~1service_links~1{id}/delete/parameters",
+    "value": [
+      {
+        "name": "id",
+        "in": "path",
+        "schema": {
+          "type": "integer"
+        },
+        "required": true,
+        "description": "The service link ID"
+      },
+      {
+        "name": "project_id",
+        "in": "query",
+        "description": "Project ID, required when using an Account Access Token with this endpoint.",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    ]
+  }
+]

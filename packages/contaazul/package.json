@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/contaazul",
+  "description": "Conta Azul ERP: financial events, accounts and categories, sales, people, products and services, invoices and contracts.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Conta Azul"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

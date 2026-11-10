@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nooks",
+  "description": "Nooks sales engagement: sequences, steps, prospects, accounts, enrollments, calls, emails, tasks, notes, mailboxes and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nooks"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linguapop",
+  "description": "Create and send Linguapop language placement test invitations and list the supported test languages.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Linguapop"
+  }
+}

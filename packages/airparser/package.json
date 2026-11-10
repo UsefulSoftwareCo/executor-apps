@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/airparser",
+  "description": "Extract structured JSON from emails, PDFs, images and other documents with Airparser: inboxes, extraction schemas, uploads and parsed documents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Airparser"
+  }
+}

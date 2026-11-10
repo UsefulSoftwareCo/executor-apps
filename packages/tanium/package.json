@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/tanium",
+  "description": "Query endpoints and run actions on a Tanium platform: sensors, questions, saved questions, groups, packages, actions, users and the Gateway GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Tanium"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clerk",
+  "description": "Manage Clerk users, organizations, sessions, invitations, domains, JWT templates and instance settings through the Backend API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Clerk"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/looker",
+  "description": "Looks, dashboards, queries, LookML models, users, groups, scheduled plans and the rest of the Looker API 4.0.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Looker"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

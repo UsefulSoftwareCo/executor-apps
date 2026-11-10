@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/prtg-classic",
+  "description": "Monitor your own PRTG Network Monitor server: sensors, devices, groups, probes, alarms, messages, historic data, and pause, resume, scan and acknowledge actions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PRTG Classic"
+  }
+}

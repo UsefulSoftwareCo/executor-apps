@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bookingmood",
+  "description": "Manage a Bookingmood vacation-rental business: products, bookings, contacts, payments, invoices, pricing, coupons, messages, tasks, sites and webhooks, plus availability search and the booking flow.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bookingmood"
+  }
+}

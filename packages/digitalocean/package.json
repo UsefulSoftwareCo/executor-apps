@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/digitalocean",
+  "description": "Droplets, Kubernetes, databases, Spaces, domains, networking, App Platform and the rest of the DigitalOcean API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DigitalOcean"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

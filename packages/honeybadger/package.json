@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/honeybadger",
+  "description": "Errors, insights, dashboards, alarms and projects in Honeybadger, through Honeybadger's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Honeybadger"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

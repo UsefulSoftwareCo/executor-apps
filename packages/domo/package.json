@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/domo",
+  "description": "Domo: DataSets, streams, data accounts, cards, pages, users, groups, projects and the audit log through the Platform API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Domo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

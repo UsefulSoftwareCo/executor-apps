@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bestbuy",
+  "description": "Search Best Buy products, stores, categories, recommendations, warranties, in-store availability and open-box offers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Best Buy"
+  }
+}

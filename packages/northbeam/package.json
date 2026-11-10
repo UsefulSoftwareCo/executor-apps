@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/northbeam",
+  "description": "Query Northbeam marketing attribution, spend, ROAS and dashboards through Northbeam's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Northbeam"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

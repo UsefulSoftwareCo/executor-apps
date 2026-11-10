@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/presenton",
+  "description": "Generate and export AI presentations with the Presenton Cloud API: decks, outlines, templates, uploads and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Presenton"
+  }
+}

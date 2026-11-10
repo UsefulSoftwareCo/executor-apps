@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/filescom",
+  "description": "Files.com cloud file storage and managed file transfer: files and folders, share links, users, groups, permissions, automations and logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Files.com"
+  }
+}

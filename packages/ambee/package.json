@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ambee",
+  "description": "Hyperlocal environmental data from Ambee: air quality, pollen, weather, wildfires and fire risk, natural disasters, influenza-like illness forecasts, elevation and geocoding.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ambee"
+  }
+}

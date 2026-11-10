@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/eversign",
+  "description": "Send documents for e-signature with Xodo Sign (formerly eversign): documents, templates, signers, bulk sends and audit logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Xodo Sign (eversign)"
+  }
+}

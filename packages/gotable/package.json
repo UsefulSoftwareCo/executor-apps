@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gotable",
+  "description": "Manage GoTable restaurant reservations, guests, offers, tables, availability, reviews and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GoTable"
+  }
+}

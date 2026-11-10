@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linkhut",
+  "description": "Linkhut bookmarks and tags: add, find, list and delete posts, rename and delete tags.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Linkhut"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

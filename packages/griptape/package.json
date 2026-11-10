@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/griptape",
+  "description": "Build and run generative AI on Griptape Cloud: assistants, structures, threads, rulesets, knowledge bases, data connectors, tools, models and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Griptape"
+  }
+}

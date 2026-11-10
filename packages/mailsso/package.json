@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailsso",
+  "description": "Validate email addresses with Mails.so: single checks, bulk validation jobs and their results.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mails.so"
+  }
+}

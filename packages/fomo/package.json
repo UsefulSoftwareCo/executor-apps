@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fomo",
+  "description": "Create, list, update and delete Fomo social proof notification events.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fomo"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/spotify",
+  "description": "Search the catalog, read and edit playlists and the saved library, and control playback through the Spotify Web API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Spotify"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

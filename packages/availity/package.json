@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/availity",
+  "description": "Availity healthcare clearinghouse: eligibility and benefits, prior authorizations, claim status and the payer list.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Availity"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

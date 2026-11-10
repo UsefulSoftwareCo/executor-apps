@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stormglassio",
+  "description": "Stormglass weather and marine data: forecasts, historical weather, bio, tides, astronomy, solar and elevation.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Stormglass"
+  }
+}

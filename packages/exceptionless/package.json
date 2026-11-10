@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/exceptionless",
+  "description": "Exceptionless error and event tracking: events, stacks, projects, organizations, users, tokens and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Exceptionless"
+  }
+}

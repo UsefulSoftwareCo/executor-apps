@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pinata",
+  "description": "Pinata IPFS: files, groups, gateways, signed upload URLs, API keys and x402 payment instructions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pinata"
+  }
+}

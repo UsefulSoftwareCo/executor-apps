@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/botdog",
+  "description": "Run LinkedIn outreach with Botdog: campaigns, leads, lists, blacklists, snippets, messaging, accounts, webhooks and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Botdog"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/teamleader",
+  "description": "Contacts, companies, deals, quotations, invoices, projects, tasks, calendar, time tracking and tickets in Teamleader Focus.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Teamleader Focus"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

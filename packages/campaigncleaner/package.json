@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/campaigncleaner",
+  "description": "Clean, inline and analyze HTML email campaigns with Campaign Cleaner: submit campaigns, read results and PDF reports, manage saved campaigns, check credits and run inbox placement tests.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Campaign Cleaner"
+  }
+}

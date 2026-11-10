@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/diffbot",
+  "description": "Diffbot web data extraction and Knowledge Graph: extract articles, products, jobs and more from any URL, crawl and bulk-process sites, query the Knowledge Graph with DQL, enhance entities and read account usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Diffbot"
+  }
+}

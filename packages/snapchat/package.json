@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/snapchat",
+  "description": "Snapchat Ads: organizations, ad accounts, campaigns, ad squads, ads, creatives, media, audience segments, targeting options and performance stats through the Snap Marketing API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Snapchat"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

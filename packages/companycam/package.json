@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/companycam",
+  "description": "Projects, photos, videos, documents, checklists, users, groups, tags and webhooks in CompanyCam.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "CompanyCam"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

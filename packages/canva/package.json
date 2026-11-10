@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/canva",
+  "description": "Designs, assets, folders, exports, comments, brand templates and autofill through the Canva Connect REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Canva"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

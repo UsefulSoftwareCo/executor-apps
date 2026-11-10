@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/aspire",
+  "description": "Aspire Software (landscaping and field-service ERP): properties, contacts, opportunities, work tickets, invoices, payments, catalog items, equipment, vendors, receipts and time clock.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Aspire"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

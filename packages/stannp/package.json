@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stannp",
+  "description": "Send direct mail with Stannp: postcards, letters, SMS, recipients, groups, campaigns, address validation and reporting.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Stannp"
+  }
+}

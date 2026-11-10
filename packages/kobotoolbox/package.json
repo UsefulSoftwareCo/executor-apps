@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kobotoolbox",
+  "description": "Manage KoboToolbox survey projects, forms, submissions, exports, assets and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "KoboToolbox"
+  }
+}

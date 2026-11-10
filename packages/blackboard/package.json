@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/blackboard",
+  "description": "Blackboard Learn courses, users, memberships, grades, content, announcements, terms and the rest of the Learn REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Blackboard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

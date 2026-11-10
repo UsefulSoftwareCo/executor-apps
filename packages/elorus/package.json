@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/elorus",
+  "description": "Elorus invoicing and time tracking: contacts, invoices, estimates, bills, expenses, payments, projects and time entries.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Elorus"
+  }
+}

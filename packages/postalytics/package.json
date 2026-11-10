@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/postalytics",
+  "description": "Direct mail automation with Postalytics: campaigns, templates, contact lists, flows, triggered sends, suppression lists, webhooks and accounts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Postalytics"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pdfgen",
+  "description": "Generate PDFs from templates, HTML, Markdown or an AI prompt with PDFgen, and manage templates, account usage and API logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PDFgen"
+  }
+}

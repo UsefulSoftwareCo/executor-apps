@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/requesttracker",
+  "description": "Request Tracker (RT) by Best Practical: tickets, queues, users, groups, assets, catalogs, articles, custom fields and history through the REST2 API of your own RT instance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Request Tracker (RT)"
+  }
+}

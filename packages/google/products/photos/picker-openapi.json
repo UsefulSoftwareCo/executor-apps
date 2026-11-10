@@ -1,0 +1,444 @@
+{
+ "openapi": "3.0.3",
+ "info": {
+  "title": "Google Photos Picker API",
+  "version": "v1 (discovery revision 20261008)",
+  "description": "View photos you select from your Google Photos library. "
+ },
+ "servers": [
+  {
+   "url": "https://photospicker.googleapis.com"
+  }
+ ],
+ "security": [
+  {
+   "bearer": []
+  }
+ ],
+ "paths": {
+  "/v1/sessions": {
+   "post": {
+    "operationId": "photospicker.sessions.create",
+    "description": "Generates a new session during which the user can pick photos and videos for third-party access. If the user doesn't have an active Google Photos account, a `FAILED_PRECONDITION` error is returned. If the client application creates too many sessions per user, a `RESOURCE_EXHAUSTED` error is returned. Clients are unlikely to reach these limits under normal circumstances. However, clients are still recommended to call `sessions.delete` after each session, to proactively stay within resource limits. Once [a user taps the **Done**](https://developers.google.com/photos/picker/guides/picking-experience#done_screen) button to complete a picking session, the `pickerUri` will no longer work. Create a new session to allow the user to pick more photos.",
+    "parameters": [
+     {
+      "name": "requestId",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A client-provided unique identifier for this request. This ID is used to enable the streamlined picking experience for applications using the OAuth 2.0 flow for limited-input devices. This ID must have the format of a UUID (version 4) string and follow these requirements: - Must not contain any sensitive identifying information about the user. - Must contain 32 hexadecimal characters divided into five groups separated by hyphens, in the format \"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\" (or 8-4-4-4-12).",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PickingSession"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PickingSession"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1/sessions/{sessionsId}": {
+   "get": {
+    "operationId": "photospicker.sessions.get",
+    "description": "Retrieves information about the specified session. If the specified session does not exist or is not owned by the user, a `NOT_FOUND` error is returned. If the session exists but access to the session has expired, a `PERMISSION_DENIED` error is returned.",
+    "parameters": [
+     {
+      "name": "sessionsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment sessionsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PickingSession"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "delete": {
+    "operationId": "photospicker.sessions.delete",
+    "description": "Deletes the specified session. A `NOT_FOUND` error is returned if the session does not exist or is not owned by the user. An empty response indicates successful deletion.",
+    "parameters": [
+     {
+      "name": "sessionsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment sessionsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Empty"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  },
+  "/v1/mediaItems": {
+   "get": {
+    "operationId": "photospicker.mediaItems.list",
+    "description": "Returns a list of media items picked by the user during the specified session. A `FAILED_PRECONDITION` error is returned if the user has not yet finished picking media items for the specified session. In this scenario, your application should poll `sessions.get` until the session is ready before retrying this method.",
+    "parameters": [
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "Optional. The maximum number of media items to return. The service may return fewer than this value (including zero results). If unspecified or set to 0, at most 50 media items is returned. The maximum value is 100; values above 100 will be coerced to 100. Negative values will result in an `INVALID_ARGUMENT` error.",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "sessionId",
+      "in": "query",
+      "required": false,
+      "description": "Required. The Google-generated identifier for this session.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Optional. A page token, received from a previous `mediaItems.list` call. Provide this to retrieve the subsequent page.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ListMediaItemsResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "PickedMediaItem": {
+    "description": "Representation of a photo or video that was picked by the user.",
+    "type": "object",
+    "properties": {
+     "type": {
+      "description": "The type of this media item.",
+      "type": "string",
+      "enum": [
+       "TYPE_UNSPECIFIED",
+       "PHOTO",
+       "VIDEO"
+      ]
+     },
+     "id": {
+      "description": "Identifier for the media item. This is a persistent identifier that can be used between sessions to identify this media item.",
+      "type": "string"
+     },
+     "createTime": {
+      "description": "Time when the media item was created (not when it was uploaded to Google Photos).",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "mediaFile": {
+      "$ref": "#/components/schemas/MediaFile"
+     }
+    }
+   },
+   "Empty": {
+    "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }",
+    "type": "object",
+    "properties": {}
+   },
+   "MediaFileMetadata": {
+    "description": "Metadata about a media file.",
+    "type": "object",
+    "properties": {
+     "width": {
+      "description": "Original width (in pixels) of the media file.",
+      "type": "integer",
+      "format": "int32"
+     },
+     "videoMetadata": {
+      "$ref": "#/components/schemas/VideoMetadata"
+     },
+     "cameraMake": {
+      "description": "Brand of the camera with which the media was captured.",
+      "type": "string"
+     },
+     "height": {
+      "description": "Original height (in pixels) of the media file.",
+      "type": "integer",
+      "format": "int32"
+     },
+     "photoMetadata": {
+      "$ref": "#/components/schemas/PhotoMetadata"
+     },
+     "cameraModel": {
+      "description": "Model of the camera with which the media was captured.",
+      "type": "string"
+     }
+    }
+   },
+   "VideoMetadata": {
+    "description": "Metadata that is specific to a video. For example, fps.",
+    "type": "object",
+    "properties": {
+     "processingStatus": {
+      "description": "Processing status of the video.",
+      "type": "string",
+      "enum": [
+       "UNSPECIFIED",
+       "PROCESSING",
+       "READY",
+       "FAILED"
+      ]
+     },
+     "fps": {
+      "description": "Frame rate of the video.",
+      "type": "number",
+      "format": "double"
+     }
+    }
+   },
+   "PollingConfig": {
+    "description": "Configuration for polling the API.",
+    "type": "object",
+    "properties": {
+     "pollInterval": {
+      "description": "Output only. Recommended time between poll requests.",
+      "type": "string",
+      "format": "google-duration"
+     },
+     "timeoutIn": {
+      "description": "Output only. The length of time after which the client should stop polling. A value of 0 indicates that the client should stop polling if it hasn't already.",
+      "type": "string",
+      "format": "google-duration"
+     }
+    }
+   },
+   "ListMediaItemsResponse": {
+    "description": "Response to the `mediaItems.list` method.",
+    "type": "object",
+    "properties": {
+     "mediaItems": {
+      "description": "A page of picked media items.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/PickedMediaItem"
+      }
+     },
+     "nextPageToken": {
+      "description": "If set, this field can be used as the `pageToken` in a subsequent `mediaItems.list` call to retrieve the next page of picked media items. If this field is omitted, there are no subsequent pages.",
+      "type": "string"
+     }
+    }
+   },
+   "PickingSession": {
+    "description": "Representation of a user session during which the user can pick photos and videos using Google Photos.",
+    "type": "object",
+    "properties": {
+     "expireTime": {
+      "description": "Output only. Time when access to this session (and its picked media items) will expire.",
+      "type": "string",
+      "format": "google-datetime"
+     },
+     "pickerUri": {
+      "description": "Output only. The URI used to redirect the user to Google Photos (on web) so they can pick photos and videos for the current session. To view this page successfully, the user must be logged into the Google account that owns this session in their web browser. The `pickerUri` cannot be opened in an iframe due to security reasons. For web-based applications, you can append `/autoclose` to this URI. The Google Photos window or tab will then close automatically after the user has finished picking, instead of displaying a \"Done\" screen.",
+      "type": "string"
+     },
+     "mediaItemsSet": {
+      "description": "Output only. If set to `true`, media items have been picked for this session and your application can request the list of picked media items via `mediaItems.list`.",
+      "type": "boolean"
+     },
+     "id": {
+      "description": "Output only. The Google-generated identifier for this session.",
+      "type": "string"
+     },
+     "pollingConfig": {
+      "$ref": "#/components/schemas/PollingConfig"
+     },
+     "pickingConfig": {
+      "$ref": "#/components/schemas/PickingConfig"
+     }
+    }
+   },
+   "MediaFile": {
+    "description": "Representation of a media file.",
+    "type": "object",
+    "properties": {
+     "mediaFileMetadata": {
+      "$ref": "#/components/schemas/MediaFileMetadata"
+     },
+     "filename": {
+      "description": "Filename of the media file.",
+      "type": "string"
+     },
+     "baseUrl": {
+      "description": "A URL to fetch the media file's bytes. To download a media file, the API client must add the parameters specified in the developer documentation to this URL. For example, `'=w2048-h1024'` will set the dimensions of a media item of type photo to have a width of 2048 px and height of 1024 px.",
+      "type": "string"
+     },
+     "mimeType": {
+      "description": "MIME type of the media file. For example, `image/jpeg`.",
+      "type": "string"
+     }
+    }
+   },
+   "PickingConfig": {
+    "description": "Client-specified configuration for the user's picking experience during this session.",
+    "type": "object",
+    "properties": {
+     "showExpandedAppBar": {
+      "description": "Optional. Whether to show an expanded app bar on mobile. If true, the picker will show an app bar with a search bar that is expanded on load instead of a search icon. This will be secured behind an allowlist. UI: https://screenshot.googleplex.com/6dnYtCu95rjzRxX",
+      "type": "boolean"
+     },
+     "showZeroState": {
+      "description": "Optional. Whether to show a custom zero state page on mobile. If not set, the picker will use the default allphotos emptystate page. This will be secured behind an allowlist. UI: https://screenshot.googleplex.com/eZovEtnzdyWYKHh",
+      "type": "boolean"
+     },
+     "maxItemCount": {
+      "description": "Optional. The maximum number of items that the user can pick during this session. Defaults to 2000 if not specified. If unspecified or set to 0, at most 2000 items can be picked. Values above 2000 will be coerced to 2000. Negative values will result in an `INVALID_ARGUMENT` error.",
+      "type": "string",
+      "format": "int64"
+     },
+     "showEducationBanner": {
+      "description": "Optional. Whether to show an educational banner instead of the partner caption. This will be secured behind an allowlist. UI: https://screenshot.googleplex.com/5TKqW9zkHuuRBwk",
+      "type": "boolean"
+     }
+    }
+   },
+   "PhotoMetadata": {
+    "description": "Metadata that is specific to a photo, such as, ISO, focal length, and exposure time. Some of these fields may not be set.",
+    "type": "object",
+    "properties": {
+     "focalLength": {
+      "description": "Focal length of the camera lens with which the photo was taken.",
+      "type": "number",
+      "format": "float"
+     },
+     "isoEquivalent": {
+      "description": "ISO of the camera with which the photo was taken.",
+      "type": "integer",
+      "format": "int32"
+     },
+     "apertureFNumber": {
+      "description": "Aperture f number of the camera lens with which the photo was taken.",
+      "type": "number",
+      "format": "float"
+     },
+     "exposureTime": {
+      "description": "Exposure time of the camera aperture when the photo was taken.",
+      "type": "string",
+      "format": "google-duration"
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "bearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

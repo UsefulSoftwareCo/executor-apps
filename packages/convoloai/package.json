@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/convoloai",
+  "description": "Brightcall (formerly Convolo.ai) speed-to-lead: agents, widgets, calls, call logs, leads and outcome tags.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Convolo AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

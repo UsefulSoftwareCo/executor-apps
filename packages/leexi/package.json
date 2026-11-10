@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/leexi",
+  "description": "Leexi AI notetaker: calls, call notes, meeting events, users and teams.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Leexi"
+  }
+}

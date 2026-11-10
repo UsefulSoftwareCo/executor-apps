@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/botpenguin",
+  "description": "BotPenguin inbox contacts and segments, WhatsApp templates and WhatsApp messages.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "BotPenguin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

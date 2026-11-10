@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lastpass",
+  "description": "Administer a LastPass Business or Enterprise account: users, groups, shared folders and the activity report.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LastPass"
+  }
+}

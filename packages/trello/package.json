@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/trello",
+  "description": "Boards, lists, cards, checklists, labels, members, workspaces and webhooks from the Trello REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Trello"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

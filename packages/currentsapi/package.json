@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/currentsapi",
+  "description": "News headlines and search from Currents API: latest news, article search, and the available categories, languages and regions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Currents API"
+  }
+}

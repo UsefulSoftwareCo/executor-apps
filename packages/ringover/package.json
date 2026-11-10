@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ringover",
+  "description": "Ringover cloud phone system: calls, contacts, SMS, call campaigns, users, groups, numbers, IVRs, conversations and Empower call analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ringover"
+  }
+}

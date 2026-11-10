@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/instantly",
+  "description": "Instantly cold email outreach: campaigns, leads, sending accounts, emails, analytics and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Instantly"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

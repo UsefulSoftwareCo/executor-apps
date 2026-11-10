@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/retellai",
+  "description": "Build and manage Retell AI voice agents: agents, calls, phone numbers, LLMs, conversation flows, knowledge bases, tests and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Retell AI"
+  }
+}

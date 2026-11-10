@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/godaddy",
+  "description": "Search, register and manage domains and DNS records on GoDaddy, with AI domain suggestions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GoDaddy"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

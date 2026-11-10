@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/brightdata",
+  "description": "Bright Data web access for agents: search engine results, scraping through Web Unlocker, browser automation and structured data from pre-built scrapers, through Bright Data's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bright Data"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

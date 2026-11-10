@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/arizeax",
+  "description": "Arize AX AI observability: projects, spans, datasets, experiments, evaluators, prompts, annotations and account administration.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Arize AX"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

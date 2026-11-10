@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/whop",
+  "description": "Products, plans, memberships, payments, payouts, courses, chat and the rest of the Whop API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Whop"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/statuscake",
+  "description": "Website monitoring with StatusCake: uptime, page speed, SSL and heartbeat tests, contact groups, maintenance windows and public pages.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "StatusCake"
+  }
+}

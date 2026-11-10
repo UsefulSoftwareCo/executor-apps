@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/candis",
+  "description": "Candis accounts payable: exports and postings, core data imports, invoices, purchase requests and reimbursement items.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Candis"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

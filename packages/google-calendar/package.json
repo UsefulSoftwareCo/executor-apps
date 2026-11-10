@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-calendar",
+  "description": "Calendars, events, attendees, free/busy availability, sharing and settings in Google Calendar through the Calendar API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Calendar"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

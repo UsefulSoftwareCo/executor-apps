@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/azure-blob-storage",
+  "description": "List, read, upload, copy, tag, snapshot and delete blobs and containers in an Azure Storage account.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Azure Blob Storage"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

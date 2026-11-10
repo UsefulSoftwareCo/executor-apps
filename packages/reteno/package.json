@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/reteno",
+  "description": "Contacts, segments, events, messages and analytics in Reteno, through Reteno's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Reteno"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

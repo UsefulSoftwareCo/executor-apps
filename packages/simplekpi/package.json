@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/simplekpi",
+  "description": "SimpleKPI: KPIs, KPI entries, categories, units, users, groups and reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SimpleKPI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/botstar",
+  "description": "Manage BotStar chatbots: bots, bot attributes, publishing, user attributes, CMS entities and items, and sending messages.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BotStar"
+  }
+}

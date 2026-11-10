@@ -1,0 +1,36 @@
+// openapi.json and picker-openapi.json are generated from Google's official Photos Library API v1
+// and Photos Picker API v1 Discovery documents (https://photoslibrary.googleapis.com/$discovery/rest?version=v1,
+// revision 20261008; https://photospicker.googleapis.com/$discovery/rest?version=v1, revision 20261008) by
+// discovery-to-openapi.mjs; see README. Every operation takes one OAuth bearer token.
+import type { JsonObject } from "apps";
+import type { OpenapiToolNamesOptions } from "apps/openapi";
+import library from "./openapi.json" with { type: "json" };
+import picker from "./picker-openapi.json" with { type: "json" };
+
+// The inferred JSON type has no index signature, so widen it once here.
+const widen = (value: unknown): JsonObject => JSON.parse(JSON.stringify(value));
+
+const common = {
+  securitySchemes: { bearer: { type: "http", scheme: "bearer" } },
+  methods: {
+    oauth: [{ scheme: "bearer", field: "access_token", part: "value", prefix: "" }],
+  },
+  oauth: [],
+} as const;
+
+export const libraryOptions = {
+  source: { document: widen(library) },
+  allowedOrigin: "https://photoslibrary.googleapis.com",
+  ...common,
+  // mediaItems.search and batchGet only read, so they run without an approval prompt.
+  kinds: { "photoslibrary.mediaItems.search": "query", "photoslibrary.mediaItems.batchGet": "query" },
+} satisfies OpenapiToolNamesOptions;
+
+export const pickerOptions = {
+  source: { document: widen(picker) },
+  allowedOrigin: "https://photospicker.googleapis.com",
+  ...common,
+} satisfies OpenapiToolNamesOptions;
+
+// scripts/tools.ts reads `options`; it reports the Library spec, pickerOptions is checked separately.
+export const options = libraryOptions;

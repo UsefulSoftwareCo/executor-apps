@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/grok",
+  "description": "Use xAI's Grok API: chat completions, responses, messages, image and video generation, embeddings, files, skills, document search and model listing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Grok"
+  }
+}

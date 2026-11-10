@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apify",
+  "description": "Run Apify Actors and manage tasks, runs, datasets, key-value stores, request queues, schedules and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Apify"
+  }
+}

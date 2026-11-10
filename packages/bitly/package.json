@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bitly",
+  "description": "Shorten and manage links, branded short domains, QR codes, campaigns and click analytics with Bitly.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bitly"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

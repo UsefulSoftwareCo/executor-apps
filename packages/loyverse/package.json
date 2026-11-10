@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/loyverse",
+  "description": "Loyverse point of sale: items, inventory, receipts, customers, stores, employees, shifts and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Loyverse"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

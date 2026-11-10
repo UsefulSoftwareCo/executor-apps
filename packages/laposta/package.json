@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/laposta",
+  "description": "Dutch email marketing with Laposta: lists, fields, segments, members, webhooks, campaigns and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Laposta"
+  }
+}

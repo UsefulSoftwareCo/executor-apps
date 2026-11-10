@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/byteforms",
+  "description": "ByteForms forms and their submitted responses.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Byteforms"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

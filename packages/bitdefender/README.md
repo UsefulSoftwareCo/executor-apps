@@ -1,0 +1,9 @@
+# Bitdefender
+
+Manage Bitdefender GravityZone (cloud) through its Public API: network inventory and endpoints, scan and reconfigure tasks, policies, installation packages, quarantine, reports, companies, user accounts, licensing, incidents, patch management and push event settings.
+
+**Interface:** hand-written tools over the GravityZone Public API, a JSON-RPC 2.0 API at `<access URL>/v1.0/jsonrpc/<service>` (documented at https://www.bitdefender.com/business/support/en/77209-125281-accounts.html and the per-method pages beside it). GravityZone publishes no OpenAPI document, GraphQL API or remote MCP server. The 39 typed tools wrap the most used methods (some use API v1.1 or v1.2 as the docs require); the `request` tool calls any other method (killProcess, createIsolateEndpointTask, changeIncidentStatus, addToBlocklist, integrations, custom rules...) by service path and method name. Every mutation, including `request`, requires approval.
+
+**Auth:** API key. In GravityZone Control Center open your account menu, then My Account, then API keys, create a key and enable the APIs you need (Network, Packages, Policies, Reports, Quarantine, Incidents, and so on). Copy the key and the Access URL shown there (for example `https://cloud.gravityzone.bitdefender.com/api`; EU tenants use `https://cloudgz.gravityzone.bitdefender.com/api`). The key is sent as the HTTP Basic username with an empty password. There is no OAuth.
+
+**Known gaps:** on-premises GravityZone appliances are not supported, only `*.gravityzone.bitdefender.com` cloud hosts. A key only works for the APIs enabled on it, so a missing-API error means enabling that API on the key. Incidents need an EDR/XDR license. The maintenance windows, integrations, custom rules, response actions and blocklist methods are reachable only through `request`. The health check calls `getApiKeyDetails`.

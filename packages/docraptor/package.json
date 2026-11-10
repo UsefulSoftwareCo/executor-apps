@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docraptor",
+  "description": "Convert HTML to PDF, XLS and XLSX with DocRaptor: create documents synchronously, asynchronously or hosted, check status and download.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DocRaptor"
+  }
+}

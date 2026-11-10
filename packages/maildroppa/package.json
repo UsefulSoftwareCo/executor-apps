@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/maildroppa",
+  "description": "Manage Maildroppa email marketing: subscribers, tags, fields, segments, RSS newsletters, events, transactional email and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Maildroppa"
+  }
+}

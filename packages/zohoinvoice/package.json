@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zohoinvoice",
+  "description": "Zoho Invoice: invoices, recurring invoices, estimates, retainer invoices, credit notes, customer payments, expenses, time entries, projects, contacts, items, taxes and the rest of the Zoho Invoice REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zoho Invoice"
+  }
+}

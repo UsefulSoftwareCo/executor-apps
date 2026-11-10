@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mistralai",
+  "description": "Mistral AI: chat, embeddings, agents, conversations, OCR, audio, files, fine-tuning, batch jobs, libraries and models.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mistral AI"
+  }
+}

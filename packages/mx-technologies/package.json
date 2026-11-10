@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mx-technologies",
+  "description": "Aggregate and enhance financial data with the MX Platform API: users, members, institutions, accounts, transactions, categories, budgets, goals, holdings and ACH data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MX Technologies"
+  }
+}

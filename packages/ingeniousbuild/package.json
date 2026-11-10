@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ingeniousbuild",
+  "description": "INGENIOUS.BUILD construction management: projects, accounting, cost codes, contracts, change orders, RFIs, submittals, daily logs and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "INGENIOUS.BUILD"
+  }
+}

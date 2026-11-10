@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/breathehr",
+  "description": "Breathe HR: employees, absences, leave requests, sickness, expenses, salaries, benefits, departments and company setup.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Breathe HR"
+  }
+}

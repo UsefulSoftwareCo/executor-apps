@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sedna",
+  "description": "Sedna maritime email and workflow platform: messages, contacts, teams, tags, job references, documents, templates, workflows and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sedna"
+  }
+}

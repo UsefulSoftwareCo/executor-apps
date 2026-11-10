@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/labsmobile",
+  "description": "Send SMS with LabsMobile, manage scheduled sendings, check credit balance and look up per-country SMS prices.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LabsMobile"
+  }
+}

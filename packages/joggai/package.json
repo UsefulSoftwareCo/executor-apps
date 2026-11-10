@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/joggai",
+  "description": "Create AI avatar, product, lip-sync, template and translated videos with JoggAI, and manage avatars, voices, assets and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "JoggAI"
+  }
+}

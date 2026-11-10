@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/seam",
+  "description": "Control smart locks, access codes, thermostats, sensors and other connected devices through Seam.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Seam"
+  }
+}

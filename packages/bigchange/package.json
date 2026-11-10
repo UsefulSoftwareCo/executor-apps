@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bigchange",
+  "description": "BigChange field service and job management: jobs, contacts, resources, finance, stock, assets and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BigChange"
+  }
+}

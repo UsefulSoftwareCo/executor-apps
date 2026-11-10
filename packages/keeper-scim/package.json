@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/keeper-scim",
+  "description": "Provision Keeper Security users and teams over SCIM 2.0: list, invite, lock and unlock users, manage teams and members, and run bulk requests.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Keeper (SCIM)"
+  }
+}

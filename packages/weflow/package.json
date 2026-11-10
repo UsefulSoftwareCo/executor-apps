@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/weflow",
+  "description": "Read Weflow recordings, transcripts, summaries, comments, clips, scorecards, trackers and interaction metrics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Weflow"
+  }
+}

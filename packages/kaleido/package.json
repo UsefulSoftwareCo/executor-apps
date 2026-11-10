@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kaleido",
+  "description": "Manage Kaleido enterprise blockchain platform resources: organizations, consortia, environments, nodes, services, API keys and app credentials.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kaleido"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/smartsheet",
+  "description": "Sheets, rows, columns, workspaces, reports, dashboards, users, sharing and webhooks in Smartsheet.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Smartsheet"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

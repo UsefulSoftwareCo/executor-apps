@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/highergov",
+  "description": "Search US federal, state and local government contract and grant opportunities, awards, awardees, agencies and people with HigherGov.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HigherGov"
+  }
+}

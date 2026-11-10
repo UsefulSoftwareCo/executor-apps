@@ -1,0 +1,12 @@
+# Supabase
+
+Covers the Supabase Management API: organizations, projects, branches, database config and queries, auth config, edge functions, secrets, storage, domains, analytics and more (167 tools, mutations require approval). It does not cover per-project data APIs (`<ref>.supabase.co/rest/v1`, storage objects, auth users), which live on tenant-specific hosts.
+
+Interface: OpenAPI, from Supabase's official document at https://api.supabase.com/api/v1-json (Supabase also publishes a remote MCP server at https://mcp.supabase.com/mcp; the OpenAPI document exposes more operations).
+
+Auth:
+- Personal access token: create one at https://supabase.com/dashboard/account/tokens and paste it in.
+- OAuth: create an OAuth app under your organization settings (Organization > OAuth Apps) at https://supabase.com/dashboard, and enter its client ID and secret on the connect page. Add Executor's redirect URI to the app's redirect URIs. The token endpoint takes the client credentials in an HTTP Basic header (`client_secret_basic`) with a form-encoded body, and refresh uses the standard `grant_type=refresh_token` request on the same endpoint. Scopes use the identifiers declared in the API document (24: `<resource>:read` and `<resource>:write` for analytics, analytics_config, auth, database, domains, edge_functions, environment, organizations, projects, rest, secrets and storage). Supabase's scopes page shows only display names (Auth, Database, Domains, Edge Functions, Environment, Organizations, Projects, Rest, Secrets, Storage) that map to these identifiers; it lists no analytics scopes, no Organizations write and no Storage write, but the document declares them. Supabase deprecated the per-request `scope` parameter: the scopes granted are those chosen when the OAuth app is created, so pick them there (read-only if you only need read tools). Write scopes are requested because the package includes mutation tools, which always need approval.
+- Health check: `GET /v1/profile`; the account is identified by the profile's `gotrue_id` and shown by its `username`.
+
+Known gaps: the OAuth protocol endpoints (`GET /v1/oauth/authorize`, `POST /v1/oauth/token`, `POST /v1/oauth/revoke`) are removed from the tools; `GET /v1/projects/{ref}/config/database/pgbouncer` is unauthenticated in the document but is sent with the bearer token. The document's one HEAD operation is exposed as a tool. The project-level Data REST API is not included.

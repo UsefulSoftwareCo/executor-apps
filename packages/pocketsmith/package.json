@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pocketsmith",
+  "description": "Manage PocketSmith budgets: accounts, transactions, categories, budgets, events, attachments and forecasts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PocketSmith"
+  }
+}

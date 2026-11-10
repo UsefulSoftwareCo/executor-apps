@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/emelia",
+  "description": "Cold email campaigns, contact lists, mailbox providers, email verification and webhooks in Emelia, through its GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Emelia"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

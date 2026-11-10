@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agencyzoom",
+  "description": "Manage insurance agency leads, customers, policies, tasks, service tickets and pipelines in AgencyZoom.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AgencyZoom"
+  }
+}

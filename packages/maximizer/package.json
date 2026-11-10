@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/maximizer",
+  "description": "Maximizer CRM contacts and companies, leads, opportunities, tasks, notes, appointments, cases and campaigns through the Octopus API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Maximizer"
+  }
+}

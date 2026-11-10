@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/circleso",
+  "description": "Manage a Circle community: members, spaces, posts, events, courses, access groups, tags, comments and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Circle"
+  }
+}

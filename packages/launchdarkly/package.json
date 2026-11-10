@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/launchdarkly",
+  "description": "Feature flags, projects, environments, segments, experiments, members and the rest of the LaunchDarkly REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "LaunchDarkly"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

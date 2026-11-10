@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/coinbase-wallet",
+  "description": "Coinbase Wallet: balances, transfers, swaps, signing, x402 payments and transaction history, through Coinbase's official wallet MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Coinbase Wallet"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

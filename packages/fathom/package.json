@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fathom",
+  "description": "Fathom AI meeting assistant: meetings, summaries, transcripts, recording downloads, teams, team members, users, meeting types and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fathom"
+  }
+}

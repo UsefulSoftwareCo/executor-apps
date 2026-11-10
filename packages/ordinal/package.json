@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/ordinal",
+  "description": "Plan, draft, schedule and analyze social media posts, ideas, approvals and comments in Ordinal, through Ordinal's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ordinal"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

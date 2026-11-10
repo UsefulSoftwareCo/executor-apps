@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pushbytechulus",
+  "description": "Send push notifications with Push by Techulus: notify all devices, a team or a device group, and manage team invites.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Push by Techulus"
+  }
+}

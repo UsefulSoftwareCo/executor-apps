@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/synthflowai",
+  "description": "Build and run Synthflow AI voice agents: assistants, calls, batch calls, phone numbers, actions, knowledge bases and subaccounts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Synthflow AI"
+  }
+}

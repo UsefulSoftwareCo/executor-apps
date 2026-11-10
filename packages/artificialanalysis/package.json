@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/artificialanalysis",
+  "description": "Independent AI model benchmarks from Artificial Analysis: LLM intelligence, speed and pricing, plus image, video and speech arena rankings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Artificial Analysis"
+  }
+}

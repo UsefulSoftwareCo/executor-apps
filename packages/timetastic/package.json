@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/timetastic",
+  "description": "Manage Timetastic leave: absences, holidays, users, departments, leave types, allowances, locked dates and public holidays.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Timetastic"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kustomer",
+  "description": "Kustomer customer service CRM: customers, conversations, messages, notes, companies, users, teams, queues, tags and custom objects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kustomer"
+  }
+}

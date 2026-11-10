@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/eventee",
+  "description": "Manage Eventee event content: halls, lectures, speakers, partners, pauses, tracks, registrations, attendees and reviews.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Eventee"
+  }
+}

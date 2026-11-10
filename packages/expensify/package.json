@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/expensify",
+  "description": "Expensify Integration Server: policies, categories, tags, reports, expenses, report exports, reconciliation and downloads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Expensify"
+  }
+}

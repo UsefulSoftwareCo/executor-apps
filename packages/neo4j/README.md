@@ -1,0 +1,9 @@
+# Neo4j
+
+Manages Neo4j Aura (AuraDB, AuraDS, Graph Analytics): instances, snapshots, tenants, customer-managed keys, Graph Analytics sessions, and, through the newer API, organizations, projects, users, invites, IP filters, databases, backups, import jobs, billing and fleet manager.
+
+Interface: OpenAPI. Two official Neo4j documents are mounted in one provider as `v1` (https://neo4j.com/docs/aura/platform/api/specification/aura_api_spec_v1.yaml, 26 operations) and `v2beta1` (https://api.neo4j.io/v2beta1/spec.json, 72 operations). Base URL `https://api.neo4j.io`.
+
+Auth: OAuth 2.0 client credentials. In the Aura console open Account settings, Client credentials (Aura API), create a credential and save the Client ID and Client Secret. Executor exchanges them at `https://api.neo4j.io/oauth/token` with HTTP Basic auth (the flow documented at https://neo4j.com/docs/aura/api/authentication/), and sends the one bearer token to both mounts. Caveat: the v2beta1 spec declares its own token URL, `https://api.neo4j.io/v2beta1/oauth/token`, and the vendor docs do not say a token from `/oauth/token` is accepted on `/v2beta1/*`. Both endpoints answer a bogus Basic credential with the same `access_denied` error, which suggests one shared backend, but this was not confirmed with a real credential. If v2beta1 calls return 401, report it. No redirect URI is needed.
+
+Known gaps: this covers the Aura management API only. Running Cypher against a database (Query API / Bolt, per-instance host with database user credentials) is not included; for querying data Neo4j offers the official per-instance MCP for Aura (`https://<INSTANCE_ID>.mcp-instances.neo4j.io`), which this package does not wrap. The v2beta1 API is beta and billing endpoints are limited to 10 requests per day per organization. `scripts/check.sh` counts only the v1 document (26 tools); v2beta1 (72 tools, 36 mutations, 0 skipped, checked separately with `openapiToolNamesOptions`) adds the rest.

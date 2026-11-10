@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-search-console",
+  "description": "Search performance analytics, URL inspection, sites and sitemaps in Google Search Console.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Search Console"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

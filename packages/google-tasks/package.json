@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-tasks",
+  "description": "Task lists and tasks in Google Tasks: create, update, complete, move and clear.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Tasks"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

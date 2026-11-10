@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/canvas",
+  "description": "Courses, assignments, submissions, grades, enrollments, modules, discussions, files and the rest of the Canvas LMS REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Canvas"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/calendly",
+  "description": "Calendly scheduling: event types, scheduled events, invitees, availability, routing forms, webhooks and organization management.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Calendly"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

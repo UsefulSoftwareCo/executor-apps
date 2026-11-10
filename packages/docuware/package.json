@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docuware",
+  "description": "DocuWare Cloud document management: organizations and users, file cabinets and trays, dialogs, document search, create, index update and delete, plus any Platform REST resource.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DocuWare"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

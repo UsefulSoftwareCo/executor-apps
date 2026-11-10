@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/codegen",
+  "description": "Run and manage Codegen AI software engineering agents: agent runs, repositories, users, pull requests and integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Codegen"
+  }
+}

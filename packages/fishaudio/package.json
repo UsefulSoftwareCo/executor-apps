@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fishaudio",
+  "description": "Text-to-speech, speech-to-text, voice models, voice design and voice agents with Fish Audio.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fish Audio"
+  }
+}

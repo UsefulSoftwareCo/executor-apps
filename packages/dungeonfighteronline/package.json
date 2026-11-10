@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dungeonfighteronline",
+  "description": "Dungeon Fighter Online (Neople Open API): servers, character search and equipment, fame rankings, items, set items, jobs and skills.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Dungeon Fighter Online"
+  }
+}

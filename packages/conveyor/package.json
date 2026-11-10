@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/conveyor",
+  "description": "Conveyor's official AI Connector (MCP server): knowledge base, questionnaires, Trust Center documents, access requests and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Conveyor"
+  }
+}

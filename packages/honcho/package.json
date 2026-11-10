@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/honcho",
+  "description": "Memory and reasoning for stateful AI agents with Honcho: workspaces, peers, sessions, messages, conclusions, search and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Honcho"
+  }
+}

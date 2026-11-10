@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/conductorone",
+  "description": "Apps, access requests, entitlements, reviews, policies, users, tasks and the rest of the ConductorOne (C1) API for a tenant.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ConductorOne"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

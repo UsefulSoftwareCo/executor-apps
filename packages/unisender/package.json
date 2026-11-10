@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/unisender",
+  "description": "Unisender email and SMS marketing: contact lists, contacts, messages, campaigns, templates, custom fields, tags, notes and statistics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Unisender"
+  }
+}

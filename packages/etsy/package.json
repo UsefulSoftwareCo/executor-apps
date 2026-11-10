@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/etsy",
+  "description": "Etsy Open API v3: shops, listings, inventory, receipts, shipping profiles, reviews and taxonomy.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Etsy"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

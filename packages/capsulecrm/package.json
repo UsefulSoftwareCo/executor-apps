@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/capsulecrm",
+  "description": "Contacts, opportunities, projects, tasks, notes, pipelines and custom fields in Capsule CRM.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Capsule CRM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/meilisearch",
+  "description": "Indexes, documents, search, settings, tasks, API keys and more on Meilisearch Cloud or a self-hosted instance.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Meilisearch"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

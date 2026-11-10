@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/skyfire",
+  "description": "Skyfire agent payments and identity: create KYA and pay tokens, charge and introspect tokens, manage seller services, wallet balance, the service directory and organization users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Skyfire"
+  }
+}

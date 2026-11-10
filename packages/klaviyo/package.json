@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/klaviyo",
+  "description": "Profiles, lists, segments, campaigns, flows, events, metrics, catalogs and the rest of the Klaviyo REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Klaviyo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

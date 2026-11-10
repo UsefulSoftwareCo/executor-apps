@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cats",
+  "description": "TheCatAPI: cat images, breeds, facts, favourites, votes, pets and health tips.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TheCatAPI"
+  }
+}

@@ -1,0 +1,9 @@
+[
+  "/paths/~1systeminsights~1windows_security_center/get",
+  "/paths/~1systeminsights~1userassist/get",
+  "/paths/~1systeminsights~1chassis_info/get",
+  "/paths/~1systeminsights~1secureboot/get",
+  "/paths/~1systeminsights~1tpm_info/get",
+  "/paths/~1systeminsights~1azure_instance_metadata/get",
+  "/paths/~1systeminsights~1azure_instance_tags/get"
+]

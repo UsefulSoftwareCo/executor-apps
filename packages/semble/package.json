@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/semble",
+  "description": "Patients, bookings, availability and the rest of Semble's practice management GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Semble"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

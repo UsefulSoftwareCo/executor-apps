@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/magicslides",
+  "description": "MagicSlides presentations, docs, sheets and meeting notes, through MagicSlides' official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MagicSlides"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

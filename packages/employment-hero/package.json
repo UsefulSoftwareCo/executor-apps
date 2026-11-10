@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/employment-hero",
+  "description": "Employment Hero HR: organisations, employees, leave, timesheets, rostering, pay, goals, forms and assets via the Employment Hero API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Employment Hero"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

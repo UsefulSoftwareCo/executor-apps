@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onlogist",
+  "description": "Order vehicle transfers on ONLOGIST: orders, price offers, messages, locations, cost centers, changes, qualifications and invoices.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ONLOGIST"
+  }
+}

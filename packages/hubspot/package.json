@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hubspot",
+  "description": "HubSpot CRM objects, associations, lists, marketing, CMS, conversations, files, automation and account APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "HubSpot"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

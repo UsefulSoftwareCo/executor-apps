@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/scrapecreators",
+  "description": "Scrape public social media data with ScrapeCreators: profiles, posts, videos, comments and ads across TikTok, Instagram, YouTube, X, LinkedIn, Facebook, Reddit and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ScrapeCreators"
+  }
+}

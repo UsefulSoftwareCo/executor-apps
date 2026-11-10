@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/azure-devops",
+  "description": "Azure DevOps boards, repos, pull requests, pipelines and wikis: work items, Git, builds and pipeline runs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Azure DevOps"
+  }
+}

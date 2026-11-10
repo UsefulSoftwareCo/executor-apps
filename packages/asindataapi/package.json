@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/asindataapi",
+  "description": "Real-time Amazon product data from ASIN Data API: product details, offers, category listings and keyword search across Amazon marketplaces, plus account credit usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ASIN Data API"
+  }
+}

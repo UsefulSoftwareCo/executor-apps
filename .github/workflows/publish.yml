@@ -1,0 +1,38 @@
+# Builds the catalog feed and publishes it to the R2 bucket Executor serves at
+# https://catalog.executor.sh.
+name: Publish catalog
+
+on:
+  # Every push to main republishes the feed.
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Publishes run one at a time, in order; a newer push waits rather than racing an older one.
+concurrency:
+  group: publish-catalog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - name: Build feed
+        run: bun scripts/feed.ts --out feed
+      - name: Publish to R2
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CATALOG_PUBLISH_TOKEN }}
+          CATALOG_BUCKET: executor-app-catalog
+        run: bun scripts/publish.ts feed

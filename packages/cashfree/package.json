@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/cashfree",
+  "description": "Cashfree Payments: the Payment Gateway REST API plus the dashboard, settlement and report tools of Cashfrees MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cashfree"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mimecast",
+  "description": "Mimecast API 2.0: email security gateway, audit and security logs, users and groups, domains, policies, threat remediation, archive search and awareness training.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mimecast"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

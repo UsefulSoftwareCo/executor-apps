@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/cloudflare",
+  "description": "Zones, DNS, Workers, R2, Zero Trust and the rest of Cloudflare, through Cloudflare's MCP server and REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cloudflare"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

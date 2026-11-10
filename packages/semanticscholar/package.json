@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/semanticscholar",
+  "description": "Search and analyze scholarly literature with Semantic Scholar: papers, authors, citations, references, snippets, recommendations and bulk datasets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Semantic Scholar"
+  }
+}

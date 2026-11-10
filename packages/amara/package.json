@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/amara",
+  "description": "Amara: manage videos, subtitles and captions, teams, projects, members, subtitle requests, activity and messages.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Amara"
+  }
+}

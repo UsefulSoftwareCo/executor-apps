@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/insightly",
+  "description": "Insightly CRM: contacts, organizations, leads, opportunities, projects, tasks, events, notes, products, quotes and custom objects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Insightly"
+  }
+}

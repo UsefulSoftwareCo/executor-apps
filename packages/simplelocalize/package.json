@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/simplelocalize",
+  "description": "Manage SimpleLocalize translation projects: translation keys, translations, languages, imports, exports, environments, jobs and auto-translation.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SimpleLocalize"
+  }
+}

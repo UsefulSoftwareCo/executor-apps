@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ocrwebservice",
+  "description": "OCR Web Service: extract text from scanned documents and images, convert to searchable PDF, Word, Excel and more, and check account page balance.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "OCR Web Service"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agiloft",
+  "description": "Agiloft knowledgebases: schema, record search, read, create, update, upsert and delete, locks, action buttons and attachment info.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Agiloft"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

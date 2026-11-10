@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/thrivecart",
+  "description": "Manage a ThriveCart account: products, bumps, upsells, downsells, transactions, customers, refunds, subscriptions, affiliates and event subscriptions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ThriveCart"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

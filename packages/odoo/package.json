@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/odoo",
+  "description": "Contacts, CRM leads, sales, purchases, invoices, products, projects, employees and any model of an Odoo database through the external JSON-2 API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Odoo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

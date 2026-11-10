@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/adroll",
+  "description": "Advertisables, campaigns, ad groups, ads, audiences, pixels, product feeds and reports from the AdRoll (NextRoll) CRUD API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "AdRoll"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

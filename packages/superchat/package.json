@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/superchat",
+  "description": "Send and manage WhatsApp, Instagram, Messenger, Telegram, SMS and email conversations with Superchat: messages, contacts, conversations, labels, templates, files, notes and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Superchat"
+  }
+}

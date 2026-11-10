@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mapflow",
+  "description": "Run AI analysis on satellite and aerial imagery with Mapflow: projects, processings, results, mosaics, images and imagery catalog search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mapflow"
+  }
+}

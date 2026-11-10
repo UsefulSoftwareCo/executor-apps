@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bandwidth",
+  "description": "Bandwidth messaging, voice, multi-factor authentication, number lookup, toll-free verification, 10DLC campaigns, accounts and applications.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bandwidth"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

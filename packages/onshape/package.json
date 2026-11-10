@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onshape",
+  "description": "Onshape CAD documents, parts, assemblies, drawings, versions, exports, translations and teams through the REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Onshape"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

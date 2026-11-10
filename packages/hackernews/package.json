@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hackernews",
+  "description": "Read Hacker News: top, new, best, Ask, Show and job stories, items, comments, users, and full-text search.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hacker News"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

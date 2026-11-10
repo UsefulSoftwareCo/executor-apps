@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/coinbase",
+  "description": "Coinbase Advanced Trade: accounts, orders, fills, products, market data, portfolios, conversions and payment methods.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Coinbase"
+  }
+}

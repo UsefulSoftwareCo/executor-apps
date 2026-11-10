@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/alpaca",
+  "description": "Trade stocks, options and crypto and read market data with Alpaca: account, orders, positions, assets, watchlists, historical bars, quotes, trades and news.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Alpaca"
+  }
+}

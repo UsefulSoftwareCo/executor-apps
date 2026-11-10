@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/signpath",
+  "description": "Manage SignPath code signing: certificates, projects, signing policies, signing requests, users and audit logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SignPath"
+  }
+}

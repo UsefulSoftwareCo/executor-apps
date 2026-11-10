@@ -1,0 +1,9 @@
+# 1Password
+
+Reads 1Password Events API data for a Business or Teams account: audit events, sign-in attempts, shared-vault item usages, and token introspection.
+
+**Interface:** hand-written tools over 1Password's official Events API (https://developer.1password.com/docs/events-api/reference). 1Password's official OpenAPI document (https://i.1password.com/media/1password-events-reporting/1password-events-api.yaml) lists four regional servers and still puts its three POST operations under `/api/v1`, while the current vendor docs (https://www.1password.dev/events-api/reference) use `/api/v2`, so the spec is stale and hand-written tools call the documented `/api/v2` endpoints on the account's regional host. Tools: `introspect`, `auditEvents`, `signInAttempts`, `itemUsages`. Paging tools accept `cursor` to continue, or `limit`, `startTime`, `endTime` to start a new cursor. All are read-only.
+
+**Auth:** Events Reporting bearer token (no OAuth). Requires the owner or administrator role. In your 1Password account, open Integrations in the sidebar (then Directory if other integrations exist), then Events Reporting, choose your SIEM or Other, enter a name and Add Integration, then set the token name, expiry and the event features it may read and Issue Token. When connecting, also enter the region of your account: `1password.com`, `1password.ca`, `1password.eu` or `ent.1password.com`. Your sign-in address (such as `example.1password.eu`) works too. A service account token (it starts with `ops_`) does not work: the Events API accepts only Events Reporting tokens, and 1Password refuses any other token. This app does not read vault items.
+
+**Not covered:** the Users API for Partners and the Partnership API need partner agreements, the SCIM bridge is self-hosted per customer, and Connect Server is a self-hosted vault API; none have a fixed public host or a self-serve credential.

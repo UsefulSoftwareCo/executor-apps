@@ -1,0 +1,11 @@
+# OKZest
+
+Render personalized images from OKZest designs: list designs, inspect one design and its editable fields, and generate a new image (JPG by default; also GIF, PNG or WebP) with per-call text, color, image, screenshot and logo changes.
+
+**Interface:** hand-written tools over the documented REST API (`https://api.okzest.com/v1`). Endpoint paths and the create-image request schema are taken from the vendor's API reference: https://docs.okzest.com/okzest-api/get-designs (`GET /v1/images`), https://docs.okzest.com/okzest-api/get-design (`GET /v1/images/:id`), https://docs.okzest.com/okzest-api/get-design-fields (`GET /v1/images/:designId/fields`) and https://docs.okzest.com/okzest-api/post-image (`POST /v1/images`, with `design_id`, `layers`, `background`, `format` and `quality`); guides at https://docs.okzest.com/api/introduction, https://docs.okzest.com/api/core-resources/images and https://docs.okzest.com/api/design-resources/designs. OKZest publishes no downloadable OpenAPI document and no remote MCP server, so the four documented endpoints are wrapped directly: `listDesigns` (`GET /images`), `getDesign` (`GET /images/:id`), `getDesignFields` (`GET /images/:designId/fields`) and `createImage` (`POST /images`, returned as base64). `createImage` requires approval because it consumes image quota.
+
+**Auth:** API key, sent in the `x-api-key` header. Create one on the API page of your OKZest account (https://app.okzest.com). OKZest has no OAuth.
+
+**Icon:** OKZest's own app icon (`apple-touch-icon.png`, 180px) from okzest.com; the mark is not in Simple Icons and no SVG is published.
+
+**Known gaps:** the docs do not describe response bodies for `getDesignFields`. The `background` field is a string in one guide example and an object (`color`, `image_url`, `width`, `height`) in the API reference, so `background` accepts any JSON. Output `format` is gif, jpg, png or webp (there is no PDF option in the API reference, despite the guide's mention of one). Static image layers cannot be modified, and per-layer styling fields beyond those exposed here (position, size, fonts, shadows) can be sent only through the documented body; this package exposes text, color, image_url, is_screenshot and is_logo. The health check lists designs (`GET /v1/images`).

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zenrows",
+  "description": "Scrape and extract data from any web page with ZenRows: JS rendering, proxies, anti-bot bypass and plan usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ZenRows"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/knack",
+  "description": "Knack no-code databases: manage app structure through Knack's MCP server, or read and write records through the REST API with an app API key.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Knack"
+  }
+}

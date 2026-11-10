@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/fellow",
+  "description": "Meetings, summaries, transcripts, participants, action items, channels and agendas in Fellow, through Fellow's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fellow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

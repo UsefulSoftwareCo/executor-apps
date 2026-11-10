@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/planyo",
+  "description": "Planyo online reservation system: resources, reservations, availability, pricing, payments, vacations and additional products.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Planyo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

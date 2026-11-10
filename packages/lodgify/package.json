@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lodgify",
+  "description": "Manage vacation rentals with Lodgify: properties, rooms, availability, rates, quotes, bookings, messaging threads and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lodgify"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/huggingface",
+  "description": "Models, datasets, Spaces, repos, collections, discussions, Inference Providers and the rest of the Hugging Face Hub API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hugging Face"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

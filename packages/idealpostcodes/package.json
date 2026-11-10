@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/idealpostcodes",
+  "description": "UK and international address search with Ideal Postcodes: postcode lookup, autocomplete, UDPRN/UMPRN lookup, address cleansing, places, email and phone validation, and API key management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ideal Postcodes"
+  }
+}

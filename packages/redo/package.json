@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/redo",
+  "description": "Manage Redo e-commerce stores: checkout experiences, coverage, customers, inventory, bundles, returns and events.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Redo"
+  }
+}

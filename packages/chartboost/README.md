@@ -1,0 +1,9 @@
+# Chartboost
+
+Manage Chartboost monetization (apps, ad locations, content block lists, per-app monetization settings) and read mediation publisher metrics.
+
+**Interface:** hand-written tools over Chartboost's documented REST APIs, 17 in all. Chartboost publishes no OpenAPI document, so the tools follow the reference pages at https://docs.chartboost.com/en/monetization/reference/api-access-authentication/, .../app-management-api/, .../ad-locations-api/ and .../list-management-api/ (under https://docs.chartboost.com/en/monetization/reference/) and https://docs.chartboost.com/en/mediation/reference/mediation-reporting-api/ (publisher metrics from `https://helium-api.chartboost.com`). Everything else goes to `https://api.chartboost.com/v5`. Mutations ask for approval.
+
+**Auth:** one method, API v5 client credentials. In the Chartboost dashboard open the user menu, Company info & settings, Access Management, and choose "Refresh API v5 Credentials" (accept the App Disclosures first). The secret is shown once, and refreshing invalidates the previous credentials. Executor exchanges the client id and secret itself (JSON body with the Chartboost audience, `POST /v5/oauth/token`) and caches the 24 hour bearer token. This is a machine grant, so there is no redirect URI. The generic OAuth client-credentials method is not used because the token endpoint requires the `audience` field.
+
+**Known gaps:** the v5 Analytics API (https://docs.chartboost.com/en/monetization/reference/analytics-api/) is not exposed. Its docs show every call as a GET with a JSON body, which the runtime fetch cannot send, and the docs do not say query strings are accepted, so those tools could not be made reliable. Not built from a spec, so response shapes are untyped. The Partner Reporting API (static token issued by Chartboost) and S2S API are not covered. Not verified against a live account.

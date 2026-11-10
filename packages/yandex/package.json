@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/yandex",
+  "description": "Yandex Disk files, folders, public links and trash, plus read access to Yandex Metrica.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Yandex"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/uplisting",
+  "description": "Vacation rental management in Uplisting: properties, availability search, bookings, calendar rates and availability, custom booking attributes and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Uplisting"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/carbone",
+  "description": "Generate and convert documents with Carbone: manage templates, render DOCX, XLSX, PPTX and HTML templates to PDF and other formats.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Carbone"
+  }
+}

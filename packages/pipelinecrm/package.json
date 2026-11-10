@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pipelinecrm",
+  "description": "Deals, people, companies, activities, tasks, projects and custom fields in Pipeline CRM.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Pipeline CRM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

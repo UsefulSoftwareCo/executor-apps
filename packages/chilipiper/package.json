@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/chilipiper",
+  "description": "Meeting routing, scheduling, distributions and users in Chili Piper, through Chili Piper's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Chili Piper"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dnsfilter",
+  "description": "Manage DNSFilter DNS security and content filtering: organizations, networks, policies, roaming clients, block and allow lists, users and traffic reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DNSFilter"
+  }
+}

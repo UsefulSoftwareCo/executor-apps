@@ -1,0 +1,58 @@
+export type Operation = {
+  group: string;
+  name: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  path: string;
+  description: string;
+};
+
+// Lexware Office Public API v1 (https://developers.lexware.io/docs/). The vendor publishes no OpenAPI
+// document, so these are written by hand from the docs. File upload/download endpoints are omitted (binary bodies).
+export const operations: Operation[] = [
+  { group: "profile", name: "get", method: "GET", path: "/profile", description: "Get the organization profile of the connected Lexware Office account." },
+  { group: "contacts", name: "list", method: "GET", path: "/contacts", description: "List contacts. Query: page, size, email, name, number, customer (bool), vendor (bool)." },
+  { group: "contacts", name: "get", method: "GET", path: "/contacts/{id}", description: "Get a contact by id." },
+  { group: "contacts", name: "create", method: "POST", path: "/contacts", description: "Create a contact. Body: version 0, roles (customer/vendor), company or person, addresses, emailAddresses, phoneNumbers, note." },
+  { group: "contacts", name: "update", method: "PUT", path: "/contacts/{id}", description: "Replace a contact. Body is the full contact including the current version." },
+  { group: "articles", name: "list", method: "GET", path: "/articles", description: "List articles. Query: page, size, articleNumber, gtin, type (PRODUCT or SERVICE)." },
+  { group: "articles", name: "get", method: "GET", path: "/articles/{id}", description: "Get an article by id." },
+  { group: "articles", name: "create", method: "POST", path: "/articles", description: "Create an article. Body: title, type, unitName, price, taxRate and optional description, articleNumber, gtin." },
+  { group: "articles", name: "update", method: "PUT", path: "/articles/{id}", description: "Replace an article. Body is the full article including the current version." },
+  { group: "articles", name: "delete", method: "DELETE", path: "/articles/{id}", description: "Delete an article." },
+  { group: "invoices", name: "get", method: "GET", path: "/invoices/{id}", description: "Get a invoice by id." },
+  { group: "invoices", name: "create", method: "POST", path: "/invoices", description: "Create a invoice. Body: voucherDate, address, lineItems, totalPrice, taxConditions and related fields. Query finalize=true creates it as open instead of a draft." },
+  { group: "invoices", name: "document", method: "GET", path: "/invoices/{id}/document", description: "Render the invoice PDF and return its documentFileId. Only finalized documents have a PDF." },
+  { group: "quotations", name: "get", method: "GET", path: "/quotations/{id}", description: "Get a quotation by id." },
+  { group: "quotations", name: "create", method: "POST", path: "/quotations", description: "Create a quotation. Body: voucherDate, address, lineItems, totalPrice, taxConditions and related fields. Query finalize=true creates it as open instead of a draft." },
+  { group: "quotations", name: "document", method: "GET", path: "/quotations/{id}/document", description: "Render the quotation PDF and return its documentFileId. Only finalized documents have a PDF." },
+  { group: "orderConfirmations", name: "get", method: "GET", path: "/order-confirmations/{id}", description: "Get a order confirmation by id." },
+  { group: "orderConfirmations", name: "create", method: "POST", path: "/order-confirmations", description: "Create a order confirmation. Body: voucherDate, address, lineItems, totalPrice, taxConditions and related fields. Query finalize=true creates it as open instead of a draft. For order confirmations and delivery notes pass precedingSalesVoucherId in query to link a quotation or order confirmation." },
+  { group: "orderConfirmations", name: "document", method: "GET", path: "/order-confirmations/{id}/document", description: "Render the order confirmation PDF and return its documentFileId. Only finalized documents have a PDF." },
+  { group: "deliveryNotes", name: "get", method: "GET", path: "/delivery-notes/{id}", description: "Get a delivery note by id." },
+  { group: "deliveryNotes", name: "create", method: "POST", path: "/delivery-notes", description: "Create a delivery note. Body: voucherDate, address, lineItems, totalPrice, taxConditions and related fields. Query finalize=true creates it as open instead of a draft. For order confirmations and delivery notes pass precedingSalesVoucherId in query to link a quotation or order confirmation." },
+  { group: "deliveryNotes", name: "document", method: "GET", path: "/delivery-notes/{id}/document", description: "Render the delivery note PDF and return its documentFileId. Only finalized documents have a PDF." },
+  { group: "creditNotes", name: "get", method: "GET", path: "/credit-notes/{id}", description: "Get a credit note by id." },
+  { group: "creditNotes", name: "create", method: "POST", path: "/credit-notes", description: "Create a credit note. Body: voucherDate, address, lineItems, totalPrice, taxConditions and related fields. Query finalize=true creates it as open instead of a draft. For credit notes pass precedingSalesVoucherId in query to link an invoice." },
+  { group: "creditNotes", name: "document", method: "GET", path: "/credit-notes/{id}/document", description: "Render the credit note PDF and return its documentFileId. Only finalized documents have a PDF." },
+  { group: "downPaymentInvoices", name: "get", method: "GET", path: "/down-payment-invoices/{id}", description: "Get a down payment invoice by id." },
+  { group: "downPaymentInvoices", name: "document", method: "GET", path: "/down-payment-invoices/{id}/document", description: "Render the down payment invoice PDF and return its documentFileId." },
+  { group: "dunnings", name: "get", method: "GET", path: "/dunnings/{id}", description: "Get a dunning by id." },
+  { group: "dunnings", name: "create", method: "POST", path: "/dunnings", description: "Create a dunning for an invoice. Query: precedingSalesVoucherId (required). Body: voucherDate, lineItems, totalPrice, taxConditions." },
+  { group: "dunnings", name: "document", method: "GET", path: "/dunnings/{id}/document", description: "Render the dunning PDF and return its documentFileId." },
+  { group: "recurringTemplates", name: "list", method: "GET", path: "/recurring-templates", description: "List recurring invoice templates. Query: page, size, sort." },
+  { group: "recurringTemplates", name: "get", method: "GET", path: "/recurring-templates/{id}", description: "Get a recurring template by id." },
+  { group: "voucherlist", name: "list", method: "GET", path: "/voucherlist", description: "List vouchers (invoices, credit notes, quotations, bookkeeping vouchers...). Query: voucherType, voucherStatus (both required, comma separated allowed), page, size, sort, archived, contactId, voucherNumber, voucherDateFrom/To, createdDateFrom/To, updatedDateFrom/To, totalAmountFrom/To." },
+  { group: "vouchers", name: "list", method: "GET", path: "/vouchers", description: "Look up bookkeeping vouchers by voucherNumber (query)." },
+  { group: "vouchers", name: "get", method: "GET", path: "/vouchers/{id}", description: "Get a bookkeeping voucher by id." },
+  { group: "vouchers", name: "create", method: "POST", path: "/vouchers", description: "Create a bookkeeping voucher (bill or receipt). Body: type, voucherDate, totalGrossAmount, totalTaxAmount, taxType, voucherItems and optional contactId, voucherNumber." },
+  { group: "vouchers", name: "update", method: "PUT", path: "/vouchers/{id}", description: "Replace a bookkeeping voucher. Body is the full voucher including the current version." },
+  { group: "payments", name: "get", method: "GET", path: "/payments/{id}", description: "Get payment status and payment items for a voucher (invoice, credit note) by id." },
+  { group: "paymentConditions", name: "list", method: "GET", path: "/payment-conditions", description: "List the payment conditions configured in the account." },
+  { group: "postingCategories", name: "list", method: "GET", path: "/posting-categories", description: "List posting categories usable on bookkeeping vouchers." },
+  { group: "printLayouts", name: "list", method: "GET", path: "/print-layouts", description: "List the print layouts of the account." },
+  { group: "countries", name: "list", method: "GET", path: "/countries", description: "List countries with their tax classification." },
+  { group: "eventSubscriptions", name: "list", method: "GET", path: "/event-subscriptions", description: "List webhook event subscriptions." },
+  { group: "eventSubscriptions", name: "get", method: "GET", path: "/event-subscriptions/{id}", description: "Get an event subscription by id." },
+  { group: "eventSubscriptions", name: "create", method: "POST", path: "/event-subscriptions", description: "Create an event subscription. Body: eventType (for example invoice.created) and callbackUrl." },
+  { group: "eventSubscriptions", name: "delete", method: "DELETE", path: "/event-subscriptions/{id}", description: "Delete an event subscription." },
+];

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/here",
+  "description": "HERE location services: geocoding and search, routing, isolines, matrices, traffic, weather, transit, fuel prices, EV charge points, positioning, tour planning and geofencing.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "HERE"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

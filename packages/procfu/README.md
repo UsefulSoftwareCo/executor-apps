@@ -1,0 +1,17 @@
+# ProcFu
+
+ProcFu adds scripting and automation functions to Podio and Podio Workflow Automation (GlobiFlow). This package exposes its Functions API as 301 tools, grouped by prefix (`podio`, `flow`, `pwa`, `notion`, `google`, `var`, and so on): Podio items, comments, tasks, files and spaces, flow management, Notion, Google Drive and Sheets, saved variables, and data utilities.
+
+**Interface:** hand-written (custom) tools. ProcFu publishes no OpenAPI document or MCP server. Each function is called as `POST https://procfu.com/exe/<function>.pf` with form-encoded arguments and an `Authorization` header, as in the sample code at <https://procfuguide.com/functions/what-is-functions-api> (the sample spells the URL `.pdf`, which reads as a typo for `.pf`). The tool table in `functions.ts` is generated from the vendor's per-function reference at <https://procfu.com/scripts/> (one page per function with its arguments and return value). Functions that only read or compute are queries; every other function requires approval. All arguments are optional in the schemas because ProcFu does not mark required ones; each tool description lists the documented arguments.
+
+**Auth:** an auth token (`apiKey`). Copy it from the Security & Keys page of your ProcFu account (<https://help.procfu.com/security--keys.html>). It is sent as `Authorization: Basic <token>`; paste it with or without the `Basic ` prefix. ProcFu has no OAuth for third-party clients.
+
+**Known gaps:**
+- ProcFu only accepts calls from GlobiFlow servers by default. Add the IP addresses Executor calls from on the Account page of your ProcFu account, or calls fail.
+- Functions that act on other services (Notion, Google, FTP, S3, MySQL, SMTP) need those connections configured inside ProcFu first, under the names ProcFu expects.
+- The response format is not documented per function; JSON responses are parsed and anything else is returned as text.
+- The health check calls `whoami.pf`, which the vendor documents as returning the account email as plain text; it fails on a non-2xx status or a body that is not an email address.
+- Premium plan: the vendor index marks these functions as premium-only (`(prem)`): `pwa_whoami`, `pwa_tree_get`, `pwa_flows_list`, `pwa_flows_get_for_space`, `pwa_flow_get`, `pwa_flow_save`, `pwa_flow_create`, `pwa_flow_toggle_active`, `pwa_flow_delete`, `pwa_webhook_url_get`, `pwa_flow_logs_get`, `pwa_throttled_apps`, `pwa_refresh_callback`, `pwa_throttled_apps_callback`, `podio_ai_ask_general`, `podio_ai_ask_trained`. They fail on a free ProcFu plan.
+- Interface search: on 2026-10-12 procfu.com and the vendor guides were checked for an OpenAPI/Swagger document or MCP server (probed `/openapi.json`, `/openapi.yaml`, `/swagger.json`, `/mcp`, `/.well-known/mcp`: all 404; none linked from the site or the Functions API guide). None was found, so the tools are hand-written. A web search for an official MCP server could not be run (search budget exhausted).
+- `webpage_get_chrome` costs 10 actions of account quota per call, so it requires approval.
+- Icon: ProcFu publishes no SVG or 128px+ logo. The site header logo (`/img/code_sm.png`, a green `</>` glyph) is 24x24 and `/img/code.png` is 72x72, both below the 128px minimum. The icon used is the 128px icon of the vendor's "ProcFu for GlobiFlow" Chrome extension (publisher Globi Web Solutions, ProcFu's operator), a different but vendor-published mark.

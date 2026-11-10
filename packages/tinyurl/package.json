@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tinyurl",
+  "description": "Shorten URLs and manage short links with TinyURL: create, update, archive, delete, list, bulk create and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TinyURL"
+  }
+}

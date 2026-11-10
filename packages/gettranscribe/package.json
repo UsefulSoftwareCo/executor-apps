@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gettranscribe",
+  "description": "Transcribe Instagram, TikTok, YouTube and other public video links with GetTranscribe: jobs, transcripts, folders and download links.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GetTranscribe"
+  }
+}

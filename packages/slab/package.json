@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/slab",
+  "description": "Posts, topics, comments and search in Slab's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Slab"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

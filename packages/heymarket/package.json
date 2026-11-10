@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/heymarket",
+  "description": "Business texting with Heymarket: send SMS, MMS and email, manage contacts, lists, conversations, inboxes, templates and tracked links.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Heymarket"
+  }
+}

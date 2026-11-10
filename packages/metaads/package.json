@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/metaads",
+  "description": "Meta Ads campaigns, ad sets, ads, creatives, catalogs and insights across Facebook and Instagram, through Meta's official Ads MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Meta Ads"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

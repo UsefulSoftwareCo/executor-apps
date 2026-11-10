@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-docs",
+  "description": "Read, create and edit Google Docs: document content, text, formatting, tables, images and batch updates.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Docs"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

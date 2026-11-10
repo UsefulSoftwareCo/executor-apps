@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ninety-io",
+  "description": "Run your EOS operating system in Ninety: to-dos, issues, rocks, milestones, scorecard, meetings, teams and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ninety"
+  }
+}

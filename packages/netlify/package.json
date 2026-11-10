@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/netlify",
+  "description": "Sites, deploys, builds, DNS, forms, environment variables, functions and team accounts on Netlify.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Netlify"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

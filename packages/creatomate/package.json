@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/creatomate",
+  "description": "Generate videos, images and GIFs with Creatomate: renders from templates or RenderScript, and template management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Creatomate"
+  }
+}

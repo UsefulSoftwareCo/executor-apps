@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chartly",
+  "description": "Render Chart.js configurations as PNG or SVG images with Chartly and create permanent shareable chart URLs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Chartly"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dadataru",
+  "description": "DaData.ru: clean and standardize addresses, names, phones and more, suggest and look up addresses, companies, banks and other Russian reference data, and read account balance and statistics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DaData.ru"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/screenshotone",
+  "description": "Take website screenshots, render HTML and check usage with the ScreenshotOne API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ScreenshotOne"
+  }
+}

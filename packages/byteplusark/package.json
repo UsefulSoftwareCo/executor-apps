@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/byteplusark",
+  "description": "BytePlus ModelArk (Ark): video generation tasks (Seedance), chat completions, image generation, embeddings and model listing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BytePlus Ark"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ynab",
+  "description": "YNAB budgets: plans, accounts, categories, payees, transactions, scheduled transactions and months.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "YNAB"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/anydb",
+  "description": "Work with AnyDB teams, databases and records through the integration API (API key) or AnyDB's official MCP server (OAuth).",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "AnyDB"
+  }
+}

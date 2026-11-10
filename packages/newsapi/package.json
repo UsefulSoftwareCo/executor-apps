@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/newsapi",
+  "description": "Search news articles, top headlines and news sources from thousands of publishers with NewsAPI.org.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NewsAPI"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/leadiq",
+  "description": "B2B prospecting through LeadIQ's official remote MCP server: find and enrich people and companies, verify emails, manage lists.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "LeadIQ"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

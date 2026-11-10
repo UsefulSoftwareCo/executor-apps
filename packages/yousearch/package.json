@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/yousearch",
+  "description": "Web search, page contents, cited answers and deep research with the You.com API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "You.com"
+  }
+}

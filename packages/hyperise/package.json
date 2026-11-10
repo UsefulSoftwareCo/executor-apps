@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hyperise",
+  "description": "Personalized images and short links with Hyperise: image templates, views, prospect business data, enrichment and short links.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hyperise"
+  }
+}

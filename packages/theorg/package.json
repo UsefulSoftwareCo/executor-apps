@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/theorg",
+  "description": "Company org charts, people and position search, managers, reports, open jobs and lead lists in The Org, through The Org's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "The Org"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

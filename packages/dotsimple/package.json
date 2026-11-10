@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dotsimple",
+  "description": "Plan and publish social media posts with DotSimple: accounts, tags, media files, posts and AI text.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DotSimple"
+  }
+}

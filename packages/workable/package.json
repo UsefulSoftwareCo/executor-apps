@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/workable",
+  "description": "Workable jobs, candidates, offers, requisitions, employees, time off and performance reviews, through Workable's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Workable"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

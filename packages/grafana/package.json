@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/grafana",
+  "description": "Grafana dashboards, folders, data sources, alerting, annotations, teams, users and service accounts on Grafana Cloud.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Grafana"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

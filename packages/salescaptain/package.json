@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/salescaptain",
+  "description": "Manage SalesCaptain CRM data: companies, accounts, contacts, tags, custom fields, conversations, messages, SMS templates and call analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SalesCaptain"
+  }
+}

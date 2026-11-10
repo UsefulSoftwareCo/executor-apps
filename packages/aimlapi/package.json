@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/aimlapi",
+  "description": "AI/ML API: one API for hundreds of AI models, covering chat, responses, embeddings, images, speech, video, audio, OCR and batches.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AI/ML API"
+  }
+}

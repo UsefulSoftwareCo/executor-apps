@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ibmxforceexchange",
+  "description": "IBM X-Force Exchange threat intelligence: IP, URL and malware reports, vulnerabilities, threat groups, casefiles and TAXII feeds.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IBM X-Force Exchange"
+  }
+}

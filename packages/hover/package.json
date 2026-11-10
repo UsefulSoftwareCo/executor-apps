@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hover",
+  "description": "Hover 3D property models: jobs, capture requests, measurements, images, webhooks, wallets and users.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hover"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

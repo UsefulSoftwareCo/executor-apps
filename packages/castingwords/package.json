@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/castingwords",
+  "description": "Order and manage human transcripts with CastingWords: orders, audiofiles, transcripts, upgrades, refunds, invoices, balance and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CastingWords"
+  }
+}

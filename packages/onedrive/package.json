@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onedrive",
+  "description": "OneDrive drives, files, folders, sharing links, permissions and versions through Microsoft Graph.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "OneDrive"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

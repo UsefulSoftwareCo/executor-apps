@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/eventzilla",
+  "description": "Manage Eventzilla events, ticket types, orders, attendees and check-ins.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Eventzilla"
+  }
+}

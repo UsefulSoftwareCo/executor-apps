@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/epicgames",
+  "description": "Fortnite Data API from Epic Games: public islands, engagement metrics, rankings and genres.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Epic Games"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

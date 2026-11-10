@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/countdownapi",
+  "description": "Countdown API by Traject Data: real-time eBay search results, product data, reviews, seller profiles and seller feedback.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Countdown API"
+  }
+}

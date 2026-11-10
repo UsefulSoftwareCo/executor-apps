@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/signaturely",
+  "description": "E-signature platform: documents, signers, templates, signing requests, folders, team members and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Signaturely"
+  }
+}

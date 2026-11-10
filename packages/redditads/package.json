@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/redditads",
+  "description": "Reddit Ads campaigns, ad groups, ads, audiences, pixels, catalogs and reporting from the Reddit Ads API v3.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Reddit Ads"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

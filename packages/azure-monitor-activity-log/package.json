@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/azure-monitor-activity-log",
+  "description": "Query Azure Monitor Activity Log events for a subscription or tenant and list event categories.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Azure Monitor Activity Log"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

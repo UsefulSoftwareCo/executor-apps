@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vercel-ai-gateway",
+  "description": "Vercel AI Gateway: discover models, run chat, messages, responses and embeddings, and check credits, generations and spend.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Vercel AI Gateway"
+  }
+}

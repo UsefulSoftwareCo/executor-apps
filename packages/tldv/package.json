@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tldv",
+  "description": "tl;dv meeting recordings: list meetings, read transcripts, notes and highlights, get download links, and import or upload recordings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "tl;dv"
+  }
+}

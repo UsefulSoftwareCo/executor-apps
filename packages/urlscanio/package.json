@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/urlscanio",
+  "description": "Scan and investigate websites with urlscan.io: submit scans, search results, fetch screenshots and DOM, and manage urlscan Pro searches, subscriptions and incidents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "urlscan.io"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hackerrank-work",
+  "description": "HackerRank for Work: tests, candidates and reports, interviews, interview templates, questions, users and teams.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HackerRank Work"
+  }
+}

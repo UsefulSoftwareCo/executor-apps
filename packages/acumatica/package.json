@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/acumatica",
+  "description": "Acumatica cloud ERP: customers, vendors, sales orders, invoices, bills, payments, stock items, purchase orders, projects and any other entity of the contract-based REST API, plus generic inquiries and entity actions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Acumatica"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

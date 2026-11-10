@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chatgptenterprise",
+  "description": "Provision and manage ChatGPT Enterprise and Edu workspace users and groups through the SCIM 2.0 API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ChatGPT Enterprise"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

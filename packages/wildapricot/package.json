@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wildapricot",
+  "description": "WildApricot contacts, membership levels, events, invoices, payments, email and the rest of the Admin API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "WildApricot"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

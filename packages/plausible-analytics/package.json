@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/plausible-analytics",
+  "description": "Query Plausible Analytics stats and manage sites, goals, custom properties, guests and shared links.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Plausible Analytics"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

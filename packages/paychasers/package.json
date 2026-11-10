@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/paychasers",
+  "description": "Create payment chases and clients, send follow-ups and mark chases paid with PayChasers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PayChasers"
+  }
+}

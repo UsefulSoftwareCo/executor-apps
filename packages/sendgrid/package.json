@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sendgrid",
+  "description": "Twilio SendGrid: send email, manage marketing contacts, lists and campaigns, templates, suppressions, domain authentication, stats and account settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SendGrid"
+  }
+}

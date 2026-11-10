@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/demio",
+  "description": "Demio webinars: list events, read event sessions, register attendees and report on session participants.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Demio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/minimax",
+  "description": "MiniMax: chat models, text-to-speech, voice cloning and design, image, video and music generation, and files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MiniMax"
+  }
+}

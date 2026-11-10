@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/freshdesk",
+  "description": "Freshdesk helpdesk: tickets, conversations, contacts, companies, agents, groups, canned responses, knowledge base and settings.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Freshdesk"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

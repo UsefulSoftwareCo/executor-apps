@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/maxio",
+  "description": "Maxio Advanced Billing (formerly Chargify): customers, subscriptions, products, components, invoices, coupons, payments and reporting.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Maxio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

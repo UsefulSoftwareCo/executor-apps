@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/servicem8",
+  "description": "Field service jobs, clients, quotes, invoices, scheduling, staff, assets, attachments and messaging in ServiceM8.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ServiceM8"
+  }
+}

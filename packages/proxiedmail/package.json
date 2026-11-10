@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/proxiedmail",
+  "description": "Create and manage ProxiedMail proxy email addresses, webhooks and received emails.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ProxiedMail"
+  }
+}

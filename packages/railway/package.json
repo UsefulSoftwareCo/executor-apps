@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/railway",
+  "description": "Projects, services, deployments, environments, variables, domains and the rest of Railway's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Railway"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

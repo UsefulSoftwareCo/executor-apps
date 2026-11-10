@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hunter",
+  "description": "Find and verify professional email addresses with Hunter: domain search, email finder, verifier, leads, campaigns and sequences.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hunter"
+  }
+}

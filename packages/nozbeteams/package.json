@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nozbeteams",
+  "description": "Manage Nozbe Teams tasks, projects, comments, reminders, tags and team members.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nozbe Teams"
+  }
+}

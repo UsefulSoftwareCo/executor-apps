@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dripcel",
+  "description": "SMS and email marketing with Dripcel: contacts, tags, campaigns, sends, replies, deliveries, sales and compliance checks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dripcel"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/factorial",
+  "description": "Employees, time off, time tracking, contracts, payroll, recruiting and the rest of the Factorial HR API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Factorial"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

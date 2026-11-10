@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/checkhq",
+  "description": "Check payroll API through the official hosted MCP server: companies, employees, contractors, payrolls, taxes, benefits and forms.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Check"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

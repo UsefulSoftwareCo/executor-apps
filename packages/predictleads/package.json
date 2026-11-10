@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/predictleads",
+  "description": "Company intelligence from PredictLeads: job openings, technology detections, financing and news events, connections, products and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PredictLeads"
+  }
+}

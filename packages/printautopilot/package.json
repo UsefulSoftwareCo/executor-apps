@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/printautopilot",
+  "description": "Queue PDF documents on remote printers with Print Autopilot, and manage printers and print jobs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Print Autopilot"
+  }
+}

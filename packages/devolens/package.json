@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/devolens",
+  "description": "Software licensing in Devolens (formerly Cryptolens): products, license keys, customers and usage analytics, through Devolens's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Devolens"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

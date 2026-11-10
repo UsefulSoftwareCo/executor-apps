@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/workday",
+  "description": "Workday workers, supervisory organizations, custom reports and any REST endpoint for a tenant.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Workday"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/commercelayer",
+  "description": "Orders, customers, SKUs, prices, stock, shipments, payments, promotions and every other resource of the Commerce Layer Core API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Commerce Layer"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

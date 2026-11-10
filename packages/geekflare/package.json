@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/geekflare",
+  "description": "Geekflare web utility APIs: scraping, search, screenshots, PDFs, DNS, TLS, ping, ports, Lighthouse and site checks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Geekflare"
+  }
+}

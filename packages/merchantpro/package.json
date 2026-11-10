@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/merchantpro",
+  "description": "Manage a MerchantPro store: products, categories, orders, customers, inventory, discount rules, content and taxonomy.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MerchantPro"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

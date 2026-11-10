@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/truelist",
+  "description": "Validate email addresses with TrueList: single checks, batch validation jobs and validation history.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TrueList"
+  }
+}

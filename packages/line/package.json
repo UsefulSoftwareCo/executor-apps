@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/line",
+  "description": "LINE Official Account Messaging API: send messages, rich menus, audiences, insights and LIFF apps.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LINE"
+  }
+}

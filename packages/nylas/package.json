@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nylas",
+  "description": "Email, calendar, contacts, Notetaker, Scheduler and administration through the Nylas v3 API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Nylas"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

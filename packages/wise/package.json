@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wise",
+  "description": "Wise Platform API: profiles, balances, quotes, recipients, transfers, statements, cards and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Wise"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docupotion",
+  "description": "Generate PDF and PNG documents from DocuPotion templates and data, list templates and check usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DocuPotion"
+  }
+}

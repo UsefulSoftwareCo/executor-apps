@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/abstract",
+  "description": "Abstract API: email, phone, IP intelligence and IP geolocation, company enrichment, IBAN and VAT validation, exchange rates, holidays, timezones, web scraping and image processing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Abstract"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/contentstudio",
+  "description": "Schedule and manage social media posts, accounts, workspaces, media, analytics and inbox in ContentStudio.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ContentStudio"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/bolna",
+  "description": "Build and run Bolna voice AI agents, calls, batches, workflows, phone numbers and sub-accounts through Bolna's official MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Bolna"
+  }
+}

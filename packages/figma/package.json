@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/figma",
+  "description": "Files, nodes, images, comments, components, styles, projects, dev resources, webhooks and variables from the Figma REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Figma"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

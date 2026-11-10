@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gitea",
+  "description": "Repositories, issues, pull requests, organizations, releases, Actions and the rest of the Gitea REST API, on gitea.com or a self-hosted instance.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Gitea"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

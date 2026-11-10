@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/activetrail",
+  "description": "Email, SMS, WhatsApp and push marketing with ActiveTrail: contacts, groups, mailing lists, campaigns, automations, templates, reports, webhooks and commerce.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ActiveTrail"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mathpix",
+  "description": "OCR for math, text, tables and chemistry with Mathpix: images, handwritten strokes, PDFs and documents, Markdown conversion, bulk jobs, result history and usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mathpix"
+  }
+}

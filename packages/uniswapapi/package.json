@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/uniswapapi",
+  "description": "Uniswap Trading API: quotes, swaps, orders, token approvals, supported chains and tokens.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Uniswap API"
+  }
+}

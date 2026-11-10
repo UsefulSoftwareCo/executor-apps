@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/thanksio",
+  "description": "Send postcards, letters, notecards and gift cards with thanks.io: recipients, mailing lists, orders, templates and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Thanks.io"
+  }
+}

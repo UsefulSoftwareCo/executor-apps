@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/roboflow",
+  "description": "Projects, images, annotation, training, Workflows and deployments in Roboflow, through Roboflow's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Roboflow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

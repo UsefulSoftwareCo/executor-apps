@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/synthesize-bio",
+  "description": "Resolve sample metadata and run bulk or single-cell gene expression analyses in Synthesize Bio, through its official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Synthesize Bio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

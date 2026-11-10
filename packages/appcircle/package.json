@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/appcircle",
+  "description": "Appcircle mobile CI/CD: build profiles, builds, distribution, signing identities, publish, Enterprise App Store, reports and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Appcircle"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/unifi",
+  "description": "Monitor UniFi Site Manager inventory: hosts, sites, devices, ISP metrics and SD-WAN configurations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "UniFi"
+  }
+}

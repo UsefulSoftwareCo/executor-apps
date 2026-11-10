@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/liveswitch",
+  "description": "LiveSwitch contacts, conversations, projects, recordings, documents, webhooks, tags, attributes and Sparks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "LiveSwitch"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

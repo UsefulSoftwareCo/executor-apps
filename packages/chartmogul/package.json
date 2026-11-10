@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/chartmogul",
+  "description": "Subscription analytics in ChartMogul: customers, subscriptions, invoices, plans, metrics and CRM data, through ChartMogul's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ChartMogul"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

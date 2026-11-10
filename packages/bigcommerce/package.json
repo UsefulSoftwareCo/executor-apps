@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bigcommerce",
+  "description": "BigCommerce store management: products, orders, customers, carts, checkouts, pricing, content, shipping, tax, webhooks and the rest of the BigCommerce REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "BigCommerce"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

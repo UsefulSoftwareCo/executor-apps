@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linktwin",
+  "description": "Create and manage LinkTwin deep links, branded domains, pixels, QR codes and collections.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "LinkTwin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

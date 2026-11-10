@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/scrapedo",
+  "description": "Scrape any web page through Scrape.do's anti-bot proxies, run its structured Amazon, Google, Walmart and other scraper APIs, and manage async jobs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Scrape.do"
+  }
+}

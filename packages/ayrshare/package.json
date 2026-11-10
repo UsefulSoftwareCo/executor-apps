@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/ayrshare",
+  "description": "Publish and schedule social media posts, read history, analytics, comments and messages, and manage profiles in Ayrshare, through Ayrshare's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ayrshare"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/skyvern",
+  "description": "Automate browser workflows with Skyvern AI agents: tasks, workflows, runs, browser sessions, credentials and artifacts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Skyvern"
+  }
+}

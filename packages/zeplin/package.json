@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zeplin",
+  "description": "Zeplin projects, screens, components, styleguides, design tokens, notes, members and webhooks through the Zeplin REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zeplin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

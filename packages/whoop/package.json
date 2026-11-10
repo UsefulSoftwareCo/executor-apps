@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/whoop",
+  "description": "WHOOP recovery, sleep, strain cycles, workouts, body measurements and profile from the WHOOP developer API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "WHOOP"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

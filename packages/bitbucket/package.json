@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bitbucket",
+  "description": "Bitbucket Cloud repositories, pull requests, issues, pipelines, commits, branches, snippets, workspaces and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bitbucket"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

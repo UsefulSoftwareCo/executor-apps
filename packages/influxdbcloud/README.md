@@ -1,0 +1,9 @@
+# InfluxDB Cloud
+
+Covers InfluxDB Cloud (TSM, the usage-based and free plans): write and query data, buckets, organizations, users, tasks, checks and notification rules/endpoints, dashboards, labels, variables, scrapers, templates, tokens (authorizations), secrets and more. 175 tools, 107 of them mutations (each requires approval). Every non-GET operation counts as a mutation, so Flux read queries (`POST /query`) also prompt for approval.
+
+Interface: OpenAPI, InfluxData's official InfluxDB Cloud contract at https://raw.githubusercontent.com/influxdata/openapi/733b5254fa360097509aab25d2492976d1748d81/contracts/cloud.yml (github.com/influxdata/openapi, pinned to commit `733b525`). Its server is the relative `/api/v2`; the package points calls at the account's own cluster.
+
+Auth: API token. In the InfluxDB Cloud UI go to Load Data > API Tokens and create a token with the permissions you need. When connecting, enter the token and your cluster URL (the first subdomain of your InfluxDB Cloud organization URL, see the [regions reference](https://docs.influxdata.com/influxdb/cloud/reference/regions/), for example `https://us-east-1-1.aws.cloud2.influxdata.com`). Only `*.influxdata.com` hosts are accepted. The token is sent as `Authorization: Token <token>`. The health check calls `/api/v2/me`, so the token must be able to read the current user.
+
+Known gaps: InfluxDB 3 Cloud Serverless is not mounted separately: its v2 API (a docs-v2 OpenAPI file, not a versioned contract) is largely the same /api/v2 surface on the same hosts and token, so the tools above work against it; the few Serverless-only operations (bucket schema measurements, org limits/usage, legacy authorizations) are not covered. Cloud Dedicated and Clustered use a different API and are not covered. The three Basic/query-string signin operations are skipped (token auth only). `/ping`, `/health` and similar root-level endpoints are not under `/api/v2` and may not resolve.

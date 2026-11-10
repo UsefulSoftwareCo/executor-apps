@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tikhub",
+  "description": "Social media data from TikHub: TikTok, Douyin, Instagram, YouTube, Twitter/X, Reddit, Xiaohongshu, Bilibili, Weibo and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TikHub"
+  }
+}

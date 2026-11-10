@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kommo",
+  "description": "Kommo CRM: leads, contacts, companies, pipelines, tasks, notes, tags, custom fields, users, webhooks, salesbots and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Kommo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

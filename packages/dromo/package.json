@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dromo",
+  "description": "Dromo spreadsheet importer: saved import schemas, uploads, headless imports, SFTP credentials and connectors, and partial-import sessions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Dromo"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/productlane",
+  "description": "Manage Productlane threads, contacts, companies, changelogs, help docs, projects, issues, tags and workspace settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Productlane"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cursor",
+  "description": "Cursor Cloud Agents: create agents, submit and stream runs, manage environments, secrets, artifacts and models.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cursor"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

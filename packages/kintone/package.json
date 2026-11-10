@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kintone",
+  "description": "Kintone no-code business apps: records, app settings and forms, spaces, files, comments, statuses and bulk requests.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kintone"
+  }
+}

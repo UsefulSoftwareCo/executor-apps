@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/discourse",
+  "description": "Manage a Discourse forum: topics, posts, categories, users, groups, badges, tags, search, private messages and site administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Discourse"
+  }
+}

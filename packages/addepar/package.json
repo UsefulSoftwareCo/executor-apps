@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/addepar",
+  "description": "Portfolio queries, entities, positions, groups, transactions, benchmarks, users and reports in Addepar.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Addepar"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

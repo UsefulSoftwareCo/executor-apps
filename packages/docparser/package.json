@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docparser",
+  "description": "Upload documents to Docparser parsers and fetch the parsed data.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Docparser"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

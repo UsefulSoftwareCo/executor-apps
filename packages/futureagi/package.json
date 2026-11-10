@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/futureagi",
+  "description": "Future AGI: evaluation groups, annotation labels, queues and scores, and simulation scenarios, agent definitions and run tests (create and execute operations).",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Future AGI"
+  }
+}

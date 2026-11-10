@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/censusbureau",
+  "description": "U.S. Census Bureau data: browse the dataset catalog, variables and geographies, query ACS, decennial census and other statistics through the Census Data API, and geocode addresses.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Census Bureau"
+  }
+}

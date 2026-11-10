@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/prerender",
+  "description": "Prerender.io: recache URLs, search the cache, submit sitemaps, clear cached pages and tune the render queue speed.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Prerender"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

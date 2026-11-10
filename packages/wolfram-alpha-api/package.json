@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wolfram-alpha-api",
+  "description": "Wolfram|Alpha: Full Results, LLM, Short Answers, Spoken, Simple, Fast Query Recognizer and Summary Box APIs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Wolfram|Alpha API"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/eventbrite",
+  "description": "Manage Eventbrite events, ticket classes, orders, attendees, venues, discounts, webhooks and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Eventbrite"
+  }
+}

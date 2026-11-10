@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/fireflies",
+  "description": "Meeting transcripts, summaries, action items, soundbites, and bot controls through Fireflies.ai's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fireflies"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

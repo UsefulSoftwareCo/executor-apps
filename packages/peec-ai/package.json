@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/peec-ai",
+  "description": "AI search analytics in Peec AI: brand visibility, sentiment, citations, sources, prompts, topics, competitors and project configuration, through Peec AI's Customer API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Peec AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

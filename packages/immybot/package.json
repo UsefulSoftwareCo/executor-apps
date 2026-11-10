@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/immybot",
+  "description": "Tenants, computers, maintenance sessions, software, deployments and people in an ImmyBot instance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ImmyBot"
+  }
+}

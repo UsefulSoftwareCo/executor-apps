@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/paypal",
+  "description": "PayPal orders, payments, refunds, subscriptions, invoices, payouts, disputes, webhooks, vault and transaction reporting.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "PayPal"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

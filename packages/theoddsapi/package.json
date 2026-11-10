@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/theoddsapi",
+  "description": "Sports betting odds, scores, events and historical odds from The Odds API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "The Odds API"
+  }
+}

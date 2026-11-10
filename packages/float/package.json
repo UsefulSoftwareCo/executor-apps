@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/float",
+  "description": "Float resource planning: people, projects, allocations, time off, logged time, clients, phases, milestones and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Float"
+  }
+}

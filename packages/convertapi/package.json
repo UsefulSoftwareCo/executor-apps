@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/convertapi",
+  "description": "Convert files between 200+ formats with ConvertAPI: documents, spreadsheets, images, PDF, web pages, barcodes and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ConvertAPI"
+  }
+}

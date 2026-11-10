@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sharepoint",
+  "description": "SharePoint sites, lists, list items, document libraries, files, pages and permissions through Microsoft Graph.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SharePoint"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

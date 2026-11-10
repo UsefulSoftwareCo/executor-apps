@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/beatapi",
+  "description": "BeatAPI: one API key for AI text, image and video models, music and ecommerce video workflows, web and social data, files, usage and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BeatAPI"
+  }
+}

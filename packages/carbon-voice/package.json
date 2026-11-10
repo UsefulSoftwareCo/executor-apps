@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/carbon-voice",
+  "description": "Voice messages, conversations and collaboration workflows in Carbon Voice, through Carbon Voice's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Carbon Voice"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

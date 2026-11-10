@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fern",
+  "description": "Fern docs site Public API: JWT from a Fern API key, Algolia search credentials and current-user info.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fern"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

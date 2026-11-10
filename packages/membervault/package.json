@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/membervault",
+  "description": "List courses and add, remove or delete members in a MemberVault account.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MemberVault"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

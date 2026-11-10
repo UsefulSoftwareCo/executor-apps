@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/contentstack",
+  "description": "Contentstack Content Management API: stacks, content types, entries, assets, environments, releases, workflows, webhooks and users.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Contentstack"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

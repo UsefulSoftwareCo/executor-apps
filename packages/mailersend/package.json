@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailersend",
+  "description": "Send and manage transactional email and SMS with MailerSend: messages, domains, templates, webhooks, suppressions, inbound routes and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MailerSend"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/monday",
+  "description": "Boards, items, columns, updates, workspaces, users and the rest of monday.com's GraphQL Platform API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Monday"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

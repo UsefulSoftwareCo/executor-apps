@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shortcut",
+  "description": "Shortcut project management: stories, epics, iterations, objectives, labels, projects, docs, members and search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Shortcut"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bitwarden",
+  "description": "Bitwarden Public API for organizations: members, groups, collections, policies, event logs and directory import.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Bitwarden"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/microsoftpowerbi",
+  "description": "Workspaces, datasets, reports, dashboards, dataflows, refreshes, DAX queries, imports, capacities and admin APIs of the Power BI REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Microsoft Power BI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

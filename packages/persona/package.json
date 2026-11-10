@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/persona",
+  "description": "Identity verification with Persona: inquiries, verifications, reports, accounts, cases, lists, graph queries, transactions and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Persona"
+  }
+}

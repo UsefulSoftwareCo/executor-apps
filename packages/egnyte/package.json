@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/egnyte",
+  "description": "Egnyte files, folders, search, links, comments, projects, workflows and Copilot answers, through Egnyte's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Egnyte"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

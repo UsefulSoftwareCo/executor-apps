@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/front",
+  "description": "Conversations, messages, inboxes, contacts, tags, teammates and the rest of the Front Core API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Front"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

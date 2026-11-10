@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/fuseai",
+  "description": "Prospect and company search, lists, enrichment, smart columns, campaigns, exports and analytics in FuseAI.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "FuseAI"
+  }
+}

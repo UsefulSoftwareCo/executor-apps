@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/humaansio",
+  "description": "Humaans HR platform: people, job roles, time away, timesheets, compensation, documents, equipment, performance, custom fields and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Humaans"
+  }
+}

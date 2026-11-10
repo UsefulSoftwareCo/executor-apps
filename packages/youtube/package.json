@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/youtube",
+  "description": "Videos, channels, playlists, comments, captions, subscriptions and live broadcasts on YouTube.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "YouTube"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

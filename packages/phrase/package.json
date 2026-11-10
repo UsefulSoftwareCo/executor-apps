@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/phrase",
+  "description": "Manage localization in Phrase Strings: projects, locales, keys, translations, uploads, jobs, glossaries and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Phrase"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/freshbooks",
+  "description": "Invoices, clients, expenses, payments, estimates, bills, projects, time entries and reports in FreshBooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "FreshBooks"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

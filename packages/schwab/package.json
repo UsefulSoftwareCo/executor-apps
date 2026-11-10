@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/schwab",
+  "description": "Charles Schwab brokerage accounts, positions, orders, transactions, quotes, option chains, price history and market hours.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Charles Schwab"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

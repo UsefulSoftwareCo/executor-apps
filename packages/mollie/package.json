@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mollie",
+  "description": "Payments, refunds, customers, subscriptions, payment links, settlements, balances and the rest of the Mollie API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mollie"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

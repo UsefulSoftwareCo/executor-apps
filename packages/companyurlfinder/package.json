@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/companyurlfinder",
+  "description": "Find a company's domain, name or LinkedIn page from a name or domain with Company URL Finder (CUFinder).",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Company URL Finder"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

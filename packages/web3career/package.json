@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/web3career",
+  "description": "Search Web3 Career job listings by technology, role, country and remote status.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Web3 Career"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/documint",
+  "description": "Generate documents from Documint templates: list, update and delete templates and merge JSON data into a template to produce a PDF or other document.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Documint"
+  }
+}

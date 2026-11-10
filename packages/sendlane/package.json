@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sendlane",
+  "description": "Email and SMS marketing with Sendlane: contacts, lists, tags, segments, custom fields, campaigns, SMS messages, senders, suppression and ecommerce tracking events.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sendlane"
+  }
+}

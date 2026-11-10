@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/pophive",
+  "description": "Yale PopHIVE harmonized US public health surveillance data (disease, vaccination, health outcomes), through PopHIVE's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "PopHIVE"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

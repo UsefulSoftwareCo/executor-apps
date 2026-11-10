@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/asyncinterview",
+  "description": "List, update and delete Async Interview jobs and list candidate interview responses.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Async Interview"
+  }
+}

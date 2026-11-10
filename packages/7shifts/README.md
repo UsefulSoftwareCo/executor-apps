@@ -1,0 +1,9 @@
+# 7shifts
+
+Restaurant scheduling and labor management in 7shifts: companies, locations, departments, roles, users (with wages and assignments), shifts, time punches, payroll periods, time off, availability, events, webhooks, and the hours-and-wages, daily sales-and-labor and daily stats reports.
+
+**Interface:** hand-written tools over the official 7shifts REST API (`https://api.7shifts.com/v2`, API reference at https://developers.7shifts.com/reference). 7shifts publishes no downloadable OpenAPI document (only per-endpoint definitions embedded in its docs). Its official remote MCP server (`https://developers.7shifts.com/mcp`) is read-only and mainly browses the API spec and docs, so it is not used. Tools pin `x-api-version: 2026-01-01` (the current published version). 7shifts also publishes a Postman collection, which is not a spec; the tool set of the official MCP server was not listed, so it is not used. Each tool takes an optional `companyId` (resolved from `whoami` when the token reaches exactly one company), path ids, `query` for filters (cursor pagination: pass `meta.cursor.next` as `cursor`) and, for writes, a JSON `body` following the API reference. All writes require approval.
+
+**Auth:** access token. In 7shifts open Company Settings, Developer Tools, Access Tokens, Create Access Token (https://developers.7shifts.com/docs/authentication). The token is sent as a bearer token to `api.7shifts.com`. It covers a single company. 7shifts OAuth clients are issued only to vetted partners after commercial review, so OAuth is not offered.
+
+**Known gaps:** tools cover the common scheduling, labor and people endpoints. Not wrapped: POS orders and receipts, sales forecasting overrides, tip pools, task lists, log book, external user mappings, bulk user and assignment endpoints, trial account creation and OAuth token creation. Some endpoints need a higher 7shifts plan (see https://developers.7shifts.com/docs/plan-requirements).

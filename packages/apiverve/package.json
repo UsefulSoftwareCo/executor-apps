@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/apiverve",
+  "description": "Call APIVerve's catalog of 370+ lookup and utility APIs (validation, geo, weather, finance, text, images and more) through its official hosted MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "APIVerve"
+  }
+}

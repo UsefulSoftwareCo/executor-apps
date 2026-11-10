@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/clay",
+  "description": "Run Clay routines, searches, table queries and workflow-run queries through the Clay public API, plus research and enrichment through Clay's MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Clay"
+  }
+}

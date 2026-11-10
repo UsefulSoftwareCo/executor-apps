@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shipengine",
+  "description": "Shipping labels, rates, tracking, address validation, carriers, shipments, batches and warehouses with ShipEngine (ShipStation API).",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ShipEngine"
+  }
+}

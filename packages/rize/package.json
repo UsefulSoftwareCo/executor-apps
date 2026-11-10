@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/rize",
+  "description": "Time entries, projects, clients, tasks and team analytics from Rize's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Rize"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

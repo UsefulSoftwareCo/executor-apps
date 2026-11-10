@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/commercetools",
+  "description": "Carts, orders, customers, products, categories, prices, inventory, discounts and the rest of the commercetools Composable Commerce HTTP API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "commercetools"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

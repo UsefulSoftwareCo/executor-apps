@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/imagior",
+  "description": "Generate images from Imagior design templates, inspect templates and their elements, and check remaining credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Imagior"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mezmo",
+  "description": "Mezmo telemetry pipelines, log views, alerts, archiving, exports and account administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mezmo"
+  }
+}

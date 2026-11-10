@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/evaluagent",
+  "description": "evaluagent contact centre quality assurance: evaluations, disputes, calibrations, actions, one-to-ones, conversation analytics, users, groups, roles and the knowledge vault.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "evaluagent"
+  }
+}

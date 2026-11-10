@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ragic",
+  "description": "Read and write Ragic database sheets: list, search, create, update and delete records, plus sheet schema, comments, locks and mass operations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ragic"
+  }
+}

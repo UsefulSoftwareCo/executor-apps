@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wisepops",
+  "description": "Read Wisepops popup performance and collected contacts, manage webhooks and process data-privacy deletions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Wisepops"
+  }
+}

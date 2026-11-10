@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twitterapiio",
+  "description": "Read X (Twitter) data through twitterapi.io: users, tweets, search, lists, communities, trends, and post actions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "twitterapi.io"
+  }
+}

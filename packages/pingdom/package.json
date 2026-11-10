@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pingdom",
+  "description": "Monitor uptime and performance with Pingdom: checks, results, probes, alerting contacts, maintenance windows, summaries and transaction checks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pingdom"
+  }
+}

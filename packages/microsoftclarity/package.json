@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/microsoftclarity",
+  "description": "Read Microsoft Clarity live insights: traffic, engagement, scroll depth and frustration signals broken down by dimension.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Microsoft Clarity"
+  }
+}

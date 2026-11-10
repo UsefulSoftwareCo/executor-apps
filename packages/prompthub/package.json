@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/prompthub",
+  "description": "List, fetch and run versioned prompts in PromptHub projects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PromptHub"
+  }
+}

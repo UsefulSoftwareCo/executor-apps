@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pagerduty",
+  "description": "Incidents, services, schedules, escalation policies, users, teams, on-calls and the rest of the PagerDuty REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "PagerDuty"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

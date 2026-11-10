@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/marcopolo",
+  "description": "Query and analyze data across databases, warehouses, cloud storage and SaaS apps through MarcoPolo's MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MarcoPolo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

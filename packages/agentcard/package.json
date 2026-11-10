@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agentcard",
+  "description": "Agentcard platform API: connect users, verify identity (KYC), issue and manage cards, and run agent purchases.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Agentcard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

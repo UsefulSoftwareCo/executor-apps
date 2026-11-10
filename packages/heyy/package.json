@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/heyy",
+  "description": "Manage Heyy business messaging: WhatsApp messages, contacts, chats, broadcasts, labels, attributes, workflows and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Heyy"
+  }
+}

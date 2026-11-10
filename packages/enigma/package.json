@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/enigma",
+  "description": "U.S. business data from Enigma's GraphQL API: brands, legal entities, locations, card revenue and verification.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Enigma"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

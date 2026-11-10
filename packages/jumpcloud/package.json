@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jumpcloud",
+  "description": "Manage JumpCloud users, devices, groups, applications, policies and directories through the v1 and v2 REST APIs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "JumpCloud"
+  }
+}

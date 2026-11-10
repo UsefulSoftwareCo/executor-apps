@@ -1,0 +1,14 @@
+{
+  "name": "@executor.sh/contentful",
+  "description": "Contentful headless CMS (spaces, content types, entries, assets, locales, tags, environments) through Contentful's official hosted MCP server, plus read access to published or preview content through the GraphQL Content API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Contentful"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "graphql": "16.11.0"
+  }
+}

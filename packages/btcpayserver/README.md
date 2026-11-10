@@ -1,0 +1,11 @@
+# BTCPay Server
+
+Self-hosted Bitcoin payment processor. This package covers the Greenfield REST API: stores, invoices, payment requests, pull payments, payouts, wallets, lightning nodes, apps, webhooks, users and API keys.
+
+**Interface:** OpenAPI 3.0, BTCPay's official Greenfield document at https://docs.btcpayserver.org/API/Greenfield/v1/swagger.json. Calls are routed to the account's own instance; the document's placeholder origin is never contacted with credentials.
+
+**Auth:** API key. Create it in your BTCPay Server under Account > Manage Account > API keys, choosing only the permissions you need (the connection check calls `GET /api/v1/api-keys/current`, which BTCPay's source authorizes for any valid key; the spec's `canmanageusers` note for it is inaccurate). Enter your instance URL (https, e.g. `https://btcpay.example.com`, sub-path installs keep their path) and the key; it is sent as `Authorization: token <key>`. BTCPay has no user-created OAuth apps, so there is no OAuth method.
+
+**Gaps:** instances are arbitrary hosts, so the provider declares no static `hosts` and the token is not host-restricted by the framework (same decision as the other self-hosted packages in this batch: gitea, metabase, unleash). Tool calls pin the router's allowed origin to the account's instance, and only https URLs are accepted; the health fetch goes to the entered https instance without further pinning. The health check only calls `GET /api/v1/api-keys/current`. The `/api-keys/authorize` browser flow is not usable as a tool. Mutations require approval.
+
+The OpenAPI document is vendored as `spec.ts` (regenerate with `node packages/btcpayserver/generate.mjs`). Edits: the upstream document lists `API_Key` and `Basic` in one security requirement (meaning both) and references them at the top level and per operation, so the `Basic` scheme is dropped and security is normalized to `API_Key`; `security: []` is set only on `GET/POST /api/v1/plan-checkout/{checkoutId}` and `GET /api/v1/subscriber-portal/{portalSessionId}`, which BTCPay's source marks `[AllowAnonymous]`. `GET /api/v1/apps/pos/{appId}` and `/apps/crowdfund/{appId}` require `canviewstoresettings` and stay API-key authenticated. 202 tools; 2 operations with external references are skipped.

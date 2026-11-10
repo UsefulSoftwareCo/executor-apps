@@ -1,0 +1,590 @@
+{
+ "openapi": "3.0.3",
+ "info": {
+  "title": "Firebase Realtime Database Management API",
+  "version": "v1beta (discovery revision 20261011)",
+  "description": "The Firebase Realtime Database API enables programmatic provisioning and management of Realtime Database instances."
+ },
+ "servers": [
+  {
+   "url": "https://firebasedatabase.googleapis.com"
+  }
+ ],
+ "security": [
+  {
+   "bearer": []
+  }
+ ],
+ "paths": {
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:undelete": {
+   "post": {
+    "operationId": "firebasedatabase.projects.locations.instances.undelete",
+    "description": "Restores a DatabaseInstance that was previously marked to be deleted. After the delete method is used, DatabaseInstances are set to the DELETED state for 20 days, and will be purged within 30 days. Databases in the DELETED state can be undeleted without losing any data. This method may only be used on a DatabaseInstance in the DELETED state. Purged DatabaseInstances may not be recovered.",
+    "parameters": [
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "instancesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment instancesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DatabaseInstance"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UndeleteDatabaseInstanceRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/instances": {
+   "get": {
+    "operationId": "firebasedatabase.projects.locations.instances.list",
+    "description": "Lists each DatabaseInstance associated with the specified parent project. The list items are returned in no particular order, but will be a consistent view of the database instances when additional requests are made with a `pageToken`. The resulting list contains instances in any STATE. The list results may be stale by a few seconds. Use GetDatabaseInstance for consistent reads.",
+    "parameters": [
+     {
+      "name": "showDeleted",
+      "in": "query",
+      "required": false,
+      "description": "Indicate that DatabaseInstances in the `DELETED` state should also be returned.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "pageToken",
+      "in": "query",
+      "required": false,
+      "description": "Token returned from a previous call to `ListDatabaseInstances` indicating where in the set of database instances to resume listing.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "description": "The maximum number of database instances to return in the response. The server may return fewer than this at its discretion. If no value is specified (or too large a value is specified), then the server will impose its own limit.",
+      "schema": {
+       "type": "integer",
+       "format": "int32"
+      }
+     },
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ListDatabaseInstancesResponse"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "post": {
+    "operationId": "firebasedatabase.projects.locations.instances.create",
+    "description": "Requests that a new DatabaseInstance be created. The state of a successfully created DatabaseInstance is ACTIVE. Only available for projects on the Blaze plan. Projects can be upgraded using the Cloud Billing API https://cloud.google.com/billing/reference/rest/v1/projects/updateBillingInfo. Note that it might take a few minutes for billing enablement state to propagate to Firebase systems.",
+    "parameters": [
+     {
+      "name": "validateOnly",
+      "in": "query",
+      "required": false,
+      "description": "When set to true, the request will be validated but not submitted.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "databaseId",
+      "in": "query",
+      "required": false,
+      "description": "The globally unique identifier of the database instance.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DatabaseInstance"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DatabaseInstance"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:reenable": {
+   "post": {
+    "operationId": "firebasedatabase.projects.locations.instances.reenable",
+    "description": "Enables a DatabaseInstance. The database must have been disabled previously using DisableDatabaseInstance. The state of a successfully reenabled DatabaseInstance is ACTIVE.",
+    "parameters": [
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "instancesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment instancesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DatabaseInstance"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReenableDatabaseInstanceRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}:disable": {
+   "post": {
+    "operationId": "firebasedatabase.projects.locations.instances.disable",
+    "description": "Disables a DatabaseInstance. The database can be re-enabled later using ReenableDatabaseInstance. When a database is disabled, all reads and writes are denied, including view access in the Firebase console.",
+    "parameters": [
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "instancesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment instancesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DatabaseInstance"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DisableDatabaseInstanceRequest"
+       }
+      }
+     }
+    }
+   }
+  },
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/instances/{instancesId}": {
+   "get": {
+    "operationId": "firebasedatabase.projects.locations.instances.get",
+    "description": "Gets the DatabaseInstance identified by the specified resource name.",
+    "parameters": [
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "instancesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment instancesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DatabaseInstance"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   },
+   "delete": {
+    "operationId": "firebasedatabase.projects.locations.instances.delete",
+    "description": "Marks a DatabaseInstance to be deleted. The DatabaseInstance will be set to the DELETED state for 20 days, and will be purged within 30 days. The default database cannot be deleted. IDs for deleted database instances may never be recovered or re-used. The Database may only be deleted if it is already in a DISABLED state.",
+    "parameters": [
+     {
+      "name": "projectsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment projectsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "locationsId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment locationsId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "instancesId",
+      "in": "path",
+      "required": true,
+      "description": "Identifier segment instancesId of the resource name.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DatabaseInstance"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ]
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "DatabaseInstance": {
+    "description": "Representation of a Realtime Database instance. Details on interacting with contents of a DatabaseInstance can be found at: https://firebase.google.com/docs/database/rest/start.",
+    "type": "object",
+    "properties": {
+     "project": {
+      "description": "Output only. The resource name of the project this instance belongs to. For example: `projects/{project-number}`.",
+      "type": "string"
+     },
+     "name": {
+      "description": "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`.",
+      "type": "string"
+     },
+     "databaseUrl": {
+      "description": "Output only. Output Only. The globally unique hostname of the database.",
+      "type": "string"
+     },
+     "state": {
+      "description": "Output only. The database's lifecycle state. Read-only.",
+      "type": "string",
+      "enum": [
+       "LIFECYCLE_STATE_UNSPECIFIED",
+       "ACTIVE",
+       "DISABLED",
+       "DELETED"
+      ]
+     },
+     "type": {
+      "description": "Immutable. The database instance type. On creation only USER_DATABASE is allowed, which is also the default when omitted.",
+      "type": "string",
+      "enum": [
+       "DATABASE_INSTANCE_TYPE_UNSPECIFIED",
+       "DEFAULT_DATABASE",
+       "USER_DATABASE"
+      ]
+     }
+    }
+   },
+   "ReenableDatabaseInstanceRequest": {
+    "description": "The request sent to the ReenableDatabaseInstance method.",
+    "type": "object",
+    "properties": {}
+   },
+   "DisableDatabaseInstanceRequest": {
+    "description": "The request sent to the DisableDatabaseInstance method.",
+    "type": "object",
+    "properties": {}
+   },
+   "ListDatabaseInstancesResponse": {
+    "description": "The response from the ListDatabaseInstances method.",
+    "type": "object",
+    "properties": {
+     "instances": {
+      "description": "List of each DatabaseInstance that is in the parent Firebase project.",
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/DatabaseInstance"
+      }
+     },
+     "nextPageToken": {
+      "description": "If the result list is too large to fit in a single response, then a token is returned. If the string is empty, then this response is the last page of results. This token can be used in a subsequent call to `ListDatabaseInstances` to find the next group of database instances. Page tokens are short-lived and should not be persisted.",
+      "type": "string"
+     }
+    }
+   },
+   "UndeleteDatabaseInstanceRequest": {
+    "description": "The request sent to UndeleteDatabaseInstance method.",
+    "type": "object",
+    "properties": {}
+   }
+  },
+  "securitySchemes": {
+   "bearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

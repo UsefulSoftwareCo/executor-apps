@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gptbots",
+  "description": "GPTBots enterprise AI agents: chat with the agent, conversations and messages, knowledge bases and search, database tables, user attributes, workflows and credit analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GPTBots"
+  }
+}

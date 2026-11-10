@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docuseal",
+  "description": "Create document templates, send them for e-signature and track submissions and submitters with DocuSeal.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DocuSeal"
+  }
+}

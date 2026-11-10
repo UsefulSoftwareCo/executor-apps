@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/beeminder",
+  "description": "Track goals with Beeminder: users, goals, datapoints and charges.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Beeminder"
+  }
+}

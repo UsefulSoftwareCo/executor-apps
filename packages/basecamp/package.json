@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/basecamp",
+  "description": "Projects, to-dos, messages, schedules, files, Campfire chats, card tables and the rest of the Basecamp 3 REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Basecamp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

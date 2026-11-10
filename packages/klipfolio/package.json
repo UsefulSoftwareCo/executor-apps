@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/klipfolio",
+  "description": "Manage Klipfolio business intelligence dashboards: Klips, dashboards, data sources, clients, users, groups and roles.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Klipfolio"
+  }
+}

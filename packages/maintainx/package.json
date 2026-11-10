@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/maintainx",
+  "description": "Maintenance management with MaintainX: work orders, assets, parts, meters, purchase orders, locations, teams and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MaintainX"
+  }
+}

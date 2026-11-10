@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shopline",
+  "description": "SHOPLINE e-commerce stores: products, variants, collections, inventory, orders, fulfillments, returns, customers, discounts, marketing events, online store content, metafields and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SHOPLINE"
+  }
+}

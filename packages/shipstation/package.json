@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shipstation",
+  "description": "Manage ShipStation shipping: rates, labels, shipments, batches, manifests, tracking, carriers, warehouses and inventory (API v2), plus the legacy v1 orders API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ShipStation"
+  }
+}

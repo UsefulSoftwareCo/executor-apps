@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/podium",
+  "description": "Podium messaging, contacts, conversations, reviews, campaigns, payments, appointments and locations.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Podium"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/spondyr",
+  "description": "Generate and deliver template-driven correspondence with Spondyr, and manage transaction types, event types, recipients, conditions, search filters and templates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Spondyr"
+  }
+}

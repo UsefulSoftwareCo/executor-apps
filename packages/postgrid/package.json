@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/postgrid",
+  "description": "PostGrid direct mail and address verification: letters, postcards, cheques, templates, contacts, webhooks, and address verification and autocomplete.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PostGrid"
+  }
+}

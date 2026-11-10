@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/parma",
+  "description": "Relationships, notes, deals, groups and pipeline stages in Parma CRM.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Parma"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

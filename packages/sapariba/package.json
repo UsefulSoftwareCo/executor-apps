@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sapariba",
+  "description": "SAP Ariba open APIs (procurement, sourcing, reporting, supplier data) for one realm through the OAuth 2LO gateway.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SAP Ariba"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

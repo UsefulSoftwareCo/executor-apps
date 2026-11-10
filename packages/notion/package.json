@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/notion",
+  "description": "Pages, databases, blocks, comments and search in Notion, through Notion's MCP server or the REST API for internal integrations.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Notion"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

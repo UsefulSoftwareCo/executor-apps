@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/daffy",
+  "description": "Give with Daffy, the donor-advised fund: fund balance, contributions, donations, gifts, charity search by name or EIN, and user profiles.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Daffy"
+  }
+}

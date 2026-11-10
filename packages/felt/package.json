@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/felt",
+  "description": "Create and manage Felt maps: maps, layers, elements, projects, data sources, exports and comments.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Felt"
+  }
+}

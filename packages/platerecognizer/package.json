@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/platerecognizer",
+  "description": "Plate Recognizer license plate recognition: read plates and vehicles from images, VINs, OCR, usage statistics, and Vision Alert and Stream management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Plate Recognizer"
+  }
+}

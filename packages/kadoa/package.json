@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kadoa",
+  "description": "Create, run and monitor Kadoa web data extraction workflows, schemas, crawls, notifications and extracted data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kadoa"
+  }
+}

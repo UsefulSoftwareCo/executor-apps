@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/temporal",
+  "description": "Manage Temporal Cloud control plane resources: namespaces, users, service accounts, API keys, connectivity rules and audit logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Temporal"
+  }
+}

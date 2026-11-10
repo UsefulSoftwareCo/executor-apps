@@ -1,0 +1,11 @@
+# Serper
+
+Real-time Google results as JSON through [Serper](https://serper.dev): web, images, news, videos, places, maps, place reviews, shopping, scholar, patents, autocomplete, and webpage scraping.
+
+**Interface:** custom tools written with `fetch` (12 tools). Serper publishes no OpenAPI document, MCP server or GraphQL API on its own site; the only OpenAPI found is a community one (API Evangelist) that covers `/search` alone, so it was not used. Endpoints are `POST https://google.serper.dev/{search,images,news,videos,places,maps,reviews,shopping,scholar,patents,autocomplete}` and `POST https://scrape.serper.dev` (body `url`, `includeMarkdown`), with parameter names (`q`, `gl`, `hl`, `location`, `num`, `page`, `tbs`, `autocorrect`, `ll`) taken from the Serper dashboard demos. Serper's API reference (https://serper.dev/api-reference) could not be fetched, so request shapes were not exercised against a live key; the `reviews` body fields (`fid`, `cid`, `placeId`, `sortBy`, `topicId`, `nextPageToken`) are the least certain. None of the request field names are confirmed against Serper's own documentation (the API reference was unreachable and the homepage lists no parameters).
+
+**Auth:** API key, sent in the `X-API-KEY` header. Create one at https://serper.dev/api-key after signing up (2,500 free queries). Serper has no OAuth. The health check posts an empty body to `/search` and passes only on 400 or 2xx; any other status (401/403, 402, 404, 429, 5xx) fails. That an empty body returns 400 without spending credits is an assumption: it was not verified against a live key or Serper's docs.
+
+**Approvals:** all tools are read-only lookups (though they spend credits), so none ask for approval.
+
+**Known gaps:** Serper's Lens endpoint (reverse image search by image URL) is not exposed because its endpoint and field name could not be confirmed. The scrape tool does not expose `include_links`, `include_images` and `include_videos` options. Batch search and location lookup are not exposed; Serper's native batch (array body) is not exposed. Parameter bounds such as `num` 1-100 are described, not enforced, since the framework schemas have no bounds. The icon is Serper's official `safari-pinned-tab.svg` mark from serper.dev.

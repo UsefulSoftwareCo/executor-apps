@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/currencyscoop",
+  "description": "CurrencyBeacon (formerly CurrencyScoop) exchange rates: latest, historical, time series, conversion, currencies and account usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CurrencyScoop"
+  }
+}

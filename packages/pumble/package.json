@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pumble",
+  "description": "Send and read Pumble messages, replies, DMs, reactions, scheduled messages, channels and users through the Pumble API Keys addon.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pumble"
+  }
+}

@@ -1,0 +1,9 @@
+# Google Meet
+
+Create and configure Google Meet meeting spaces and their members, and read meeting data: conference records, participants and their sessions, recordings, transcripts (with entries) and Gemini smart notes. 24 tools, covering every method of the Meet REST API v2.
+
+**Interface.** Hand-written tools over the official Google Meet REST API (`https://meet.googleapis.com/v2`, [reference](https://developers.google.com/workspace/meet/api/reference/rest)). Google publishes only a Discovery document (no OpenAPI), APIs.guru has no Meet conversion, and there is no official Meet MCP server (`meetmcp.googleapis.com` returns 404), so the tools are written by hand from the Discovery document. Mutations (create/update space, end conference, member changes) always require approval.
+
+**Auth.** OAuth 2.0 only (Google has no API keys for user meetings). In a Google Cloud project, enable the Google Meet REST API, configure the OAuth consent screen, and create an OAuth client of type "Web application". Add the redirect URI shown on Executor's connect page to the client's authorized redirect URIs, then paste the client ID and secret into the connect page. Scopes: `meetings.space.created` (spaces the app creates), `meetings.space.readonly` (read any space and conference data you can access), `meetings.space.settings` (edit space settings), plus `openid email profile` for the account health check. The app asks for offline access so it receives a refresh token. While the consent screen is in Testing status, refresh tokens expire after 7 days.
+
+**Known gaps.** Member management and smart notes are Google Workspace features and may be unavailable or in preview for some accounts. Recordings, transcripts and notes return Drive/Docs references; use the Google Drive and Google Docs packages to read their content. Not verified against a live account.

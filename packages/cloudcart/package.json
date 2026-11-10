@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloudcart",
+  "description": "Manage a CloudCart store: products, categories, variants, orders, customers, discounts, blog, subscribers and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "CloudCart"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

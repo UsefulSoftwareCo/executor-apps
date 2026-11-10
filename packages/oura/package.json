@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/oura",
+  "description": "Sleep, readiness, activity, heart rate, workouts and other health data from the Oura Ring API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Oura"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/recharge",
+  "description": "Recharge subscriptions: customers, subscriptions, charges, orders, addresses, plans, discounts and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Recharge"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

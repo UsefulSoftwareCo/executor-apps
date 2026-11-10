@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/payfit",
+  "description": "PayFit payroll and HR: companies, collaborators, contracts, payslips, absences, accounting and payment files.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "PayFit"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

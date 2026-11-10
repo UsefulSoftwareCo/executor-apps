@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stormboard",
+  "description": "Stormboard online sticky-note whiteboards: Storms, ideas, comments, votes, tags, connectors, chat, folders and templates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Stormboard"
+  }
+}

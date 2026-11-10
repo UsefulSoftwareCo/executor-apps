@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mandrill",
+  "description": "Send and manage transactional email and SMS with Mandrill (Mailchimp Transactional): messages, templates, senders, domains, webhooks, inbound routes and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mandrill"
+  }
+}

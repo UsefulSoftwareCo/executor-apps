@@ -1,0 +1,14 @@
+{
+  "name": "@executor.sh/anvil",
+  "description": "Anvil PDF filling, generation, e-signatures (Etch), workflows and webforms, through the official MCP server (OAuth) or the GraphQL API (API key).",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Anvil"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

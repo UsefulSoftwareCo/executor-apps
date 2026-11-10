@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/helpspot",
+  "description": "Help desk requests, notes, time tracking, filters, canned responses, staff and address book in HelpSpot's private web service API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HelpSpot"
+  }
+}

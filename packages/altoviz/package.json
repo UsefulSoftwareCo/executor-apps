@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/altoviz",
+  "description": "Manage Altoviz billing: customers, suppliers, contacts, products, invoices, quotes, credit notes, receipts and statistics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Altoviz"
+  }
+}

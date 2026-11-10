@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/heightsplatform",
+  "description": "Heights Platform: courses, lessons, bundles, digital products, community, orders, students and student access.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Heights Platform"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

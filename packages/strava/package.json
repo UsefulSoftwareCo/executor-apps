@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/strava",
+  "description": "Athletes, activities, clubs, gear, routes, segments and uploads from the Strava API v3.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Strava"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

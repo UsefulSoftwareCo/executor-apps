@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/modjoai",
+  "description": "Modjo conversation intelligence: export calls with transcripts and summaries, upload calls, and manage teams and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Modjo"
+  }
+}

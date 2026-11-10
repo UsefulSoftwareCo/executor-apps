@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/callerapi",
+  "description": "Caller ID, spam score, carrier (HLR) and number porting lookups, plus spam report webhooks, from CallerAPI.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CallerAPI"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/planly",
+  "description": "Schedule social media posts with Planly: teams, channels, media uploads, schedules, schedule groups and AI text completion.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Planly"
+  }
+}

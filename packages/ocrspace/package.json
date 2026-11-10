@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ocrspace",
+  "description": "OCR.space: extract text from images and PDFs by URL or base64, with word overlays, tables and searchable PDFs, plus usage statistics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OCR.space"
+  }
+}

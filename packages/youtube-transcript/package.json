@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/youtube-transcript",
+  "description": "Fetch and store YouTube transcripts with YouTubeTranscript.dev: single and batch transcription, stored transcripts, languages, translation, playlists, channels and search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "YouTube Transcript"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/autom",
+  "description": "Autom SERP API: structured search results from Google (web, light, AI Mode, images, videos, news, shopping, jobs, maps, autocomplete), Bing and Brave, plus usage, platform stats and location/language/country finders.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Autom"
+  }
+}

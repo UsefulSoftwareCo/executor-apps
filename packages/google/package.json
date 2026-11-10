@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google",
+  "description": "Every linked Google account across Gmail, Calendar, Drive, Sheets, Docs, Slides, Forms, Tasks, Contacts, Meet and Photos: cross-account search, agenda and availability, plus the complete APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ringcentral",
+  "description": "Calls, SMS, voicemail, fax, call logs, presence, meetings, team messaging and account administration through the RingCentral REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "RingCentral"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

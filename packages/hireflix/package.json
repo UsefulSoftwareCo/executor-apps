@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/hireflix",
+  "description": "One-way video interviews with Hireflix: positions, interviews, candidates, templates, themes, webhooks and company settings.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hireflix"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

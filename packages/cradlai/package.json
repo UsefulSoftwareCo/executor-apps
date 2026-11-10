@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cradlai",
+  "description": "Cradl AI document agents: agents and runs, documents, models, validations, hooks, actions, predictions and users.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cradl AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

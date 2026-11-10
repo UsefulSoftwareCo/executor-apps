@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/quaderno",
+  "description": "Quaderno tax compliance: tax calculation, invoices, credit notes, expenses, contacts, transactions, reports and tax jurisdictions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Quaderno"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/todoist",
+  "description": "Tasks, projects, sections, labels, comments, reminders, filters and workspaces from the Todoist API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Todoist"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/anakinio",
+  "description": "Anakin web data for agents: scrape, search, map, crawl, agentic research, Wire site actions, monitors and AI visibility, through Anakin's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Anakin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

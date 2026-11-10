@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/conductor",
+  "description": "Run coding agents in Conductor Cloud: projects, workspaces, sessions, messages, routines and transcript search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Conductor"
+  }
+}

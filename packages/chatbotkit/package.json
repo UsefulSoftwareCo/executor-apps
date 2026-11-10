@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chatbotkit",
+  "description": "Build and manage ChatBotKit conversational AI: bots, datasets, skillsets, conversations, files, secrets, blueprints and integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ChatBotKit"
+  }
+}

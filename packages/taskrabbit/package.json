@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/taskrabbit",
+  "description": "Find and book local Taskrabbit services for home repair, moving, cleaning and handyman tasks, through Taskrabbit's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Taskrabbit"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/circleback",
+  "description": "Circleback meetings, transcripts, action items, calendar events, emails, people and companies, through Circleback's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Circleback"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

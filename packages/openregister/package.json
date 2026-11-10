@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/openregister",
+  "description": "German company data from OpenRegister: search, owners, financials, documents, insolvency and monitoring.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenRegister"
+  }
+}

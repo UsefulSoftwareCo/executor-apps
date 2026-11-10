@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pipedrive",
+  "description": "Deals, persons, organizations, leads, activities, pipelines, products and the rest of the Pipedrive CRM REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Pipedrive"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

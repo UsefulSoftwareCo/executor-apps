@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/magichour",
+  "description": "Generate and edit AI video, images and audio with Magic Hour: face swap, lip sync, text and image to video, upscaling, voice generation and project status.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Magic Hour"
+  }
+}

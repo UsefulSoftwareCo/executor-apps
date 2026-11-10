@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/benchmarkemail",
+  "description": "Benchmark Email marketing: contact lists and contacts, segments, emails and templates, automations, A/B tests, reports and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Benchmark Email"
+  }
+}

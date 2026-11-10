@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lagrowthmachine",
+  "description": "Multichannel sales outreach with La Growth Machine: campaigns, audiences, leads, enrichment, LinkedIn and email inbox, conversations and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "La Growth Machine"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chargebee",
+  "description": "Manage Chargebee subscription billing: customers, subscriptions, invoices, plans, items, coupons, payments and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Chargebee"
+  }
+}

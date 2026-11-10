@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/kaggle",
+  "description": "Kaggle competitions, datasets, notebooks, models, benchmarks, hackathons and forums.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Kaggle"
+  }
+}

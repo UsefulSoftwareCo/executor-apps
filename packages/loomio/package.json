@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/loomio",
+  "description": "Run group decisions in Loomio: groups, threads, comments, polls, memberships, reports and search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Loomio"
+  }
+}

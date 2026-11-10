@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/winstonai",
+  "description": "Detect AI-generated text and images, check plagiarism, fact-check and compare texts with Winston AI.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Winston AI"
+  }
+}

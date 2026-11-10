@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/celigo",
+  "description": "Manage Celigo integrator.io: integrations, flows, exports, imports, connections, jobs, scripts, EDI, AI agents and account administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Celigo"
+  }
+}

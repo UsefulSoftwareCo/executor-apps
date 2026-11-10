@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/betterstack",
+  "description": "Uptime monitors, incidents, on-call, logs, metrics, traces and error tracking in Better Stack, through Better Stack's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Better Stack"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

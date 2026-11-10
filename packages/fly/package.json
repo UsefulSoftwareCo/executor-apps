@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fly",
+  "description": "Run apps on Fly.io: apps, Machines, volumes, secrets, certificates, IPs and Postgres via the Machines API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fly"
+  }
+}

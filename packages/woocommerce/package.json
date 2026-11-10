@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/woocommerce",
+  "description": "WooCommerce store management: products, orders, customers, coupons, shipping, taxes, payment gateways, webhooks, settings and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "WooCommerce"
+  }
+}

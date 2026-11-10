@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rudderstack-transformation",
+  "description": "Manage RudderStack transformations and libraries: create, edit, publish, version, delete and connect them to destinations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "RudderStack Transformation"
+  }
+}

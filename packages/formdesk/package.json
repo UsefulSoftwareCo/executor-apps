@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/formdesk",
+  "description": "Formdesk online forms: forms, results, files, users, visitors and prefill tickets through the REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Formdesk"
+  }
+}

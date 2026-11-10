@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/quickbase",
+  "description": "Quickbase: apps, tables, fields, records, reports, relationships, users, groups, formulas and solutions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Quickbase"
+  }
+}

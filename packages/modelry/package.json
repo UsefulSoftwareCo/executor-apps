@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/modelry",
+  "description": "Products, modeling requests, embeds and assets in Modelry, CGTrader's 3D product visualization platform.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Modelry"
+  }
+}

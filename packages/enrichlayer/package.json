@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/enrichlayer",
+  "description": "Enrich people, companies, jobs and schools with Enrich Layer: profiles, lookups, search, contact emails and phones, credit balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Enrich Layer"
+  }
+}

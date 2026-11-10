@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/financialdatasetsai",
+  "description": "US public company financial data: statements, prices, SEC filings, insider and institutional ownership, news, estimates and macro series.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Financial Datasets"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dropboxsign",
+  "description": "Dropbox Sign (formerly HelloSign) eSignature: signature requests, templates, embedded signing, accounts, teams and API apps.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dropbox Sign"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

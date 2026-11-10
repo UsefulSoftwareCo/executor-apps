@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/procfu",
+  "description": "ProcFu's Functions API: hosted functions for Podio, Podio Workflow Automation, Notion, Google, storage and data utilities.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ProcFu"
+  }
+}

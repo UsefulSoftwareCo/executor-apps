@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/beachdayapi",
+  "description": "Search beaches and get conditions, water quality, tide predictions, rules, amenities, country coverage and Beach Day Scores from Beach Day API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Beach Day API"
+  }
+}

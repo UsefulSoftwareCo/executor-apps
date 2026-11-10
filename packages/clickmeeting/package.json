@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clickmeeting",
+  "description": "Run online meetings and webinars with ClickMeeting: rooms, invitations, tokens, sessions, registrations, recordings, file library, chats and contacts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ClickMeeting"
+  }
+}

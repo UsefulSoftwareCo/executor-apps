@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lattice",
+  "description": "Lattice people management: users, departments, goals, review cycles, feedback, tasks and updates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lattice"
+  }
+}

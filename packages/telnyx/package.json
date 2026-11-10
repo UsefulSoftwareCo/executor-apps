@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/telnyx",
+  "description": "Telnyx communications platform: voice, messaging, phone numbers, SIP, wireless, fax, verify, storage and AI.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Telnyx"
+  }
+}

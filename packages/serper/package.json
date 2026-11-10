@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/serper",
+  "description": "Real-time Google results as JSON: web, images, news, videos, places, maps, reviews, shopping, scholar, patents, autocomplete and webpage scraping.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Serper"
+  }
+}

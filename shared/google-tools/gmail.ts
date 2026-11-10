@@ -1,0 +1,374 @@
+// Gmail tools shaped for agents: search returns readable thread summaries across every linked
+// account, reads return decoded text, and writes take plain fields instead of raw MIME.
+import { array, boolean, mutation, number, object, query, string } from "apps";
+import { always } from "apps/operations/approval";
+import {
+  base64Lines,
+  base64url,
+  decodeBody,
+  encodeHeader,
+  fanOut,
+  google,
+  htmlToText,
+  mapLimit,
+  select,
+  single,
+  type Base,
+  type Context,
+  type Source,
+  type Target,
+  type WriteContext,
+} from "./shared.js";
+
+const base = "https://gmail.googleapis.com/gmail/v1/users/me";
+const account = string().optional();
+
+interface Part {
+  readonly mimeType?: string;
+  readonly filename?: string;
+  readonly headers?: readonly { readonly name: string; readonly value: string }[];
+  readonly body?: { readonly data?: string; readonly size?: number; readonly attachmentId?: string };
+  readonly parts?: readonly Part[];
+}
+interface Message {
+  readonly id: string;
+  readonly threadId: string;
+  readonly labelIds?: readonly string[];
+  readonly snippet?: string;
+  readonly internalDate?: string;
+  readonly payload?: Part;
+}
+
+const header = (part: Part | undefined, name: string) =>
+  part?.headers?.find((h) => h.name.toLowerCase() === name.toLowerCase())?.value;
+
+const charset = (part: Part) => /charset="?([^";]+)"?/i.exec(header(part, "Content-Type") ?? "")?.[1];
+
+/** The message text: its text/plain part, else its HTML part as text. Attachments are listed, not read. */
+const content = (payload: Part | undefined) => {
+  let plain: string | undefined;
+  let html: string | undefined;
+  const attachments: { filename: string; mimeType: string; size: number; attachmentId: string }[] = [];
+  const walk = (part: Part) => {
+    if (part.filename && part.body?.attachmentId) {
+      attachments.push({
+        filename: part.filename,
+        mimeType: part.mimeType ?? "application/octet-stream",
+        size: part.body.size ?? 0,
+        attachmentId: part.body.attachmentId,
+      });
+      return;
+    }
+    if (part.body?.data && part.mimeType === "text/plain" && plain === undefined) plain = decodeBody(part.body.data, charset(part));
+    if (part.body?.data && part.mimeType === "text/html" && html === undefined) html = decodeBody(part.body.data, charset(part));
+    for (const child of part.parts ?? []) walk(child);
+  };
+  if (payload) walk(payload);
+  return { body: (plain ?? (html === undefined ? "" : htmlToText(html))).trim(), attachments };
+};
+
+/** Label IDs to names; system labels keep their IDs (INBOX, UNREAD, STARRED...). */
+const labelNames = async (ctx: Base, target: Target) => {
+  const { labels = [] } = await google(ctx, target, `${base}/labels`);
+  return new Map<string, string>((labels as { id: string; name: string }[]).map((label) => [label.id, label.name]));
+};
+
+const summary = (target: Target, message: Message, names: Map<string, string>) => ({
+  account: target.email,
+  messageId: message.id,
+  threadId: message.threadId,
+  from: header(message.payload, "From") ?? "",
+  to: header(message.payload, "To") ?? "",
+  subject: header(message.payload, "Subject") ?? "",
+  date: message.internalDate ? new Date(Number(message.internalDate)).toISOString() : "",
+  snippet: message.snippet ?? "",
+  unread: message.labelIds?.includes("UNREAD") ?? false,
+  labels: (message.labelIds ?? []).filter((id) => id !== "UNREAD").map((id) => names.get(id) ?? id),
+});
+
+const full = (target: Target, message: Message, names: Map<string, string>) => ({
+  ...summary(target, message, names),
+  cc: header(message.payload, "Cc") ?? "",
+  replyTo: header(message.payload, "Reply-To") ?? "",
+  ...content(message.payload),
+});
+
+/** Resolves label names or IDs, case-insensitively, to IDs. */
+const labelIds = (names: Map<string, string>, wanted: readonly string[]) => {
+  const byName = new Map([...names].map(([id, name]) => [name.toLowerCase(), id]));
+  return wanted.map((label) => {
+    const id = names.has(label) ? label : byName.get(label.toLowerCase());
+    if (id === undefined) throw new Error(`No Gmail label named ${label}. Create it first, or list labels with gmail.labels.`);
+    return id;
+  });
+};
+
+const Compose = {
+  account,
+  to: array(string()).optional(),
+  cc: array(string()).optional(),
+  bcc: array(string()).optional(),
+  subject: string().optional(),
+  body: string(),
+  html: boolean().optional(),
+  replyToMessageId: string().optional(),
+  replyAll: boolean().optional(),
+  from: string().optional(),
+};
+type ComposeInput = {
+  readonly account?: string;
+  readonly to?: readonly string[];
+  readonly cc?: readonly string[];
+  readonly bcc?: readonly string[];
+  readonly subject?: string;
+  readonly body: string;
+  readonly html?: boolean;
+  readonly replyToMessageId?: string;
+  readonly replyAll?: boolean;
+  readonly from?: string;
+};
+
+const addresses = (value: string | undefined) =>
+  (value ?? "")
+    .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+const bare = (address: string) => (/<([^>]+)>/.exec(address)?.[1] ?? address).trim().toLowerCase();
+
+/**
+ * Builds the RFC 2822 message. A reply takes the original's thread, subject and references, and
+ * addresses its sender (and, with replyAll, everyone else on it except this account).
+ */
+const compose = async (ctx: Base, target: Target, input: ComposeInput) => {
+  let to = [...(input.to ?? [])];
+  let cc = [...(input.cc ?? [])];
+  let subject = input.subject;
+  let threadId: string | undefined;
+  const extra: string[] = [];
+  if (input.replyToMessageId) {
+    const original: Message = await google(ctx, target, `${base}/messages/${encodeURIComponent(input.replyToMessageId)}`, {
+      search: { format: "metadata", metadataHeaders: ["From", "To", "Cc", "Subject", "Message-ID", "References", "Reply-To"] },
+    });
+    threadId = original.threadId;
+    const messageId = header(original.payload, "Message-ID");
+    if (messageId) {
+      extra.push(`In-Reply-To: ${messageId}`);
+      extra.push(`References: ${[header(original.payload, "References"), messageId].filter(Boolean).join(" ")}`);
+    }
+    const originalSubject = header(original.payload, "Subject") ?? "";
+    subject ??= /^re:/i.test(originalSubject) ? originalSubject : `Re: ${originalSubject}`;
+    const self = target.email.toLowerCase();
+    const sender = header(original.payload, "Reply-To") ?? header(original.payload, "From") ?? "";
+    // Replying to your own message goes back to its recipients.
+    const fromSelf = bare(header(original.payload, "From") ?? "") === self;
+    if (to.length === 0) to = fromSelf ? addresses(header(original.payload, "To")) : addresses(sender);
+    if (input.replyAll) {
+      const already = new Set([...to, ...cc].map(bare));
+      for (const address of [...addresses(header(original.payload, "To")), ...addresses(header(original.payload, "Cc"))]) {
+        if (bare(address) === self || already.has(bare(address))) continue;
+        already.add(bare(address));
+        cc.push(address);
+      }
+    }
+  }
+  const lines = [
+    ...(input.from ? [`From: ${input.from}`] : []),
+    ...(to.length ? [`To: ${to.join(", ")}`] : []),
+    ...(cc.length ? [`Cc: ${cc.join(", ")}`] : []),
+    ...(input.bcc?.length ? [`Bcc: ${input.bcc.join(", ")}`] : []),
+    `Subject: ${encodeHeader(subject ?? "")}`,
+    ...extra,
+    "MIME-Version: 1.0",
+    `Content-Type: ${input.html ? "text/html" : "text/plain"}; charset="UTF-8"`,
+    "Content-Transfer-Encoding: base64",
+    "",
+    base64Lines(input.body),
+  ];
+  return { raw: base64url(lines.join("\r\n")), threadId, to, cc, subject: subject ?? "" };
+};
+
+/** Matching threads across targets, newest first, each summarised by its latest message. */
+export const searchMail = async (ctx: Base, targets: readonly Target[], q: string, max: number) => {
+  const { items, errors } = await fanOut(targets, async (target) => {
+    const [{ threads = [] }, names] = await Promise.all([
+      google(ctx, target, `${base}/threads`, { search: { q, maxResults: max } }),
+      labelNames(ctx, target),
+    ]);
+    return mapLimit(threads as { id: string }[], 10, async ({ id }) => {
+      const thread: { messages?: Message[] } = await google(ctx, target, `${base}/threads/${id}`, {
+        search: { format: "metadata", metadataHeaders: ["From", "To", "Subject", "Date"] },
+      });
+      const messages = thread.messages ?? [];
+      const latest = messages.at(-1)!;
+      return {
+        ...summary(target, latest, names),
+        messageCount: messages.length,
+        unread: messages.some((message) => message.labelIds?.includes("UNREAD")),
+      };
+    });
+  });
+  items.sort((a, b) => b.date.localeCompare(a.date));
+  return { threads: items.slice(0, max), errors };
+};
+
+/** The curated tools and their router's metadata; `source` names the package's accounts. */
+export const gmail = (source: Source) => ({
+  tools: {
+    search: query(
+      {
+        description:
+          "Search mail with Gmail search syntax (from:, to:, subject:, is:unread, has:attachment, newer_than:7d, label:, in:inbox...) across every linked Google account, or one. Returns matching threads, newest first, each with its latest message's sender, subject, date and snippet. Read one with readThread.",
+        input: object({
+          query: string(),
+          account,
+          max: number().optional(),
+        }),
+      },
+      async (ctx: Context, input) =>
+        searchMail(ctx, await select(ctx, source, input.account), input.query, Math.min(Math.max(input.max ?? 20, 1), 100)),
+    ),
+    readThread: query(
+      {
+        description: "Read a whole thread as decoded text: every message's headers, body and attachment list, oldest first.",
+        input: object({ account, threadId: string({ minLength: 1 }) }),
+      },
+      async (ctx: Context, input) => {
+        const target = await single(ctx, source, input.account);
+        const [thread, names] = await Promise.all([
+          google(ctx, target, `${base}/threads/${encodeURIComponent(input.threadId)}`, { search: { format: "full" } }),
+          labelNames(ctx, target),
+        ]);
+        return { account: target.email, threadId: input.threadId, messages: ((thread.messages ?? []) as Message[]).map((m) => full(target, m, names)) };
+      },
+    ),
+    readMessage: query(
+      {
+        description: "Read one message as decoded text: headers, body (HTML converted to text) and attachment list.",
+        input: object({ account, messageId: string({ minLength: 1 }) }),
+      },
+      async (ctx: Context, input) => {
+        const target = await single(ctx, source, input.account);
+        const [message, names] = await Promise.all([
+          google(ctx, target, `${base}/messages/${encodeURIComponent(input.messageId)}`, { search: { format: "full" } }),
+          labelNames(ctx, target),
+        ]);
+        return full(target, message, names);
+      },
+    ),
+    labels: query(
+      {
+        description: "List each account's labels with their unread and total counts.",
+        input: object({ account }),
+      },
+      async (ctx: Context, input) =>
+        fanOut(await select(ctx, source, input.account), async (target) => {
+          const { labels = [] } = await google(ctx, target, `${base}/labels`);
+          return mapLimit(labels as { id: string; name: string; type: string }[], 10, async (label) => {
+            const detail = await google(ctx, target, `${base}/labels/${encodeURIComponent(label.id)}`);
+            return {
+              account: target.email,
+              id: label.id,
+              name: label.name,
+              type: label.type,
+              unreadThreads: detail.threadsUnread ?? 0,
+              threads: detail.threadsTotal ?? 0,
+            };
+          });
+        }).then(({ items, errors }) => ({ labels: items, errors })),
+    ),
+    send: mutation(
+      {
+        description:
+          "Send an email. For a reply, pass replyToMessageId: it stays in the thread, gets a Re: subject and goes to the original sender unless `to` is given; replyAll also copies the other recipients. `from` must be one of the account's send-as aliases.",
+        input: object(Compose),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const message = await compose(ctx, target, input);
+        if (message.to.length === 0 && message.cc.length === 0 && !input.bcc?.length) throw new Error("Pass at least one recipient.");
+        const sent = await google(ctx, target, `${base}/messages/send`, {
+          method: "POST",
+          body: { raw: message.raw, ...(message.threadId ? { threadId: message.threadId } : {}) },
+        });
+        return { account: target.email, messageId: sent.id, threadId: sent.threadId, to: message.to, cc: message.cc, subject: message.subject };
+      },
+    ),
+    draft: mutation(
+      {
+        description: "Save a draft without sending it. Takes the same fields as send, and recipients may be left out.",
+        input: object(Compose),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const message = await compose(ctx, target, input);
+        const draft = await google(ctx, target, `${base}/drafts`, {
+          method: "POST",
+          body: { message: { raw: message.raw, ...(message.threadId ? { threadId: message.threadId } : {}) } },
+        });
+        return { account: target.email, draftId: draft.id, messageId: draft.message?.id, threadId: draft.message?.threadId };
+      },
+    ),
+    modify: mutation(
+      {
+        description:
+          "Change threads: archive (leave the inbox), mark read or unread, star or unstar, move to trash, and add or remove labels by name. Applies to every message in each thread.",
+        input: object({
+          account,
+          threadIds: array(string({ minLength: 1 })),
+          archive: boolean().optional(),
+          read: boolean().optional(),
+          starred: boolean().optional(),
+          trash: boolean().optional(),
+          addLabels: array(string()).optional(),
+          removeLabels: array(string()).optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const names = await labelNames(ctx, target);
+        const add = labelIds(names, input.addLabels ?? []);
+        const remove = labelIds(names, input.removeLabels ?? []);
+        if (input.archive) remove.push("INBOX");
+        if (input.read === true) remove.push("UNREAD");
+        if (input.read === false) add.push("UNREAD");
+        if (input.starred === true) add.push("STARRED");
+        if (input.starred === false) remove.push("STARRED");
+        await mapLimit(input.threadIds, 10, async (id) => {
+          const thread = encodeURIComponent(id);
+          if (input.trash) await google(ctx, target, `${base}/threads/${thread}/trash`, { method: "POST" });
+          if (add.length || remove.length)
+            await google(ctx, target, `${base}/threads/${thread}/modify`, {
+              method: "POST",
+              body: { addLabelIds: add, removeLabelIds: remove },
+            });
+        });
+        return { account: target.email, threads: input.threadIds.length, added: add, removed: remove, trashed: input.trash ?? false };
+      },
+    ),
+    attachment: query(
+      {
+        description:
+          "Read an attachment listed by readMessage or readThread. Text attachments (text/*, JSON, CSV, XML) come back as text; others as base64.",
+        input: object({ account, messageId: string({ minLength: 1 }), attachmentId: string({ minLength: 1 }), mimeType: string().optional() }),
+      },
+      async (ctx: Context, input) => {
+        const target = await single(ctx, source, input.account);
+        const { data = "", size } = await google(
+          ctx,
+          target,
+          `${base}/messages/${encodeURIComponent(input.messageId)}/attachments/${encodeURIComponent(input.attachmentId)}`,
+        );
+        const text = /^(text\/|application\/(json|xml|csv))/.test(input.mimeType ?? "");
+        return text ? { size, text: decodeBody(data) } : { size, base64: (data as string).replaceAll("-", "+").replaceAll("_", "/") };
+      },
+    ),
+  },
+  meta: {
+    title: "Gmail",
+    description: "Search, read and send mail across every linked Google account.",
+    instructions: `search spans every linked account unless \`account\` (an address) is given; its results carry the account, and reads and writes take that account. Writes need \`account\` only when several accounts are linked. The full Gmail API is under ${source.api("gmail")}.`,
+  },
+});

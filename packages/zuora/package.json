@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zuora",
+  "description": "Zuora subscription billing: accounts, subscriptions, orders, invoices, payments, usage, product catalog, credit memos and the rest of the Zuora REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zuora"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

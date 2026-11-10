@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/osv",
+  "description": "Query the OSV open source vulnerability database: vulnerabilities by package version, commit or OSV ID.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OSV"
+  }
+}

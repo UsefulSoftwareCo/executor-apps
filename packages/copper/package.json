@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/copper",
+  "description": "Leads, people, companies, opportunities, projects, tasks, activities, custom fields, files and webhooks in Copper CRM.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Copper"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

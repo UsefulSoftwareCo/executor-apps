@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/beaconchain",
+  "description": "Ethereum staking data from beaconcha.in: validators, rewards, performance, slots, epochs, queues, MEV timing and entities.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "beaconcha.in"
+  }
+}

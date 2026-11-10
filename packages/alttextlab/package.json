@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/alttextlab",
+  "description": "AltTextLab: generate accessible, SEO-aware image alt text from an image URL in 130+ languages, with writing styles, keywords, e-commerce metadata and page context.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AltTextLab"
+  }
+}

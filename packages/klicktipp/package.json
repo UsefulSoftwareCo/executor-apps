@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/klicktipp",
+  "description": "KlickTipp email marketing: contacts, tags, custom data fields and opt-in processes through the Management API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "KlickTipp"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twitter",
+  "description": "Posts, users, timelines, lists, bookmarks, direct messages, Spaces and the rest of the X (Twitter) API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "X"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hex",
+  "description": "Hex data workspace: projects, runs, cells, threads, collections, groups, data connections, users and suggestions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hex"
+  }
+}

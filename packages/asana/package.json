@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/asana",
+  "description": "Tasks, projects, portfolios, goals, teams, users, custom fields and the rest of the Asana REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Asana"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

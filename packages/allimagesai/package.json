@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/allimagesai",
+  "description": "All-Images.ai: search, buy and download images, run AI image generations, manage webhooks and check credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "All Images AI"
+  }
+}

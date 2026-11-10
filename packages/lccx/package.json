@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lccx",
+  "description": "Create and manage short links, branded domains, tags, click statistics and QR codes in lc.cx (Nemorius).",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "lc.cx"
+  }
+}

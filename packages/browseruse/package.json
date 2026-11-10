@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/browseruse",
+  "description": "Run Browser Use Cloud browser agents, sessions, raw browsers, profiles and workspaces.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Browser Use"
+  }
+}

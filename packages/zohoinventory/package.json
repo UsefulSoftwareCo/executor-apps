@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zohoinventory",
+  "description": "Zoho Inventory: items, sales and purchase orders, invoices, bills, packages, shipments, transfer orders, inventory adjustments, contacts and the rest of the Inventory REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zoho Inventory"
+  }
+}

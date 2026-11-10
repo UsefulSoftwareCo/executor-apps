@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ascora",
+  "description": "Ascora field service management: customers, contacts, jobs, quotes, enquiries, inventory, suppliers, supplier invoices and notes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ascora"
+  }
+}

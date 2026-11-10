@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pushinator",
+  "description": "Send push notifications to iPhone, iPad and Android with Pushinator and create notification channels.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pushinator"
+  }
+}

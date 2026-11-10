@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/jobber",
+  "description": "Clients, requests, quotes, jobs, visits, invoices and payments from Jobber's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Jobber"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

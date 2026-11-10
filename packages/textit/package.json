@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/textit",
+  "description": "Messaging flows and contacts in TextIt: contacts, groups, fields, flows, flow starts, broadcasts, messages, runs, campaigns, labels, tickets, topics and resthooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TextIt"
+  }
+}

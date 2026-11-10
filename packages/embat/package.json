@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/embat",
+  "description": "Treasury management with Embat: bank connections, accounts, balances, transactions, payments, operations, accounting entries, budgets and categories.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Embat"
+  }
+}

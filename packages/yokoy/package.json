@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/yokoy",
+  "description": "Expenses, invoices, legal entities, cards, categories, users and the rest of the Yokoy spend management API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Yokoy"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

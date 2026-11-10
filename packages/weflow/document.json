@@ -1,0 +1,1311 @@
+{
+ "openapi": "3.0.0",
+ "info": {
+  "title": "Weflow Public API",
+  "version": "1.0.0",
+  "description": "API for accessing Weflow data."
+ },
+ "servers": [
+  {
+   "url": "/api/v1",
+   "description": "Public API"
+  }
+ ],
+ "components": {
+  "securitySchemes": {
+   "BearerAuth": {
+    "type": "http",
+    "scheme": "bearer",
+    "description": "API key (e.g. wfl_abc123...)"
+   }
+  },
+  "schemas": {
+   "Participant": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "email": {
+      "type": "string",
+      "format": "email"
+     },
+     "role": {
+      "type": "string",
+      "enum": [
+       "host",
+       "internal",
+       "external"
+      ]
+     }
+    },
+    "required": [
+     "name",
+     "email",
+     "role"
+    ]
+   },
+   "SalesforceLinkedRecord": {
+    "type": "object",
+    "properties": {
+     "sfdcRecordId": {
+      "type": "string"
+     },
+     "sfdcObjectType": {
+      "type": "string"
+     },
+     "sfdcRecordName": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "sfdcRecordId",
+     "sfdcObjectType",
+     "sfdcRecordName"
+    ]
+   },
+   "RecordingListItem": {
+    "type": "object",
+    "properties": {
+     "uid": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "title": {
+      "type": "string"
+     },
+     "duration": {
+      "type": "integer",
+      "description": "Duration in milliseconds"
+     },
+     "start": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "isExternal": {
+      "type": "boolean",
+      "nullable": true
+     },
+     "conferenceUrl": {
+      "type": "string"
+     },
+     "salesforceRecordingId": {
+      "type": "string",
+      "nullable": true
+     },
+     "longestCustomerStory": {
+      "type": "number"
+     },
+     "transcriptLanguage": {
+      "type": "string",
+      "nullable": true
+     },
+     "summaryLanguage": {
+      "type": "string",
+      "nullable": true
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "eventId": {
+      "type": "string"
+     }
+    }
+   },
+   "Recording": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/RecordingListItem"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "participants": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/Participant"
+        }
+       },
+       "salesforceLinkedRecords": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/SalesforceLinkedRecord"
+        }
+       }
+      },
+      "required": [
+       "participants",
+       "salesforceLinkedRecords"
+      ]
+     }
+    ]
+   },
+   "RecordingsResponse": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/RecordingListItem"
+      }
+     },
+     "total": {
+      "type": "integer"
+     },
+     "nextCursor": {
+      "type": "string",
+      "nullable": true
+     },
+     "hasMore": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "data",
+     "total",
+     "nextCursor",
+     "hasMore"
+    ]
+   },
+   "Comment": {
+    "type": "object",
+    "properties": {
+     "uid": {
+      "type": "string"
+     },
+     "content": {
+      "type": "array",
+      "description": "Rich-text content nodes",
+      "items": {
+       "type": "object"
+      }
+     },
+     "userUid": {
+      "type": "string"
+     },
+     "userName": {
+      "type": "string"
+     },
+     "timestampSeconds": {
+      "type": "number"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "parentCommentUid": {
+      "type": "string"
+     },
+     "replies": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Comment"
+      }
+     }
+    },
+    "required": [
+     "uid",
+     "content",
+     "userUid",
+     "userName",
+     "timestampSeconds",
+     "createdAt",
+     "updatedAt",
+     "replies"
+    ]
+   },
+   "Clip": {
+    "type": "object",
+    "properties": {
+     "uid": {
+      "type": "string"
+     },
+     "start": {
+      "type": "number"
+     },
+     "end": {
+      "type": "number"
+     },
+     "title": {
+      "type": "string",
+      "nullable": true
+     },
+     "text": {
+      "type": "string",
+      "nullable": true
+     },
+     "userUid": {
+      "type": "string"
+     },
+     "userName": {
+      "type": "string"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     }
+    },
+    "required": [
+     "uid",
+     "start",
+     "end",
+     "userUid",
+     "userName"
+    ]
+   },
+   "InteractionMetric": {
+    "type": "object",
+    "properties": {
+     "userUid": {
+      "type": "string",
+      "nullable": true,
+      "description": "Null for external guests without a user account."
+     },
+     "userName": {
+      "type": "string"
+     },
+     "isExternal": {
+      "type": "boolean",
+      "description": "True for speakers that are not company users. They only carry talkRatio."
+     },
+     "talkRatio": {
+      "type": "number"
+     },
+     "longestMonologue": {
+      "type": "number"
+     },
+     "interactivityScore": {
+      "type": "number"
+     },
+     "patience": {
+      "type": "number"
+     },
+     "questionsPerHour": {
+      "type": "number"
+     },
+     "totalQuestions": {
+      "type": "integer"
+     },
+     "transitionPauses": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "userUid",
+     "userName",
+     "isExternal"
+    ]
+   },
+   "RecordingVideoUrls": {
+    "type": "object",
+    "properties": {
+     "streamUrl": {
+      "type": "string"
+     },
+     "downloadUrl": {
+      "type": "string"
+     },
+     "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+     }
+    },
+    "required": [
+     "streamUrl",
+     "downloadUrl",
+     "expiresAt"
+    ]
+   },
+   "Transcript": {
+    "type": "object",
+    "properties": {
+     "speakerId": {
+      "type": "integer"
+     },
+     "speaker": {
+      "type": "string"
+     },
+     "words": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "text": {
+         "type": "string"
+        },
+        "start": {
+         "type": "number"
+        },
+        "end": {
+         "type": "number"
+        }
+       },
+       "required": [
+        "text",
+        "start",
+        "end"
+       ]
+      }
+     }
+    },
+    "required": [
+     "speakerId",
+     "speaker",
+     "words"
+    ]
+   },
+   "Tracker": {
+    "type": "object",
+    "properties": {
+     "uid": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "matches": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "uid": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "match": {
+         "type": "string"
+        },
+        "keyword": {
+         "type": "string"
+        },
+        "index": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "uid",
+        "match",
+        "keyword",
+        "index"
+       ]
+      }
+     }
+    },
+    "required": [
+     "uid",
+     "name",
+     "matches"
+    ]
+   },
+   "SummaryTemplate": {
+    "type": "object",
+    "properties": {
+     "uid": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "isDefault": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "uid",
+     "name",
+     "isDefault"
+    ]
+   },
+   "Summary": {
+    "type": "object",
+    "properties": {
+     "summaryTemplateUid": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "summary": {
+      "type": "string"
+     },
+     "sections": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "title": {
+         "type": "string"
+        },
+        "items": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "text": {
+            "type": "string"
+           },
+           "timestamp": {
+            "type": "number"
+           }
+          },
+          "required": [
+           "text",
+           "timestamp"
+          ]
+         }
+        }
+       },
+       "required": [
+        "title",
+        "items"
+       ]
+      }
+     }
+    },
+    "required": [
+     "summaryTemplateUid",
+     "summary",
+     "sections"
+    ]
+   },
+   "Scorecard": {
+    "type": "object",
+    "properties": {
+     "coachingTemplateUid": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "overall": {
+      "type": "object",
+      "properties": {
+       "title": {
+        "type": "string"
+       },
+       "text": {
+        "type": "string"
+       },
+       "rating": {
+        "type": "number"
+       },
+       "createdAt": {
+        "type": "string",
+        "format": "date-time"
+       },
+       "updatedAt": {
+        "type": "string",
+        "format": "date-time"
+       }
+      },
+      "required": [
+       "title",
+       "text",
+       "rating",
+       "createdAt",
+       "updatedAt"
+      ]
+     },
+     "sections": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "uid": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "title": {
+         "type": "string"
+        },
+        "text": {
+         "type": "string"
+        },
+        "rating": {
+         "type": "number"
+        },
+        "items": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "text": {
+            "type": "string"
+           },
+           "timestamp": {
+            "type": "number"
+           }
+          },
+          "required": [
+           "text",
+           "timestamp"
+          ]
+         }
+        },
+        "createdAt": {
+         "type": "string",
+         "format": "date-time"
+        },
+        "updatedAt": {
+         "type": "string",
+         "format": "date-time"
+        }
+       },
+       "required": [
+        "uid",
+        "title",
+        "text",
+        "rating",
+        "items",
+        "createdAt",
+        "updatedAt"
+       ]
+      }
+     }
+    },
+    "required": [
+     "coachingTemplateUid",
+     "overall",
+     "sections"
+    ]
+   },
+   "Error": {
+    "type": "object",
+    "properties": {
+     "error": {
+      "type": "object",
+      "properties": {
+       "code": {
+        "type": "string"
+       },
+       "message": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "code",
+       "message"
+      ]
+     }
+    },
+    "required": [
+     "error"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "BearerAuth": []
+  }
+ ],
+ "paths": {
+  "/recordings/{uid}": {
+   "get": {
+    "summary": "Get recording metadata",
+    "description": "Returns a single recording's metadata, including the list of participants and the Salesforce records linked to it.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Recording metadata.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Recording"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/video": {
+   "get": {
+    "summary": "Get recording video URLs",
+    "description": "Returns pre-signed S3 URLs to stream or download the recording's video. URLs expire after 1 hour.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Stream and download URLs with expiration timestamp.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecordingVideoUrls"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings": {
+   "get": {
+    "summary": "List recordings",
+    "description": "Returns a paginated list of recordings for the company, newest first.",
+    "parameters": [
+     {
+      "name": "limit",
+      "in": "query",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100,
+       "default": 20
+      },
+      "description": "Number of recordings per page (1–100, default 20)."
+     },
+     {
+      "name": "cursor",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Cursor from a previous response to get the next page."
+     },
+     {
+      "name": "startDate",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      },
+      "description": "Only return recordings on or after this date. ISO 8601 format (e.g. 2026-01-15T00:00:00Z)."
+     },
+     {
+      "name": "endDate",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date-time"
+      },
+      "description": "Only return recordings on or before this date. ISO 8601 format (e.g. 2026-01-15T00:00:00Z)."
+     },
+     {
+      "name": "sfEventId",
+      "in": "query",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Only return the recording linked to a Salesforce event id. Returns an empty list if no recording matches."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "A paginated list of recordings.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/RecordingsResponse"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid query parameters.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "API not enabled for this company.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "429": {
+      "description": "Rate limit exceeded.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/comments": {
+   "get": {
+    "summary": "Get recording comments",
+    "description": "Returns threaded comments for a recording. Replies are nested under their parent.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of threaded comments.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Comment"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/clips": {
+   "get": {
+    "summary": "Get recording clips",
+    "description": "Returns all clips for a recording.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of clips.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Clip"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/interaction-metrics": {
+   "get": {
+    "summary": "Get recording interaction metrics",
+    "description": "Returns per-user metrics like talk ratio, longest monologue, questions per hour, etc.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of per-user interaction metrics.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/InteractionMetric"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/transcript": {
+   "get": {
+    "summary": "Get recording transcript",
+    "description": "Returns the full transcript for a recording, including per-word timestamps. Returns an empty array if transcription never produced output.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Transcript segments grouped by speaker.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Transcript"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/scorecards": {
+   "get": {
+    "summary": "Get recording scorecards",
+    "description": "Returns all cached scorecards for a recording, one per coaching template that has been run against it.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of scorecards.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Scorecard"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/trackers": {
+   "get": {
+    "summary": "Get recording trackers",
+    "description": "Returns all trackers that have at least one match on this recording, with each tracker's matches.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of trackers with their matches.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Tracker"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/recordings/{uid}/summary": {
+   "get": {
+    "summary": "Get recording summary for a template",
+    "description": "Returns the summary for the given recording + summary template. If no templateId is provided, the company's default summary template is used.",
+    "parameters": [
+     {
+      "name": "uid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Recording UUID or numeric id."
+     },
+     {
+      "name": "templateId",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "description": "Summary template unique identifier. If omitted, the company's default summary template is used."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "The summary.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Summary"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid recording uid or templateId.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Recording or template not found, or summary could not be generated.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/summary-templates": {
+   "get": {
+    "summary": "List summary templates",
+    "description": "Returns all summary templates available for the company. Use the returned uids as the templateId query param on /recordings/{uid}/summary.",
+    "responses": {
+     "200": {
+      "description": "List of summary templates.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/SummaryTemplate"
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Missing or invalid API key.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "tags": []
+}

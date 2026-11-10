@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/keap",
+  "description": "Contacts, companies, opportunities, orders, products, tags, automations, campaigns, emails and the rest of the Keap CRM REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Keap"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

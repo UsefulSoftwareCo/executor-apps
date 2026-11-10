@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zoominfo",
+  "description": "ZoomInfo: search and enrich companies, contacts, intent, news and scoops, plus account insights, lookalikes, GTM Studio audiences, data quality, marketing audiences and vertical datasets.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ZoomInfo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

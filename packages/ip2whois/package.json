@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ip2whois",
+  "description": "Look up WHOIS records for domains and the domains hosted on an IP address with IP2WHOIS.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IP2WHOIS"
+  }
+}

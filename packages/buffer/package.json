@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/buffer",
+  "description": "Channels, posts, scheduling, ideas, tags and analytics from Buffer's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Buffer"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

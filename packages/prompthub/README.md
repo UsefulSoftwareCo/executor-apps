@@ -1,0 +1,9 @@
+# PromptHub
+
+Versioned prompt management with [PromptHub](https://www.prompthub.us): look up the current team, list a team's projects, fetch a project's head commit (prompt, system message, model configuration and a provider-ready `formatted_request`), and run a prompt or chat project through PromptHub.
+
+**Interface:** custom tools over the REST API at `https://app.prompthub.us/api/v1` (`GET /me`, `GET /teams/{id}/projects`, `GET /projects/{id}/head`, `POST /projects/{id}/run`). PromptHub publishes no OpenAPI document, GraphQL API or MCP server. The endpoints come from PromptHub's official public Postman collection, "PromptHub API Requests" (https://www.postman.com/prompthub/prompthub-public/collection/01lf36o/prompthub-api-requests), which links to PromptHub's API documentation, and from the vendor guide https://www.prompthub.us/blog/prompthub-openai-integration-guide. The collection documents these requests only (list projects with `group`/`model`/`provider` filters, get head with `branch`/`variables`/`fallback`, run completion and chat projects); the `/me` endpoint and its `current_team_id` field are named in the collection's list-projects notes. `runProject` requires approval.
+
+**Auth:** API key (`Authorization: Bearer`). Create it in PromptHub at https://app.prompthub.us/user/api-tokens. The project id is in the project URL or on the project's API tab. `listProjects` uses the team from `GET /me` (`current_team_id`) unless you pass `teamId`; the team id is also the number at the end of the Team Settings URL. The provider health check calls `GET /me`.
+
+**Known gaps:** the shape of the `/me` response is not documented beyond `current_team_id`, so `getMe` returns it as raw JSON and the team lookup accepts the field at the top level or under `data`. The documented API has no write endpoints other than running a project, so none are exposed.

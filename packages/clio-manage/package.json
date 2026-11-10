@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clio-manage",
+  "description": "Clio Manage legal practice management: contacts, matters, activities and time entries, calendar, tasks, bills, trust accounting, documents and communications.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Clio Manage"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

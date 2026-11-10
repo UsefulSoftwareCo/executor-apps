@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/trivago",
+  "description": "Search Trivago accommodations and compare hotel prices, through Trivago's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Trivago"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

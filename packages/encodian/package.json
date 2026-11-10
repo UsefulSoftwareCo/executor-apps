@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/encodian",
+  "description": "Encodian Flowr document automation: Word, PDF, Excel, PowerPoint, image, barcode and format conversion actions, plus general and utility actions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Encodian"
+  }
+}

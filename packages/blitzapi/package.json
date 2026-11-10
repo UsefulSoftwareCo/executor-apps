@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/blitzapi",
+  "description": "B2B data from Blitz API: people, company and job search, plus email, phone and company enrichment.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Blitz API"
+  }
+}

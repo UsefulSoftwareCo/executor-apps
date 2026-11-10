@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/incidentio",
+  "description": "Manage incident.io incidents, alerts, on-call schedules, escalations, catalog, workflows, status pages and follow-ups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "incident.io"
+  }
+}

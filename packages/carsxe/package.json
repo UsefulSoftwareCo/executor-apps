@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/carsxe",
+  "description": "Vehicle data with CarsXE: VIN decoding, specifications, recalls, market value, history, plate decoding, images, recognition and OBD codes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CarsXE"
+  }
+}

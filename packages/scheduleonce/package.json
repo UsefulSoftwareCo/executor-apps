@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/scheduleonce",
+  "description": "Manage OnceHub (formerly ScheduleOnce) bookings, booking calendars, contacts, users, teams and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ScheduleOnce"
+  }
+}

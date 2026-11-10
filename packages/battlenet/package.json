@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/battlenet",
+  "description": "Blizzard Battle.net APIs: World of Warcraft game data and character profiles, Diablo III, StarCraft II and Hearthstone.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Battle.net"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

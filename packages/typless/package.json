@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/typless",
+  "description": "Typless AI document extraction: extract fields and line items from invoices and other documents, poll async results, and train document type models.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Typless"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/grain",
+  "description": "Meeting recordings, transcripts, notes and workspace data in Grain, through Grain's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Grain"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

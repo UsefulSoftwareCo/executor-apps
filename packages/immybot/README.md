@@ -1,0 +1,9 @@
+# ImmyBot
+
+Computer and software management for MSPs in ImmyBot: tenants, computers and inventory, maintenance sessions and schedules, local and global software and maintenance tasks, deployments, people, users, roles and tags, plus a raw API caller for everything else.
+
+**Interface:** hand-written tools over the official ImmyBot REST API (`https://<instance>.immy.bot/api/v1`, overview at https://www.immy.bot/documentation/reference/api-documentation/). ImmyBot serves its OpenAPI document only from each customer's own instance behind authentication (`https://<instance>.immy.bot/swagger`), so there is no public spec to compile. The dedicated tools are read-only; `api.get` and `api.request` reach any other `/api/` path (writes always require approval). Endpoint paths were taken from the community PSImmyBot module and ImmyBot's release notes and were not exercised against a live instance.
+
+**Auth:** Microsoft Entra client credentials. Create an App Registration in Entra ID and copy its Application (client) ID, create a client secret and copy its value, then copy the object ID of the matching Enterprise Application. In ImmyBot (People, New), paste that object ID into "AD External ID", and create a user from that person with admin privileges (https://www.immy.bot/documentation/reference/api-documentation/). Enter the Entra tenant ID, the instance subdomain (the `contoso` in `contoso.immy.bot`), the client ID and the secret. The app requests a token from `login.microsoftonline.com` with scope `https://<subdomain>.immy.bot/.default` and sends it as a bearer token to the instance only. ImmyBot offers no user-created OAuth authorization-code flow, so OAuth is not offered.
+
+**Known gaps:** only the common read endpoints have their own tools; everything else goes through the raw tools and needs paths from your instance's `/swagger`.

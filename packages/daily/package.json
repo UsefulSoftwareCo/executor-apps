@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/daily",
+  "description": "Manage Daily video and audio: rooms, meeting tokens, recordings, transcripts, meetings, presence, logs, webhooks, phone numbers, dial-in and SIP.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Daily"
+  }
+}

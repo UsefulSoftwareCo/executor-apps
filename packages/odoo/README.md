@@ -1,0 +1,17 @@
+# Odoo
+
+Contacts, CRM leads and opportunities, sales and purchase orders, invoices and bills, payments, products, stock transfers, projects and tasks, employees, calendar events, helpdesk tickets, the chatter, and any model of an Odoo database.
+
+**Interface:** hand-written tools (about 117) over Odoo's official external JSON-2 API (https://www.odoo.com/documentation/19.0/developer/reference/external_api.html): every tool is `POST https://<host>/json/2/<model>/<method>` with the ORM method's named parameters in the JSON body. Odoo publishes no OpenAPI document and no MCP server, and the API lives on a per-database host, so the tools are written against the documentation. `records.*` tools (list, search, count, get, group, nameSearch, create, update, delete, call) work on any model; `models.list` and `models.fields` discover installed models and their fields, so custom and Studio models work too. Typed `contacts`, `leads`, `saleOrders`, `invoices`, `products`, `projects`, `tasks`, `employees`, ... tools cover common models, and `workflow.*` runs the usual buttons (confirm a quotation, post an invoice, mark a lead won or lost, validate a transfer, post to the chatter). Models whose app is not installed (for example `helpdesk.ticket`, an Enterprise app) return an error from Odoo. Every mutation, including the generic `records.call`, asks for approval first.
+
+**Auth:** API key, sent as a bearer token. Enter the instance (the `mycompany` in `mycompany.odoo.com`, or the full `.odoo.com` / `.odoo.sh` host), the database name (leave empty on Odoo Online, where the host identifies the database; sent as `X-Odoo-Database`) and the key. Create the key as the integration user under Preferences > Account Security > New API Key; Odoo keys last at most three months and must then be rotated. The key acts with that user's access rights, so use a dedicated user. Credentials are sent only to `*.odoo.com` and `*.odoo.sh`. The health check calls `res.users/context_get`.
+
+**Known gaps:**
+- Odoo's documentation states that external API access is only available on Custom Odoo pricing plans, and is not available on One App Free or Standard plans. On other plans the health check and every tool fail with an access error, so check your plan before entering a key.
+- JSON-2 exists in Odoo 19 and later; Odoo 17 and 18 only offer the legacy `/jsonrpc` and XML-RPC endpoints, which are not supported. The legacy endpoints are deprecated and scheduled for removal in Odoo 22 (fall 2028).
+- Each database serves its own dynamic documentation at `/doc` (models, fields, methods). Whether it exposes a machine-readable spec was not verified, since the pages need a live database; the tools are hand-written from the public documentation. `records.nameSearch` sends `domain` (the Odoo 19 `name_search` signature, checked in odoo/orm/models.py; Odoo 17 and 18 used `args`, but they lack JSON-2 anyway).
+- Self-hosted databases on custom domains are not supported: the `apps` framework declares provider hosts statically, so only `*.odoo.com` and `*.odoo.sh` are allowed.
+- No OAuth. Odoo ships no OAuth provider for API access to a database, so the API key is the only method.
+- Binary fields (attachments, images) are base64 strings in values; there is no file upload helper.
+- Nothing was called against a real database; checks were typecheck and deploy only.
+- The icon is the Odoo mark from Simple Icons (Odoo's logo is the lowercase "odoo" lettering).

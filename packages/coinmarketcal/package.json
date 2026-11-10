@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/coinmarketcal",
+  "description": "Track upcoming and past crypto events with CoinMarketCal: search events by coin, category, date and keyword, read single events and cancellations, and look up coins, categories and API usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CoinMarketCal"
+  }
+}

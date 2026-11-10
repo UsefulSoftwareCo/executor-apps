@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tisane",
+  "description": "Analyze text with Tisane: problematic-content detection, sentiment, entities, topics, language detection, similarity, translation and language model lookups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Tisane Labs"
+  }
+}

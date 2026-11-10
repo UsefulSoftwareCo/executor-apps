@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tiktok",
+  "description": "TikTok for creators: profile and stats, the user's videos, and publishing videos and photos through the Display and Content Posting APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "TikTok"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nanonets",
+  "description": "Extract structured data from documents with Nanonets OCR models: predictions, results, training and external integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nanonets"
+  }
+}

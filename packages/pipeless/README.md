@@ -1,0 +1,11 @@
+# Pipeless
+
+Pipeless turns object-relationship-object events (user liked article, user followed user) into a graph and serves activity feeds and personalized recommendations from it. This package exposes 18 tools: write and delete events and objects, read recent events, relationship existence and counts, three activity feeds, and content, users-to-follow, related-content, related-tags and related-users recommendations.
+
+Interface: hand-written tools over the REST API at `https://api.pipeless.io/v1/apps/{app_id}/...`. Pipeless publishes no standalone OpenAPI document; its per-endpoint OpenAPI definitions are embedded in the ReadMe reference pages (https://docs.pipeless.io/reference, index at https://docs.pipeless.io/llms.txt). Every mutation requires approval.
+
+HTTP method conflict: the vendor's reference pages and the generated docs in the official pipeless-node repository (docs/*.md) show GET for the read endpoints (get-object, recent-events, relationship-exists, relationship-counts, algos/*) with a JSON body. The same client's source (https://github.com/pipeless/pipeless-node, src/Pipeless/api/*.js, v1.0.7, last pushed 2020-12) sends POST with the JSON body for all of them. A body on GET is rejected by the Fetch spec (and so by the Executor runtime), so this package follows the client source and sends reads as POST. This has NOT been confirmed against a live Pipeless app; if the server only accepts GET, the reads and the connection health check (POST `/recent-events`) will fail.
+
+Auth: API token. Each Pipeless app has its own App ID and API token; create an app on https://pipeless.io/apps, then enter both when connecting. The token is sent as `Authorization: Bearer <token>`. There is no OAuth.
+
+Known gaps: the tool schemas take relationship and object types as plain strings (the allowed values are listed in each tool description). Not verified against the vendor reference (docs.pipeless.io was behind a Cloudflare challenge/429): the paths `recent-events`, `relationship-exists`, `relationship-counts`, `objects/all` and the snake_case parameter names of the `algos/*` endpoints (the official client types them as opaque objects). Batch size (1 to 10 events) is checked at call time, since the schema builder has no array bounds. No live exercise has been done. Pipeless has had little activity since 2025.

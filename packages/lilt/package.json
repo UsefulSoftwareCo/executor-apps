@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lilt",
+  "description": "LILT translation and localization: machine translation, translation memories, projects, jobs, documents and files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LILT"
+  }
+}

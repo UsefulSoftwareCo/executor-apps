@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ebay",
+  "description": "eBay Buy, Commerce, Developer and Sell REST APIs: item search, catalog and taxonomy, orders and fulfillment, listings, marketing and analytics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "eBay"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

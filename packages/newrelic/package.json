@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/newrelic",
+  "description": "Query telemetry with NRQL, manage alerts, entities, dashboards and accounts through New Relic's NerdGraph GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "New Relic"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/guru",
+  "description": "Search and manage Guru knowledge: cards, collections, boards, groups, members, teams and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Guru"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apipieai",
+  "description": "APIpie AI unified model API: chat completions, embeddings, image generation, speech, web search and scrape, model catalog, usage history, vector collections and RAG tuning.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "APIpie AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

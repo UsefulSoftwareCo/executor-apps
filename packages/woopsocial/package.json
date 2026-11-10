@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/woopsocial",
+  "description": "Schedule and publish social media posts with WoopSocial: posts, projects, social accounts, media and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "WoopSocial"
+  }
+}

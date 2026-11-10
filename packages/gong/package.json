@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gong",
+  "description": "Calls and transcripts, users, activity stats, scorecards, library folders, CRM uploads, Engage flows and tasks from the Gong API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Gong"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bigmailer",
+  "description": "Email marketing with BigMailer: brands, contacts, lists, fields, templates, senders, bulk, transactional and automation campaigns, suppressions, webhooks and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BigMailer"
+  }
+}

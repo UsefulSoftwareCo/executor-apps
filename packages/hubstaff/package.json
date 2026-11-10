@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hubstaff",
+  "description": "Time tracking, projects, tasks, members, timesheets, payments and reports in Hubstaff, via the Hubstaff API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hubstaff"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

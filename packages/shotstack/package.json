@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shotstack",
+  "description": "Programmatic video, image and audio with Shotstack: edit renders, templates, probe, AI generation, hosted assets and source ingest.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Shotstack"
+  }
+}

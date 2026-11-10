@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/autobound",
+  "description": "Autobound sales signals, prospect and company insights and AI-personalized outreach content, through Autobound's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Autobound"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

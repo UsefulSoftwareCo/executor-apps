@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jiminny",
+  "description": "Jiminny conversation intelligence: activities, transcripts, summaries, action items, questions, triggers, comments, AI scorecards, coaching feedback, users and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Jiminny"
+  }
+}

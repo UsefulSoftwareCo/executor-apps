@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/excalidraw",
+  "description": "Create hand-drawn style Excalidraw diagrams, export them to shareable links and save checkpoints, through Excalidraw's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Excalidraw"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/elevio",
+  "description": "Manage Elevio knowledge base content: articles, categories and search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Elevio"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lightspeed",
+  "description": "Lightspeed Retail (X-Series): products, inventory, sales, customers, registers, outlets, suppliers, gift cards, store credit and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Lightspeed Retail X-Series"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

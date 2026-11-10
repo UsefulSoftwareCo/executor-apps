@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/iplocate",
+  "description": "Look up geolocation, ASN, company, privacy, hosting and abuse contact data for any IP address with IPLocate.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "IPLocate"
+  }
+}

@@ -1,0 +1,9 @@
+# Polymarket US
+
+Covers Polymarket US, the CFTC-regulated product for US users (not the global Polymarket app): events, markets, order books and BBO, series, tags, sports, search, price history, asset prices, orders, portfolio and balances, RFQs, combos and incentives. 53 tools.
+
+Interface: Polymarket's official OpenAPI documents, one per area, from `https://docs.polymarket.us/api-reference/oapi-schemas/<name>-schema.json`, mounted under one key each (markets, events, series, search, sports, tags, priceHistory, assetPrices, orders, portfolio, rfqs, combos, incentives). Public market data is served from `https://gateway.polymarket.us` and needs no credentials; trading, portfolio, RFQ, combo and incentive endpoints use `https://api.polymarket.us`. Mutations require approval.
+
+Auth: API key. Sign in at https://polymarket.us/developer with the same method you use in the app (verified account required) and create a key. Enter the Key ID and the Secret Key (shown only once). Each private request is signed by the app: `X-PM-Signature` is the base64 Ed25519 signature of `timestamp + METHOD + path`, with the first 32 bytes of the base64-decoded secret as the seed, plus `X-PM-Timestamp` (Unix ms, within 30 seconds of server time) and `X-PM-Access-Key`. The app signs the path only. The vendor's only signing example is a GET with no query parameters, so whether the server expects the query string to be signed is unverified and a known risk: private endpoints that take query parameters (portfolio positions and activities, open orders) may return 401 if it does. There is no OAuth.
+
+Known gaps: the legacy sports document, the institutional/FIX/gRPC APIs, and WebSocket streams are not included. The signing flow was not exercised against the live API (no real credentials). The health check calls `/v1/account/balances`.

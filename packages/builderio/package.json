@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/builderio",
+  "description": "Builder.io CMS (models, content, schemas) and Builder Code (projects, branches, agent runs, design systems) through Builder's official MCP servers.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Builder.io"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

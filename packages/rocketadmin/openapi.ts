@@ -1,0 +1,48 @@
+import type { OpenapiToolNamesOptions } from "apps/openapi";
+
+// Rocketadmin's published description has no servers entry; the API lives under /api on app.rocketadmin.com.
+export const options = {
+  source: { url: "https://app.rocketadmin.com/api/docs-json" },
+  allowedOrigin: "https://app.rocketadmin.com",
+  baseUrl: "https://app.rocketadmin.com/api",
+  // Operations reference an undeclared "bearer" scheme; the API actually reads the key from x-api-key.
+  securitySchemes: { bearer: { type: "apiKey", in: "header", name: "x-api-key" } },
+  fallbackSecurity: [{ bearer: [] }],
+  methods: { apiKey: [{ scheme: "bearer", field: "token", part: "value", prefix: "" }] },
+  oauth: [],
+  // Operations that take no API key (no security requirement) or only work with browser sessions (login, OTP login, 2FA).
+  patches: [
+    { op: "remove", path: "/paths/~1hello/get" },
+    { op: "remove", path: "/paths/~1user~1login/post" },
+    { op: "remove", path: "/paths/~1user~1otp~1login/post" },
+    { op: "remove", path: "/paths/~1saas~1user~1login/post" },
+    { op: "remove", path: "/paths/~1saas~1user~1otp~1login/post" },
+    { op: "remove", path: "/paths/~1saas~1user~1google~1login/post" },
+    { op: "remove", path: "/paths/~1saas~1user~1github~1login/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1auth~1validate-user-token/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1auth~1validate-table-ai-request/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1auth~1validate-connection-edit/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1connection~1public-permissions~1{connectionId}/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1connection~1site-runtime-policy~1{connectionId}/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1context/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1tables/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1table-structure/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1raw-query/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1sample-rows/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1aggregation-pipeline/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1ai~1data~1{connectionId}~1settings-scan/post" },
+    { op: "remove", path: "/paths/~1internal~1agents~1company~1subscription-info/post" },
+    { op: "remove", path: "/paths/~1internal~1sitenova~1row-event~1{connectionId}/post" },
+    { op: "remove", path: "/paths/~1internal~1sitenova~1connection~1{connectionId}/get" },
+    { op: "remove", path: "/paths/~1internal~1sitenova~1validate-public-read~1{connectionId}/post" },
+    { op: "remove", path: "/paths/~1internal~1sitenova~1raw-query~1{connectionId}/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1auth~1register/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1auth~1login/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1data~1rows/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1data~1read/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1data~1create/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1data~1update/post" },
+    { op: "remove", path: "/paths/~1sitenova~1{connectionId}~1data~1delete/post" },
+    { op: "remove", path: "/paths/~1company~12fa~1{companyId}/put" },
+  ],
+} satisfies OpenapiToolNamesOptions;

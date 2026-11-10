@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/printful",
+  "description": "Orders, stores, catalog products, sync products, files, shipping rates, mockups and webhooks in Printful.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Printful"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

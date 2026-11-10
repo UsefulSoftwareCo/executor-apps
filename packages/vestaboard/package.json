@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vestaboard",
+  "description": "Read and write messages on a Vestaboard split-flap display through the Vestaboard Cloud API: read the current message, send text or character codes, set transitions and format text into a grid.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Vestaboard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

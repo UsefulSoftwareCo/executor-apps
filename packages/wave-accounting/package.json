@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/wave-accounting",
+  "description": "Businesses, customers, invoices, products, accounts and transactions in Wave's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Wave Accounting"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

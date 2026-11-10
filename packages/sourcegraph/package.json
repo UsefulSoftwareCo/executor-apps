@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/sourcegraph",
+  "description": "Code search, repositories, commits, symbols, batch changes and the rest of Sourcegraph's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Sourcegraph"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

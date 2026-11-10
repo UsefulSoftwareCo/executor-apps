@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/exa",
+  "description": "AI web search with Exa: search, find similar pages, fetch page contents, get cited answers, and manage monitors, agent runs, batches and websets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Exa"
+  }
+}

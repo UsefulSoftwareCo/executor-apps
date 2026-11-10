@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apple-app-store",
+  "description": "Apple App Store Connect: apps, builds, TestFlight, versions, reviews, in-app purchases, subscriptions, users and analytics reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Apple App Store"
+  }
+}

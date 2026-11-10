@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hotspotsystem",
+  "description": "Read HotspotSystem Wi-Fi hotspot data: locations, customers, subscribers, vouchers and transactions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HotspotSystem"
+  }
+}

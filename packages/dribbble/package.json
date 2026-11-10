@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dribbble",
+  "description": "Manage your Dribbble shots, projects and shot attachments through the Dribbble API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dribbble"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

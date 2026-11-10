@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/explorium",
+  "description": "Explorium AgentSource B2B data: match, search and enrich businesses and prospects, track events, run research jobs, using Explorium's official OpenAPI document.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Explorium"
+  }
+}

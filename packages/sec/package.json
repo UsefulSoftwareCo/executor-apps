@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sec",
+  "description": "Read SEC EDGAR: company filings, XBRL financial facts and concepts, cross-company frames, ticker lookup, filing indexes and full-text search.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SEC EDGAR"
+  }
+}

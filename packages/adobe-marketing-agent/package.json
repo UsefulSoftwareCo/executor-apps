@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/adobe-marketing-agent",
+  "description": "Adobe marketing context, preferences and agent capabilities, through Adobe's official Marketing Agent MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Adobe Marketing Agent"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

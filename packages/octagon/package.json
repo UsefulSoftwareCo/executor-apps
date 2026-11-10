@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/octagon",
+  "description": "Octagon market intelligence (SEC filings, earnings transcripts, financial metrics, stock data, deep research, prediction markets), through Octagon's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Octagon"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

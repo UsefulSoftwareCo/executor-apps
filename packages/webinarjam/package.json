@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webinarjam",
+  "description": "WebinarJam: list webinars, read webinar details and schedules, register attendees, list registrants and unsubscribe leads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "WebinarJam"
+  }
+}

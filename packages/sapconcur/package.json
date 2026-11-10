@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sapconcur",
+  "description": "SAP Concur expense reports and entries, travel requests and trips, invoices, vendors, lists, users and any REST endpoint.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SAP Concur"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

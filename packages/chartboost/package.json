@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chartboost",
+  "description": "Chartboost monetization APIs: apps, ad locations, lists, monetization settings, analytics and mediation reporting.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Chartboost"
+  }
+}

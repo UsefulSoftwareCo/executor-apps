@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rockgympro",
+  "description": "Manage climbing gym data in Rock Gym Pro: facilities, customers, bookings, check-ins, invoices, sales, staff, time clocks and event widgets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rock Gym Pro"
+  }
+}

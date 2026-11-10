@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hostinger",
+  "description": "Manage Hostinger hosting, VPS, domains, DNS, billing and email marketing through the Hostinger API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hostinger"
+  }
+}

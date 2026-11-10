@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pneumatic",
+  "description": "Pneumatic workflow management: templates, workflow runs, tasks, users and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pneumatic"
+  }
+}

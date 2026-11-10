@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linkedinads",
+  "description": "LinkedIn Ads (Campaign Manager) ad accounts, campaign groups, campaigns, creatives, targeting and analytics through LinkedIn's Marketing API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "LinkedIn Ads"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

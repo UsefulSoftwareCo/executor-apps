@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/digicert",
+  "description": "Manage DigiCert CertCentral certificates: orders, reissues, revocation, domains and DCV, organizations, users, containers and products.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DigiCert"
+  }
+}

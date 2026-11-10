@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/phantombuster",
+  "description": "Run and manage PhantomBuster automation: agents, runs and output, scripts, branches, lead lists, organization storage and usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PhantomBuster"
+  }
+}

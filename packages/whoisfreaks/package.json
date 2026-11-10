@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/whoisfreaks",
+  "description": "Domain and IP intelligence with WhoisFreaks: WHOIS, DNS, SSL, availability, subdomains, geolocation and reputation lookups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "WhoisFreaks"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/truthscan",
+  "description": "Detect AI-generated and manipulated text, images, audio, video and PDFs with TruthScan.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TruthScan"
+  }
+}

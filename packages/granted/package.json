@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/granted",
+  "description": "Search grant opportunities and funders, with eligibility and deadline details, through Granted AI's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Granted"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

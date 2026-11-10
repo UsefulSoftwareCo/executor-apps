@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/github",
+  "description": "Repositories, code search, issues and pull requests through GitHub's MCP server, plus the rest of the GitHub REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GitHub"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

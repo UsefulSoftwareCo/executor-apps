@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wiza",
+  "description": "Find and enrich contacts and companies with Wiza: individual reveals, prospect and company search, lists, credits and filter autocomplete.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Wiza"
+  }
+}

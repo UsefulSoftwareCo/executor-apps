@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/streamtime",
+  "description": "Jobs, companies, contacts, invoices, quotes, time tracking and scheduling in Streamtime, through its public v2 API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Streamtime"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

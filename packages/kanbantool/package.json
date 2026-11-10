@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kanbantool",
+  "description": "Kanban Tool boards, tasks, subtasks, comments, time trackers and changelogs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Kanban Tool"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

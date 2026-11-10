@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/persistiq",
+  "description": "Manage PersistIQ sales outreach: leads, campaigns, lead fields and statuses, replies, events, tags, do-not-contact domains and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PersistIQ"
+  }
+}

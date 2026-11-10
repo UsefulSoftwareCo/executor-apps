@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/justworks",
+  "description": "Justworks company, members, payroll, paystubs, deductions and time off through the Justworks partner API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Justworks"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

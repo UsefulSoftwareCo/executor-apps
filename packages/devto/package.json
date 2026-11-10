@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/devto",
+  "description": "Read and publish on DEV Community (dev.to): articles, comments, reactions, tags, users, organizations, analytics and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DEV Community"
+  }
+}

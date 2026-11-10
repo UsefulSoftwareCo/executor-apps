@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/renderform",
+  "description": "Generate images, PDFs and screenshots from RenderForm templates, and manage templates, results and fonts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "RenderForm"
+  }
+}

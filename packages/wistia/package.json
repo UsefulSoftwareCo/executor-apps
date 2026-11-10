@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wistia",
+  "description": "Manage Wistia video media, folders, channels, webinars, captions, tags and analytics through the Wistia Data API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Wistia"
+  }
+}

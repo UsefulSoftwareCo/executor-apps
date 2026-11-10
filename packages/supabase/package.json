@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/supabase",
+  "description": "Supabase Management API: projects, organizations, databases, branches, auth config, edge functions, secrets, storage and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Supabase"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

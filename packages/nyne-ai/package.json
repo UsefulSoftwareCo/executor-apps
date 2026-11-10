@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nyne-ai",
+  "description": "People and company data from Nyne.ai: person and company search, enrichment, email and phone finding, social intelligence and AI research.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nyne AI"
+  }
+}

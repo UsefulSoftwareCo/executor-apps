@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ntfy",
+  "description": "Send and read push notifications on ntfy.sh, and manage access tokens and topic reservations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ntfy"
+  }
+}

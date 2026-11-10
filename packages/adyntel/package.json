@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/adyntel",
+  "description": "Competitor ad intelligence from Adyntel: Meta (Facebook and Instagram), Google, Google Shopping, LinkedIn and TikTok ad libraries, keyword ad search, and paid versus organic keyword data for a domain.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Adyntel"
+  }
+}

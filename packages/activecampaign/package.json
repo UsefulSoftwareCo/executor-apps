@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/activecampaign",
+  "description": "ActiveCampaign: contacts, accounts, deals and pipelines, lists, tags, custom fields, campaigns, automations, forms, webhooks and ecommerce.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ActiveCampaign"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

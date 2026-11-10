@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/typeform",
+  "description": "Forms, themes, automations, contacts and response insights in Typeform, through Typeform's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Typeform"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

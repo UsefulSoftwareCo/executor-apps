@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pushbullet",
+  "description": "Send pushes, SMS and files between devices with Pushbullet: pushes, devices, chats, channel subscriptions and text messages.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pushbullet"
+  }
+}

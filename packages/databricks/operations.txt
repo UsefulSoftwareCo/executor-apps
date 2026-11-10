@@ -1,0 +1,217 @@
+# tag|operationId|METHOD|path|summary|query params|body fields   (types: s i b o a; ! = required; METHODR = POST/PUT that only reads)
+clusters|listClusters|GET|/api/2.1/clusters/list|List clusters|filter_by:o,page_size:i,page_token,sort_by:o|
+clusters|getCluster|GET|/api/2.1/clusters/get|Get a cluster|cluster_id!|
+clusters|createCluster|POST|/api/2.1/clusters/create|Create a cluster||spark_version!,cluster_name,num_workers:i,autoscale:o,node_type_id,driver_node_type_id,autotermination_minutes:i,spark_conf:o,custom_tags:o,policy_id,instance_pool_id,data_security_mode,runtime_engine,single_user_name,aws_attributes:o,azure_attributes:o,gcp_attributes:o,init_scripts:a,spark_env_vars:o,ssh_public_keys:a,apply_policy_default_values:b
+clusters|editCluster|POST|/api/2.1/clusters/edit|Edit a cluster's configuration||cluster_id!,spark_version!,cluster_name,num_workers:i,autoscale:o,node_type_id,autotermination_minutes:i,spark_conf:o,custom_tags:o,policy_id,instance_pool_id,data_security_mode
+clusters|startCluster|POST|/api/2.1/clusters/start|Start a terminated cluster||cluster_id!
+clusters|restartCluster|POST|/api/2.1/clusters/restart|Restart a cluster||cluster_id!
+clusters|terminateCluster|POST|/api/2.1/clusters/delete|Terminate a cluster (it can be restarted later)||cluster_id!
+clusters|permanentDeleteCluster|POST|/api/2.1/clusters/permanent-delete|Permanently delete a cluster||cluster_id!
+clusters|pinCluster|POST|/api/2.1/clusters/pin|Pin a cluster||cluster_id!
+clusters|unpinCluster|POST|/api/2.1/clusters/unpin|Unpin a cluster||cluster_id!
+clusters|listClusterEvents|POSTR|/api/2.1/clusters/events|List events for a cluster||cluster_id!,start_time:i,end_time:i,event_types:a,order,limit:i,offset:i
+clusters|listNodeTypes|GET|/api/2.1/clusters/list-node-types|List available node types||
+clusters|listSparkVersions|GET|/api/2.1/clusters/spark-versions|List available Databricks Runtime versions||
+clusters|listZones|GET|/api/2.1/clusters/list-zones|List availability zones||
+libraries|listAllClusterLibraryStatuses|GET|/api/2.0/libraries/all-cluster-statuses|Library status on all clusters||
+libraries|getClusterLibraryStatus|GET|/api/2.0/libraries/cluster-status|Library status on one cluster|cluster_id!|
+libraries|installLibraries|POST|/api/2.0/libraries/install|Install libraries on a cluster||cluster_id!,libraries:a!
+libraries|uninstallLibraries|POST|/api/2.0/libraries/uninstall|Uninstall libraries from a cluster (applies on restart)||cluster_id!,libraries:a!
+instancePools|listInstancePools|GET|/api/2.0/instance-pools/list|List instance pools||
+instancePools|getInstancePool|GET|/api/2.0/instance-pools/get|Get an instance pool|instance_pool_id!|
+instancePools|createInstancePool|POST|/api/2.0/instance-pools/create|Create an instance pool||instance_pool_name!,node_type_id!,min_idle_instances:i,max_capacity:i,idle_instance_autotermination_minutes:i,preloaded_spark_versions:a,custom_tags:o
+instancePools|deleteInstancePool|POST|/api/2.0/instance-pools/delete|Delete an instance pool||instance_pool_id!
+clusterPolicies|listClusterPolicies|GET|/api/2.0/policies/clusters/list|List cluster policies|sort_column,sort_order|
+clusterPolicies|getClusterPolicy|GET|/api/2.0/policies/clusters/get|Get a cluster policy|policy_id!|
+clusterPolicies|createClusterPolicy|POST|/api/2.0/policies/clusters/create|Create a cluster policy||name!,definition,description,libraries:a,max_clusters_per_user:i
+clusterPolicies|deleteClusterPolicy|POST|/api/2.0/policies/clusters/delete|Delete a cluster policy||policy_id!
+jobs|listJobs|GET|/api/2.2/jobs/list|List jobs|limit:i,offset:i,name,expand_tasks:b,page_token|
+jobs|getJob|GET|/api/2.2/jobs/get|Get a job|job_id:i!,page_token|
+jobs|createJob|POST|/api/2.2/jobs/create|Create a job||name,tasks:a,schedule:o,trigger:o,job_clusters:a,email_notifications:o,max_concurrent_runs:i,timeout_seconds:i,tags:o,parameters:a,queue:o,continuous:o,git_source:o,run_as:o,environments:a,performance_target
+jobs|updateJob|POST|/api/2.2/jobs/update|Partially update a job||job_id:i!,new_settings:o,fields_to_remove:a
+jobs|resetJob|POST|/api/2.2/jobs/reset|Overwrite all settings of a job||job_id:i!,new_settings:o!
+jobs|deleteJob|POST|/api/2.2/jobs/delete|Delete a job||job_id:i!
+jobs|runJobNow|POST|/api/2.2/jobs/run-now|Trigger a run of a job||job_id:i!,job_parameters:o,notebook_params:o,python_params:a,jar_params:a,idempotency_token,queue:o,only:a
+jobs|submitRun|POST|/api/2.2/jobs/runs/submit|Submit a one-time run||run_name,tasks:a!,idempotency_token,timeout_seconds:i,git_source:o,environments:a,queue:o,run_as:o
+jobs|listRuns|GET|/api/2.2/jobs/runs/list|List job runs|job_id:i,active_only:b,completed_only:b,run_type,limit:i,offset:i,start_time_from:i,start_time_to:i,expand_tasks:b,page_token|
+jobs|getRun|GET|/api/2.2/jobs/runs/get|Get a run|run_id:i!,include_history:b,include_resolved_values:b,page_token|
+jobs|getRunOutput|GET|/api/2.2/jobs/runs/get-output|Get the output of a single-task run|run_id:i!|
+jobs|cancelRun|POST|/api/2.2/jobs/runs/cancel|Cancel a run||run_id:i!
+jobs|cancelAllRuns|POST|/api/2.2/jobs/runs/cancel-all|Cancel all active runs of a job||job_id:i,all_queued_runs:b
+jobs|repairRun|POST|/api/2.2/jobs/runs/repair|Re-run failed or skipped tasks||run_id:i!,rerun_tasks:a,rerun_all_failed_tasks:b,job_parameters:o,latest_repair_id:i
+jobs|deleteRun|POST|/api/2.2/jobs/runs/delete|Delete a non-active run||run_id:i!
+jobs|exportRun|GET|/api/2.2/jobs/runs/export|Export a run's notebook views|run_id:i!,views_to_export|
+sql|executeStatement|POST|/api/2.0/sql/statements|Execute a SQL statement on a warehouse||statement!,warehouse_id!,catalog,schema,parameters:a,row_limit:i,byte_limit:i,wait_timeout,on_wait_timeout,disposition,format
+sql|getStatement|GET|/api/2.0/sql/statements/{statement_id}|Get a statement's status and first result chunk||
+sql|cancelStatement|POST|/api/2.0/sql/statements/{statement_id}/cancel|Cancel a running statement||
+sql|getStatementResultChunk|GET|/api/2.0/sql/statements/{statement_id}/result/chunks/{chunk_index}|Get a result chunk||
+sql|listWarehouses|GET|/api/2.0/sql/warehouses|List SQL warehouses|run_as_user_id:i|
+sql|getWarehouse|GET|/api/2.0/sql/warehouses/{id}|Get a SQL warehouse||
+sql|createWarehouse|POST|/api/2.0/sql/warehouses|Create a SQL warehouse||name,cluster_size,min_num_clusters:i,max_num_clusters:i,auto_stop_mins:i,warehouse_type,enable_serverless_compute:b,enable_photon:b,spot_instance_policy,channel:o,tags:o
+sql|editWarehouse|POST|/api/2.0/sql/warehouses/{id}/edit|Edit a SQL warehouse||name,cluster_size,min_num_clusters:i,max_num_clusters:i,auto_stop_mins:i,warehouse_type,enable_serverless_compute:b,enable_photon:b,spot_instance_policy,channel:o,tags:o
+sql|deleteWarehouse|DELETE|/api/2.0/sql/warehouses/{id}|Delete a SQL warehouse||
+sql|startWarehouse|POST|/api/2.0/sql/warehouses/{id}/start|Start a SQL warehouse||
+sql|stopWarehouse|POST|/api/2.0/sql/warehouses/{id}/stop|Stop a SQL warehouse||
+sql|getWorkspaceWarehouseConfig|GET|/api/2.0/sql/config/warehouses|Workspace-wide SQL warehouse configuration||
+sql|listQueryHistory|GET|/api/2.0/sql/history/queries|List query history|filter_by:o,max_results:i,page_token,include_metrics:b|
+sql|listQueries|GET|/api/2.0/sql/queries|List saved queries|page_size:i,page_token|
+sql|getQuery|GET|/api/2.0/sql/queries/{id}|Get a saved query||
+sql|createQuery|POST|/api/2.0/sql/queries|Create a saved query||query:o
+sql|updateQuery|PATCH|/api/2.0/sql/queries/{id}|Update a saved query||update_mask!,query:o
+sql|trashQuery|DELETE|/api/2.0/sql/queries/{id}|Move a saved query to the trash||
+sql|listAlerts|GET|/api/2.0/sql/alerts|List SQL alerts|page_size:i,page_token|
+sql|getAlert|GET|/api/2.0/sql/alerts/{id}|Get a SQL alert||
+sql|createAlert|POST|/api/2.0/sql/alerts|Create a SQL alert||alert:o
+sql|trashAlert|DELETE|/api/2.0/sql/alerts/{id}|Move a SQL alert to the trash||
+lakeview|listDashboards|GET|/api/2.0/lakeview/dashboards|List AI/BI dashboards|page_size:i,page_token,show_trashed:b,view|
+lakeview|getDashboard|GET|/api/2.0/lakeview/dashboards/{dashboard_id}|Get an AI/BI dashboard||
+lakeview|createDashboard|POST|/api/2.0/lakeview/dashboards|Create an AI/BI dashboard||display_name!,serialized_dashboard,warehouse_id,parent_path
+lakeview|updateDashboard|PATCH|/api/2.0/lakeview/dashboards/{dashboard_id}|Update an AI/BI dashboard||display_name,serialized_dashboard,warehouse_id
+lakeview|trashDashboard|DELETE|/api/2.0/lakeview/dashboards/{dashboard_id}|Move an AI/BI dashboard to the trash||
+lakeview|publishDashboard|POST|/api/2.0/lakeview/dashboards/{dashboard_id}/published|Publish an AI/BI dashboard||embed_credentials:b,warehouse_id
+lakeview|getPublishedDashboard|GET|/api/2.0/lakeview/dashboards/{dashboard_id}/published|Get the published version of a dashboard||
+genie|listGenieSpaces|GET|/api/2.0/genie/spaces|List Genie spaces|page_size:i,page_token|
+genie|getGenieSpace|GET|/api/2.0/genie/spaces/{space_id}|Get a Genie space||
+genie|startGenieConversation|POST|/api/2.0/genie/spaces/{space_id}/start-conversation|Ask a question in a new Genie conversation||content!
+genie|createGenieMessage|POST|/api/2.0/genie/spaces/{space_id}/conversations/{conversation_id}/messages|Ask a follow-up question in a Genie conversation||content!
+genie|getGenieMessage|GET|/api/2.0/genie/spaces/{space_id}/conversations/{conversation_id}/messages/{message_id}|Get a Genie message and its status||
+genie|getGenieMessageQueryResult|GET|/api/2.0/genie/spaces/{space_id}/conversations/{conversation_id}/messages/{message_id}/attachments/{attachment_id}/query-result|Get the SQL result of a Genie message attachment||
+genie|listGenieConversationMessages|GET|/api/2.0/genie/spaces/{space_id}/conversations/{conversation_id}/messages|List messages in a Genie conversation|page_size:i,page_token|
+unityCatalog|getCurrentMetastoreAssignment|GET|/api/2.1/unity-catalog/current-metastore-assignment|Metastore assigned to this workspace||
+unityCatalog|getMetastoreSummary|GET|/api/2.1/unity-catalog/metastore_summary|Summary of the workspace metastore||
+unityCatalog|listMetastores|GET|/api/2.1/unity-catalog/metastores|List metastores|max_results:i,page_token|
+unityCatalog|listCatalogs|GET|/api/2.1/unity-catalog/catalogs|List catalogs|include_browse:b,max_results:i,page_token|
+unityCatalog|getCatalog|GET|/api/2.1/unity-catalog/catalogs/{name}|Get a catalog|include_browse:b|
+unityCatalog|createCatalog|POST|/api/2.1/unity-catalog/catalogs|Create a catalog||name!,comment,properties:o,storage_root,provider_name,share_name,connection_name,options:o
+unityCatalog|updateCatalog|PATCH|/api/2.1/unity-catalog/catalogs/{name}|Update a catalog||new_name,comment,owner,properties:o,isolation_mode,enable_predictive_optimization
+unityCatalog|deleteCatalog|DELETE|/api/2.1/unity-catalog/catalogs/{name}|Delete a catalog|force:b|
+unityCatalog|listSchemas|GET|/api/2.1/unity-catalog/schemas|List schemas in a catalog|catalog_name!,include_browse:b,max_results:i,page_token|
+unityCatalog|getSchema|GET|/api/2.1/unity-catalog/schemas/{full_name}|Get a schema|include_browse:b|
+unityCatalog|createSchema|POST|/api/2.1/unity-catalog/schemas|Create a schema||name!,catalog_name!,comment,properties:o,storage_root
+unityCatalog|updateSchema|PATCH|/api/2.1/unity-catalog/schemas/{full_name}|Update a schema||new_name,comment,owner,properties:o,enable_predictive_optimization
+unityCatalog|deleteSchema|DELETE|/api/2.1/unity-catalog/schemas/{full_name}|Delete a schema|force:b|
+unityCatalog|listTables|GET|/api/2.1/unity-catalog/tables|List tables in a schema|catalog_name!,schema_name!,include_browse:b,include_delta_metadata:b,max_results:i,omit_columns:b,omit_properties:b,page_token|
+unityCatalog|listTableSummaries|GET|/api/2.1/unity-catalog/table-summaries|List table summaries across schemas|catalog_name!,schema_name_pattern,table_name_pattern,include_manifest_capabilities:b,max_results:i,page_token|
+unityCatalog|getTable|GET|/api/2.1/unity-catalog/tables/{full_name}|Get a table (full_name is catalog.schema.table)|include_browse:b,include_delta_metadata:b|
+unityCatalog|deleteTable|DELETE|/api/2.1/unity-catalog/tables/{full_name}|Delete a table||
+unityCatalog|listVolumes|GET|/api/2.1/unity-catalog/volumes|List volumes in a schema|catalog_name!,schema_name!,include_browse:b,max_results:i,page_token|
+unityCatalog|getVolume|GET|/api/2.1/unity-catalog/volumes/{name}|Get a volume (name is catalog.schema.volume)|include_browse:b|
+unityCatalog|createVolume|POST|/api/2.1/unity-catalog/volumes|Create a volume||catalog_name!,schema_name!,name!,volume_type!,comment,storage_location
+unityCatalog|updateVolume|PATCH|/api/2.1/unity-catalog/volumes/{name}|Update a volume||new_name,comment,owner
+unityCatalog|deleteVolume|DELETE|/api/2.1/unity-catalog/volumes/{name}|Delete a volume||
+unityCatalog|listFunctions|GET|/api/2.1/unity-catalog/functions|List functions in a schema|catalog_name!,schema_name!,include_browse:b,max_results:i,page_token|
+unityCatalog|getFunction|GET|/api/2.1/unity-catalog/functions/{name}|Get a function||
+unityCatalog|deleteFunction|DELETE|/api/2.1/unity-catalog/functions/{name}|Delete a function|force:b|
+unityCatalog|listRegisteredModels|GET|/api/2.1/unity-catalog/models|List registered models|catalog_name,schema_name,include_browse:b,max_results:i,page_token|
+unityCatalog|getRegisteredModel|GET|/api/2.1/unity-catalog/models/{full_name}|Get a registered model|include_aliases:b,include_browse:b|
+unityCatalog|listModelVersions|GET|/api/2.1/unity-catalog/models/{full_name}/versions|List versions of a registered model|include_browse:b,max_results:i,page_token|
+unityCatalog|deleteRegisteredModel|DELETE|/api/2.1/unity-catalog/models/{full_name}|Delete a registered model||
+unityCatalog|listExternalLocations|GET|/api/2.1/unity-catalog/external-locations|List external locations|include_browse:b,max_results:i,page_token|
+unityCatalog|getExternalLocation|GET|/api/2.1/unity-catalog/external-locations/{name}|Get an external location||
+unityCatalog|listStorageCredentials|GET|/api/2.1/unity-catalog/storage-credentials|List storage credentials|max_results:i,page_token|
+unityCatalog|getStorageCredential|GET|/api/2.1/unity-catalog/storage-credentials/{name}|Get a storage credential||
+unityCatalog|listConnections|GET|/api/2.1/unity-catalog/connections|List connections|max_results:i,page_token|
+unityCatalog|getConnection|GET|/api/2.1/unity-catalog/connections/{name}|Get a connection||
+unityCatalog|getGrants|GET|/api/2.1/unity-catalog/permissions/{securable_type}/{full_name}|Get grants on a securable|principal,max_results:i,page_token|
+unityCatalog|updateGrants|PATCH|/api/2.1/unity-catalog/permissions/{securable_type}/{full_name}|Grant or revoke privileges on a securable||changes:a
+unityCatalog|getEffectiveGrants|GET|/api/2.1/unity-catalog/effective-permissions/{securable_type}/{full_name}|Get effective (inherited) grants on a securable|principal,max_results:i,page_token|
+unityCatalog|getTableLineage|GET|/api/2.0/lineage-tracking/table-lineage|Upstream and downstream lineage of a table|table_name!,include_entity_lineage:b,page_token|
+unityCatalog|getColumnLineage|GET|/api/2.0/lineage-tracking/column-lineage|Lineage of a column|table_name!,column_name!,page_token|
+unityCatalog|listShares|GET|/api/2.1/unity-catalog/shares|List Delta Sharing shares|max_results:i,page_token|
+unityCatalog|getShare|GET|/api/2.1/unity-catalog/shares/{name}|Get a share|include_shared_data:b|
+unityCatalog|listRecipients|GET|/api/2.1/unity-catalog/recipients|List sharing recipients|max_results:i,page_token|
+unityCatalog|listProviders|GET|/api/2.1/unity-catalog/providers|List sharing providers|max_results:i,page_token|
+workspace|listWorkspaceObjects|GET|/api/2.0/workspace/list|List notebooks, files and folders|path!,notebooks_modified_after:i|
+workspace|getWorkspaceObjectStatus|GET|/api/2.0/workspace/get-status|Get the status of a workspace object|path!|
+workspace|exportWorkspaceObject|GET|/api/2.0/workspace/export|Export a notebook or file (base64 content)|path!,format,direct_download:b|
+workspace|importWorkspaceObject|POST|/api/2.0/workspace/import|Import a notebook or file||path!,content,format,language,overwrite:b
+workspace|createWorkspaceDirectory|POST|/api/2.0/workspace/mkdirs|Create a directory||path!
+workspace|deleteWorkspaceObject|POST|/api/2.0/workspace/delete|Delete a workspace object||path!,recursive:b
+dbfs|listDbfs|GET|/api/2.0/dbfs/list|List a DBFS directory|path!|
+dbfs|getDbfsStatus|GET|/api/2.0/dbfs/get-status|Get the status of a DBFS file or directory|path!|
+dbfs|readDbfs|GET|/api/2.0/dbfs/read|Read up to 1 MB of a DBFS file (base64)|path!,offset:i,length:i|
+dbfs|putDbfs|POST|/api/2.0/dbfs/put|Upload a small DBFS file (base64 contents up to 1 MB)||path!,contents,overwrite:b
+dbfs|createDbfsDirectory|POST|/api/2.0/dbfs/mkdirs|Create a DBFS directory||path!
+dbfs|deleteDbfs|POST|/api/2.0/dbfs/delete|Delete a DBFS file or directory||path!,recursive:b
+dbfs|moveDbfs|POST|/api/2.0/dbfs/move|Move a DBFS file or directory||source_path!,destination_path!
+repos|listRepos|GET|/api/2.0/repos|List Git folders|path_prefix,next_page_token|
+repos|getRepo|GET|/api/2.0/repos/{repo_id}|Get a Git folder||
+repos|createRepo|POST|/api/2.0/repos|Create a Git folder||url!,provider!,path,sparse_checkout:o
+repos|updateRepo|PATCH|/api/2.0/repos/{repo_id}|Check out a branch or tag in a Git folder||branch,tag,sparse_checkout:o
+repos|deleteRepo|DELETE|/api/2.0/repos/{repo_id}|Delete a Git folder||
+secrets|listSecretScopes|GET|/api/2.0/secrets/scopes/list|List secret scopes||
+secrets|createSecretScope|POST|/api/2.0/secrets/scopes/create|Create a secret scope||scope!,initial_manage_principal,scope_backend_type
+secrets|deleteSecretScope|POST|/api/2.0/secrets/scopes/delete|Delete a secret scope||scope!
+secrets|listSecrets|GET|/api/2.0/secrets/list|List secret keys in a scope (values are never returned)|scope!|
+secrets|putSecret|POST|/api/2.0/secrets/put|Create or overwrite a secret||scope!,key!,string_value,bytes_value
+secrets|deleteSecret|POST|/api/2.0/secrets/delete|Delete a secret||scope!,key!
+tokens|listTokens|GET|/api/2.0/token/list|List your personal access tokens||
+tokens|createToken|POST|/api/2.0/token/create|Create a personal access token||comment,lifetime_seconds:i
+tokens|revokeToken|POST|/api/2.0/token/delete|Revoke a personal access token||token_id!
+permissions|getPermissions|GET|/api/2.0/permissions/{request_object_type}/{request_object_id}|Get permissions on an object||
+permissions|getPermissionLevels|GET|/api/2.0/permissions/{request_object_type}/{request_object_id}/permissionLevels|List assignable permission levels||
+permissions|updatePermissions|PATCH|/api/2.0/permissions/{request_object_type}/{request_object_id}|Add permissions on an object||access_control_list:a!
+permissions|setPermissions|PUT|/api/2.0/permissions/{request_object_type}/{request_object_id}|Replace permissions on an object||access_control_list:a!
+scim|getCurrentUser|GET|/api/2.0/preview/scim/v2/Me|Get the authenticated user||
+scim|listUsers|GET|/api/2.0/preview/scim/v2/Users|List workspace users|filter,attributes,count:i,startIndex:i,sortBy,sortOrder|
+scim|getUser|GET|/api/2.0/preview/scim/v2/Users/{id}|Get a user||
+scim|createUser|POST|/api/2.0/preview/scim/v2/Users|Create a user||userName!,displayName,emails:a,groups:a,entitlements:a,active:b
+scim|patchUser|PATCH|/api/2.0/preview/scim/v2/Users/{id}|Patch a user||schemas:a,Operations:a
+scim|deleteUser|DELETE|/api/2.0/preview/scim/v2/Users/{id}|Delete a user||
+scim|listGroups|GET|/api/2.0/preview/scim/v2/Groups|List groups|filter,attributes,count:i,startIndex:i|
+scim|getGroup|GET|/api/2.0/preview/scim/v2/Groups/{id}|Get a group||
+scim|createGroup|POST|/api/2.0/preview/scim/v2/Groups|Create a group||displayName!,members:a,entitlements:a
+scim|patchGroup|PATCH|/api/2.0/preview/scim/v2/Groups/{id}|Patch a group (add or remove members)||schemas:a,Operations:a
+scim|deleteGroup|DELETE|/api/2.0/preview/scim/v2/Groups/{id}|Delete a group||
+scim|listServicePrincipals|GET|/api/2.0/preview/scim/v2/ServicePrincipals|List service principals|filter,attributes,count:i,startIndex:i|
+scim|getServicePrincipal|GET|/api/2.0/preview/scim/v2/ServicePrincipals/{id}|Get a service principal||
+pipelines|listPipelines|GET|/api/2.0/pipelines|List pipelines|filter,max_results:i,order_by:a,page_token|
+pipelines|getPipeline|GET|/api/2.0/pipelines/{pipeline_id}|Get a pipeline||
+pipelines|createPipeline|POST|/api/2.0/pipelines|Create a pipeline||name,catalog,schema,target,libraries:a,clusters:a,configuration:o,continuous:b,development:b,serverless:b,channel,edition,photon:b,channel_policy
+pipelines|editPipeline|PUT|/api/2.0/pipelines/{pipeline_id}|Replace a pipeline's settings||name,catalog,schema,target,libraries:a,clusters:a,configuration:o,continuous:b,development:b,serverless:b,channel,edition,photon:b
+pipelines|deletePipeline|DELETE|/api/2.0/pipelines/{pipeline_id}|Delete a pipeline||
+pipelines|startPipelineUpdate|POST|/api/2.0/pipelines/{pipeline_id}/updates|Start a pipeline update||full_refresh:b,full_refresh_selection:a,refresh_selection:a,validate_only:b,cause
+pipelines|stopPipeline|POST|/api/2.0/pipelines/{pipeline_id}/stop|Stop a pipeline||
+pipelines|listPipelineUpdates|GET|/api/2.0/pipelines/{pipeline_id}/updates|List updates of a pipeline|max_results:i,page_token,until_update_id|
+pipelines|getPipelineUpdate|GET|/api/2.0/pipelines/{pipeline_id}/updates/{update_id}|Get a pipeline update||
+pipelines|listPipelineEvents|GET|/api/2.0/pipelines/{pipeline_id}/events|List pipeline events|filter,max_results:i,order_by:a,page_token|
+servingEndpoints|listServingEndpoints|GET|/api/2.0/serving-endpoints|List model serving endpoints||
+servingEndpoints|getServingEndpoint|GET|/api/2.0/serving-endpoints/{name}|Get a serving endpoint||
+servingEndpoints|createServingEndpoint|POST|/api/2.0/serving-endpoints|Create a serving endpoint||name!,config:o,ai_gateway:o,rate_limits:a,route_optimized:b,tags:a,budget_policy_id
+servingEndpoints|updateServingEndpointConfig|PUT|/api/2.0/serving-endpoints/{name}/config|Update a serving endpoint's served entities||served_entities:a,served_models:a,traffic_config:o,auto_capture_config:o
+servingEndpoints|deleteServingEndpoint|DELETE|/api/2.0/serving-endpoints/{name}|Delete a serving endpoint||
+servingEndpoints|getServingEndpointOpenApi|GET|/api/2.0/serving-endpoints/{name}/openapi|OpenAPI schema of a serving endpoint||
+servingEndpoints|queryServingEndpoint|POSTR|/serving-endpoints/{name}/invocations|Query a serving endpoint (body depends on the model: messages, prompt, input, inputs, dataframe_records)||messages:a,prompt,input,inputs,dataframe_records:a,dataframe_split:o,max_tokens:i,temperature,stop:a,n:i
+vectorSearch|listVectorSearchEndpoints|GET|/api/2.0/vector-search/endpoints|List vector search endpoints|page_token|
+vectorSearch|getVectorSearchEndpoint|GET|/api/2.0/vector-search/endpoints/{endpoint_name}|Get a vector search endpoint||
+vectorSearch|createVectorSearchEndpoint|POST|/api/2.0/vector-search/endpoints|Create a vector search endpoint||name!,endpoint_type!
+vectorSearch|deleteVectorSearchEndpoint|DELETE|/api/2.0/vector-search/endpoints/{endpoint_name}|Delete a vector search endpoint||
+vectorSearch|listVectorSearchIndexes|GET|/api/2.0/vector-search/indexes|List indexes on an endpoint|endpoint_name!,page_token|
+vectorSearch|getVectorSearchIndex|GET|/api/2.0/vector-search/indexes/{index_name}|Get a vector search index||
+vectorSearch|createVectorSearchIndex|POST|/api/2.0/vector-search/indexes|Create a vector search index||name!,endpoint_name!,primary_key!,index_type!,delta_sync_index_spec:o,direct_access_index_spec:o
+vectorSearch|deleteVectorSearchIndex|DELETE|/api/2.0/vector-search/indexes/{index_name}|Delete a vector search index||
+vectorSearch|queryVectorSearchIndex|POSTR|/api/2.0/vector-search/indexes/{index_name}/query|Query a vector search index||columns:a!,query_text,query_vector:a,filters_json,num_results:i,query_type,score_threshold
+vectorSearch|syncVectorSearchIndex|POST|/api/2.0/vector-search/indexes/{index_name}/sync|Trigger a sync of a delta-sync index||
+vectorSearch|upsertVectorSearchData|POST|/api/2.0/vector-search/indexes/{index_name}/upsert-data|Upsert rows into a direct-access index||inputs_json!
+vectorSearch|deleteVectorSearchData|DELETE|/api/2.0/vector-search/indexes/{index_name}/delete-data|Delete rows from a direct-access index|primary_keys:a!|
+mlflow|searchExperiments|POSTR|/api/2.0/mlflow/experiments/search|Search MLflow experiments||filter,max_results:i,order_by:a,page_token,view_type
+mlflow|getExperiment|GET|/api/2.0/mlflow/experiments/get|Get an MLflow experiment|experiment_id!|
+mlflow|createExperiment|POST|/api/2.0/mlflow/experiments/create|Create an MLflow experiment||name!,artifact_location,tags:a
+mlflow|searchRuns|POSTR|/api/2.0/mlflow/runs/search|Search MLflow runs||experiment_ids:a,filter,run_view_type,max_results:i,order_by:a,page_token
+mlflow|getRun|GET|/api/2.0/mlflow/runs/get|Get an MLflow run|run_id!|
+mlflow|getMetricHistory|GET|/api/2.0/mlflow/metrics/get-history|Get the history of a metric|run_id!,metric_key!,max_results:i,page_token|
+mlflow|listRegisteredModels|GET|/api/2.0/mlflow/registered-models/list|List workspace-registry models|max_results:i,page_token|
+mlflow|searchModelVersions|GET|/api/2.0/mlflow/model-versions/search|Search model versions|filter,max_results:i,order_by:a,page_token|
+apps|listApps|GET|/api/2.0/apps|List Databricks Apps|page_size:i,page_token|
+apps|getApp|GET|/api/2.0/apps/{name}|Get a Databricks App||
+apps|createApp|POST|/api/2.0/apps|Create a Databricks App||name!,description,resources:a
+apps|deleteApp|DELETE|/api/2.0/apps/{name}|Delete a Databricks App||
+apps|startApp|POST|/api/2.0/apps/{name}/start|Start a Databricks App||
+apps|stopApp|POST|/api/2.0/apps/{name}/stop|Stop a Databricks App||
+apps|deployApp|POST|/api/2.0/apps/{app_name}/deployments|Deploy a Databricks App||source_code_path,mode,deployment_id
+commandExecution|createExecutionContext|POST|/api/1.2/contexts/create|Create a command execution context on a cluster||clusterId!,language!
+commandExecution|getExecutionContextStatus|GET|/api/1.2/contexts/status|Execution context status|clusterId!,contextId!|
+commandExecution|destroyExecutionContext|POST|/api/1.2/contexts/destroy|Destroy an execution context||clusterId!,contextId!
+commandExecution|executeCommand|POST|/api/1.2/commands/execute|Run a command (code) in an execution context||clusterId!,contextId!,language!,command!
+commandExecution|getCommandStatus|GET|/api/1.2/commands/status|Command status and results|clusterId!,contextId!,commandId!|
+commandExecution|cancelCommand|POST|/api/1.2/commands/cancel|Cancel a command||clusterId!,contextId!,commandId!

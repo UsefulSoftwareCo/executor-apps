@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ticktick",
+  "description": "TickTick projects and tasks: list, create, update, complete, move, delete and filter.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "TickTick"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

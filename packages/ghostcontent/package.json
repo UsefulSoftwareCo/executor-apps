@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ghostcontent",
+  "description": "Ghost Content API: read a site's published posts, pages, authors, tags, tiers and settings.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ghost (Content API)"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

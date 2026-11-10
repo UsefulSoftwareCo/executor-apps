@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/junipermist",
+  "description": "Juniper Mist cloud-managed networking: organizations, sites, access points, switches, WAN edges, clients, WLANs, alarms and the rest of the Mist REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Juniper Mist"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/wati",
+  "description": "Wati WhatsApp Business through Wati's official remote MCP server (OAuth) plus hand-written legacy API tools (access token).",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Wati"
+  }
+}

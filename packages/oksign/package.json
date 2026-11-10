@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/oksign",
+  "description": "Send documents for legal e-signature with OK!Sign: upload documents, define signature forms, track signing, retrieve signed PDFs and audit trails.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OK!Sign"
+  }
+}

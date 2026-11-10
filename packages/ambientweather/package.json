@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ambientweather",
+  "description": "Read personal weather station data from Ambient Weather: list devices with their latest readings and query historical readings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ambient Weather"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/identitycheck",
+  "description": "IDnow iDCHECK.IO identity verification: onboarding sessions, document capture results, configurations and webhook endpoints.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "IdentityCheck"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/2chat",
+  "description": "WhatsApp, WABA and SMS messaging, channels, groups, contacts and calls in 2Chat, through 2Chat's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "2chat"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

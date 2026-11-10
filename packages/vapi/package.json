@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vapi",
+  "description": "Build and run voice AI agents with Vapi: assistants, calls, phone numbers, tools, squads, files, knowledge bases and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Vapi"
+  }
+}

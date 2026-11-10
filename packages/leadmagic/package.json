@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/leadmagic",
+  "description": "B2B data enrichment with LeadMagic: email finding and validation, mobile numbers, profile and company enrichment, job and ad search, and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "LeadMagic"
+  }
+}

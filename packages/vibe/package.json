@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vibe",
+  "description": "Launch, manage and measure Connected TV campaigns with Vibe: accounts, advertisers, audiences, campaigns, strategies, creatives, targeting catalog, billing and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Vibe"
+  }
+}

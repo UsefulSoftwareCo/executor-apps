@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zohodesk",
+  "description": "Zoho Desk: tickets, contacts, accounts, agents, departments, articles, tasks, time entries, webhooks and the rest of the Zoho Desk REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zoho Desk"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/storeleads",
+  "description": "Look up ecommerce stores and the apps they use with Store Leads: search domains, apps, reviews, technologies and themes, and manage domain lists.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Store Leads"
+  }
+}

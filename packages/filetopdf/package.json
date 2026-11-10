@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/filetopdf",
+  "description": "Convert files, HTML and Markdown to PDF and check credits with FileToPDF.dev, through its official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "FileToPDF.dev"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

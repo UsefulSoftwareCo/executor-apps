@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/mermaid-chart",
+  "description": "Validate and render Mermaid diagrams as SVG with Mermaid Chart's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mermaid Chart"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fluxguard",
+  "description": "Fluxguard website change monitoring: add pages, trigger crawls, read monitored pages, and manage webhooks, categories and sites.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fluxguard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

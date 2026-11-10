@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zohobooks",
+  "description": "Zoho Books: invoices, bills, estimates, contacts, items, payments, expenses, banking, journals, projects, taxes and the rest of the Books REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zoho Books"
+  }
+}

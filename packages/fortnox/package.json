@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fortnox",
+  "description": "Customers, invoices, orders, suppliers, vouchers, accounts, articles and the rest of the Fortnox accounting API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fortnox"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

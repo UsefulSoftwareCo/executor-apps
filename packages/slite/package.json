@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/slite",
+  "description": "Search, read, create and update notes in your Slite knowledge base, and ask questions of it.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Slite"
+  }
+}

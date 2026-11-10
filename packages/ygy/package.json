@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ygy",
+  "description": "Create, update and manage y.gy short links, QR codes and tags.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "y.gy"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

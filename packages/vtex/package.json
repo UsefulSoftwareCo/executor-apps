@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vtex",
+  "description": "Run a VTEX commerce store: catalog, orders, checkout, pricing, logistics, promotions, master data, search and more.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "VTEX"
+  }
+}

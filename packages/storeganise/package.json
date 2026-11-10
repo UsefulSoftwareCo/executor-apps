@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/storeganise",
+  "description": "Storeganise self-storage admin API: users, units, unit rentals, invoices, payments, sites, settings and add-ons.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Storeganise"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

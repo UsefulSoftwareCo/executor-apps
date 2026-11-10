@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tripo3d",
+  "description": "Generate and process 3D models with Tripo: text, image and multiview to 3D, image generation, texturing, format conversion, rigging, animation retargeting, segmentation, retopology, tasks and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Tripo3D"
+  }
+}

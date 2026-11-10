@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/aiwyntax",
+  "description": "Estimate US federal and state taxes with Aiwyn Tax (formerly Column Tax), through Aiwyn's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Aiwyn Tax"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shippo",
+  "description": "Shippo multi-carrier shipping: addresses, shipments, rates, labels, tracking, batches, pickups, manifests and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Shippo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

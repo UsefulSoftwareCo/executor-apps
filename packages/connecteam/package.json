@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/connecteam",
+  "description": "Connecteam workforce management: users, schedulers, shifts, time clock, time off, forms, chat, tasks and company policies.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Connecteam"
+  }
+}

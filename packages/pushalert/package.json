@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pushalert",
+  "description": "Send web push notifications with PushAlert, manage segments and subscriber attributes, track events and read notification stats.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PushAlert"
+  }
+}

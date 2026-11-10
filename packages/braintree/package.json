@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/braintree",
+  "description": "Braintree payments: transactions, vaulted payment methods, customers, refunds, disputes and reports through the GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Braintree"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

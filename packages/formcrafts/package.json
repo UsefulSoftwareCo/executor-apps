@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/formcrafts",
+  "description": "Read Formcrafts workspaces, forms, form responses and uploaded files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Formcrafts"
+  }
+}

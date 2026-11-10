@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cdr-platform",
+  "description": "Price and purchase carbon dioxide removal with CDR Platform, and retrieve removal certificates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CDR Platform"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ahrefs",
+  "description": "Ahrefs SEO data: Site Explorer, Keywords Explorer, SERP overview, Rank Tracker, Site Audit, Brand Radar and Web Analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ahrefs"
+  }
+}

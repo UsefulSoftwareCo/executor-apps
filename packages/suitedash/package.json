@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/suitedash",
+  "description": "Manage SuiteDash clients, companies, projects and marketing audiences through the Secure API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SuiteDash"
+  }
+}

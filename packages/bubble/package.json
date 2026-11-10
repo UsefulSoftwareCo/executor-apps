@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bubble",
+  "description": "Bubble apps: read, search, create, update and delete records through the Data API and run backend workflows through the Workflow API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bubble"
+  }
+}

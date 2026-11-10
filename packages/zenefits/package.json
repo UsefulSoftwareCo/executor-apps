@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zenefits",
+  "description": "Read company, people, employment, department, location, bank, custom field and time off data from Zenefits (TriNet HR Platform).",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zenefits"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

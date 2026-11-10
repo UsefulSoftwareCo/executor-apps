@@ -1,0 +1,12 @@
+# Uplisting
+
+Vacation rental management in Uplisting: properties, availability search, quotes, bookings and booking requests, per-night calendar rates and availability, fees and discounts, reviews, guest messaging, custom booking attributes and webhooks (36 tools: 15 for API-key accounts, 21 for OAuth accounts).
+
+**Interface:** custom, hand-written tools over Uplisting's official REST APIs at `https://connect.uplisting.io`. Uplisting publishes no OpenAPI document, only an official Postman collection. The current official documentation is https://documenter.getpostman.com/view/6655410/2sBY4HSNpH (linked from the API link on uplisting.io); it contains both APIs below. The older collection https://documenter.getpostman.com/view/1320372/SWTBfdW6 is the legacy one and covers only the legacy API. An account uses one API or the other, depending on how it was connected, so the tool set differs by auth method.
+
+**Auth:**
+
+- `apiKey` (legacy public API, 15 tools). Create the key in Uplisting under Connect > API (https://app.uplisting.io/connect/api). It is sent as HTTP Basic with the Base64 of the bare key, as the API requires.
+- `oauth` (modern partner API, 21 tools). OAuth 2.0 Authorization Code with PKCE (S256) against `https://auth.airdna.co/oauth2/authorize` and `/oauth2/token`, client secret sent in the form body, bearer tokens, with `offline_access` for refresh tokens. Scopes requested: properties, bookings, calendar, reviews, custom booking attributes and messaging (read/write as listed in the vendor docs). Self-serve client registration is not documented: the vendor collection says only that `clientId`, `clientSecret` and `redirectUri` are "registered for your integration", and directs partners to partner@uplisting.io. Ask Uplisting for a client and register the redirect URI Executor shows on the connect page.
+
+**Known gaps:** the legacy `/v2` endpoints (create booking, update booking attributes, list and create custom booking attributes) require a partner client ID from Uplisting (partner@uplisting.io), passed per call as `clientId` (sent as `X-Uplisting-Client-ID`); those four tools are partner-only and do not work with an ordinary API key. The OAuth tools were written from the vendor docs and could not be exercised without a registered OAuth client. Rate limits: 5 requests/second and 100 requests/minute per IP, 15 requests/minute per property. All write tools require approval.

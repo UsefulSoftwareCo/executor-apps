@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/neo4j",
+  "description": "Manage Neo4j Aura: instances, databases, snapshots and backups, projects, organizations, users, IP filters, Graph Analytics sessions and import jobs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Neo4j"
+  }
+}

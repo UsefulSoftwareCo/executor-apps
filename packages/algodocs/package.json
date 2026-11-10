@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/algodocs",
+  "description": "AlgoDocs document data extraction: list extractors and folders, upload documents by URL, base64 or inline, and read the extracted data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Algodocs"
+  }
+}

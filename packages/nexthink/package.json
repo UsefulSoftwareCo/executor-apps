@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nexthink",
+  "description": "Run NQL queries and exports, trigger remote actions, workflows and campaigns, enrich objects and schedule device deletions in Nexthink.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Nexthink"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/faraday",
+  "description": "Faraday AI platform: datasets, cohorts, outcomes, streams, persona sets, recommenders, scopes, targets and account management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Faraday"
+  }
+}

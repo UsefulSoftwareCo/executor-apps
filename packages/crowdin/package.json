@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/crowdin",
+  "description": "Projects, source files, strings, translations, tasks, glossaries, translation memories, reports and AI in Crowdin's REST API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Crowdin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

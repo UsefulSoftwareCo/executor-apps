@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/missive",
+  "description": "Conversations, drafts, messages, posts, contacts, tasks, teams, labels and responses in Missive, the collaborative email and chat inbox.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Missive"
+  }
+}

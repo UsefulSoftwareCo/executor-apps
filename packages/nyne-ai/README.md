@@ -1,0 +1,9 @@
+# Nyne AI
+
+People and company data from Nyne.ai: person search, enrichment, verified email and phone finding, social lookups and newsfeeds, deep research and Q&A about a person, plus company search, enrichment, employees, funding, funders, intent and technographic checks. Also reports credit usage.
+
+**Interface:** custom tools written with `fetch` against the official REST API at `https://api.nyne.ai` (docs: https://api.nyne.ai/documentation, index at https://api.nyne.ai/llms.txt). Nyne publishes no OpenAPI document. Nyne also runs a hosted MCP server at `https://api.nyne.ai/mcp` (OAuth with dynamic client registration, or key and secret headers), but it exposes only 7 curated tools, while the REST API has 33 data endpoints, so the package uses REST: 22 `person.*` tools, 11 `company.*` tools, `usage` and `getResult`. Each data tool takes a `body` object with the endpoint's request parameters (see the endpoint's doc page), submits the async job and polls the same path for about 18 seconds. If the job is still running, the reply has `pending: true` and a `requestId`; pass it with the path to `getResult`. Data tools spend credits and always require approval; `usage` and `getResult` are free.
+
+**Auth:** API key plus API secret, sent as the `X-API-Key` and `X-API-Secret` headers. Create them in the Nyne dashboard at https://api.nyne.ai. There is no OAuth for the REST API. The health check calls the free `GET /usage`.
+
+**Known gaps:** request bodies are free-form objects rather than typed fields, so refer to each endpoint's documentation for parameters. Webhook delivery (`callback_url`) is not useful from a tool call; polling is used instead. `person.osint` is disabled by default on Nyne accounts (access on request). The bundled mark is Nyne's official SVG from nyne.ai recolored in a brand green so it is visible on light and dark backgrounds.

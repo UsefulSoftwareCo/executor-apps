@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/scavio",
+  "description": "Real-time search and structured data from Google, YouTube, TikTok, Instagram, X, retail and more, plus URL extraction, through Scavio's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Scavio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

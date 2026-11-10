@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lemonsqueezy",
+  "description": "Lemon Squeezy: stores, products, orders, subscriptions, customers, discounts, license keys, checkouts and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lemon Squeezy"
+  }
+}

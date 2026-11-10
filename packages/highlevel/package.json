@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/highlevel",
+  "description": "HighLevel (GoHighLevel) CRM: contacts, conversations, calendars, opportunities, invoices, payments, workflows, social planner and the rest of the HighLevel API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "HighLevel"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

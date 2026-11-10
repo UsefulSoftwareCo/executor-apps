@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/classmarker",
+  "description": "Online quizzes and exams with ClassMarker: groups, links and tests, recent results, access codes, categories and the question bank.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ClassMarker"
+  }
+}

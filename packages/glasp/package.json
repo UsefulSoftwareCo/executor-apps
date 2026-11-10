@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/glasp",
+  "description": "Glasp highlights, bookmarks, Kindle highlights and AI summaries: REST export, create, update and delete, plus Glasp's MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Glasp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clientary",
+  "description": "Clientary: clients, contacts, leads, projects, tasks, hours, invoices, payments, estimates and expenses.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Clientary"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/digitalhumani",
+  "description": "Plant trees through Digital Humani's reforestation API: browse projects, submit planting requests and read tree counts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Digital Humani"
+  }
+}

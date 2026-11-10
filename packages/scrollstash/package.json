@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/scrollstash",
+  "description": "ScrollStash competitor ad intelligence (Meta Ad Library brands, ads and landing pages), through ScrollStash's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ScrollStash"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

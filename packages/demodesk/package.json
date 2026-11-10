@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/demodesk",
+  "description": "Demodesk: sales call recordings, transcripts, summaries, scorecards and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Demodesk"
+  }
+}

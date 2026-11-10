@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tableau",
+  "description": "Workbooks, views, data sources, projects, users, groups, flows and jobs on Tableau Cloud or Server, plus the Metadata API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Tableau"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

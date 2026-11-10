@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloro",
+  "description": "Extract structured data from ChatGPT, Perplexity, Gemini, Grok, Copilot, Google AI Mode and Google Search with Cloro.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Cloro"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docupilot",
+  "description": "Docupilot document automation: templates, folders, content blocks, document generation, merges, deliveries and workspace administration.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Docupilot"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pdfapiio",
+  "description": "List and inspect PDF-API.io templates and render PDFs from them, singly or merged.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PDF-API.io"
+  }
+}

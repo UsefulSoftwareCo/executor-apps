@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/enforcedflow",
+  "description": "Route work across teams with EnforcedFlow advanced round-robin groups: groups, fields, agents and next-agent selection.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "EnforcedFlow"
+  }
+}

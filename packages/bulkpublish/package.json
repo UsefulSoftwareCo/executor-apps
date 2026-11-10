@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bulkpublish",
+  "description": "Publish and schedule social media posts to 15 platforms with BulkPublish: channels, posts, media, labels, inbox and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BulkPublish"
+  }
+}

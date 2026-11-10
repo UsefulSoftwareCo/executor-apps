@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/polygon",
+  "description": "Polygon.io (now Massive) market data: stocks, options, futures, indices, forex and crypto aggregates, trades, quotes, snapshots, reference data, fundamentals and news.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Polygon"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gerrit",
+  "description": "Gerrit Code Review: changes, reviews, comments, reviewers, files and diffs, projects, branches, accounts and groups on any Gerrit server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gerrit"
+  }
+}

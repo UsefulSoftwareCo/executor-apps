@@ -1,0 +1,13 @@
+# withPICA
+
+Read and manage a withPICA music catalogue (works, recordings, credits, people, agreements, projects, sessions) from Executor.
+
+**Interface:** withPICA's official remote MCP server at `https://withpica.com/api/mcp` (documented at https://withpica.com/connect and https://withpica.com/llms.txt). The vendor states "there is no public REST API for writes" and publishes no OpenAPI document: https://withpica.com/openapi.json, /api/openapi.json and /api/public/directory/openapi.json return 404, and its llms.txt only lists a read-only public-directory REST API (a different, unauthenticated surface that is not packaged here). The vendor's discovery document (https://withpica.com/.well-known/mcp.json) advertises 354 tools. By default the endpoint lists only three meta tools (`pica_discover`, `pica_tool_details`, `pica_execute`); this package requests `?layered=0`, the vendor-documented switch for the full list, so each tool carries its own annotations and tools without `readOnlyHint` need approval. The authenticated tool list was not verified here (no credentials were used), so the exact tool names and that `layered=0` behaves as documented are unconfirmed.
+
+**Auth:**
+- API key: create one at https://withpica.com/settings?tab=connections (the vendor's docs also point at https://withpica.com/connect). It is sent as `Authorization: Bearer <key>`. The vendor requires an API-key caller to invoke `pica_introduce_self` (agent name, optional role, human, model) before any other tool; the router instructions say so.
+- OAuth 2.1 with PKCE and dynamic client registration, discovered from the server's metadata; no OAuth app has to be created. Requested scopes are the ten the server advertises in `scopes_supported`: `read:catalog`, `write:catalog`, `read:people`, `write:people`, `read:agreements`, `write:agreements`, `read:files`, `write:files`, `read:analytics`, `write:feedback`. Because the tool list could not be inspected, the write scopes are requested to cover the advertised write tools (creating works, updating credits, submitting splits, files and agreements, feedback); they could not be trimmed against evidence.
+
+**Health:** the server answers `initialize` and `tools/list` without credentials (a signup "lobby", server name `pica-http-lobby`), so the generic `mcpHealth` check, which requires anonymous refusal, would reject every account. The package sends the Bearer token to `initialize` itself, treats HTTP 400 (invalid API key), 401 and 403 as refused, and treats a `pica-http-lobby` answer as unauthenticated.
+
+**Gaps:** authenticated tool names and count are unverified; scopes are not narrowed to the tools.

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linguinai",
+  "description": "Linguin AI language detection and English profanity scoring, single and bulk, plus account quota and supported languages.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Linguin AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

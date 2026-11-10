@@ -1,0 +1,13 @@
+# Outreach
+
+Prospects, accounts, opportunities, sequences, sequence steps and states, mailings, mailboxes, calls, tasks, templates, snippets, personas, stages, tags, users, teams, phone numbers, events and meetings in the Outreach sales engagement platform. Each resource has list, get and (where the API allows) create, update and delete tools, plus actions such as pausing or finishing a sequence state and completing a task.
+
+**Interface:** hand-written tools over the Outreach REST API (JSON:API, `https://api.outreach.io/api/v2`), documented at <https://developers.outreach.io/api/reference/>. Outreach publishes no OpenAPI document. It also runs an official remote MCP server (`https://api.outreach.io/mcp/`, OAuth with dynamic client registration), but its OAuth metadata (`https://api.outreach.io/.well-known/oauth-authorization-server`, `scopes_supported`) lists only `prospects.all`, so the REST API gives much broader coverage and is used instead. Create and update tools take an `attributes` object (and optional `relationships`) in JSON:API form; consult the API reference for each resource's fields. List tools take `filter`, `sort`, `pageSize`, `pageOffset` and `include`.
+
+**Auth**
+- OAuth only: Outreach has no personal API keys. Create an app in the Outreach developer portal (My apps), open the API access tab, add the Executor redirect URI as a redirect URI, select the scopes you need, and enter the client ID and secret in Executor. Development credentials work for up to 10 users in the owning org; production credentials need Outreach's app review. Access tokens last 2 hours and are refreshed automatically.
+- The package requests a `<resource>.all` scope for every resource it exposes (including events, meetings, phoneNumbers, callDispositions, callPurposes, opportunityStages and sequenceTemplates; calls are covered by `calls.all`). The `<resource>.all` form is confirmed by the MCP server's advertised `prospects.all`; the developer docs' OAuth page only shows `.read` examples and no full list. The scope separator is a space (the docs' `+` is its URL encoding), so the default is used. The docs state no refresh-token lifetime or rotation; development credentials require users outside the first 10 org users to reauthorize weekly. Outreach rejects scopes that are not enabled on the app, so enable the same scopes in the API access tab (or remove any you do not need).
+
+Health check calls `GET /api/v2/users?page[size]=1`.
+
+**Known gaps:** server-to-server (S2S) tokens, webhooks, content categories, rulesets, roles, profiles, favorites, notes, and the Outreach MCP server are not exposed.

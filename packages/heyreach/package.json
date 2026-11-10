@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/heyreach",
+  "description": "Automate LinkedIn outreach with HeyReach: campaigns, lead lists, leads, LinkedIn accounts, inbox conversations, analytics, blacklists and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HeyReach"
+  }
+}

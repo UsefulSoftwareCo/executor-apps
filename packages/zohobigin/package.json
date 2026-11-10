@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zohobigin",
+  "description": "Zoho Bigin: contacts, companies, pipeline records, products, tasks, events, calls, notes, tags, search and COQL queries.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zoho Bigin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

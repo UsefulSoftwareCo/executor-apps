@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docmosis",
+  "description": "Generate PDF and Word documents from templates with Docmosis Cloud: render, convert, and manage templates and images.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Docmosis"
+  }
+}

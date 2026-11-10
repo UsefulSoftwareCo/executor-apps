@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/writer",
+  "description": "Writer AI platform: chat and text completions with Palmyra models, Knowledge Graphs, files, applications, web search, PDF parsing and vision.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Writer"
+  }
+}

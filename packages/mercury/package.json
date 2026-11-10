@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/mercury",
+  "description": "Read-only access to Mercury business banking: accounts, balances, transactions, cards, recipients, statements and treasury, through Mercury's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mercury"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

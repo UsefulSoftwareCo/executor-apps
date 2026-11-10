@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/docsumo",
+  "description": "Docsumo document AI: upload documents, fetch extracted data, review and manage documents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Docsumo"
+  }
+}

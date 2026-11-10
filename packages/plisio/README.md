@@ -1,0 +1,11 @@
+# Plisio
+
+Plisio is a cryptocurrency payment gateway. This package exposes 18 tools from Plisio's official OpenAPI document: invoices (create, read, email), operations (list, read, withdraw, fee and commission estimates, fee plans), balances, supported coins, exchanges (estimate, create, read), shop info and deposit addresses, and the Telegram bot creator.
+
+Interface: OpenAPI 3.0 at https://plisio.net/swagger/api (linked from https://plisio.net/swagger/docs). The document's server is `https://plisio.net/api/v1`, so credentials go only to `plisio.net`. The document uses opaque hash operationIds, so tool names look like `invoice.<hash>`; read each tool's description and input for what it does.
+
+Auth: API key (`apiKey`). Create a shop in Plisio and copy its Secret key from API > API settings (https://plisio.net/account/api). Executor sends it as the `api_key` query parameter, which is how the spec's `api_key` security scheme defines it. The spec also declares a `view_key` scheme; it is left out on purpose because it is a separate, limited key, so `/invoices/switch/{id}` (view_key) is skipped.
+
+Approvals: Plisio declares several state-changing operations as GET (`/invoices/new`, `/operations/withdraw`, `/shops/deposit/new`, `/exchanges/new`, `/invoices/email/{id}`) and one as POST (`/telegram-bot/create`). `openapi.ts` marks each of them as a mutation by operationId (`kinds`), and every mutation requires approval. Withdraw and exchange move real funds.
+
+Known gaps: `/exchanges/list` is skipped because the spec references an undeclared `ExchangesListDto` schema; `/payment-button/new/{hash}` is skipped because it requires a `JWT` scheme the package does not offer; `/invoices/switch/{id}` needs `view_key` (see above). Callbacks (webhooks) are received by your server and are not tools. Deposit tools need white-label payment processing. In the spec, `currency` is required for `/invoices/new`, although Plisio's docs also describe fiat-only invoices through `source_currency` and `source_amount`; supply `currency` as the spec requires. The icon is Plisio's official 192px app icon (PNG, the mark alone); Plisio's published SVG (`https://plisio.net/v2/images/logo-color.svg`) is the "PLISIO" wordmark lockup, not the mark.

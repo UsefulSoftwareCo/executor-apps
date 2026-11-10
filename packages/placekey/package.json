@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/placekey",
+  "description": "Placekey: generate Placekey location identifiers for addresses, coordinates and points of interest, singly or in bulk.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Placekey"
+  }
+}

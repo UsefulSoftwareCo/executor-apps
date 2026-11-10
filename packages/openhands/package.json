@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/openhands",
+  "description": "Run and manage OpenHands Cloud coding agents: conversations, sandboxes, events, secrets, settings and git integrations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenHands"
+  }
+}

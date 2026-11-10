@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/authyo",
+  "description": "Send and verify OTPs, validate and revoke user sessions, and send order and invoice notifications with Authyo.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Authyo"
+  }
+}

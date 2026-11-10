@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/junglescout",
+  "description": "Amazon seller research with Jungle Scout: keyword search volume, product database, sales estimates and share of voice.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Jungle Scout"
+  }
+}

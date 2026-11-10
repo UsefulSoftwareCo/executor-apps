@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/templatefox",
+  "description": "Generate PDFs and images from HTML/CSS templates, manage templates and versions, manipulate PDFs, and configure S3 storage with TemplateFox.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TemplateFox"
+  }
+}

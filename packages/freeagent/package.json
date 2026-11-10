@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/freeagent",
+  "description": "FreeAgent accounting: contacts, invoices, estimates, credit notes, bills, expenses, banking, projects, time tracking, tax returns and reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "FreeAgent"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

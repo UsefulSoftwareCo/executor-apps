@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/templated",
+  "description": "Generate images and PDFs from templates with Templated: templates, renders, folders, fonts and uploads.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Templated"
+  }
+}

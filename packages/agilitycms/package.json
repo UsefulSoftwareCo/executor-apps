@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/agilitycms",
+  "description": "Manage Agility CMS content, pages, models, assets and containers through Agility's official MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  },
+  "executor": {
+    "title": "Agility CMS"
+  }
+}

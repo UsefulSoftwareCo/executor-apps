@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/statsig",
+  "description": "Manage Statsig feature gates, experiments, dynamic configs, layers, metrics, segments and project settings through the Console API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Statsig"
+  }
+}

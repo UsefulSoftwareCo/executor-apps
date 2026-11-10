@@ -1,0 +1,1278 @@
+[
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1/get/parameters",
+  "value": [
+   {
+    "name": "client_id",
+    "in": "query",
+    "description": "Filter campaigns by specific client ID (for agency accounts)",
+    "required": false,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "include_tags",
+    "in": "query",
+    "description": "Include campaign tags in the response",
+    "required": false,
+    "schema": {
+     "type": "boolean",
+     "default": false
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}/get/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "description": "Unique identifier of the campaign",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "include_tags",
+    "in": "query",
+    "description": "Include campaign tags in response",
+    "required": false,
+    "schema": {
+     "type": "boolean",
+     "default": false
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}/delete/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "description": "Unique identifier of the campaign to delete",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1create/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1status/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1settings/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1schedule/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1sequences/get/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1sequences/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1email-accounts/get/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1email-accounts/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1email-accounts/delete/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads/get/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "offset",
+    "in": "query",
+    "description": "Number of records to skip for pagination",
+    "schema": {
+     "type": "integer",
+     "minimum": 0,
+     "default": 0
+    }
+   },
+   {
+    "name": "limit",
+    "in": "query",
+    "description": "Maximum number of records to return",
+    "schema": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 1000,
+     "default": 100
+    }
+   },
+   {
+    "name": "status",
+    "in": "query",
+    "description": "Filter by lead status",
+    "schema": {
+     "type": "string",
+     "enum": [
+      "ACTIVE",
+      "PAUSED",
+      "COMPLETED",
+      "UNSUBSCRIBED",
+      "BOUNCED"
+     ]
+    }
+   },
+   {
+    "name": "email_sequence_number",
+    "in": "query",
+    "description": "Filter by specific sequence number",
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "email_status",
+    "in": "query",
+    "description": "Filter by email status",
+    "schema": {
+     "type": "string",
+     "enum": [
+      "Sent",
+      "Opened",
+      "Clicked",
+      "Replied",
+      "Bounced"
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads~1{lead_id}/delete/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads~1{lead_id}/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads~1{lead_id}~1pause/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads~1{lead_id}~1resume/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads~1{lead_id}~1unsubscribe/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1leads~1{lead_id}~1category/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1statistics/get/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   },
+   {
+    "name": "offset",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "minimum": 0,
+     "default": 0
+    }
+   },
+   {
+    "name": "limit",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 1000,
+     "default": 100
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1analytics/get/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1reply-email-thread/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1campaigns~1{campaign_id}~1forward-email/post/parameters",
+  "value": [
+   {
+    "name": "campaign_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1{account_id}/get/parameters",
+  "value": [
+   {
+    "name": "account_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1{account_id}/post/parameters",
+  "value": [
+   {
+    "name": "account_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1{account_id}/delete/parameters",
+  "value": [
+   {
+    "name": "account_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1save/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1save-oauth/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1{account_id}~1warmup/post/parameters",
+  "value": [
+   {
+    "name": "account_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1{account_id}~1warmup-stats/get/parameters",
+  "value": [
+   {
+    "name": "account_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1suspend~1{accountId}/put/parameters",
+  "value": [
+   {
+    "name": "accountId",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1email-accounts~1unsuspend~1{accountId}/delete/parameters",
+  "value": [
+   {
+    "name": "accountId",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1leads~1/get/parameters",
+  "value": [
+   {
+    "name": "email",
+    "in": "query",
+    "required": true,
+    "description": "Email address of the lead",
+    "schema": {
+     "type": "string",
+     "format": "email"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1leads~1{lead_id}~1campaigns/get/parameters",
+  "value": [
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1leads~1fetch-categories/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1leads~1{lead_id}~1unsubscribe/post/parameters",
+  "value": [
+   {
+    "name": "lead_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1master-inbox~1sent/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1master-inbox~1inbox-replies/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1master-inbox~1unread-replies/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1master-inbox~1important/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1overall-stats-v2/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "description": "Comma-separated list of client IDs to filter",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "campaign_ids",
+    "in": "query",
+    "description": "Comma-separated list of campaign IDs to filter",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1day-wise-overall-stats/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "campaign_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1campaign~1overall-stats/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "campaign_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "limit",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "default": 100
+    }
+   },
+   {
+    "name": "offset",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "default": 0
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1webhook~1create/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1webhook~1{webhook_id}/get/parameters",
+  "value": [
+   {
+    "name": "webhook_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1webhook~1update~1{webhook_id}/put/parameters",
+  "value": [
+   {
+    "name": "webhook_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1webhook~1delete~1{webhook_id}/delete/parameters",
+  "value": [
+   {
+    "name": "webhook_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1/get/parameters",
+  "value": [
+   {
+    "name": "listName",
+    "in": "query",
+    "description": "Filter by list name",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "tagIds",
+    "in": "query",
+    "description": "Comma-separated tag IDs to filter",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "limit",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 1000,
+     "default": 10
+    }
+   },
+   {
+    "name": "offset",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "minimum": 0,
+     "default": 0
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1{id}/get/parameters",
+  "value": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1{id}/put/parameters",
+  "value": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1{id}/delete/parameters",
+  "value": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1{id}~1import/post/parameters",
+  "value": [
+   {
+    "name": "id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1lead-list~1assign-tags/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1subscription~1credits-stats/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1users~1get-by-api-key/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1campaign~1list/get/parameters",
+  "value": [
+   {
+    "name": "client_ids",
+    "in": "query",
+    "description": "Comma-separated client IDs",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1day-wise-positive-reply-stats/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "campaign_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1mailbox~1overall-stats/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "email_account_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1lead~1overall-stats/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "campaign_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1analytics~1lead~1category-wise-response/get/parameters",
+  "value": [
+   {
+    "$ref": "#/components/parameters/StartDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/EndDateParam"
+   },
+   {
+    "$ref": "#/components/parameters/TimezoneParam"
+   },
+   {
+    "name": "client_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   },
+   {
+    "name": "campaign_ids",
+    "in": "query",
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1provider-ids/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1automated-test/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1manual-test/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1tests/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1test~1{test_id}/get/parameters",
+  "value": [
+   {
+    "name": "test_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1test~1{test_id}~1email-content/get/parameters",
+  "value": [
+   {
+    "name": "test_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1automated-test~1{test_id}~1stop/post/parameters",
+  "value": [
+   {
+    "name": "test_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1tests~1bulk-delete/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1folders/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1folders/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1folder~1{folder_id}/get/parameters",
+  "value": [
+   {
+    "name": "folder_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1folder~1{folder_id}/delete/parameters",
+  "value": [
+   {
+    "name": "folder_id",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1mailbox-summary/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1mailbox-count/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1sender-list/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1sender-report/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1provider-report/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1geo-report/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1spam-filter-report/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1schedule-history/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1blacklists/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1domain-blacklist/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1ip-blacklist-count/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1spf-details/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1dkim-details/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1rdns-report/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1ip-details/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-delivery~1reply-headers/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-senders~1vendors/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-senders~1domain~1search/get/parameters",
+  "value": [
+   {
+    "name": "query",
+    "in": "query",
+    "required": true,
+    "schema": {
+     "type": "string"
+    }
+   }
+  ]
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-senders~1domains/get/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-senders~1order/post/parameters",
+  "value": []
+ },
+ {
+  "op": "replace",
+  "path": "/paths/~1v1~1smart-senders~1auto-generate/post/parameters",
+  "value": []
+ }
+]

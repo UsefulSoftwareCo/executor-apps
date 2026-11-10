@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fusedesk",
+  "description": "FuseDesk help desk: cases, case notes and email replies, contacts, departments, reps, case tags, chats, unassigned emails and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "FuseDesk"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

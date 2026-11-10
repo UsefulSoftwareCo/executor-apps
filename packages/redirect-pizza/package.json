@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/redirect-pizza",
+  "description": "Manage redirect.pizza redirects, email forwards, domains, analytics and team members, and test redirects or generate QR codes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "redirect.pizza"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/endorsal",
+  "description": "Collect and manage customer testimonials with Endorsal: testimonials, contacts, tags, widgets, wall of love and autorequest campaigns.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Endorsal"
+  }
+}

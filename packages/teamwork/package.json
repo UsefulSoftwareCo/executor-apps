@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/teamwork",
+  "description": "Teamwork.com projects, tasks, task lists, milestones, time tracking, people, companies, budgets and reports through the official Teamwork API v3.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Teamwork"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

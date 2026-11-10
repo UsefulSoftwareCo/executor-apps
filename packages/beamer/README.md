@@ -1,0 +1,9 @@
+# Beamer
+
+Beamer is a changelog, announcement and feature-request tool. This package covers the whole Beamer REST API: posts (with comments and reactions), unread posts, feature requests (with comments and votes), Analytics users, NPS surveys, team members, privacy deletion, the feed URL and ping. 49 tools.
+
+**Interface:** hand-written tools over `https://api.getbeamer.com/v0`. Beamer publishes its API reference at https://www.getbeamer.com/api but no downloadable OpenAPI document, so each operation was written from that reference. Mutations require approval. `posts.list` and `posts.unread` never record views or mark posts read (those parameters are fixed off); `posts.markAsRead` does and is a mutation, as is `nps.link`, which creates a single-use link. Path IDs are strings, matching how Beamer returns them.
+
+**Auth:** API key, sent as the `Beamer-Api-Key` header. Create it in Beamer under Settings > API (https://app.getbeamer.com/settings#api). Beamer has no OAuth. Some options need a key permission (for example `ignoreFilters` needs "Read posts (ignore filters)") or a paid plan; Beamer answers 403 otherwise. The `users.*` tools and the `markAsRead` option need the Scale plan.
+
+**Gaps:** the PUT users tool names its matching parameters `match_userId`, `beamerId` and `match_userEmail`; only userId and userEmail are prefixed because the request body reuses those names. Multiple IDs or emails in delete calls are separated by semicolons. Open question: the reference at getbeamer.com/api is not downloadable and `/v0/openapi.json` returns 404, so an upstream Swagger definition may exist but is not published at a stable URL; tools were checked against an unofficial mirror (getbeamer-api.pages.dev) of that reference. Rate limit is 30 requests per second plus a monthly quota by plan.

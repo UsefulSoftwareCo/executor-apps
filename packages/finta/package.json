@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/finta",
+  "description": "Read and manage your Finta data: bank connections, accounts, balances, transactions, holdings, categories and rules.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Finta"
+  }
+}

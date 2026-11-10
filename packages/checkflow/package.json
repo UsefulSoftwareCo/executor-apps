@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/checkflow",
+  "description": "Run and build CheckFlow checklists: checklists, tasks, templates, data sets, schedules, webhooks, members, groups and tags.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CheckFlow"
+  }
+}

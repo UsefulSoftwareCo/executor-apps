@@ -1,0 +1,9 @@
+# DataScope
+
+Tools for DataScope (mobile forms and field data collection): form answers (v2, v5 and legacy), answer edits and workflow states, signatures, locations, lists, task assignments, notifications, files and tickets (26 tools; mutations need approval).
+
+Interface: hand-written tools over the REST API documented at https://dscope.github.io/docs/ (base `https://www.mydatascope.com/api/external`). DataScope publishes no remote MCP server. It does publish a Swagger 2.0 definition (the Power Automate connector file, 32 operations, host `www.mydatascope.com`, basePath `/api/external`, apiKey in the `Authorization` header) at https://raw.githubusercontent.com/DScope/docs/main/source/power_automate/apiDefinition.swagger.json, but it covers only a subset of the API (no v2/v5 answers, locations, lists, signatures, notifications, files or ticket listing), so the tools are hand-written. Parameter placement follows that spec: `assign_task`, `change_form_answer` and `findings/create` are sent as query-string parameters with an empty body; `change_state` is sent as both query and form-encoded body because the spec (query) and prose docs (form body) disagree; locations and list endpoints use JSON bodies as documented.
+
+Auth: API key. Request a developer key from the Integrations page (app.mydatascope.com/integrations, "Sign Up for a Developer Key") and copy the token. It is sent as the raw `Authorization` header value (no `Bearer`). The v5 answers, signatures and answer endpoints require export permission for the key's user.
+
+Known gaps: the Swagger names the answer-edit path `/change_form` while the docs and this package use `/change_form_answer` (the docs' samples also disagree on GET vs POST); this is unverified without a live key. Webhooks are configured only in the DataScope UI.

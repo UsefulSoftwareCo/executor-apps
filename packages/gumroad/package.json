@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gumroad",
+  "description": "Products, variants, offer codes, sales, refunds, license keys, subscribers, payouts, emails and webhooks on Gumroad.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Gumroad"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

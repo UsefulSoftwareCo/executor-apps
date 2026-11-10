@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/keyword",
+  "description": "Keyword.com rank tracking and AI visibility (projects, keywords, rankings, share of voice), through Keyword.com's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Keyword.com"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

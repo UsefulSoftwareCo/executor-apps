@@ -1,0 +1,9 @@
+# RudderStack Transformation
+
+Manage RudderStack transformations and libraries from an agent: create, update, publish, version and delete JavaScript or Python transformations and reusable libraries, connect or disconnect transformations and destinations, and publish specific versions together (17 tools).
+
+**Interface:** hand-written tools over RudderStack's documented Transformations API (https://www.rudderstack.com/docs/api/transformation-api/). RudderStack publishes no OpenAPI document for it, so the endpoints are written by hand from that page. Every mutation requires approval. RudderStack also ships an official remote MCP server (https://www.rudderstack.com/docs/ai-features/rudderstack-mcp/, OAuth login), but its transformation writes only cover create, update and connect, with no delete, libraries, versions or publish, so this hand-written package is used instead.
+
+**Auth:** one method, an access token. The Transformations API uses Bearer authentication (`Authorization: Bearer <token>`), not Basic; Basic applies to RudderStack's HTTP and Test APIs, which are out of scope. Create a workspace-level Service Access Token (recommended) in the RudderStack dashboard under Settings, Service Access Tokens, with Transformations (Create & Delete, Connect, Edit), Transformation Libraries (Edit) and Destinations (Connect) permissions. A Personal Access Token with Read-Write role also works for testing. Set the optional `region` field to `eu` for workspaces on `api.eu.rudderstack.com`; it defaults to `us` (`api.rudderstack.com`). RudderStack has no OAuth for its public APIs, so there is no OAuth app or redirect URI.
+
+**Known gaps:** only the Transformations API is covered. RudderStack's other APIs (HTTP/tracking, Data Catalog, Tracking Plans, Reverse ETL, Audit Logs, User Suppression and so on) are not included. The `publish` option is a string: pass `"true"` to publish.

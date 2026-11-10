@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-admin",
+  "description": "Google Workspace Admin SDK: users, groups, org units, devices, roles, domains, audit reports and data transfers.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Admin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

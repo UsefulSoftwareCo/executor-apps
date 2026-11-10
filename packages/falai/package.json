@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/falai",
+  "description": "fal.ai: run generative media models through the queue, search models and pricing, and manage usage, API keys, assets and serverless apps.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "fal.ai"
+  }
+}

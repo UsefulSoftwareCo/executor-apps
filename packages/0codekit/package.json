@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/0codekit",
+  "description": "Utility APIs from 0CodeKit: AI, document and image processing, PDF, conversion, validation, generation, storage and scheduling.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "0CodeKit"
+  }
+}

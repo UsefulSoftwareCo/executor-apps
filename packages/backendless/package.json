@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/backendless",
+  "description": "Backendless backend-as-a-service: data tables and relations, users, files, counters, cache, hive, messaging, email and logging.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Backendless"
+  }
+}

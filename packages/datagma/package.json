@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/datagma",
+  "description": "B2B data enrichment with Datagma: enrich people and companies, find work emails and phone numbers, find people by job title and detect job changes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Datagma"
+  }
+}

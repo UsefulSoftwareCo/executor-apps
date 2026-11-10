@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/droptocdn",
+  "description": "Upload files and publish HTML pages to public CDN URLs, then list, inspect and delete hosted files.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Drop to CDN"
+  }
+}

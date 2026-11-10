@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/heyzine",
+  "description": "Convert PDFs and office documents into Heyzine flipbooks, manage bookshelves, social metadata and password access, through Heyzine's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Heyzine"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

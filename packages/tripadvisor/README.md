@@ -1,0 +1,9 @@
+# Tripadvisor
+
+Tripadvisor's Terra platform: Partner API (location and geo details, single and batch, reviews, photos, nearby and free-text search, catalog search, AI recommendations), Account API (read and change the location allowlist) and Feed API (list feed files, get a feed file URL).
+
+Interface: OpenAPI. Terra publishes three descriptions on https://docs.terra.tripadvisor.com, served from ReadMe's public registry (each reference page names its registry id in `oasPublicUrl`): Partner API `https://dash.readme.com/api/v1/api-registry/4laulumrj76bhp`, Account API `.../bgy3v814mrwexjsy`, Feed API `.../5iz0kllmiyfk7ja`. They share the host and key, so one provider mounts them as `partner`, `account` and `feed`. Base URL `https://terra.tripadvisor.com/api` (feeds under `/api/feeds`). 16 tools; the two mutations (`POST /recommendations/search`, `POST /allowlist`) require approval.
+
+Auth: API key only (header `X-API-Key`). Terra keys are issued to partners through https://www.tripadvisor.com/developers (linked from the Terra overview), with endpoint access set by package and add-ons in the Terra dashboard; Terra publishes no OAuth. Results from non-catalog endpoints are restricted to the key's allowlist.
+
+Known gaps: the Feed API's `getFile` (`GET /feeds/{filename}`) is excluded. It answers 302 to a presigned storage URL, and the docs say the key must not be relied on there; use `getFileUrl` to get that URL and download it without credentials. The legacy Content API (`api.content.tripadvisor.com`) is legacy and not covered; the Terra FAQ says it is sunset, with keys deprecated, on 2026-08-31. The Terra MCP server at https://docs.terra.tripadvisor.com/mcp is a documentation server (tools `list-endpoints`, `get-endpoint`, `search-endpoints`, `list-specs`, `execute-request`), not a separate data API, so it is not used.

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shortmenu",
+  "description": "Create, update and delete Short Menu short links.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Short Menu"
+  }
+}

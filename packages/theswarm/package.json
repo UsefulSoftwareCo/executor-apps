@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/theswarm",
+  "description": "Search and enrich professional profiles and companies, map relationships and track job changes with The Swarm.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "The Swarm"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/getform",
+  "description": "Getform (now Forminit) form backend: list form submissions and submit to forms.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Getform"
+  }
+}

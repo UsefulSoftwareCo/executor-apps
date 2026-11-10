@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/uploadpost",
+  "description": "Publish and schedule posts to TikTok, Instagram, YouTube, LinkedIn, X and more with Upload-Post: uploads, queue, analytics, comments and DMs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Upload-Post"
+  }
+}

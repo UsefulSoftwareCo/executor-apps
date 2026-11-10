@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apptivegrid",
+  "description": "Manage ApptiveGrid spaces, grids, records, views, forms, flows and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ApptiveGrid"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/servicenow",
+  "description": "Incidents, problems, changes, requests, the service catalog, CMDB, knowledge and any table of a ServiceNow instance.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ServiceNow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

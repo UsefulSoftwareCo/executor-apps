@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/vectorshift",
+  "description": "Run and manage VectorShift pipelines, knowledge bases, chatbots and transformations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "VectorShift"
+  }
+}

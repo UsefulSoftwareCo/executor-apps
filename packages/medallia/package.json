@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/medallia",
+  "description": "Medallia Experience Cloud: manage users and roles, run Query API (GraphQL) requests over feedback data, and import survey and CX records.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Medallia"
+  }
+}

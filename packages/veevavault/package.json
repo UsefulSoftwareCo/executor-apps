@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/veevavault",
+  "description": "Veeva Vault content and data: documents, binders, object records, VQL queries, users, picklists and jobs, plus any other endpoint of the Vault REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Veeva Vault"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

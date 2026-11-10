@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/entrata",
+  "description": "Entrata property management: properties, units, leases, leads, customers, maintenance, financials, vendors and pricing.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Entrata"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

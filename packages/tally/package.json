@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tally",
+  "description": "Create and manage Tally forms, submissions, workspaces, webhooks and analytics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Tally"
+  }
+}

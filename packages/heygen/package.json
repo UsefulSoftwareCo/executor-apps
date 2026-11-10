@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/heygen",
+  "description": "Create AI avatar videos with HeyGen: videos, avatars, voices, templates, translation, photo avatars, streaming avatars, folders, assets and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HeyGen"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/easyemailverification",
+  "description": "Verify email addresses with Easy Email Verification: single checks, batches of up to 50, asynchronous bulk list jobs and credit balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Easy Email Verification"
+  }
+}

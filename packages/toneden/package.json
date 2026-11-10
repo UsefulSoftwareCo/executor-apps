@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/toneden",
+  "description": "ToneDen ad campaigns, smart links, social unlocks, contests, playbooks and user lists.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ToneDen"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

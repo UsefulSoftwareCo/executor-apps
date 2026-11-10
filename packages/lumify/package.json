@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lumify",
+  "description": "Sports intelligence with Lumify: schedules, live scores, odds, line movement, betting splits, props and explainable bet confidence.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lumify"
+  }
+}

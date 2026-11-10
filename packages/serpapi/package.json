@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/serpapi",
+  "description": "Real-time search engine results from SerpApi: Google (web, images, news, maps, shopping, jobs, scholar, flights, hotels, trends), Bing, DuckDuckGo, YouTube, Amazon, Walmart, eBay and more, plus account usage, locations and the search archive.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SerpApi"
+  }
+}

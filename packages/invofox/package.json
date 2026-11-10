@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/invofox",
+  "description": "Extract structured data from invoices and business documents with Invofox: uploads, documents, OCR, companies, providers, clients and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Invofox"
+  }
+}

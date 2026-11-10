@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jobvite",
+  "description": "Jobvite applicant tracking: candidates, applications, jobs, employees, departments, rejection reasons and offer letters.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Jobvite"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sendbird",
+  "description": "Manage Sendbird Chat: users, group and open channels, messages, moderation, announcements, bots, metadata and statistics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sendbird"
+  }
+}

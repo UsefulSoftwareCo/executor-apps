@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/firebase",
+  "description": "Firebase: projects and apps, Hosting, Authentication users and config, Cloud Messaging, App Distribution, App Check, Realtime Database instances and Security Rules.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Firebase"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

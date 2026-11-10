@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/emailvalidation",
+  "description": "Validate email addresses for deliverability, run bulk list verification jobs and check quota with emailvalidation.io.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Emailvalidation"
+  }
+}

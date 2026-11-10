@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/aivoov",
+  "description": "AiVOOV text-to-speech: list voices across 150+ languages and synthesize multi-voice speech audio.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Aivoov"
+  }
+}

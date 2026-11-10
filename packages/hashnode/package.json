@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/hashnode",
+  "description": "Publications, posts, drafts, series, comments and the rest of Hashnode's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Hashnode"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

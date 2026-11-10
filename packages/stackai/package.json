@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/stackai",
+  "description": "StackAI projects, workflows, connections, knowledge bases and runs, through StackAI's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "StackAI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

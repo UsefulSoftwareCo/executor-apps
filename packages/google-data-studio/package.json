@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-data-studio",
+  "description": "Search Google Data Studio (Looker Studio) reports and data sources and manage who can access them.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Data Studio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

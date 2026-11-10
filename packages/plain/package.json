@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/plain",
+  "description": "Support threads, customers, companies, labels, tenants and the rest of Plain's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Plain"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

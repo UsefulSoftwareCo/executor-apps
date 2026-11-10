@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/headout",
+  "description": "Search Headout tours, attractions and experiences by query or collection, through Headout's official public MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Headout"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

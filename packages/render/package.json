@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/render",
+  "description": "Manage Render services, deploys, Postgres, key-value stores, environment variables, domains, jobs and projects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Render"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rev",
+  "description": "Rev AI speech-to-text: transcription jobs, transcripts, captions, custom vocabularies, topic extraction, sentiment analysis, language identification and forced alignment.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rev AI"
+  }
+}

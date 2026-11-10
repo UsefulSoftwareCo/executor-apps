@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/emailable",
+  "description": "Verify email addresses singly or in batches and check your credits with Emailable.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Emailable"
+  }
+}

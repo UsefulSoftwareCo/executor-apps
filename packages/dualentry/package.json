@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dualentry",
+  "description": "DualEntry accounting: companies, accounts, customers, vendors, invoices, bills, payments, journal entries, fixed assets and bank matching, through DualEntry's official Public API v2.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DualEntry"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jobadder",
+  "description": "Candidates, jobs, companies, contacts, applications, placements, notes and more in the JobAdder recruitment platform.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "JobAdder"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

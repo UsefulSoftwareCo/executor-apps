@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/appdrag",
+  "description": "AppDrag Cloud Backend: SQL against the project's cloud database, file storage, email, and the project's own API functions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AppDrag"
+  }
+}

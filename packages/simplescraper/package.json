@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/simplescraper",
+  "description": "Create scraping recipes and extract structured live web data in Simplescraper, through Simplescraper's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Simplescraper"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rocketreach",
+  "description": "Find and verify professional contact details with RocketReach: people and company search, lookups, bulk lookups, Universal Credits and email verification.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "RocketReach"
+  }
+}

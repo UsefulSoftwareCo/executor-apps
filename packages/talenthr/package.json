@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/talenthr",
+  "description": "HR with TalentHR: employees, time off, job positions and applicants, assets, documents, surveys, time tracking and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TalentHR"
+  }
+}

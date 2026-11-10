@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/surecontact",
+  "description": "SureContact contacts, lists, tags, campaigns, sequences, forms and reports, through SureContact's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SureContact"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

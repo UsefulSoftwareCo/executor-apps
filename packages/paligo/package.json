@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/paligo",
+  "description": "Paligo: documents, folders, forks, taxonomies, search, productions, translations, variables, assignments, groups and users.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Paligo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

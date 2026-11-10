@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/astronomer",
+  "description": "Manage Apache Airflow deployments and DAGs on Astro, Astronomer's managed Airflow platform, through Astronomer's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Astronomer"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zohomail",
+  "description": "Zoho Mail: send, read, search and organize email, folders, labels, notes and tasks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zoho Mail"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/parsera",
+  "description": "Parsera AI web extraction: extract data from URLs, parse HTML, convert pages to markdown, and manage reusable scrapers and agents.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Parsera"
+  }
+}

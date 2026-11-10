@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ninox",
+  "description": "Manage Ninox workspaces: modules, tables, fields, records, views, reports, files and server-side scripts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ninox"
+  }
+}

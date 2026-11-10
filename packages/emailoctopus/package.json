@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/emailoctopus",
+  "description": "Email marketing with EmailOctopus: lists, contacts, tags, fields, campaigns, reports and automations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "EmailOctopus"
+  }
+}

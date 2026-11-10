@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-analytics",
+  "description": "Google Analytics 4 reports, realtime data, audience exports, and property administration.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Analytics"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

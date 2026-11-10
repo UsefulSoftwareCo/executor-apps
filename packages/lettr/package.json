@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/lettr",
+  "description": "Send and manage transactional email with Lettr: emails, domains, templates, webhooks, audience lists, contacts, topics, segments and campaigns.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Lettr"
+  }
+}

@@ -1,0 +1,9 @@
+# Voiceflow
+
+Build, run and analyze Voiceflow AI agents: agent prompt and instructions, playbooks, functions, tools, API tools, MCP servers, variables, knowledge base, conversations and state, transcripts, tests, evaluations, environments and analytics.
+
+**Interface:** OpenAPI. Voiceflow's official Realtime API document, <https://www.voiceflow.com/docs/specs-prettified/realtime/openapi.stable.json> (the `/v1/stable` API served from `https://realtime-api.voiceflow.com`; docs at <https://www.voiceflow.com/docs/api-reference/api-overview>).
+
+**Auth:** personal access token (`apiKey`-style secret, sent as `Authorization: Bearer vfp_...`). Create one in Voiceflow under Settings, Access tokens, Create personal access token (<https://www.voiceflow.com/docs/api-reference/authentication>). Tokens expire (1 day to 1 year) and act as the user, across all their workspaces. The REST API takes a personal access token only. Voiceflow also publishes an official remote MCP server at <https://mcp.voiceflow.com/mcp> (OAuth with dynamic client registration, scopes `universal.workspace.read` and `universal.workspace.write`; docs at <https://www.voiceflow.com/docs/mcp/overview>). It is not mounted here: its tools are grouped under the same areas as the REST operations, and the OpenAPI package is the higher-priority interface. Its tool list needs OAuth to enumerate and was not checked, so this package is not necessarily the only official interface.
+
+**Gaps:** most operations take `projectID` and `environmentAlias` query parameters (find the project ID in Settings, General; the default environment is `main`). The older Dialog Manager / general-runtime API (`general-runtime.voiceflow.com`, project API keys `VF.DM...`) is not covered; the stable Conversations API in this spec replaces it. The WebSocket interface is not covered.

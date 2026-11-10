@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/decodo",
+  "description": "Decodo (formerly Smartproxy) residential proxy management: sub-users, whitelisted IPs, endpoints, subscriptions and traffic statistics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Decodo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/yahoo",
+  "description": "Yahoo Fantasy Sports leagues, teams, rosters, players, standings and transactions.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Yahoo"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

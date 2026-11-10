@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/piloterr",
+  "description": "Piloterr web scraping and data extraction: search engines, e-commerce, LinkedIn, company data, email finder and more, through Piloterr's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Piloterr"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

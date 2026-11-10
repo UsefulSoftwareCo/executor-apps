@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/shortio",
+  "description": "Create and manage Short.io branded short links, domains, tags, folders, QR codes, link bundles and geo targeting.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Short.io"
+  }
+}

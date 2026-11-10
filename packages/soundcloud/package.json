@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/soundcloud",
+  "description": "Tracks, playlists, users, likes, reposts, comments and search through the SoundCloud public API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SoundCloud"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

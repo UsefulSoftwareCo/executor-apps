@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fleetio",
+  "description": "Manage fleet vehicles, equipment, maintenance, inspections, fuel, parts and purchasing in Fleetio.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fleetio"
+  }
+}

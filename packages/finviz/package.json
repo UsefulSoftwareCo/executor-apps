@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/finviz",
+  "description": "Finviz Elite exports: stock screener, price history, news, market groups as rows.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Finviz"
+  }
+}

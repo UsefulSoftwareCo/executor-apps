@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/devin",
+  "description": "Devin (Cognition) v3 API: sessions, knowledge, playbooks, schedules, secrets, users, metrics and enterprise administration.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Devin"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

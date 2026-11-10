@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tradingeconomics",
+  "description": "Economic indicators, forecasts, calendar, markets, and news for 196 countries from Trading Economics.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Trading Economics"
+  }
+}

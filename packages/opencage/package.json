@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/opencage",
+  "description": "Forward and reverse geocoding with OpenCage: addresses to coordinates and coordinates to addresses, in JSON, XML or GeoJSON.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenCage"
+  }
+}

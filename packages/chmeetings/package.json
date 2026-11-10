@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chmeetings",
+  "description": "Church management with ChMeetings: people, families, groups, events, attendance, giving, accounting and organizations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ChMeetings"
+  }
+}

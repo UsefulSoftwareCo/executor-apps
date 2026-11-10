@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/workpath",
+  "description": "Workpath strategy execution: goals, key results, KPIs, initiatives, strategic elements, cycles, teams, users and notes.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Workpath"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sapsuccessfactors",
+  "description": "SAP SuccessFactors Employee Central, Recruiting, foundation objects and any OData v2 entity for one tenant.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "SAP SuccessFactors"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

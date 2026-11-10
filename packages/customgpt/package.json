@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/customgpt",
+  "description": "Build and manage CustomGPT.ai agents: knowledge sources, pages, conversations, messages, settings, plugins and usage limits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CustomGPT.ai"
+  }
+}

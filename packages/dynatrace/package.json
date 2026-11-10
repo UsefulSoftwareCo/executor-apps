@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dynatrace",
+  "description": "Problems, entities, metrics, events, logs, SLOs and settings from the Dynatrace Environment API v2.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Dynatrace"
+  }
+}

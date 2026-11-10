@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mindbody",
+  "description": "Mindbody Public API v6: classes, appointments, clients, sales, staff, enrollments and site data for fitness, wellness and beauty businesses.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mindbody"
+  }
+}

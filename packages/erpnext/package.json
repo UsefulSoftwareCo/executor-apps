@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/erpnext",
+  "description": "ERPNext (Frappe) customers, suppliers, items, sales and purchase documents, accounting, stock, HR and projects through the Frappe REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ERPNext"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

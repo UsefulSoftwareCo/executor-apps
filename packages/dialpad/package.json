@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dialpad",
+  "description": "Calls, SMS, users, offices, call centers, contacts, numbers, transcripts and stats from the Dialpad business phone API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dialpad"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/worldnewsapi",
+  "description": "Search and retrieve news from thousands of sources, top news, article extraction, news sources and geocoding with World News API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "World News API"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/datto-rmm",
+  "description": "Datto RMM sites, devices, alerts, jobs, audits, patches, variables and account settings through the Datto RMM API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Datto RMM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

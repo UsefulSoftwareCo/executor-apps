@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailjet",
+  "description": "Send and manage email with Mailjet: transactional sending, contacts and lists, campaigns, statistics, webhooks, senders, plus templates, images and labels through the Content API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailjet"
+  }
+}

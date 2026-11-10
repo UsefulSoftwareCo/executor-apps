@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/addressfinder",
+  "description": "Addressfinder address autocomplete, metadata, verification, reverse geocoding for Australia, New Zealand and international, plus email and phone verification.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Addressfinder"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@executor.sh/linear",
+  "description": "Issues, projects, cycles, teams and comments through Linear's MCP server, plus its GraphQL API for API-key accounts.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Linear"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

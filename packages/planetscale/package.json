@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/planetscale",
+  "description": "PlanetScale organizations, databases, branches, deploy requests, backups, passwords, workflows and Insights through the PlanetScale API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "PlanetScale"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

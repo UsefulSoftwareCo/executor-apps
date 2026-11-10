@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/auth0",
+  "description": "Users, roles, organizations, applications, connections, actions, logs and the rest of the Auth0 Management API for an Auth0 tenant.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Auth0"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

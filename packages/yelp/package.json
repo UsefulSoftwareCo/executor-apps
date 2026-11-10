@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/yelp",
+  "description": "Search Yelp businesses, read reviews and categories, find events and ask Yelp AI about local places.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Yelp"
+  }
+}

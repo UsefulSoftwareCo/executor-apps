@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/crustdata",
+  "description": "Crustdata B2B data: company and person search, enrichment and identification, jobs, web search, social posts, batch jobs and watches.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Crustdata"
+  }
+}

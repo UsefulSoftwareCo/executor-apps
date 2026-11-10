@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/haileyhr",
+  "description": "Hailey HR: employees, employments, salaries, time off, time reporting, competences, educations and company data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Hailey HR"
+  }
+}

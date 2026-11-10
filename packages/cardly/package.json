@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cardly",
+  "description": "Send physical greeting cards with Cardly: artwork, templates, contacts and lists, orders, invitations, webhooks and account balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Cardly"
+  }
+}

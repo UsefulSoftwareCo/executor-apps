@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/scaleai",
+  "description": "Scale AI data labeling: projects, batches and tasks, with task creation for any task type.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Scale AI"
+  }
+}

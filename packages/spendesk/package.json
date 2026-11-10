@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/spendesk",
+  "description": "Spendesk Public API: payables, settlements, suppliers, users, cost centers, cards, purchase orders, invoices, accounting exports and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Spendesk"
+  }
+}

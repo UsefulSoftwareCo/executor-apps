@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/aircall",
+  "description": "Calls, users, numbers, contacts, tags, teams, webhooks, messages and dialer campaigns in the Aircall cloud phone system.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Aircall"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

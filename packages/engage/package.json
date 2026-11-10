@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/engage",
+  "description": "Customer messaging platform: manage users, accounts, events and lists in Engage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Engage"
+  }
+}

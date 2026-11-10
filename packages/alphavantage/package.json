@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/alphavantage",
+  "description": "Stock, forex, crypto, commodity and economic data, fundamentals and technical indicators from Alpha Vantage's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Alpha Vantage"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

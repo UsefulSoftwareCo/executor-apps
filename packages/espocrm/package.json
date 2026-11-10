@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/espocrm",
+  "description": "EspoCRM accounts, contacts, leads, opportunities, cases, tasks, meetings, calls, documents, campaigns and any other entity through the EspoCRM REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "EspoCRM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ashby",
+  "description": "Recruiting and applicant tracking with Ashby: candidates, applications, jobs, interviews, offers, openings and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ashby"
+  }
+}

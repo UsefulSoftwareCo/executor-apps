@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nasdaq",
+  "description": "Nasdaq Data Link: search databases, time-series datasets and datatables, and fetch their metadata and data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Nasdaq Data Link"
+  }
+}

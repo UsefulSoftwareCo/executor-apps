@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/accuweather",
+  "description": "AccuWeather: location search, current conditions, daily and hourly forecasts, MinuteCast, alerts, indices, air quality and tropical storms.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "AccuWeather"
+  }
+}

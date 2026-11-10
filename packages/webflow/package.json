@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/webflow",
+  "description": "Sites, CMS collections and items, pages, assets, forms, custom code, e-commerce, webhooks and the rest of the Webflow Data API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Webflow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

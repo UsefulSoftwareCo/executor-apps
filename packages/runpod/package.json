@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/runpod",
+  "description": "Manage Runpod GPU cloud: pods, serverless endpoints, templates, network volumes, container registry auth and billing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Runpod"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailercloud",
+  "description": "Mailercloud email marketing: campaigns, contacts, lists, segments, tags, templates, webhooks, automations and transactional email.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailercloud"
+  }
+}

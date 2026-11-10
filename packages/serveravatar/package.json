@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/serveravatar",
+  "description": "Manage ServerAvatar servers, applications, domains, SSL, databases, cron jobs, firewall rules, supervisors and backups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ServerAvatar"
+  }
+}

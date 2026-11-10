@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/onlyofficedocspace",
+  "description": "Rooms, files, folders, users, groups, sharing and portal settings on an ONLYOFFICE DocSpace portal.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ONLYOFFICE DocSpace"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

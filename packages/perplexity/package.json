@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/perplexity",
+  "description": "Web-grounded AI from Perplexity: Sonar chat, search, agents, embeddings, skills and models.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Perplexity"
+  }
+}

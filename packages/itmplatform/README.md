@@ -1,0 +1,9 @@
+# ITM Platform
+
+Project, program, portfolio, task, timesheet, client, service, issue, risk, purchase, revenue and resource management through ITM Platform's REST API (339 tools across two API versions, mutations require approval).
+
+**Interface:** OpenAPI, from ITM Platform's official API document at https://developers.itmplatform.com/documentation/openapi.json (docs at https://developers.itmplatform.com/documentation/). The document gives each operation its own server, so the package mounts two routers per account: `v1` (164 tools, `https://api.itmplatform.com/<company>`) and `v2` (175 tools, `https://api.itmplatform.com/v2/<company>`, the version the vendor recommends). Each router removes the other version's operations (the pointer lists in `versions.ts` are generated from the document and need regenerating if the document adds operations).
+
+**Auth:** API key only (no OAuth). Enter your company URL name (the part after `itmplatform.com/` in your login URL) and an API key, created in ITM Platform under your user's API settings. The package exchanges the key for a session token with `GET /<company>/login/<apiKey>` and sends it in the `Token` header, logging in again and retrying once when a call returns 401 or a 400 whose body says the token expired (the spec documents expiry as a 400; other 400s are returned as is). The API acts with the permissions of the key's user. Calls are rate limited per IP (4/s, 100/min, 3,000/h, 10,000/day).
+
+**Known gaps:** `GET /login/{APIKey}` is deliberately not exposed, so the key is never a tool argument and the session token is never shown to the model. Sixteen operations declare no server; the eight whose operationId ends in `V2` are mounted under v2 and the other eight follow the document default (v1), which is inferred. One v1 operation is skipped because its path cannot be compiled.

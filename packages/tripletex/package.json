@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tripletex",
+  "description": "Tripletex accounting: customers, suppliers, invoices, orders, ledger, projects, timesheets, salary and travel expenses, through Tripletex's official OpenAPI.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Tripletex"
+  }
+}

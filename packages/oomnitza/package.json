@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/oomnitza",
+  "description": "Manage IT assets, users, software, SaaS, contracts, locations, stockrooms and custom objects in Oomnitza.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Oomnitza"
+  }
+}

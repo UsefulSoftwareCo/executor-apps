@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gleap",
+  "description": "Gleap customer feedback and support: tickets, conversations, sessions, companies, help center, engagement and project settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gleap"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/otter",
+  "description": "Otter.ai meeting transcripts, summaries and action items, through Otter's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Otter.ai"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

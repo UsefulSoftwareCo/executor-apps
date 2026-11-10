@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/graphhopper",
+  "description": "GraphHopper Directions API: routing, route optimization, matrices, isochrones, geocoding, map matching and clustering.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GraphHopper"
+  }
+}

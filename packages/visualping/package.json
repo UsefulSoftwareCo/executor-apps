@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/visualping",
+  "description": "Monitor web pages for changes with Visualping: list, create, update, run and delete monitors, read check history and the activity feed, and manage labels and saved presets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Visualping"
+  }
+}

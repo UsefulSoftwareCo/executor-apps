@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/folk",
+  "description": "Manage people, companies, deals, groups, notes, tasks and interactions in the folk CRM.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Folk"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tiktokads",
+  "description": "TikTok Ads: advertisers, campaigns, ad groups, ads, creatives, audiences, pixels, catalogs, Business Center assets, targeting and reports through the TikTok API for Business.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "TikTok Ads"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

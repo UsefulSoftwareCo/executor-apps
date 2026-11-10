@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/creem",
+  "description": "Creem merchant-of-record payments: products, checkouts, customers, subscriptions, licenses, discounts, transactions, refunds, credits, meters and affiliates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Creem"
+  }
+}

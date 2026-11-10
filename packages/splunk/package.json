@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/splunk",
+  "description": "Run Splunk searches and manage saved searches, indexes, apps, users, roles, KV store collections and inputs on a Splunk Enterprise or Splunk Cloud Platform instance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Splunk"
+  }
+}

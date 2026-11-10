@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bird",
+  "description": "Bird (formerly MessageBird): send and manage email, SMS and WhatsApp, verification, realtime messaging and workspace settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bird"
+  }
+}

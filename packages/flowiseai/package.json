@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/flowiseai",
+  "description": "Flowise: chatflows, agentflows, predictions, chat messages, document stores, tools, variables, assistants and feedback.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Flowise"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/postscript",
+  "description": "Manage Postscript SMS marketing subscribers, unsubscribes, redactions and custom events.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Postscript"
+  }
+}

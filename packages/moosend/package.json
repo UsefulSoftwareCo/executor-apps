@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/moosend",
+  "description": "Email marketing with Moosend: campaigns, mailing lists, custom fields, segments, subscribers and campaign reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Moosend"
+  }
+}

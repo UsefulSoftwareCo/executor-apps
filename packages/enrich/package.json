@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/enrich",
+  "description": "Validate and find emails and phones, look up professional profiles, search leads and people, and manage credits with Enrich.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Enrich"
+  }
+}

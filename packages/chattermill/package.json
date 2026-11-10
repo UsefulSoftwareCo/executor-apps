@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chattermill",
+  "description": "Chattermill: projects, customer feedback responses, themes, categories, attributes, tags, segments and metrics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Chattermill"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

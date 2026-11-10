@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/snowflake",
+  "description": "Run SQL and manage databases, schemas, tables, warehouses, roles, grants, tasks, Cortex and the rest of Snowflake's REST APIs.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Snowflake"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

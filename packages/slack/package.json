@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/slack",
+  "description": "Channels, messages, threads, users, files, reactions, search and the rest of the Slack Web API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Slack"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

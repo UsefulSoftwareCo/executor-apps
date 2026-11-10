@@ -1,0 +1,4989 @@
+{
+ "openapi": "3.0.0",
+ "info": {
+  "version": "0.10.0",
+  "title": "Peerdom Public API",
+  "x-logo": {
+   "url": "/static/img/peerdom_logo.svg"
+  },
+  "description": "### Purpose\nPeerdom’s RESTful API offers organizations another way to work with the data they manage in Peerdom, making it easy to integrate with other tools or automate processes.\n\n### API Access Requirements\nAPI access is available only to organizations with an active paid subscription or during an active trial period. Organizations upgrade to Peerdom+ to gain access.\n\nCreate your API key in your organization’s settings.\n\nPeerdom's API URL is https://api.peerdom.app/\n\n### Authentication\nAll API endpoints operate in the context of a single organization, determined by the API key you provide. Most endpoints require this key to return data.\n\nInclude your API key in the request header using:\n```X-Api-Key```.   \n\n### Data Encoding\nThe API returns JSON-encoded data. Apply any additional encoding needed for your specific context (for example, escape HTML tags when rendering in a browser).\n",
+  "termsOfService": "https://peerdom.com/security-and-privacy/",
+  "contact": {
+   "name": "Peerdom Support",
+   "email": "support@peerdom.org",
+   "url": "https://peerdom.com"
+  }
+ },
+ "servers": [
+  {
+   "url": "https://api.peerdom.app/v1"
+  }
+ ],
+ "tags": [
+  {
+   "name": "Peers",
+   "description": "API endpoints related to Peers"
+  },
+  {
+   "name": "Roles",
+   "description": "API endpoints related to Roles"
+  },
+  {
+   "name": "Groups",
+   "description": "API endpoints related to Groups.\n\nNote: The default terminology has been changed to `/groups`. For backward compatibility, `/circles` is still available and functions the same as `/groups`. Please update your integrations to use `/groups` as `/circles` will eventually be deprecated.\n"
+  },
+  {
+   "name": "Projects",
+   "description": "API endpoints related to Projects"
+  },
+  {
+   "name": "Goals",
+   "description": "API endpoints related to Goals"
+  },
+  {
+   "name": "Maps",
+   "description": "API endpoints related to Maps"
+  },
+  {
+   "name": "Tenant",
+   "description": "API endpoints related to Tenant"
+  },
+  {
+   "name": "Apps",
+   "description": "API endpoints related to activating Peerdom apps"
+  },
+  {
+   "name": "Custom Fields",
+   "description": "API endpoints related to custom-field definitions (the schema/vocabulary)"
+  },
+  {
+   "name": "Pages",
+   "description": "API endpoints related to Pages. A page is a titled, ordered collection of cards. Cards are a separate resource (see the Cards tag) linked to pages via the page-card endpoints, so one card can appear on several pages (\"mirrored\"). Deleting a page archives it rather than removing it, matching the Peerdom app.\n"
+  },
+  {
+   "name": "Cards",
+   "description": "API endpoints related to Cards. A card is a text or image block that lives independently of pages and may be linked to zero, one, or many pages. Editing a card changes it on every page it is linked to.\n"
+  }
+ ],
+ "paths": {
+  "/tenant": {
+   "get": {
+    "summary": "Get tenant's details",
+    "description": "Retrieve details of the tenant associated with the Auth Key.\n",
+    "operationId": "getMyTenant",
+    "tags": [
+     "Tenant"
+    ],
+    "responses": {
+     "200": {
+      "description": "An object with tenant's data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Tenant"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/maps": {
+   "get": {
+    "summary": "Get List of Maps",
+    "description": "Gets a lists of all Maps within the organization's namespace.\n",
+    "operationId": "getMaps",
+    "tags": [
+     "Maps"
+    ],
+    "responses": {
+     "200": {
+      "description": "List of maps data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Map"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Post a draft map",
+    "description": "Create a draft map\n",
+    "operationId": "createDraftMap",
+    "tags": [
+     "Maps"
+    ],
+    "requestBody": {
+     "description": "Create a new draft map",
+     "required": false,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/MapCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "draft map",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Map"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/peers": {
+   "get": {
+    "summary": "Get List of Peers",
+    "description": "Gets a lists of all peers within the organization's namespace.\n",
+    "operationId": "getPeers",
+    "tags": [
+     "Peers"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "limit",
+      "description": "Pagination: limit the result to `limit` items (1-100). Recommended for large orgs.\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      }
+     },
+     {
+      "in": "query",
+      "name": "offset",
+      "description": "Pagination: skip the first `offset` items (0-based).\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 0
+      }
+     },
+     {
+      "in": "query",
+      "name": "includeFormer",
+      "description": "When `true`, former peers (those who have left) are included in the\nresult alongside active ones. Defaults to `false` (active peers only).\n",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "in": "query",
+      "name": "with",
+      "description": "Use `customfields` for inclusion of custom fields. (`roles` is only\neffective on `GET /peers/{id}`; it is ignored on the list.)\n",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of peers data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Peer"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "description": "A peer with the specified ID was not found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Create New Peer",
+    "description": "Create a new peer within the organization's namespace.\n\nWhen `email` is set, an account is provisioned for the peer and granted a\npermission in your organization (see `permissionGroup`). No invitation\nemail is sent — invite the peer from the Peerdom UI when you are ready.\n\nA Peerdom account is identified globally by its email address, so if one\nalready exists for that address it is reused and linked, rather than a\nsecond account being created. The existing account is not modified: its\npassword, and any access it holds in other organizations, are untouched.\nOnly a permission in *your* organization is added.\n",
+    "operationId": "createPeer",
+    "tags": [
+     "Peers"
+    ],
+    "requestBody": {
+     "description": "Create one peer (single object) or many peers (array, 1..n). An array\nis created atomically: all peers are created or none are.\n",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/PeerCreate"
+         },
+         {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "$ref": "#/components/schemas/PeerCreate"
+          }
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Created peer. A single object returns the created peer; an array\nrequest returns a creation summary.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "oneOf": [
+          {
+           "$ref": "#/components/schemas/Peer"
+          },
+          {
+           "type": "object",
+           "properties": {
+            "created": {
+             "type": "integer",
+             "description": "Number of peers created."
+            },
+            "items": {
+             "type": "array",
+             "items": {
+              "$ref": "#/components/schemas/Peer"
+             }
+            }
+           }
+          }
+         ]
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "409": {
+      "description": "The peer could not be created because the email address is already in\nuse. Either a peer in this organization already has it, or the account\nfor it already holds a different permission here, or it is already\nlinked to another peer. On an array request the whole batch is rolled\nback and the failing item's index is reported.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "422": {
+      "$ref": "#/components/responses/BulkCreateError"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/peers/{id}": {
+   "get": {
+    "summary": "Get Single Peer",
+    "description": "Gets a single peer based on their single ID.",
+    "operationId": "getPeerById",
+    "tags": [
+     "Peers"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of peer to fetch",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "with",
+      "description": "Comma-separated list of extra data to include. Use `customfields`\nfor custom fields, and `roles` to include the roles this peer holds.\n",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "includeFormer",
+      "description": "When `true`, a former peer (one who has left) can be fetched by id.\nDefaults to `false`, which returns 404 for former peers.\n",
+      "schema": {
+       "type": "boolean"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Peer data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Peer"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "put": {
+    "summary": "Update A Peer",
+    "description": "Update a single peer based on the ID supplied.\n",
+    "operationId": "updatePeer",
+    "tags": [
+     "Peers"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of peer to update",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "description": "Update a peer",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PeerUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "peer response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Peer"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Delete A Peer",
+    "description": "Delete a single peer based on the ID supplied.",
+    "operationId": "deletePeer",
+    "tags": [
+     "Peers"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of peer to delete",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "peer deleted"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/peers/{id}/photo": {
+   "post": {
+    "summary": "Set A Peer's Photo",
+    "description": "Set (upload or replace) a peer's profile photo. The image is resized\nand stored, and the peer's `avatarUrl` is updated. Provide the image in\none of two ways on this single endpoint:\n\n  - `multipart/form-data` with a `file` field (raw image bytes), or\n  - `application/json` with an `imageUrl` the server fetches itself.\n\nFor `imageUrl` the fetch is restricted for safety: HTTPS only, public\nhosts only (private, loopback, link-local and cloud-metadata addresses\nare rejected), a few redirects at most, and a short timeout.\n\nAllowed formats: JPEG, PNG, WebP. Maximum size 5 MB and maximum\ndimensions 4000x4000 pixels. Uploading the same image again is a no-op.\n",
+    "operationId": "setPeerPhoto",
+    "tags": [
+     "Peers"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of the peer whose photo to set",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "multipart/form-data": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "file"
+        ],
+        "properties": {
+         "file": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file (JPEG, PNG or WebP). Max 5 MB, max 4000x4000 px.\n"
+         }
+        }
+       }
+      },
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "required": [
+         "imageUrl"
+        ],
+        "properties": {
+         "imageUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Public HTTPS URL of the image (JPEG, PNG or WebP). The host\nmust resolve to a public address. Max 5 MB, max 4000x4000 px.\n",
+          "example": "https://example.com/avatars/jane.jpg"
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "peer response with the updated avatarUrl",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Peer"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Remove A Peer's Photo",
+    "description": "Remove a peer's profile photo. The peer's `avatarUrl` is cleared and the\nstored image is retired. Returns the updated peer. Calling this on a peer\nwith no photo is a no-op and still returns `200`.\n",
+    "operationId": "removePeerPhoto",
+    "tags": [
+     "Peers"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of the peer whose photo to remove",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "peer response with the photo removed (no `avatarUrl`)",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Peer"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/roles": {
+   "post": {
+    "summary": "Create a new Role",
+    "description": "Create a new role within the organtization\n",
+    "operationId": "postRole",
+    "tags": [
+     "Roles"
+    ],
+    "requestBody": {
+     "description": "Create one role (single object) or many roles (array, 1..n). You can\ncreate a role inside the organization or as an external role. An array\nis created atomically: all roles are created or none are.\n",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/RoleCreate"
+         },
+         {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "$ref": "#/components/schemas/RoleCreate"
+          }
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Created role. A single object returns the created role; an array\nrequest returns a creation summary.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "oneOf": [
+          {
+           "$ref": "#/components/schemas/Role"
+          },
+          {
+           "type": "object",
+           "properties": {
+            "created": {
+             "type": "integer",
+             "description": "Number of roles created."
+            },
+            "items": {
+             "type": "array",
+             "items": {
+              "$ref": "#/components/schemas/Role"
+             }
+            }
+           }
+          }
+         ]
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "422": {
+      "$ref": "#/components/responses/BulkCreateError"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "get": {
+    "summary": "Get List Of Roles",
+    "description": "Get a list of all roles within the organization's namespace.\n\nOptionally filterable to only include roles held by a given peer or that belong to a given group.\nThe result may optionally be extended by showing a list of peers holding the roles.\n",
+    "operationId": "getRoles",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "peer",
+      "description": "Peer ID to filter roles by. If set, this parameter overrides the `group` parameter.",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "group",
+      "description": "Group ID to filter roles by.",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "with",
+      "description": "Use `holders` for a list of all peers holding the roles, `customfields` for inclusion of custom fields, `groups` to include the role's parent group (circle), or `representing` to include the node the role represents. Comma-separated combination of values is allowed (e.g. `holders,customfields,groups,representing`).",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "mapId",
+      "description": "Filter the role nodes on the basis of map ID. If there is no map Id provided, the role nodes of the live map will be returned.",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "description": "Pagination: limit the result to `limit` items (1-100). Recommended for large maps.\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      }
+     },
+     {
+      "in": "query",
+      "name": "offset",
+      "description": "Pagination: skip the first `offset` items (0-based).\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of roles data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Role"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/roles/{id}": {
+   "get": {
+    "summary": "Get Single role from live or draft map excluding archived maps",
+    "description": "Get a single role based on the ID supplied.",
+    "operationId": "getRoleById",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of role to fetch",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "with",
+      "description": "Use `holders` for a list of all peers holding the role, `customfields` for inclusion of custom fields, `groups` to include the role's parent group (circle), or `representing` to include the node the role represents. Comma-separated combination of values is allowed (e.g. `holders,customfields,groups,representing`).",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Role data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Role"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "put": {
+    "summary": "Update an existing role",
+    "description": "Update an existing role based on the ID supplied.",
+    "operationId": "updateRoleById",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of role to update",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "description": "Update the following fields of an existing role",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RoleUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Updated role data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Role"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Delete Single Role from live or draft map excluding archived maps",
+    "description": "Delete a single role based on the ID supplied.",
+    "operationId": "deleteRoleById",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of role to delete",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Deleted role data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Role"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/roles/holders/bulk": {
+   "post": {
+    "summary": "Assign holders to several roles in one request",
+    "description": "Assign peers to multiple roles in a single atomic request. The body is an\narray of `{roleId, holders[]}` groups; every assignment across every group\nis created in one transaction (all-or-none). Collapses what used to be one\ncall per role into a single round trip.\n",
+    "operationId": "bulkAssignHolders",
+    "tags": [
+     "Roles"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+         "$ref": "#/components/schemas/BulkHolderAssignment"
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Creation summary across all groups.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "created": {
+           "type": "integer",
+           "description": "Total number of holders created across all roles."
+          },
+          "items": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Holder"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "422": {
+      "$ref": "#/components/responses/BulkCreateError"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/roles/{roleId}/mirrors": {
+   "post": {
+    "summary": "Mirror a role into one or more parent circles",
+    "description": "Create mirrored copies of a role across the given target parent circles.\nEvery copy shares the source role's template, so the whole mirror group\nkeeps its custom fields and goals in sync — editing one propagates to all\nsiblings. If the source role is still standalone, a template is created\nand the source is linked to it on the first mirror.\n\nHolders are NOT mirrored. When `copyHolders` is true the source's current\nholders are copied onto each new role once, at creation; later holder\nchanges do not propagate between mirrored roles.\n\nA target circle that already holds a member of the group — including the\nsource role's own parent circle — is rejected with `400`, so the role is\nnever duplicated within a circle it is already present in.\n\nThe operation is atomic: either every copy is created or none are.\n",
+    "operationId": "mirrorRole",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "roleId",
+      "in": "path",
+      "description": "ID of the source role to mirror.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/RoleMirror"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Creation summary. `templateId` is the mirror-group handle shared by\nthe source and all copies; `items` are the created roles.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "created": {
+           "type": "integer",
+           "description": "Number of mirrored roles created."
+          },
+          "templateId": {
+           "type": "string",
+           "format": "uuid",
+           "description": "The shared template id identifying the mirror group."
+          },
+          "items": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Role"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "description": "Source role or a target parent circle was not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "get": {
+    "summary": "List the roles in a role's mirror group",
+    "description": "Return every role sharing this role's template — the full mirror group,\nincluding the role itself. Returns an empty array when the role is\nstandalone (not part of a mirror group).\n",
+    "operationId": "getRoleMirrors",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "roleId",
+      "in": "path",
+      "description": "ID of a role in the mirror group.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "The roles that make up the mirror group.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Role"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "description": "Role not found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/roles/{roleId}/peers": {
+   "post": {
+    "summary": "Assign existing role to a peer",
+    "description": "Assign existing role from live or draft map to a peer",
+    "operationId": "assignRole",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "roleId",
+      "in": "path",
+      "description": "ID of role to that needs to be assigned to the peer",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "description": "Assign one peer (single object) or many peers (array, 1..n) to this\nrole. An array is created atomically: all assignments are created or\nnone are.\n",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/HolderCreate"
+         },
+         {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "$ref": "#/components/schemas/HolderCreate"
+          }
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Holder response. A single object returns the created holder; an array\nrequest returns a creation summary.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "oneOf": [
+          {
+           "$ref": "#/components/schemas/Holder"
+          },
+          {
+           "type": "object",
+           "properties": {
+            "created": {
+             "type": "integer",
+             "description": "Number of holders created."
+            },
+            "items": {
+             "type": "array",
+             "items": {
+              "$ref": "#/components/schemas/Holder"
+             }
+            }
+           }
+          }
+         ]
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "422": {
+      "$ref": "#/components/responses/BulkCreateError"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/roles/{roleId}/peers/{peerId}": {
+   "delete": {
+    "summary": "Unassign existing role from a peer",
+    "description": "Unassign existing role from a peer",
+    "operationId": "unassignRole",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "roleId",
+      "in": "path",
+      "description": "ID of role that needs to be unassigned from the peer",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "peerId",
+      "in": "path",
+      "description": "ID of peer that needs to be removed from the given role",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Holder response",
+      "content": {
+       "application/json": {
+        "example": {
+         "message": "Role Unassinged successfully"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "put": {
+    "summary": "Update existing role holder",
+    "description": "Update the role holder's percentage, focus, and electedUntil based on the role ID and peer ID.",
+    "operationId": "updateRoleHolder",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "roleId",
+      "in": "path",
+      "description": "ID of the role associated with the holder",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "peerId",
+      "in": "path",
+      "description": "ID of the peer assigned to the role",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "description": "Update the role holder's details",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/HolderUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Updated holder response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Holder"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "get": {
+    "summary": "Get Role Holder",
+    "description": "Retrieve a role holder by role ID and peer ID.",
+    "operationId": "getRoleHolder",
+    "tags": [
+     "Roles"
+    ],
+    "parameters": [
+     {
+      "name": "roleId",
+      "in": "path",
+      "required": true,
+      "description": "ID of the role",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "peerId",
+      "in": "path",
+      "required": true,
+      "description": "ID of the peer",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Role holder data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HolderReadDto"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "description": "Role holder not found",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/groups": {
+   "post": {
+    "summary": "Create a new group",
+    "description": "Create a new group. You can create a group inside the organization map or it can be an external group.",
+    "operationId": "postGroup",
+    "tags": [
+     "Groups"
+    ],
+    "requestBody": {
+     "description": "Create one group (single object) or many groups (array, 1..n). You can\ncreate a group inside the organization map or as an external group. An\narray is created atomically: all groups are created or none are.\n",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/NodeCreate"
+         },
+         {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "$ref": "#/components/schemas/NodeCreate"
+          }
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Created group. A single object returns the created group; an array\nrequest returns a creation summary.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "oneOf": [
+          {
+           "$ref": "#/components/schemas/Group"
+          },
+          {
+           "type": "object",
+           "properties": {
+            "created": {
+             "type": "integer",
+             "description": "Number of groups created."
+            },
+            "items": {
+             "type": "array",
+             "items": {
+              "$ref": "#/components/schemas/Group"
+             }
+            }
+           }
+          }
+         ]
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "422": {
+      "$ref": "#/components/responses/BulkCreateError"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "get": {
+    "summary": "Get List Of Groups",
+    "description": "Get a list of groups within the organization's namespace.\n",
+    "operationId": "getGroups",
+    "tags": [
+     "Groups"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "with",
+      "description": "Use `customfields` for inclusion of custom fields.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "peer",
+      "description": "Peer ID to filter groups by.",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "mapId",
+      "description": "Filter the group nodes on the basis of map ID. If there is no map Id provided, the group nodes of the live map will be returned.",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "description": "Pagination: limit the result to `limit` items (1-100). Recommended for large maps.\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      }
+     },
+     {
+      "in": "query",
+      "name": "offset",
+      "description": "Pagination: skip the first `offset` items (0-based).\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of groups data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Group"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/groups/{id}": {
+   "get": {
+    "summary": "Get Single Group",
+    "description": "Get a single group based on the supplied ID from live or draft map excluding archived maps",
+    "operationId": "getGroupById",
+    "tags": [
+     "Groups"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of group to fetch",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "with",
+      "description": "Use `customfields` for inclusion of custom fields.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Group data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Group"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Delete Single Group",
+    "description": "Delete a single group based on the supplied group ID from live or draft map excluding archived maps.",
+    "operationId": "deleteGroupById",
+    "tags": [
+     "Groups"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of group to delete",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Deleted role data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Group"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "put": {
+    "summary": "Update Single Group using group ID",
+    "description": "Update a single group based on the ID supplied.",
+    "operationId": "updateGroupById",
+    "tags": [
+     "Groups"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of group to update",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "description": "Update an existing group",
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NodeUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Updated role data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Group"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/projects": {
+   "get": {
+    "summary": "Get List Of Projects",
+    "description": "Get a list of projects within the organization's namespace.\n\nOptionally filterable to only include projects that belong to a given peer.\n",
+    "operationId": "getProjects",
+    "tags": [
+     "Projects"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "peer",
+      "description": "Peer ID to filter projects by.",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "description": "Pagination: limit the result to `limit` items (1-100). Applies to the\nunfiltered list (ignored when `peer` is supplied).\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      }
+     },
+     {
+      "in": "query",
+      "name": "offset",
+      "description": "Pagination: skip the first `offset` items (0-based). Applies to the\nunfiltered list (ignored when `peer` is supplied).\n",
+      "schema": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of projects data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Project"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Create a project",
+    "description": "Create a project for the organization. Optionally attach it to a circle\n(`circleId`) and/or nest it under a parent project (`parentId`). Requires\nthe Projects app to be enabled.\n",
+    "operationId": "createProject",
+    "tags": [
+     "Projects"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ProjectCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "The created project.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Project"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/projects/{id}": {
+   "get": {
+    "summary": "Get Single Project",
+    "description": "Get a single project based on the supplied ID.",
+    "operationId": "getProjectById",
+    "tags": [
+     "Projects"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "description": "ID of project to fetch",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Project data",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Project"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "patch": {
+    "summary": "Update a project",
+    "description": "Patch a project. Every field is optional; only the supplied fields are\nchanged. Renaming regenerates the slug. Requires the Projects app.\n",
+    "operationId": "updateProject",
+    "tags": [
+     "Projects"
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ProjectUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The updated project.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Project"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/goals": {
+   "post": {
+    "summary": "Create a goal",
+    "description": "Create a goal attached to a circle (`nodeId`). The goal `data` carries its\nname, order and completion (isComplete or subgoals). Requires the Goals\napp to be enabled.\n",
+    "operationId": "createGoal",
+    "tags": [
+     "Goals"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoalCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "The created goal.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Goal"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/goals/{id}": {
+   "parameters": [
+    {
+     "in": "path",
+     "name": "id",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    }
+   ],
+   "patch": {
+    "summary": "Update a goal",
+    "description": "Patch a goal. Every field is optional; only the supplied fields change.\n`nodeId` re-attaches the goal to a different circle. Requires the Goals app.\n",
+    "operationId": "updateGoal",
+    "tags": [
+     "Goals"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GoalUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The updated goal.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Goal"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Delete a goal",
+    "description": "Delete a goal and its circle links. Requires the Goals app.\n",
+    "operationId": "deleteGoal",
+    "tags": [
+     "Goals"
+    ],
+    "responses": {
+     "204": {
+      "description": "Deleted; no content."
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/apps/{name}/activate": {
+   "post": {
+    "summary": "Activate App",
+    "description": "Activate an app for the organization. Idempotent: activating an\nalready-enabled app succeeds without side effects. Only flips the\nenablement flag; billing for charged apps is handled separately.\n",
+    "operationId": "activateApp",
+    "tags": [
+     "Apps"
+    ],
+    "parameters": [
+     {
+      "name": "name",
+      "in": "path",
+      "description": "Name of the app to activate.",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "contribution",
+        "drafts",
+        "goals",
+        "pages",
+        "projects"
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "The app and its (now enabled) state.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "app": {
+           "type": "string",
+           "example": "goals"
+          },
+          "enabled": {
+           "type": "boolean",
+           "example": true
+          }
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "description": "The organization could not be found.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   }
+  },
+  "/custom-field-definitions": {
+   "get": {
+    "summary": "List custom-field definitions",
+    "description": "List the organization's custom-field definitions (the schema/vocabulary,\nnot the per-entity values). Call this before writing peers/roles/groups so\nsource data maps to the organization's real field names. Optionally filter\nby the owning entity with `?entity=`.\n",
+    "operationId": "listCustomFieldDefinitions",
+    "tags": [
+     "Custom Fields"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "entity",
+      "description": "Only return definitions for this owning entity.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "node",
+        "peer",
+        "project",
+        "goal"
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of custom-field definitions.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CustomFieldDefinition"
+         }
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "4XX": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/ServerError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Create custom-field definition(s)",
+    "description": "Create one definition (single object) or many (array, 1..n). An array is\ncreated atomically: all definitions are created or none are. Create the\ndefinitions before setting their values on peers/roles/groups.\n",
+    "operationId": "createCustomFieldDefinitions",
+    "tags": [
+     "Custom Fields"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/CustomFieldDefinitionCreate"
+         },
+         {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "$ref": "#/components/schemas/CustomFieldDefinitionCreate"
+          }
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Created definition. A single object returns the created definition; an\narray request returns a creation summary.\n",
+      "content": {
+       "application/json": {
+        "schema": {
+         "oneOf": [
+          {
+           "$ref": "#/components/schemas/CustomFieldDefinition"
+          },
+          {
+           "type": "object",
+           "properties": {
+            "created": {
+             "type": "integer",
+             "description": "Number of definitions created."
+            },
+            "items": {
+             "type": "array",
+             "items": {
+              "$ref": "#/components/schemas/CustomFieldDefinition"
+             }
+            }
+           }
+          }
+         ]
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "422": {
+      "$ref": "#/components/responses/BulkCreateError"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/custom-field-definitions/{id}": {
+   "parameters": [
+    {
+     "in": "path",
+     "name": "id",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    }
+   ],
+   "get": {
+    "summary": "Get a custom-field definition",
+    "description": "Fetch a single definition by id, including its `type`, `multiEntry`,\n`entity` and `nodeType`, so values can be verified before being written.\n",
+    "operationId": "getCustomFieldDefinition",
+    "tags": [
+     "Custom Fields"
+    ],
+    "responses": {
+     "200": {
+      "description": "The custom-field definition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CustomFieldDefinition"
+        }
+       }
+      }
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "patch": {
+    "summary": "Rename / edit a custom-field definition",
+    "description": "Update side-effect-free fields of a definition: `name` (the API key used\nto write values by name), `translation` (display labels), `order` and\n`public`. A rename updates BOTH the API key and the label. `type`,\n`entity`, `nodeType`, `multiEntry` and `relationScope` are not editable\nhere — changing them would mutate or drop existing values — and are\nrejected with 400.\n",
+    "operationId": "updateCustomFieldDefinition",
+    "tags": [
+     "Custom Fields"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CustomFieldDefinitionUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The updated definition.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CustomFieldDefinition"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "409": {
+      "$ref": "#/components/responses/Conflict"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Delete a custom-field definition",
+    "description": "Delete a definition and, via cascade, every value stored against it.\n",
+    "operationId": "deleteCustomFieldDefinition",
+    "tags": [
+     "Custom Fields"
+    ],
+    "responses": {
+     "204": {
+      "description": "Deleted; no content."
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/import": {
+   "post": {
+    "summary": "Import peers, groups, roles and holders in one request",
+    "description": "Apply a single JSON document that creates peers, groups, roles and holder\nassignments together, atomically (all-or-none). Entities created in the\nsame document are wired together with transient `ref` aliases: give an item\na `ref`, then point at it from a parent (`parentRef`) or a holder\n(`roleRef` / `peerRef`). Aliases are in-memory only and never stored. Items\nthat already exist can be referenced by real id instead. Synchronous — keep\nbatches reasonably sized.\n",
+    "operationId": "importMap",
+    "tags": [
+     "Import"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ImportMap"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Import summary (counts of what was processed).",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "imported": {
+           "type": "object",
+           "properties": {
+            "peers": {
+             "type": "integer"
+            },
+            "groups": {
+             "type": "integer"
+            },
+            "roles": {
+             "type": "integer"
+            },
+            "holders": {
+             "type": "integer"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/pages": {
+   "get": {
+    "summary": "List pages",
+    "description": "List the organization's pages, newest-updated first.",
+    "operationId": "listPages",
+    "tags": [
+     "Pages"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "archived",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Filter by archived state."
+     },
+     {
+      "in": "query",
+      "name": "public",
+      "schema": {
+       "type": "boolean"
+      },
+      "description": "Filter by public/private."
+     },
+     {
+      "in": "query",
+      "name": "with",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "cards"
+       ]
+      },
+      "description": "Comma-separated expansions. `cards` embeds the page's ordered cards."
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      }
+     },
+     {
+      "in": "query",
+      "name": "offset",
+      "schema": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of pages.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Page"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Create a page",
+    "operationId": "createPage",
+    "tags": [
+     "Pages"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PageCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "The created page.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/pages/{id}": {
+   "parameters": [
+    {
+     "in": "path",
+     "name": "id",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    }
+   ],
+   "get": {
+    "summary": "Get a page",
+    "operationId": "getPage",
+    "tags": [
+     "Pages"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "with",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "cards"
+       ]
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "The page.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page"
+        }
+       }
+      }
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "patch": {
+    "summary": "Update a page",
+    "description": "Update a page's name, description, visibility or archived state.",
+    "operationId": "updatePage",
+    "tags": [
+     "Pages"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PageUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The updated page.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Page"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Archive a page",
+    "description": "Archives the page (sets `archived: true`). The page is NOT hard-deleted — it remains fetchable and can be restored with `PATCH { \"archived\": false }`.\n",
+    "operationId": "archivePage",
+    "tags": [
+     "Pages"
+    ],
+    "responses": {
+     "204": {
+      "description": "The page was archived."
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/pages/{id}/cards": {
+   "parameters": [
+    {
+     "in": "path",
+     "name": "id",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    }
+   ],
+   "get": {
+    "summary": "List a page's cards",
+    "description": "List the cards on a page, in their per-page order.",
+    "operationId": "listPageCards",
+    "tags": [
+     "Pages"
+    ],
+    "responses": {
+     "200": {
+      "description": "The page's ordered cards.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Card"
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Attach a card to a page",
+    "description": "Link an existing card to a page. `mirrored` links the same card, so edits propagate to every page that shares it; `independent` (default) clones the card first, so edits do not propagate.\n",
+    "operationId": "attachCardToPage",
+    "tags": [
+     "Pages"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PageCardAttach"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The card was already linked to this page (idempotent no-op for a mirrored card); the existing link is returned unchanged.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PageCardLink"
+        }
+       }
+      }
+     },
+     "201": {
+      "description": "The created link.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PageCardLink"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "put": {
+    "summary": "Reorder a page's cards",
+    "description": "Rewrite the order of a page's cards. Send the FULL, ordered list of the page's current card ids; each card's position becomes its array index.\n",
+    "operationId": "reorderPageCards",
+    "tags": [
+     "Pages"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PageCardReorder"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The page's cards in their new order.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Card"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/pages/{id}/cards/{cardId}": {
+   "parameters": [
+    {
+     "in": "path",
+     "name": "id",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    },
+    {
+     "in": "path",
+     "name": "cardId",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    }
+   ],
+   "delete": {
+    "summary": "Unlink a card from a page",
+    "description": "Removes the card from this page only. The card itself, and its links to any other pages, are unaffected. To delete the card entirely use DELETE /cards/{id}.\n",
+    "operationId": "unlinkCardFromPage",
+    "tags": [
+     "Pages"
+    ],
+    "responses": {
+     "204": {
+      "description": "The card was unlinked from the page."
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/cards": {
+   "get": {
+    "summary": "List cards",
+    "operationId": "listCards",
+    "tags": [
+     "Cards"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "type",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "text",
+        "image"
+       ]
+      }
+     },
+     {
+      "in": "query",
+      "name": "onPage",
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "description": "Only cards linked to this page."
+     },
+     {
+      "in": "query",
+      "name": "limit",
+      "schema": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 100
+      }
+     },
+     {
+      "in": "query",
+      "name": "offset",
+      "schema": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "List of cards.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Card"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "post": {
+    "summary": "Create a card",
+    "description": "Create a text or image card. Image cards accept the image EITHER as a `multipart/form-data` `file` field OR as an `imageUrl` in a JSON body (fetched server-side). Link the card to a page afterwards via POST /pages/{id}/cards.\n",
+    "operationId": "createCard",
+    "tags": [
+     "Cards"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CardCreate"
+       }
+      },
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/CardCreateMultipart"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "The created card.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Card"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "403": {
+      "$ref": "#/components/responses/Forbidden"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  },
+  "/cards/{id}": {
+   "parameters": [
+    {
+     "in": "path",
+     "name": "id",
+     "required": true,
+     "schema": {
+      "type": "string",
+      "format": "uuid"
+     }
+    }
+   ],
+   "get": {
+    "summary": "Get a card",
+    "description": "Fetch a card, including `pageCount` (how many pages share it).",
+    "operationId": "getCard",
+    "tags": [
+     "Cards"
+    ],
+    "responses": {
+     "200": {
+      "description": "The card.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Card"
+        }
+       }
+      }
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "patch": {
+    "summary": "Update a card",
+    "description": "Edit a card's content. The change applies to EVERY page the card is linked to (mirrored cards share one content row). `type` may be switched between `text` and `image`.\n",
+    "operationId": "updateCard",
+    "tags": [
+     "Cards"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CardUpdate"
+       }
+      },
+      "multipart/form-data": {
+       "schema": {
+        "$ref": "#/components/schemas/CardCreateMultipart"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "The updated card.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Card"
+        }
+       }
+      }
+     },
+     "400": {
+      "$ref": "#/components/responses/BadRequest"
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   },
+   "delete": {
+    "summary": "Delete a card",
+    "description": "Permanently delete the card, its content, and every page link (it disappears from all pages). To remove a card from a single page without deleting it, use DELETE /pages/{id}/cards/{cardId}.\n",
+    "operationId": "deleteCard",
+    "tags": [
+     "Cards"
+    ],
+    "responses": {
+     "204": {
+      "description": "The card was deleted."
+     },
+     "404": {
+      "$ref": "#/components/responses/NotFound"
+     },
+     "default": {
+      "$ref": "#/components/responses/UnexpectedError"
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Page": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string",
+      "description": "Auto-generated from the name; unique per organization."
+     },
+     "public": {
+      "type": "boolean",
+      "description": "True iff visibility is PUBLIC. The only visibility axis writable via this API."
+     },
+     "visibility": {
+      "type": "string",
+      "enum": [
+       "PRIVATE",
+       "SHARED",
+       "PUBLIC"
+      ],
+      "readOnly": true,
+      "description": "Underlying page visibility. Read-only here — only the PUBLIC axis is settable via `public`. SHARED (per-account grants) cannot be set through this API, so setting `public: false` on a SHARED page is a no-op (it stays SHARED)."
+     },
+     "archived": {
+      "type": "boolean"
+     },
+     "archivedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "thumbnailUrl": {
+      "type": "string"
+     },
+     "thumbnailAlt": {
+      "type": "string"
+     },
+     "createdBy": {
+      "type": "string",
+      "description": "Email of the account that created the page."
+     },
+     "lastUpdatedBy": {
+      "type": "string"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "cards": {
+      "type": "array",
+      "description": "Present only when requested via `?with=cards`; ordered by page position.",
+      "items": {
+       "$ref": "#/components/schemas/Card"
+      }
+     }
+    }
+   },
+   "PageCreate": {
+    "type": "object",
+    "required": [
+     "name"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "public": {
+      "type": "boolean",
+      "default": false
+     }
+    }
+   },
+   "PageUpdate": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "public": {
+      "type": "boolean"
+     },
+     "archived": {
+      "type": "boolean"
+     }
+    }
+   },
+   "Card": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string",
+      "enum": [
+       "text",
+       "image"
+      ]
+     },
+     "content": {
+      "$ref": "#/components/schemas/CardContent"
+     },
+     "order": {
+      "type": "integer",
+      "description": "The card's position on a page. Present only when the card is read in a page context."
+     },
+     "pageCount": {
+      "type": "integer",
+      "description": "How many pages share this card (>1 means mirrored). Present on GET /cards/{id}."
+     }
+    }
+   },
+   "CardContent": {
+    "type": "object",
+    "description": "Shape depends on the card type — text {text,isQuote} or image {imageUrl,imageAlt}.",
+    "properties": {
+     "text": {
+      "type": "string"
+     },
+     "isQuote": {
+      "type": "boolean"
+     },
+     "imageUrl": {
+      "type": "string"
+     },
+     "imageAlt": {
+      "type": "string"
+     }
+    }
+   },
+   "CardCreate": {
+    "type": "object",
+    "required": [
+     "type"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "type": {
+      "type": "string",
+      "enum": [
+       "text",
+       "image"
+      ]
+     },
+     "name": {
+      "type": "string"
+     },
+     "text": {
+      "type": "string",
+      "description": "Required for text cards."
+     },
+     "isQuote": {
+      "type": "boolean"
+     },
+     "imageUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "For image cards: a public https URL, fetched server-side."
+     },
+     "imageAlt": {
+      "type": "string"
+     }
+    }
+   },
+   "CardUpdate": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+     "type": {
+      "type": "string",
+      "enum": [
+       "text",
+       "image"
+      ],
+      "description": "Switch the card between text and image."
+     },
+     "name": {
+      "type": "string"
+     },
+     "text": {
+      "type": "string"
+     },
+     "isQuote": {
+      "type": "boolean"
+     },
+     "imageUrl": {
+      "type": "string",
+      "format": "uri"
+     },
+     "imageAlt": {
+      "type": "string"
+     }
+    }
+   },
+   "CardCreateMultipart": {
+    "type": "object",
+    "description": "Multipart form for uploading an image card's bytes directly.",
+    "properties": {
+     "type": {
+      "type": "string",
+      "enum": [
+       "image"
+      ]
+     },
+     "name": {
+      "type": "string"
+     },
+     "imageAlt": {
+      "type": "string"
+     },
+     "file": {
+      "type": "string",
+      "format": "binary",
+      "description": "The image bytes (jpeg/png/webp",
+      "max 5MB).": null
+     }
+    }
+   },
+   "PageCardAttach": {
+    "type": "object",
+    "required": [
+     "cardId"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "cardId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "independent",
+       "mirrored"
+      ],
+      "default": "independent",
+      "description": "`mirrored` links the same card (edits propagate); `independent` clones it."
+     },
+     "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Optional insert position; appended to the end when omitted."
+     }
+    }
+   },
+   "PageCardReorder": {
+    "type": "object",
+    "required": [
+     "cardIds"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "cardIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      },
+      "description": "The full, ordered list of the page's current card ids."
+     }
+    }
+   },
+   "PageCardLink": {
+    "type": "object",
+    "properties": {
+     "pageId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "cardId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "order": {
+      "type": "integer"
+     }
+    }
+   },
+   "Tenant": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "liveMapId": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The tenant's live (non-draft) map id, or null if it has none yet."
+     },
+     "palette": {
+      "type": "array",
+      "description": "The tenant's curated color palette. When `allowPersonalColors` is false, node/group colors must be one of these hex values; use them to know which colors are available before creating or updating nodes.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "hex": {
+         "type": "string",
+         "description": "The color as a lowercase `#RRGGBB` hex string."
+        },
+        "name": {
+         "type": "string",
+         "description": "Human-readable name of the color."
+        }
+       }
+      }
+     },
+     "allowPersonalColors": {
+      "type": "boolean",
+      "description": "When false, node/group colors are restricted to `palette`. When true, any valid hex color may be used."
+     }
+    }
+   },
+   "Map": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "draft": {
+      "type": "boolean"
+     },
+     "tenant": {
+      "type": "object",
+      "properties": {
+       "id": {
+        "type": "string",
+        "format": "uuid"
+       }
+      }
+     },
+     "layout": {
+      "type": "object",
+      "properties": {
+       "enclose": {
+        "type": "string",
+        "description": "Any one of these values 'all' | 'roles' | 'none'."
+       },
+       "connectingLines": {
+        "type": "boolean"
+       }
+      }
+     },
+     "private": {
+      "type": "boolean"
+     },
+     "archived": {
+      "type": "boolean"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     }
+    }
+   },
+   "MapWrite": {
+    "type": "object",
+    "properties": {
+     "private": {
+      "type": "boolean",
+      "description": "Set to true to make the draft map private; set to false to keep it public."
+     }
+    }
+   },
+   "MapCreate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/MapWrite"
+     }
+    ]
+   },
+   "Project": {
+    "type": "object",
+    "required": [
+     "id"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "notes": {
+      "type": "string"
+     },
+     "externalUrl": {
+      "type": "string"
+     },
+     "archived": {
+      "type": "boolean"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "endedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "archivedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "group": {
+      "type": "boolean"
+     }
+    }
+   },
+   "ProjectCreate": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "name"
+    ],
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "notes": {
+      "type": "string"
+     },
+     "externalUrl": {
+      "type": "string"
+     },
+     "circleId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional circle (node) to attach the project to."
+     },
+     "parentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional parent project to nest under."
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "endedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "archived": {
+      "type": "boolean"
+     }
+    }
+   },
+   "ProjectUpdate": {
+    "type": "object",
+    "additionalProperties": false,
+    "description": "All fields optional; only supplied fields are changed.",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "description": {
+      "type": "string"
+     },
+     "notes": {
+      "type": "string"
+     },
+     "externalUrl": {
+      "type": "string"
+     },
+     "circleId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "parentId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "endedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "archived": {
+      "type": "boolean"
+     }
+    }
+   },
+   "GoalData": {
+    "type": "object",
+    "required": [
+     "name",
+     "order",
+     "isComplete"
+    ],
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "order": {
+      "type": "integer"
+     },
+     "isComplete": {
+      "type": "boolean",
+      "description": "Whole-goal completion, used when no subgoals are present."
+     },
+     "subgoals": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "name",
+        "type"
+       ],
+       "properties": {
+        "name": {
+         "type": "string"
+        },
+        "type": {
+         "type": "string",
+         "enum": [
+          "number",
+          "percentage",
+          "boolean"
+         ]
+        },
+        "amountComplete": {
+         "type": "number",
+         "description": "Required when type is \"number\"."
+        },
+        "targetAmount": {
+         "type": "number",
+         "description": "Required when type is \"number\"."
+        },
+        "percentComplete": {
+         "type": "number",
+         "minimum": 0,
+         "maximum": 1,
+         "description": "Required when type is \"percentage\"."
+        },
+        "isComplete": {
+         "type": "boolean",
+         "description": "Required when type is \"boolean\"."
+        }
+       }
+      }
+     }
+    }
+   },
+   "Goal": {
+    "type": "object",
+    "required": [
+     "id"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "data": {
+      "$ref": "#/components/schemas/GoalData"
+     },
+     "description": {
+      "type": "string"
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "endedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+     }
+    }
+   },
+   "GoalCreate": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "data",
+     "nodeId"
+    ],
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/GoalData"
+     },
+     "nodeId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The circle (node) the goal attaches to."
+     },
+     "description": {
+      "type": "string"
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "endedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "archived": {
+      "type": "boolean"
+     }
+    }
+   },
+   "GoalUpdate": {
+    "type": "object",
+    "additionalProperties": false,
+    "description": "All fields optional; only supplied fields are changed.",
+    "properties": {
+     "data": {
+      "$ref": "#/components/schemas/GoalData"
+     },
+     "nodeId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Re-attach the goal to this circle."
+     },
+     "description": {
+      "type": "string"
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "endedAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "archived": {
+      "type": "boolean"
+     }
+    }
+   },
+   "Peer": {
+    "type": "object",
+    "required": [
+     "id"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "firstName": {
+      "type": "string"
+     },
+     "lastName": {
+      "type": "string"
+     },
+     "nickName": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "avatarUrl": {
+      "type": "string"
+     },
+     "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The peer's email address, when one is on record. Omitted for peers without an address."
+     },
+     "birthdate": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "joinedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the peer joined (the record's creation date)."
+     },
+     "leftAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the peer left. Omitted for active peers; present for former peers (see the `includeFormer` query parameter)."
+     },
+     "roles": {
+      "type": "array",
+      "description": "The roles this peer holds. Only included when requested via `?with=roles` on `GET /peers/{id}`.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "id": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "name": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "contribution": {
+      "type": "number",
+      "description": "Contribution App needs to be enabled for this attribute."
+     },
+     "contributionUnit": {
+      "type": "string",
+      "description": "Contribution App needs to be enabled for this attribute."
+     },
+     "customFields": {
+      "type": "array",
+      "description": "The custom fields for a peer. If there are none, the attribute is not shown.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "id": {
+         "type": "string",
+         "description": "The unique identifier for the custom field."
+        },
+        "name": {
+         "type": "string",
+         "description": "The name of the custom field definition."
+        },
+        "values": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "The custom field value(s). Always an array, even for single-entry fields. For relation-type fields these are the raw ids of the linked entities; see `relations` for the resolved names."
+        },
+        "relations": {
+         "type": "array",
+         "description": "Only present on relation-type custom fields. Each stored id resolved against the linked entity (peer, role/circle, or page), tenant-scoped. `name` is null when the id no longer resolves (deleted or cross-tenant), which lets a verify-after-write client distinguish a real link from a dangling one.",
+         "items": {
+          "type": "object",
+          "properties": {
+           "id": {
+            "type": "string",
+            "format": "uuid"
+           },
+           "name": {
+            "type": "string",
+            "nullable": true
+           }
+          }
+         }
+        },
+        "definition": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string",
+           "format": "uuid"
+          },
+          "name": {
+           "type": "string"
+          },
+          "type": {
+           "type": "string"
+          },
+          "translation": {
+           "type": "object"
+          },
+          "multiEntry": {
+           "type": "boolean"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "PeerWrite": {
+    "type": "object",
+    "properties": {
+     "firstName": {
+      "type": "string"
+     },
+     "lastName": {
+      "type": "string"
+     },
+     "nickName": {
+      "type": "string"
+     },
+     "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The peer's email address. When provided on create, an account is found-or-created and linked to the peer, and a tenant permission is granted (see `permissionGroup`). No invitation email is sent — the account lands in a pending-invite state and is invited later from the Peerdom UI. When omitted, an account-less (\"chart-only\") peer is created."
+     },
+     "birthdate": {
+      "type": "string",
+      "format": "date"
+     },
+     "percentage": {
+      "type": "integer",
+      "description": "Contribution App needs to be enabled for this attribute."
+     },
+     "customFields": {
+      "description": "The custom fields for a peer. You can add the properties from the predefined custom fields. Please refer to the example in the sample request.",
+      "type": "object",
+      "additionalProperties": {
+       "oneOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        }
+       ]
+      },
+      "example": {
+       "Office": "String",
+       "Mobile number": "String",
+       "List of Mentors": [
+        "Mentor 1",
+        "Mentor 2"
+       ]
+      }
+     }
+    }
+   },
+   "PeerCreate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/PeerWrite"
+     },
+     {
+      "required": [
+       "firstName"
+      ]
+     },
+     {
+      "type": "object",
+      "properties": {
+       "permissionGroup": {
+        "type": "string",
+        "enum": [
+         "owner",
+         "editor",
+         "member",
+         "friend",
+         "guest"
+        ],
+        "default": "guest",
+        "description": "Permission granted to the account provisioned for this peer. Requires `email` — an account-less peer has no account to grant a permission to, so sending this without one is rejected with a 400 rather than silently ignored.\n\nDefaults to `guest`, matching a CSV import with an empty access rights column. Subject to the tenant's seat/license limit — on a PBS-subscribed tenant with no seats remaining it is downgraded to `guest`, so the permission actually granted may be lower than the one requested.\n\nCreate-only. Sending it on `PUT /peers/{id}` is rejected with a 400; changing an existing peer's permission is done from the Peerdom UI."
+       }
+      }
+     }
+    ]
+   },
+   "PeerUpdate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/PeerWrite"
+     }
+    ]
+   },
+   "Goals": {
+    "type": "object",
+    "properties": {
+     "endedAt": {
+      "type": "string",
+      "format": "date",
+      "example": "2019-05-17"
+     },
+     "startedAt": {
+      "type": "string",
+      "format": "date",
+      "example": "2019-05-17"
+     },
+     "archived": {
+      "type": "boolean"
+     },
+     "data": {
+      "type": "object",
+      "description": "The name of the custom field definition.",
+      "properties": {
+       "order": {
+        "type": "string"
+       },
+       "name": {
+        "type": "string"
+       },
+       "isComplete": {
+        "type": "boolean"
+       },
+       "subgoals": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "name": {
+           "type": "string",
+           "description": "percentage || numeric || boolean"
+          },
+          "percentComplete": {
+           "type": "number",
+           "description": "required when the type is percentage"
+          },
+          "isComplete": {
+           "type": "boolean",
+           "description": "required when the type is boolean"
+          },
+          "amountComplete": {
+           "type": "number",
+           "description": "required when the type is numeric"
+          },
+          "targetAmount": {
+           "type": "number",
+           "description": "required when the type is numeric"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "Role": {
+    "type": "object",
+    "required": [
+     "id"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "color": {
+      "nullable": true,
+      "type": "string",
+      "description": "The choice of color for the node as a hex string (`#RRGGBB` or `#RGB`). When the tenant's color palette is enforced (the `allowPersonalColors` setting is off), the color must match one of the palette's colors, otherwise the request is rejected with 400. When personal colors are allowed, any valid hex is accepted."
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "parentId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "representing": {
+      "type": "object",
+      "description": "The node this role represents (its represented parent). Only included when requested via `?with=representing`.",
+      "properties": {
+       "id": {
+        "type": "string",
+        "format": "uuid"
+       },
+       "name": {
+        "type": "string"
+       }
+      }
+     },
+     "slug": {
+      "type": "string"
+     },
+     "external": {
+      "type": "boolean"
+     },
+     "electable": {
+      "type": "boolean"
+     },
+     "salaryLevel": {
+      "type": "string"
+     },
+     "mirrored": {
+      "type": "boolean"
+     },
+     "templateId": {
+      "type": "string",
+      "format": "uuid",
+      "nullable": true,
+      "description": "The mirror-group handle: the id of the shared `NodeTemplate`. Roles\nwith the same `templateId` form one mirror group and keep their\ncustom fields and goals in sync. Absent for standalone (non-mirrored)\nroles.\n"
+     },
+     "shape": {
+      "type": "string"
+     },
+     "target": {
+      "type": "number",
+      "nullable": true,
+      "description": "The role's contribution target (`Node.targetPercentage`), expressed in the tenant's contribution unit (same conversion as holder `contribution`). Only present when the Contribution App is enabled; null when no target is set."
+     },
+     "contributionUnit": {
+      "type": "string",
+      "description": "The contribution unit the `target` is expressed in. Only present when the Contribution App is enabled."
+     },
+     "customFields": {
+      "type": "array",
+      "description": "The custom fields for a role. If there are none, the attribute is not shown.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "id": {
+         "type": "string",
+         "description": "The unique identifier for the custom field."
+        },
+        "name": {
+         "type": "string",
+         "description": "The name of the custom field definition."
+        },
+        "values": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "The custom field value(s). Always an array, even for single-entry fields."
+        },
+        "definition": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string",
+           "format": "uuid"
+          },
+          "name": {
+           "type": "string"
+          },
+          "type": {
+           "type": "string"
+          },
+          "translation": {
+           "type": "object"
+          },
+          "multiEntry": {
+           "type": "boolean"
+          }
+         }
+        }
+       }
+      }
+     },
+     "holders": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "peerId": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "contribution": {
+         "type": "number",
+         "description": "Contribution App needs to be enabled for this attribute. Value 0 means that either a contribution of 0 is stored, or none is stored."
+        },
+        "contributionUnit": {
+         "type": "string",
+         "description": "Contribution App needs to be enabled for this attribute."
+        }
+       }
+      }
+     },
+     "goals": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Goals"
+      }
+     },
+     "purpose": {
+      "type": "string",
+      "description": "The role's purpose. Sourced from the default \"Purpose\" custom field; omitted if unset or if the tenant renamed that field."
+     },
+     "accountabilities": {
+      "type": "array",
+      "description": "The role's accountabilities. Sourced from the default \"Responsibilities\" custom field; omitted if unset or if the tenant renamed that field.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "groups": {
+      "type": "array",
+      "description": "The role's parent group (circle). Only included when requested via `?with=groups`. A role has a single direct parent, so this contains at most one entry.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "id": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "name": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "groupEmail": {
+      "nullable": true,
+      "type": "string",
+      "description": "Email for node(group/role) communication"
+     }
+    }
+   },
+   "Group": {
+    "type": "object",
+    "required": [
+     "id"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "createdAt": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "parentId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "external": {
+      "type": "boolean"
+     },
+     "color": {
+      "nullable": true,
+      "type": "string",
+      "description": "The choice of color for the node as a hex string (`#RRGGBB` or `#RGB`). When the tenant's color palette is enforced (the `allowPersonalColors` setting is off), the color must match one of the palette's colors, otherwise the request is rejected with 400. When personal colors are allowed, any valid hex is accepted."
+     },
+     "shape": {
+      "type": "string",
+      "description": "Specifies the shape of the node. Acceptable values are \"circle\" or \"hexagon\", each determining the visual representation of the node within the interface."
+     },
+     "customFields": {
+      "type": "array",
+      "description": "The custom fields for a group. If there are none, the attribute is not shown.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "id": {
+         "type": "string",
+         "description": "The unique identifier for the custom field."
+        },
+        "name": {
+         "type": "string",
+         "description": "The name of the custom field definition."
+        },
+        "values": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "description": "The custom field value(s). Always an array, even for single-entry fields."
+        },
+        "definition": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string",
+           "format": "uuid"
+          },
+          "name": {
+           "type": "string"
+          },
+          "type": {
+           "type": "string"
+          },
+          "translation": {
+           "type": "object"
+          },
+          "multiEntry": {
+           "type": "boolean"
+          }
+         }
+        }
+       }
+      }
+     },
+     "goals": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Goals"
+      }
+     },
+     "groupEmail": {
+      "nullable": true,
+      "type": "string",
+      "description": "Email for node(group/role) communication"
+     }
+    }
+   },
+   "Holder": {
+    "type": "object",
+    "properties": {
+     "peerId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "roleId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "focus": {
+      "type": "string"
+     },
+     "percentage": {
+      "type": "string"
+     }
+    }
+   },
+   "NodeWrite": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "mapId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "parentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The Id should be a valid group ID. In order to find the groups on your map, please check these routes [Get a list of groups](#operation/getGroups). For roles, kindly visit this route [Get a list of roles](#operation/getRoles)"
+     },
+     "electable": {
+      "type": "boolean"
+     },
+     "external": {
+      "type": "boolean",
+      "description": "Marks the node as outside the organization. It also controls the parent link (there is no direct `parentId: null`): setting `external` to true DETACHES the node from its parent (it becomes top-level); setting it to false re-attaches it under the map's root circle. Conversely, supplying a `parentId` on a currently-external node flips `external` back to false.\n"
+     },
+     "color": {
+      "type": "string",
+      "description": "The choice of color for the node as a hex string (`#RRGGBB` or `#RGB`). When the tenant's color palette is enforced (the `allowPersonalColors` setting is off), the color must match one of the palette's colors, otherwise the request is rejected with 400. When personal colors are allowed, any valid hex is accepted."
+     },
+     "shape": {
+      "type": "string",
+      "description": "Specifies the shape of the node. Acceptable values are \"circle\" or \"hexagon\", each determining the visual representation of the node within the interface."
+     },
+     "customFields": {
+      "description": "The custom fields for a group/role. You can add the properties from the predefined custom fields. Please refer to the example in the sample request.",
+      "type": "object",
+      "additionalProperties": {
+       "oneOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        }
+       ]
+      },
+      "example": {
+       "Notes": "String",
+       "Responsibilties": [
+        "Res 1",
+        "Res 2"
+       ]
+      }
+     },
+     "goals": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Goals"
+      }
+     },
+     "groupEmail": {
+      "type": "string",
+      "description": "Email for node(group/role) communication"
+     }
+    }
+   },
+   "NodeCreate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/NodeWrite"
+     },
+     {
+      "required": [
+       "name",
+       "mapId",
+       "parentId"
+      ]
+     }
+    ]
+   },
+   "RoleCreate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/NodeCreate"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "representingId": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Id of the group the new role represents (must be the role's parent group)."
+       },
+       "target": {
+        "type": "number",
+        "minimum": 0,
+        "nullable": true,
+        "description": "The role's contribution target, mapped to `Node.targetPercentage`. A percentage where 100 = 1.0 FTE (consistent with holder `percentage`), so it can express multi-FTE targets. `null` clears it. Requires the Contribution App to be enabled."
+       }
+      }
+     }
+    ]
+   },
+   "RoleMirror": {
+    "type": "object",
+    "required": [
+     "targetParentIds"
+    ],
+    "properties": {
+     "targetParentIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "description": "Ids of the parent circles to mirror the role into. Each must be an existing circle in your tenant.",
+      "items": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     "copyHolders": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, the source role's current holders are copied onto each\nmirrored role at creation. This is a one-time snapshot, NOT a mirror:\nunlike custom fields and goals, holder changes do not propagate\nbetween mirrored roles afterwards.\n"
+     }
+    }
+   },
+   "NodeUpdate": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "color": {
+      "type": "string",
+      "description": "The choice of color for the node as a hex string (`#RRGGBB` or `#RGB`). When the tenant's color palette is enforced (the `allowPersonalColors` setting is off), the color must match one of the palette's colors, otherwise the request is rejected with 400. When personal colors are allowed, any valid hex is accepted."
+     },
+     "parentId": {
+      "type": "string",
+      "description": "The Id should be a valid group/role ID. In order to find the groups on your map, please check these routes [Get a list of groups](#operation/getGroups). For roles, kindly visit this route [Get a list of roles](#operation/getRoles)"
+     },
+     "external": {
+      "type": "boolean",
+      "description": "Marks the node as outside the organization. It also controls the parent link (there is no direct `parentId: null`): setting `external` to true DETACHES the node from its parent (it becomes top-level); setting it to false re-attaches it under the map's root circle. Conversely, supplying a `parentId` on a currently-external node flips `external` back to false.\n"
+     },
+     "shape": {
+      "type": "string",
+      "description": "Specifies the shape of the node. Acceptable values are \"circle\" or \"hexagon\", each determining the visual representation of the node within the interface."
+     },
+     "customFields": {
+      "description": "The custom fields for a group/role. You can add the properties from the predefined custom fields. Please refer to the example in the sample request.",
+      "type": "object",
+      "additionalProperties": {
+       "oneOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        }
+       ]
+      },
+      "example": {
+       "Notes": "String",
+       "Responsibilties": [
+        "Res 1",
+        "Res 2"
+       ]
+      }
+     },
+     "goals": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Goals"
+      }
+     },
+     "groupEmail": {
+      "type": "string",
+      "description": "Email for node(group/role) communication"
+     }
+    }
+   },
+   "RoleUpdate": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "color": {
+      "type": "string",
+      "description": "The choice of color for the node as a hex string (`#RRGGBB` or `#RGB`). When the tenant's color palette is enforced (the `allowPersonalColors` setting is off), the color must match one of the palette's colors, otherwise the request is rejected with 400. When personal colors are allowed, any valid hex is accepted."
+     },
+     "parentId": {
+      "type": "string",
+      "description": "The Id should be a valid group/role ID. In order to find the groups on your map, please check these routes [Get a list of groups](#operation/getGroups). For roles, kindly visit this route [Get a list of roles](#operation/getRoles)"
+     },
+     "external": {
+      "type": "boolean",
+      "description": "Marks the node as outside the organization. It also controls the parent link (there is no direct `parentId: null`): setting `external` to true DETACHES the node from its parent (it becomes top-level); setting it to false re-attaches it under the map's root circle. Conversely, supplying a `parentId` on a currently-external node flips `external` back to false.\n"
+     },
+     "customFields": {
+      "description": "The custom fields for a group/role. You can add the properties from the predefined custom fields. Please refer to the example in the sample request.",
+      "type": "object",
+      "additionalProperties": {
+       "oneOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        }
+       ]
+      },
+      "example": {
+       "Notes": "String",
+       "Responsibilties": [
+        "Res 1",
+        "Res 2"
+       ]
+      }
+     },
+     "shape": {
+      "type": "string",
+      "description": "Specifies the shape of the node. Acceptable values are \"circle\" or \"hexagon\", each determining the visual representation of the node within the interface."
+     },
+     "goals": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Goals"
+      }
+     },
+     "representing": {
+      "type": "string",
+      "nullable": true,
+      "description": "The Id of the group the role represents, or null to clear it."
+     },
+     "representingAll": {
+      "type": "boolean",
+      "description": "If true, the change to the above field \"representing\" will be copied to all the mirrored nodes."
+     },
+     "electable": {
+      "type": "boolean",
+      "description": "Set the value to true, if the role is electable."
+     },
+     "groupEmail": {
+      "type": "string",
+      "description": "Email for node(group/role) communication"
+     },
+     "target": {
+      "type": "number",
+      "minimum": 0,
+      "nullable": true,
+      "description": "The role's contribution target, mapped to `Node.targetPercentage`. A percentage where 100 = 1.0 FTE (consistent with holder `percentage`). `null` clears it. Requires the Contribution App to be enabled."
+     }
+    }
+   },
+   "HolderWrite": {
+    "type": "object",
+    "properties": {
+     "peerId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "percentage": {
+      "type": "number"
+     },
+     "focus": {
+      "type": "string"
+     },
+     "electedUntil": {
+      "type": "string",
+      "format": "date",
+      "example": "2022-06-09"
+     }
+    }
+   },
+   "HolderCreate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/HolderWrite"
+     },
+     {
+      "required": [
+       "peerId"
+      ]
+     }
+    ]
+   },
+   "BulkHolderAssignment": {
+    "type": "object",
+    "required": [
+     "roleId",
+     "holders"
+    ],
+    "description": "One group in a bulk holder assignment — a role and the holders to assign to it.",
+    "properties": {
+     "roleId": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "holders": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+       "$ref": "#/components/schemas/HolderCreate"
+      }
+     }
+    }
+   },
+   "ImportMap": {
+    "type": "object",
+    "required": [
+     "mapId"
+    ],
+    "description": "A single import document. Entities created here can reference each other via\ntransient `ref` aliases (parentRef / roleRef / peerRef) or via real ids.\n",
+    "properties": {
+     "mapId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Target map for the groups/roles in this import."
+     },
+     "peers": {
+      "type": "array",
+      "items": {
+       "allOf": [
+        {
+         "$ref": "#/components/schemas/PeerCreate"
+        },
+        {
+         "type": "object",
+         "properties": {
+          "ref": {
+           "type": "string",
+           "description": "Transient alias for referencing this peer from holders in the same document."
+          }
+         }
+        }
+       ]
+      }
+     },
+     "groups": {
+      "type": "array",
+      "items": {
+       "allOf": [
+        {
+         "$ref": "#/components/schemas/NodeWrite"
+        },
+        {
+         "type": "object",
+         "properties": {
+          "ref": {
+           "type": "string"
+          },
+          "parentRef": {
+           "type": "string",
+           "description": "Alias of a group created earlier in this document (alternative to parentId)."
+          }
+         }
+        }
+       ]
+      }
+     },
+     "roles": {
+      "type": "array",
+      "items": {
+       "allOf": [
+        {
+         "$ref": "#/components/schemas/NodeWrite"
+        },
+        {
+         "type": "object",
+         "properties": {
+          "ref": {
+           "type": "string"
+          },
+          "parentRef": {
+           "type": "string",
+           "description": "Alias of a group created earlier in this document (alternative to parentId)."
+          }
+         }
+        }
+       ]
+      }
+     },
+     "holders": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "roleId": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "roleRef": {
+         "type": "string",
+         "description": "Alias of a role created earlier in this document (alternative to roleId)."
+        },
+        "peerId": {
+         "type": "string",
+         "format": "uuid"
+        },
+        "peerRef": {
+         "type": "string",
+         "description": "Alias of a peer created earlier in this document (alternative to peerId)."
+        },
+        "percentage": {
+         "type": "number"
+        },
+        "focus": {
+         "type": "string"
+        },
+        "electedUntil": {
+         "type": "string",
+         "format": "date"
+        }
+       }
+      }
+     }
+    }
+   },
+   "Error": {
+    "type": "object",
+    "required": [
+     "message"
+    ],
+    "properties": {
+     "message": {
+      "type": "string"
+     }
+    }
+   },
+   "BulkCreateError": {
+    "type": "object",
+    "description": "Error returned for an atomic bulk (array) create. Because a bulk create\nis all-or-none, any failing item rolls back the whole batch and nothing\nis persisted. `errors` identifies the offending item(s) by their index\nin the request array.\n",
+    "required": [
+     "message"
+    ],
+    "properties": {
+     "message": {
+      "type": "string"
+     },
+     "errors": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "index": {
+         "type": "integer",
+         "description": "Zero-based index of the failing item in the request array."
+        },
+        "message": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   },
+   "HolderReadDto": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "percentage": {
+      "type": "string"
+     },
+     "focus": {
+      "type": "string"
+     },
+     "electedUntil": {
+      "type": "string",
+      "format": "date"
+     }
+    }
+   },
+   "HolderUpdate": {
+    "type": "object",
+    "properties": {
+     "percentage": {
+      "type": "string"
+     },
+     "electedUntil": {
+      "type": "string",
+      "format": "date"
+     },
+     "focus": {
+      "type": "string"
+     }
+    }
+   },
+   "Translation": {
+    "type": "object",
+    "description": "Localized labels keyed by language code.",
+    "properties": {
+     "en": {
+      "type": "string"
+     },
+     "de": {
+      "type": "string"
+     },
+     "fr": {
+      "type": "string"
+     },
+     "nl": {
+      "type": "string"
+     },
+     "sv": {
+      "type": "string"
+     },
+     "it": {
+      "type": "string"
+     },
+     "es": {
+      "type": "string"
+     }
+    }
+   },
+   "CustomFieldDefinition": {
+    "type": "object",
+    "required": [
+     "id",
+     "name"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "name": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string",
+      "enum": [
+       "text",
+       "textarea",
+       "email",
+       "link",
+       "date",
+       "relation",
+       "image",
+       "list"
+      ]
+     },
+     "entity": {
+      "type": "string",
+      "description": "The kind of entity this field is attached to.",
+      "enum": [
+       "node",
+       "peer",
+       "project",
+       "goal"
+      ]
+     },
+     "nodeType": {
+      "type": "string",
+      "description": "When `entity` is `node`, narrows to circle/role (or generic).",
+      "enum": [
+       "circle",
+       "role",
+       "generic"
+      ]
+     },
+     "multiEntry": {
+      "type": "boolean",
+      "description": "Whether the field accepts multiple values."
+     },
+     "relationScope": {
+      "type": "string",
+      "description": "Present only for `relation` fields — what the relation points to.",
+      "enum": [
+       "group",
+       "page",
+       "peer",
+       "role"
+      ]
+     },
+     "translation": {
+      "$ref": "#/components/schemas/Translation"
+     },
+     "order": {
+      "type": "integer"
+     },
+     "public": {
+      "type": "boolean"
+     }
+    }
+   },
+   "CustomFieldDefinitionWrite": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string",
+      "description": "Defaults to `text` when omitted.",
+      "enum": [
+       "text",
+       "textarea",
+       "email",
+       "link",
+       "date",
+       "relation",
+       "image",
+       "list"
+      ]
+     },
+     "entity": {
+      "type": "string",
+      "enum": [
+       "node",
+       "peer",
+       "project",
+       "goal"
+      ]
+     },
+     "nodeType": {
+      "type": "string",
+      "enum": [
+       "circle",
+       "role",
+       "generic"
+      ]
+     },
+     "multiEntry": {
+      "type": "boolean"
+     },
+     "relationScope": {
+      "type": "string",
+      "description": "Required when `type` is `relation`.",
+      "enum": [
+       "group",
+       "page",
+       "peer",
+       "role"
+      ]
+     },
+     "translation": {
+      "$ref": "#/components/schemas/Translation"
+     },
+     "order": {
+      "type": "integer"
+     },
+     "public": {
+      "type": "boolean"
+     }
+    }
+   },
+   "CustomFieldDefinitionCreate": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/CustomFieldDefinitionWrite"
+     },
+     {
+      "required": [
+       "name"
+      ]
+     }
+    ]
+   },
+   "CustomFieldDefinitionUpdate": {
+    "type": "object",
+    "description": "Editable fields for a rename / edit. All optional; only the supplied\nfields are changed. Any other field (e.g. `type`, `multiEntry`) is\nrejected with 400.\n",
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "The API key used to write values by name."
+     },
+     "translation": {
+      "$ref": "#/components/schemas/Translation"
+     },
+     "order": {
+      "type": "integer"
+     },
+     "public": {
+      "type": "boolean"
+     }
+    }
+   }
+  },
+  "responses": {
+   "Forbidden": {
+    "description": "API access forbidden. Your organization's subscription does not include API access.",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
+   "BadRequest": {
+    "description": "Erroneous request. The request is incorrect.",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
+   "ServerError": {
+    "description": "Unexpected server error.",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
+   "NotFound": {
+    "description": "The requested resource was not found.",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
+   "Conflict": {
+    "description": "The request conflicts with an existing resource (e.g. duplicate name).",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
+   "UnexpectedError": {
+    "description": "unexpected error",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
+   "BulkCreateError": {
+    "description": "A bulk (array) create failed. The batch is atomic, so nothing was\npersisted; `errors` reports the offending item index(es).\n",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/BulkCreateError"
+      }
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "X-Api-Key": {
+    "type": "apiKey",
+    "name": "X-Api-Key",
+    "in": "header",
+    "description": "The API Key for your organization."
+   }
+  }
+ },
+ "security": [
+  {
+   "X-Api-Key": []
+  }
+ ]
+}

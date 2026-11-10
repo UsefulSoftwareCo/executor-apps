@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/sentry",
+  "description": "Issue and event search, traces and Seer analysis through Sentry's MCP server, plus the Sentry REST API for auth tokens.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Sentry"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

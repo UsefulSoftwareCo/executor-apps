@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/peaka",
+  "description": "Manage Peaka organizations, projects, data connections, catalogs, queries and semantic catalogs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Peaka"
+  }
+}

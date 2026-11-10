@@ -1,0 +1,11 @@
+# SEC EDGAR
+
+Read-only access to the U.S. Securities and Exchange Commission's EDGAR system: filer submissions and filing lists, XBRL company facts and single concepts, cross-company frames, ticker-to-CIK lookup (two files), filing directory indexes, and full-text search of filings.
+
+**Interface:** hand-written tools over the SEC's own JSON endpoints, documented at https://www.sec.gov/search-filings/edgar-application-programming-interfaces (`data.sec.gov/submissions`, `data.sec.gov/api/xbrl/{companyfacts,companyconcept,frames}`), plus `www.sec.gov/files/company_tickers*.json`, `www.sec.gov/Archives/edgar/data/<cik>/<accession>/index.json`, and the full-text search endpoint `efts.sec.gov/LATEST/search-index` that powers sec.gov/edgar/search. The SEC publishes no OpenAPI document or MCP server. The full-text search endpoint is not part of the documented API list and could change without notice. Nine tools.
+
+**Auth:** one plain identity field, `userAgent`, is required for every tool; there is no API key or OAuth. The SEC's fair-access guidance (https://www.sec.gov/os/webmaster-faq#developers) asks users to declare their User-Agent in request headers (sample format: company name plus admin contact email, e.g. `Sample Company Name AdminContact@example.com`) and caps clients at 10 requests per second. The value is sent as the `User-Agent` header to `data.sec.gov`, `www.sec.gov` and `efts.sec.gov`. Nothing is secret. The account check reads Apple's submissions file.
+
+**Known gaps:** the package does not throttle to 10 requests per second, so bulk agent use can exceed the SEC cap; the tool instructions say so, but pacing is up to the caller. bulk ZIP files, the legacy `cgi-bin/browse-edgar` company search and Atom feeds, and raw filing documents (HTML/XML/text) are not exposed; use `filings.index` to find document names. All tools are reads, so none need approval.
+
+**Icon:** the SEC seal (on a white disc so it reads on dark backgrounds), cropped from the official logo at https://www.sec.gov/themes/custom/uswds_sec/dist/img/logos/sec-logo-2x.png. EDGAR has no mark of its own: its search page (https://www.sec.gov/edgar/search/) uses `edgar-logo-2x.png`, which is the same SEC seal in white. The seal is therefore the operator's official mark for EDGAR.

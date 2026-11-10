@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/devcycle",
+  "description": "DevCycle feature flags: projects, features, variables, variations, environments, targeting, audiences, overrides and SDK keys.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "DevCycle"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-bigquery",
+  "description": "Run SQL queries and manage datasets, tables, models, routines and jobs in Google BigQuery.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google BigQuery"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

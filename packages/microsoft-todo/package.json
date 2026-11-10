@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/microsoft-todo",
+  "description": "Microsoft To Do task lists, tasks, checklist items and linked resources through Microsoft Graph.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Microsoft To Do"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

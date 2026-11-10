@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/gem",
+  "description": "Gem recruiting: CRM candidates, projects, sequences, ATS jobs, applications, offers and the public job board.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gem"
+  }
+}

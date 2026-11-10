@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/freshservice",
+  "description": "Freshservice ITSM: tickets, problems, changes, releases, requesters, agents, groups, assets, software, vendors, departments, knowledge base and service catalog.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Freshservice"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/snipeit",
+  "description": "Manage IT assets in Snipe-IT: hardware, licenses, accessories, consumables, components, users, locations, categories and reports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Snipe-IT"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fiberai",
+  "description": "Fiber AI B2B data: search and enrich companies and people, reveal work emails and phone numbers, manage audiences, trackers and credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Fiber AI"
+  }
+}

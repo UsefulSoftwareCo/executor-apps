@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/viralloops",
+  "description": "Viral Loops referral marketing: campaign info and stats, participants, referrals, conversions, ranks, flags and rewards.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Viral Loops"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

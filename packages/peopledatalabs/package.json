@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/peopledatalabs",
+  "description": "B2B data enrichment with People Data Labs: person and company enrichment, search, identify, cleaners, autocomplete, IP, job title and skill enrichment.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "People Data Labs"
+  }
+}

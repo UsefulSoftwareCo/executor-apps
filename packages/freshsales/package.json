@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/freshsales",
+  "description": "Freshsales (Freshworks CRM): contacts, accounts, deals, lists, notes, tasks, appointments, sales activities, search and configuration.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Freshsales"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/telegram",
+  "description": "Telegram Bot API: send and edit messages, media, polls, chats, members, files and webhooks as a bot.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Telegram"
+  }
+}

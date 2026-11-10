@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dropbox",
+  "description": "Files, folders, search, sharing, shared links, file requests and account info across the Dropbox API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Dropbox"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

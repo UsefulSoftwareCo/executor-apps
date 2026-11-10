@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/boldsign",
+  "description": "BoldSign eSignature: send documents for signature, manage templates, contacts, users, teams, brands and sender identities.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "BoldSign"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

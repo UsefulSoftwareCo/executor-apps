@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pivotaltracker",
+  "description": "Manage Pivotal Tracker projects, stories, epics, labels, tasks, comments, iterations, memberships and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pivotal Tracker"
+  }
+}

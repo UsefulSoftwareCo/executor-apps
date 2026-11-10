@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tpscheck",
+  "description": "Check UK phone numbers against the TPS and CTPS do-not-call registers with TPSCheck.uk, and read line details and account credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TPSCheck"
+  }
+}

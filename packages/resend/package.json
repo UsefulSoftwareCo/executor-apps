@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/resend",
+  "description": "Send and manage email with Resend: emails, domains, audiences, contacts, broadcasts, templates and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Resend"
+  }
+}

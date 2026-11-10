@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/jentic",
+  "description": "Search Jentic's catalog of APIs and inspect their operations through Jentic's remote MCP server.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Jentic"
+  }
+}

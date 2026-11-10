@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/boondmanager",
+  "description": "BoondManager ERP/CRM for IT services firms: candidates, resources, companies, contacts, opportunities, projects, orders, invoices, time, expense and absence reports.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "BoondManager"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

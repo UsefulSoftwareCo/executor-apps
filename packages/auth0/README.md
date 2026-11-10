@@ -1,0 +1,13 @@
+# Auth0
+
+Covers the Auth0 Management API v2 for a tenant: users, roles, permissions, organizations, applications (clients), client grants, connections, actions, hooks, rules, log streams, logs, custom domains, branding, tenant settings, email and phone providers, and the rest of the admin API, 478 tools in all (273 mutations, each requiring approval).
+
+Interface: OpenAPI 3.1, Auth0's official Management API document at https://auth0.com/docs/oas/management/v2/management-api-oas.json (linked from https://auth0.com/docs/api/management/v2). The document's server is `https://{tenantDomain}/api/v2`, so each account's own tenant domain is used as the base URL, and credentials are only ever sent to that origin.
+
+Auth: two methods, both asking for the tenant domain (for example `example.us.auth0.com`). It must be the tenant's canonical `*.auth0.com` domain: custom domains are rejected, because Auth0 requires the Management API audience to use the canonical domain.
+- Machine to Machine application (client credentials): in the Auth0 Dashboard open Applications > APIs > Auth0 Management API > Machine to Machine Applications, authorize an application and grant it the scopes the tools should use, then copy its Client ID and Client Secret from the application's Settings. Executor exchanges them for a Management API token at `https://<domain>/oauth/token` (audience `https://<domain>/api/v2/`) and renews it as it expires. This is done in code rather than with the framework's `oauth2` method because the token endpoint is on the customer's own domain.
+- Management API access token: paste a token, such as the short-lived one on the API Explorer tab of the Auth0 Management API in the dashboard.
+
+Credentials are limited by the provider's `hosts` to `*.auth0.com` and the regional `*.us|eu|au|jp|uk|ca|sg.auth0.com` domains (a wildcard covers one level; a tenant in a region not listed would need the list extended). The account check calls `GET /api/v2/clients?per_page=1&fields=client_id`, which accepts any of `read:clients`, `read:client_keys` or `read:client_summary`; a 403 `insufficient_scope` response is treated as proof the credentials are valid, so a token or M2M app with only other scopes still connects.
+
+Known gaps: only the machine-to-machine and token methods are offered. Only the Management API is covered. The Authentication API, My Account API and My Organization API are separate surfaces and are not included; the authorization-code OAuth flow is not offered because the Management API is a machine API. Which operations succeed depends on the scopes granted to the application or token.

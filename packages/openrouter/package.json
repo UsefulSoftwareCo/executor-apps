@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/openrouter",
+  "description": "OpenRouter: unified access to hundreds of LLMs with chat, responses, messages, embeddings, images, rerank, models, credits, API keys and guardrails.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenRouter"
+  }
+}

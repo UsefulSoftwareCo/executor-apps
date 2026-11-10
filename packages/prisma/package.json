@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/prisma",
+  "description": "Manage Prisma Postgres and Prisma Data Platform: projects, databases, connections, backups, usage, apps, services and workspaces.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Prisma"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cloudsmith",
+  "description": "Manage Cloudsmith repositories, packages, entitlements, vulnerabilities, policies and teams across workspaces.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Cloudsmith"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cerby",
+  "description": "Cerby: accounts, secrets, collections, users, teams, integrations, jobs and vaults in a Cerby workspace.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Cerby"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

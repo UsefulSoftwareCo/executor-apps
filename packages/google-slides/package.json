@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-slides",
+  "description": "Read, create and edit Google Slides presentations: slides, shapes, text, images, tables, thumbnails and batch updates.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Slides"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

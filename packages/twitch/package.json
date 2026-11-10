@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twitch",
+  "description": "Twitch channels, streams, chat, moderation, clips, videos, polls, predictions, schedule, subscriptions and the rest of the Helix API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Twitch"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mailsoftly",
+  "description": "Email marketing with Mailsoftly: contacts, lists, tags, campaigns, templates, automations, forms and suppressions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mailsoftly"
+  }
+}

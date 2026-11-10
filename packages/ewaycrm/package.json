@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ewaycrm",
+  "description": "Contacts, companies, leads, projects, journals, tasks and the rest of the eWay-CRM Web Service API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "eWay-CRM"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

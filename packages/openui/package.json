@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/openui",
+  "description": "Generate interactive UI with OpenUI Cloud (Thesys): chat completions, responses, conversations and frontend tokens.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OpenUI Cloud"
+  }
+}

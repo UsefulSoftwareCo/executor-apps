@@ -1,0 +1,9 @@
+# OpenSea
+
+Browse and trade NFTs on OpenSea: collections, NFTs, traits, listings, offers, events, accounts, tokens, token groups, swaps and drops.
+
+**Interface:** OpenAPI, from OpenSea's official document at https://api.opensea.io/api/v2/openapi.json (all operations on `https://api.opensea.io`). Mutations (orders, swaps, metadata refreshes, transfers) require approval; POST operations that only read (batch lookups, transaction receipt, metadata validation) do not.
+
+**Auth:** API key, sent as the `x-api-key` header. Two ways to get one (https://docs.opensea.io/reference/api-keys): `POST https://api.opensea.io/api/v2/auth/keys` returns a free-tier key instantly with no signup, but it has lower rate limits and expires after 7 days. A full key comes from opensea.io under Settings > Developer: verify your email (anonymous emails are not supported), click Get access and submit the access request, then create the key (up to three per account).
+
+**Known gaps:** 60 operations are not exposed. They require OpenSea's `WalletAuth` (the API key plus a wallet-scoped bearer token, for example drops authoring, profile edits and favorites). OpenSea documents two ways to get that token: an OAuth 2.1 authorization-code flow with PKCE at `https://auth.opensea.io`, and a scoped personal access token created in Settings > Developer that is exchanged at `POST /api/v2/auth/tokens/exchange` for a wallet JWT valid about 12 hours. Neither is wired up. OAuth is skipped because OpenSea does not document user-created OAuth apps, and the personal-access-token exchange is skipped because it needs a token that is minted and refreshed at runtime, which the OpenAPI auth methods here cannot express. Operations that take WalletAuth only optionally (`cancel_order`, `get_profile_shelves`) are exposed and work with the API key alone.

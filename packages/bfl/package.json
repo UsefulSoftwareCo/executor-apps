@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bfl",
+  "description": "Generate and edit images and videos with Black Forest Labs FLUX models, poll results, manage fine-tunes and check credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Black Forest Labs"
+  }
+}

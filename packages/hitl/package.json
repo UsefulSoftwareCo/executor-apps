@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hitl",
+  "description": "Human-in-the-loop approvals for AI agents: create review loops, send requests to human reviewers, read their responses and manage loop members.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HITL.sh"
+  }
+}

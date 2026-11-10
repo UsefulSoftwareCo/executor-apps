@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/economic",
+  "description": "Visma e-conomic accounting: customers, suppliers, products, invoicing and quote-to-cash, journals, accounts, booked entries, accounting years, budgets, dimensions, projects and subscriptions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "e-conomic"
+  }
+}

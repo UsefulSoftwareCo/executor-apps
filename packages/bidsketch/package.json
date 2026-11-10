@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bidsketch",
+  "description": "Bidsketch proposals: clients, proposals, sections, fees, templates and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bidsketch"
+  }
+}

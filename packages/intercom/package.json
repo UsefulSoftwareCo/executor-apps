@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/intercom",
+  "description": "Intercom contacts, companies, conversations, tickets, messages, articles, help center, data events, notes, tags and teams.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Intercom"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

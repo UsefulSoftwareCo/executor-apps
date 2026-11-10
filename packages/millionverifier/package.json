@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/millionverifier",
+  "description": "Verify email addresses in real time and in bulk with MillionVerifier, and check your credits.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MillionVerifier"
+  }
+}

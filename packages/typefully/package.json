@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/typefully",
+  "description": "Draft, schedule and publish social posts with Typefully: social sets, drafts, queue, tags, media and comments.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Typefully"
+  }
+}

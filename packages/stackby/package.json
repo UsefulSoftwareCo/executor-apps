@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stackby",
+  "description": "Read and write Stackby spreadsheet-database rows, tables, columns, views and stacks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Stackby"
+  }
+}

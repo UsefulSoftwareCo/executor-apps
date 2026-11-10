@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/avanan",
+  "description": "Check Point Harmony Email & Collaboration (Avanan) Smart API: security events, secured entities, and allow/block-list exceptions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Avanan"
+  }
+}

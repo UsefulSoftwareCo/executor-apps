@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/smugmug",
+  "description": "Photo hosting on SmugMug: users, folders, albums, images, comments and share links.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SmugMug"
+  }
+}

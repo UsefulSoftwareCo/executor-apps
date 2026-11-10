@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wildixpbx",
+  "description": "Wildix PBX: users and PBX management, call control, call analytics and history, x-bees chats, Kite widgets, voicebots, knowledge bases and Company API keys.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Wildix PBX"
+  }
+}

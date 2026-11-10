@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/autosana",
+  "description": "Autosana AI end-to-end testing: flows, suites, hooks, apps, devices, environments and run results, through Autosana's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Autosana"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

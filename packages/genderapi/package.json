@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/genderapi",
+  "description": "Determine gender and country of origin from first names, full names and email addresses with Gender API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Gender API"
+  }
+}

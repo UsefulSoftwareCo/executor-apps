@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/okzest",
+  "description": "Render personalized images from OKZest designs and list your designs and their fields.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "OKZest"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

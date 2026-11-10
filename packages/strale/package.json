@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/strale",
+  "description": "Run Strale's tested data and compliance capabilities and manage its EUR wallet and audit records.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Strale"
+  }
+}

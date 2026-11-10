@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twocaptcha",
+  "description": "Solve CAPTCHAs with 2Captcha: create solving tasks, fetch solutions, check balance and report results.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "2Captcha"
+  }
+}

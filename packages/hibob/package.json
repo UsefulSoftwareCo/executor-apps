@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/hibob",
+  "description": "Employees, time off, tasks and reports in HiBob (Bob), through HiBob's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "HiBob"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

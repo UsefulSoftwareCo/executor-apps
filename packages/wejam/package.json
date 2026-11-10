@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/wejam",
+  "description": "Manage WeJam AI training: assignments, certifications, chats, documents, content drafts, analytics and data exports.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "WeJam AI"
+  }
+}

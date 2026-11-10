@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/brilliantdirectories",
+  "description": "Members, posts, leads, reviews, categories, pages, menus, forms and more on a Brilliant Directories site, through its official REST API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Brilliant Directories"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

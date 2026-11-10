@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/refiner",
+  "description": "Survey responses, reporting, contacts, forms and segments in Refiner.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Refiner"
+  }
+}

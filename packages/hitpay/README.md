@@ -1,0 +1,12 @@
+# HitPay
+
+Payments with HitPay: payment requests, charges, refunds, orders, invoices, recurring billing and subscription plans, payouts, transfers, beneficiaries, balances, customers, products, locations, staff, webhooks, static QR codes, card readers and virtual accounts.
+
+Interface: OpenAPI, the official document at https://docs.hitpayapp.com/openapi.json (OpenAPI 3.1, 89 operations). The document declares no security schemes: every operation lists `X-BUSINESS-API-KEY` as a required header parameter, and 18 of them also set `security: []`. `openapi.ts` therefore patches the document: it removes that header parameter from every operation (so the credential is never a tool input and cannot appear in chat), gives every operation an explicit credential requirement, and injects the account's credential. The patches list the operations of the document as published; an operation HitPay adds later would still show the header parameter until the patches are regenerated. Mutations require approval. HitPay also runs a separate OAuth MCP server, which is not used: the OpenAPI document is HitPay's complete public API reference (89 operations, including payouts, transfers, recurring billing and webhooks), works with a plain API key, and is not limited to the scopes an OAuth app has been granted.
+
+Auth, both sent to `api.hit-pay.com`:
+
+- Business API key, sent as `X-BUSINESS-API-KEY`. HitPay's own authentication guide could not be fetched, so the dashboard menu path is not given here; create or copy the key in your HitPay dashboard's developer/API settings.
+- OAuth 2.0 with your own app (beta, open to all businesses). A business Owner or Admin creates the app under Developers > App Builder > New App in the dashboard and registers the redirect URI shown on the connect page; the client secret is shown only once. Only Owners and Admins can authorize. Tokens are sent as `Authorization: Bearer`. The default scope is `business:read`, the only one a new app has. The scopes `payments`, `commerce` and `customer` that most tools need must first be approved by HitPay (Request Scopes in the app settings) before they can be requested; asking for an ungranted scope makes the authorization request fail. Add the approved scopes on the connect page.
+
+Known gaps: the package targets production only; sandbox hosts (`api.sandbox.hit-pay.com`, `dashboard.sandbox.hit-pay.com`) are not supported.

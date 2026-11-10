@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/statamic",
+  "description": "Statamic REST API: read a site's collections, entries, taxonomies, navigation, globals, assets, forms and users.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Statamic"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

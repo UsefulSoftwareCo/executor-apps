@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/nextdns",
+  "description": "NextDNS: manage DNS profiles, security, privacy, parental control, allow and deny lists, rewrites, settings, analytics and query logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "NextDNS"
+  }
+}

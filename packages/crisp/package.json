@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/crisp",
+  "description": "Customer messaging with Crisp: conversations, contacts, operators, inboxes, campaigns, visitors and helpdesk articles.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Crisp"
+  }
+}

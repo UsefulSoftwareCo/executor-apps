@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/hypeauditor",
+  "description": "HypeAuditor influencer analytics: Instagram, YouTube, TikTok, Twitter and Twitch reports, metrics history, brand mentions, discovery, lists and plan info.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "HypeAuditor"
+  }
+}

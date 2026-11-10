@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/extractaai",
+  "description": "Extract structured data from documents and classify them with Extracta.ai: extractions, classifications, file uploads, results and credits.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Extracta.ai"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

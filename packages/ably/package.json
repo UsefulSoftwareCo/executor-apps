@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ably",
+  "description": "Realtime messaging with Ably: publish and read channel messages, presence, push notifications and stats, plus account, app, key and integration rule management through the Control API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Ably"
+  }
+}

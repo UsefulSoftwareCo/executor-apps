@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/teltel",
+  "description": "Voice and SMS with TelTel: calls, SMS and campaigns, autodialers, contacts, users, numbers and account balance.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TelTel"
+  }
+}

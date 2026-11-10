@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agiled",
+  "description": "Agiled business management: CRM contacts, accounts and deals, projects and tasks, invoices, estimates, expenses, payments, tickets and time logs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Agiled"
+  }
+}

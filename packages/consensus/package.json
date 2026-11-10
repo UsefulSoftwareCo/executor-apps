@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/consensus",
+  "description": "Search 400 million peer-reviewed papers and run the Consensus research agent, through Consensus's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Consensus"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

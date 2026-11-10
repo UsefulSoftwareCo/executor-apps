@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/smsalert",
+  "description": "Send and schedule SMS, OTPs and group campaigns, and manage contacts, groups, templates and reports with SMS Alert.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SMS Alert"
+  }
+}

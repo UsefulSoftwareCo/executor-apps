@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/wispr-flow",
+  "description": "Wispr Flow meeting notes, transcripts, scratchpad notes and calendar context, through Wispr's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Wispr Flow"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

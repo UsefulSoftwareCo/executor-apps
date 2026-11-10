@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/minelead",
+  "description": "Find and verify professional emails with Minelead: domain search, find by name, verification, lead enrichment, buying intent, social email finder and disposable email detection.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Minelead"
+  }
+}

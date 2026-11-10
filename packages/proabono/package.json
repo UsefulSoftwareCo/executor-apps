@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/proabono",
+  "description": "ProAbono subscription management: customers, offers, features, subscriptions, usages, pricing, balance lines and invoices.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ProAbono"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

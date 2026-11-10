@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/withpica",
+  "description": "Works, recordings, credits, people, agreements and projects in withPICA's music catalogue, through withPICA's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "withPICA"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

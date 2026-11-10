@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/quiltt",
+  "description": "Quiltt financial data aggregation: Profiles, connections, accounts, transactions and statements.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Quiltt"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

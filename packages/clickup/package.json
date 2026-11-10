@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clickup",
+  "description": "Tasks, lists, folders, spaces, docs, goals, time tracking, comments, custom fields and the rest of the ClickUp API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "ClickUp"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cisco-duo-admin",
+  "description": "Manage Duo users, groups, phones, tokens, bypass codes, administrators, integrations and policies, and read authentication, administrator and telephony logs through the Duo Admin API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Cisco Duo Admin"
+  }
+}

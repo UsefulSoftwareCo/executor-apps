@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/breeze",
+  "description": "Projects, cards, lists, todos, comments, time entries and reports in Breeze, through Breeze's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Breeze"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

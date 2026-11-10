@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pdfmonkey",
+  "description": "Generate PDFs and images from templates with PDFMonkey: documents, document cards and templates.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "PDFMonkey"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/parseur",
+  "description": "Extract structured data from emails and documents with Parseur: mailboxes, documents, templates, webhooks and export configs.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Parseur"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/linkedin",
+  "description": "Publish, edit and delete LinkedIn posts as the connected member, reserve image and video uploads, and read the member profile.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "LinkedIn"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

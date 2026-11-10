@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/handwrytten",
+  "description": "Send handwritten cards with Handwrytten: cards, orders, baskets, address book, templates, QR codes and bulk outbound campaigns.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Handwrytten"
+  }
+}

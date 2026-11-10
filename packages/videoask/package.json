@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/videoask",
+  "description": "Interactive video forms in VideoAsk: forms, questions, contacts and responses, tags, webhooks, folders and brands.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "VideoAsk"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

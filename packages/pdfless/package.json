@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/pdfless",
+  "description": "Generate PDF documents from Pdfless HTML/CSS templates and JSON data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Pdfless"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/adtraction",
+  "description": "Adtraction affiliate network API: partner programs, tracking links, product feeds and search, clicks, transactions, statistics, commissions and payments for partners, plus channels, transactions, segments and statistics for advertisers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Adtraction"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/scrapfly",
+  "description": "Web scraping with anti-bot bypass, screenshots, and cloud browser tools in Scrapfly, through Scrapfly's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Scrapfly"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zyteapi",
+  "description": "Zyte API: web scraping with ban handling, browser rendering, screenshots and AI extraction of products, articles, jobs, forum threads and search results.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Zyte API"
+  }
+}

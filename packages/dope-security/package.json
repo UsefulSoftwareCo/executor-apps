@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dope-security",
+  "description": "Manage dope.security Flightdeck: endpoints, policies, bypass lists, SSL inspection and custom URL categories.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "dope.security"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/parsehub",
+  "description": "Run ParseHub web scraping projects and fetch their extracted data.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ParseHub"
+  }
+}

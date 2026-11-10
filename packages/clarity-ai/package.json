@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/clarity-ai",
+  "description": "Simulate SFDR 2.0 fund classifications from fund name, ISIN or CUSIP with Clarity AI, through Clarity AI's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Clarity AI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

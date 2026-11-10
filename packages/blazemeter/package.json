@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/blazemeter",
+  "description": "Run and analyze performance tests with BlazeMeter: tests, test runs (masters), projects, workspaces, schedules, locations, reports and users.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BlazeMeter"
+  }
+}

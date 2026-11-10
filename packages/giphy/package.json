@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/giphy",
+  "description": "Search and fetch GIFs and stickers from GIPHY: search, trending, translate, random, lookups by id, categories, tag suggestions, channels and emoji.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Giphy"
+  }
+}

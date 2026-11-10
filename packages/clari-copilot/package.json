@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/clari-copilot",
+  "description": "Clari Copilot: calls, call details, scorecards, topics, users and CRM accounts, contacts and deals, through the Clari Copilot REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Clari Copilot"
+  }
+}

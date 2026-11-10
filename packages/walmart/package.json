@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/walmart",
+  "description": "Walmart Marketplace: items, inventory, prices, orders, returns, fulfillment, feeds, reports, settings, insights and more.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Walmart Marketplace"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

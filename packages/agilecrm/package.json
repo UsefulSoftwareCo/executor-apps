@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/agilecrm",
+  "description": "Manage Agile CRM contacts, companies, deals, notes, tasks, events, campaigns, documents and help desk tickets.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Agile CRM"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-forms",
+  "description": "Create and edit Google Forms and quizzes, and read their responses.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Forms"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/attention",
+  "description": "Attention sales conversation intelligence: calls and transcripts, teams, users, scorecards, labels, CRM, snippets and the super agent.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Attention"
+  }
+}

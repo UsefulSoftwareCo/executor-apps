@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stripe",
+  "description": "Payments, customers, subscriptions, invoices, payouts and the rest of the Stripe API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Stripe"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/donately",
+  "description": "Donately fundraising: accounts, campaigns, donations, recurring subscriptions, donors, fundraisers, donation forms and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Donately"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

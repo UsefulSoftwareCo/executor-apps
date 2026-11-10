@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mongodb",
+  "description": "MongoDB Atlas clusters, projects, database users, network access, backups, alerts, search indexes and the rest of the Atlas Administration API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MongoDB"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/geoapify",
+  "description": "Geoapify location APIs: geocoding, autocomplete, places, routing, isolines, route matrix, boundaries, postcodes, elevation, IP geolocation and geometry.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Geoapify"
+  }
+}

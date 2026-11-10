@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/whautomate",
+  "description": "Contacts, clients, appointments, classes, services, staff, segments, broadcasts and WhatsApp, Instagram, Messenger and Telegram messages in Whautomate.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Whautomate"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

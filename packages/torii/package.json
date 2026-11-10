@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/torii",
+  "description": "Manage SaaS applications, contracts, users, licenses, workflows and spend in Torii.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Torii"
+  }
+}

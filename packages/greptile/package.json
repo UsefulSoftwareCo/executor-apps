@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/greptile",
+  "description": "Greptile AI code review: search knowledge bases, read pull requests and reviews, manage custom context, through Greptile's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Greptile"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

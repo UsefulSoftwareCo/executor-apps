@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/myemailverifier",
+  "description": "Verify email addresses with MyEmailVerifier: real-time single verification, credit balance, and bulk list upload with progress and results.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "MyEmailVerifier"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/mospi",
+  "description": "India's official statistics from the Ministry of Statistics and Programme Implementation, through MoSPI's official eSankhyiki MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "MoSPI"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

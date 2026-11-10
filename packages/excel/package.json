@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/excel",
+  "description": "Excel workbooks in OneDrive and SharePoint (worksheets, ranges, tables, charts, names) through Microsoft Graph.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Excel"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

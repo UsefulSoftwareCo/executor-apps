@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/billsby",
+  "description": "Manage Billsby subscription billing: customers, subscriptions, invoices, credit notes, products, plans, add-ons and allowances.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Billsby"
+  }
+}

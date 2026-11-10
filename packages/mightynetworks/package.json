@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/mightynetworks",
+  "description": "Manage a Mighty Network: members, spaces, plans, posts, events, courses and more through the Admin API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Mighty Networks"
+  }
+}

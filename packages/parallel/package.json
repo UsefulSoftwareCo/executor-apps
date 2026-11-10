@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/parallel",
+  "description": "Parallel web research APIs: search, extract, tasks, FindAll, monitors and memory.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Parallel"
+  }
+}

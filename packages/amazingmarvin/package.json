@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/amazingmarvin",
+  "description": "Amazing Marvin tasks, projects, categories, labels, time tracking, habits, reminders and reward points.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Amazing Marvin"
+  }
+}

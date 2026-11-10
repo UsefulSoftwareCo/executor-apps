@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/chameleon",
+  "description": "Chameleon product adoption: user profiles, companies, events, tours, microsurveys, launchers, segments, deliveries, tags and webhooks.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Chameleon"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

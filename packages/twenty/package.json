@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/twenty",
+  "description": "Twenty CRM: people, companies, opportunities, notes, tasks, custom objects and workspace metadata.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Twenty"
+  }
+}

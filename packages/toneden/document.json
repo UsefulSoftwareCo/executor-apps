@@ -1,0 +1,3117 @@
+{
+ "openapi": "3.0.2",
+ "info": {
+  "title": "ToneDen",
+  "version": "1.0.0"
+ },
+ "servers": [
+  {
+   "url": "https://www.toneden.io/api/v1"
+  }
+ ],
+ "paths": {
+  "/advertising/campaigns/{campaignID}": {
+   "delete": {
+    "description": "Delete an ad campaign.",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the ad campaign to delete."
+     }
+    ],
+    "responses": {
+     "200": {
+      "$ref": "#/components/responses/Success"
+     }
+    }
+   },
+   "get": {
+    "description": "Retrieve a specific ad campaign by ID.",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the ad campaign to retrieve."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved ad campaign.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaign": {
+           "$ref": "#/components/schemas/AdCampaign"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "description": "Update an ad campaign.",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the ad campaign to update."
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AdCampaign"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully updated ad campaign.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaign": {
+           "$ref": "#/components/schemas/AdCampaign"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments/{attachmentID}": {
+   "delete": {
+    "description": "Delete an attachment (social unlock or contest).",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the attachment to delete."
+     }
+    ],
+    "responses": {
+     "200": {
+      "$ref": "#/components/responses/Success"
+     }
+    }
+   },
+   "get": {
+    "description": "Retrieve a specific attachment (contest or unlock) by its ID.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the attachment to retrieve."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved attachment.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "attachment": {
+           "$ref": "#/components/schemas/Attachment"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "description": "Update an attachment.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the attachment to update."
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Attachment"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully updated attachment.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "attachment": {
+           "$ref": "#/components/schemas/Attachment"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{linkID}": {
+   "delete": {
+    "description": "Delete a link.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "linkID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the link to delete."
+     }
+    ],
+    "responses": {
+     "200": {
+      "$ref": "#/components/responses/Success"
+     }
+    }
+   },
+   "get": {
+    "description": "Retrieve a specific link by ID.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "linkID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the link to retrieve."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved link.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "link": {
+           "$ref": "#/components/schemas/Link"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "description": "Update a link.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "linkID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the link to update."
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Link"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully updated link.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "link": {
+           "$ref": "#/components/schemas/Link"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/playbooks/campaigns/{campaignID}": {
+   "delete": {
+    "description": "Delete a playbook campaign.",
+    "tags": [
+     "Playbooks"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the playbook campaign to delete."
+     }
+    ],
+    "responses": {
+     "200": {
+      "$ref": "#/components/responses/Success"
+     }
+    }
+   },
+   "get": {
+    "description": "Retrieve a specific playbook campaign by ID.",
+    "tags": [
+     "Playbooks"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the playbook campaign to retrieve."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved playbook campaign.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaign": {
+           "$ref": "#/components/schemas/PlaybookCampaign"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "description": "Update a playbook campaign.",
+    "tags": [
+     "Playbooks"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the playbook campaign to update."
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PlaybookCampaign"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully updated playbook campaign.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaign": {
+           "$ref": "#/components/schemas/PlaybookCampaign"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/advertising/campaigns/{campaignID}/creativeInsights": {
+   "get": {
+    "description": "Retrieve performance data for individual ads within a campaign.",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the ad campaign to retrieve performance data for."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "ads": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "ad_review_feedback": {
+              "type": "object",
+              "properties": {
+               "global": {
+                "description": "Will have a key for every error that was found by the ad platform when reviewing the ad. The keys will be error codes, and the values will be error text that can be displayed to the end user.",
+                "type": "object"
+               }
+              }
+             },
+             "adset_id": {
+              "type": "string"
+             },
+             "adset_name": {
+              "type": "string"
+             },
+             "created_time": {
+              "type": "string"
+             },
+             "creative": {
+              "description": "The creative object as returned raw by the ad platform.",
+              "type": "object"
+             },
+             "editor_url": {
+              "description": "Link to edit the ad on the ad platform.",
+              "type": "string"
+             },
+             "effective_status": {
+              "description": "The status of the ad.",
+              "type": "string"
+             },
+             "external_url": {
+              "description": "Link to preview the ad on the ad platform.",
+              "type": "string"
+             },
+             "id": {
+              "description": "ID of the ad on the ad platform.",
+              "type": "string"
+             },
+             "index": {
+              "description": "The position of the ad within the array of ads in the adset."
+             },
+             "insights": {
+              "$ref": "#/components/schemas/AdCampaignStatsObject"
+             },
+             "name": {
+              "description": "Name of the ad on the ad platform.",
+              "type": "string"
+             },
+             "preview_html": {
+              "description": "HTML code that will render a preview of the ad. Only supported for Facebook ads.",
+              "type": "string"
+             },
+             "updated_time": {
+              "type": "string"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/advertising/campaigns/{campaignID}/insights": {
+   "get": {
+    "description": "Retrieve performance data for a specific ad campaign by ID.",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "campaignID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the ad campaign to retrieve performance data for."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "insights": {
+           "type": "object",
+           "properties": {
+            "total": {
+             "$ref": "#/components/schemas/AdCampaignIntervalStatsObject"
+            },
+            "today": {
+             "$ref": "#/components/schemas/AdCampaignIntervalStatsObject"
+            },
+            "yesterday": {
+             "$ref": "#/components/schemas/AdCampaignIntervalStatsObject"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments/{attachmentID}/entries/totals": {
+   "get": {
+    "description": "Gets a summary of the count of entries over the past day, week, month, and lifetime of the attachment.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "description": "Numeric ID of the attachment to retrieve data for.",
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "unlocks": {
+           "type": "object",
+           "properties": {
+            "last_day": {
+             "type": "number"
+            },
+            "last_month": {
+             "type": "number"
+            },
+            "last_week": {
+             "type": "number"
+            },
+            "total": {
+             "type": "number"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments/{attachmentID}/entries": {
+   "get": {
+    "description": "Retrieve time-series entry stats for a contest, with each data point containing a summary of entries by platform for that time interval.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "description": "Numeric ID of the attachment to retrieve data for.",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "in": "query",
+      "name": "aggregate_interval",
+      "required": false,
+      "description": "The interval to aggregate time data over. Can 'day' to get one data point per day, 'hour' for one data point per hour, and 'week' for one data point per week.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "day",
+        "hour",
+        "week"
+       ],
+       "default": "day"
+      }
+     },
+     {
+      "in": "query",
+      "name": "start_date",
+      "required": false,
+      "description": "The earliest date to get data for.",
+      "schema": {
+       "type": "string",
+       "default": "attachment.createdAt"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "unlocks": {
+           "description": "Each array item will contain a key for each contest platform available. The value for that key will be the count of entries using that platform for that time interval.",
+           "type": "array",
+           "items": {
+            "oneOf": [
+             {
+              "type": "object",
+              "properties": {
+               "facebook": {
+                "description": "The number of fans who entered the contest using Facebook on this day.",
+                "type": "integer"
+               },
+               "day": {
+                "description": "The date of the day that this time-series data point is for. Only present if the aggregate_interval is 'day'.",
+                "type": "string"
+               }
+              }
+             },
+             {
+              "type": "object",
+              "properties": {
+               "facebook": {
+                "description": "The number of fans who entered the contest using Facebook on this hour.",
+                "type": "integer"
+               },
+               "hour": {
+                "description": "The date/time of the hour that this time-series data point is for. Only present if the aggregate_interval is 'hour'.",
+                "type": "string"
+               }
+              }
+             },
+             {
+              "type": "object",
+              "properties": {
+               "facebook": {
+                "description": "The number of fans who entered the contest using Facebook in this week.",
+                "type": "integer"
+               },
+               "week": {
+                "description": "The date/time of the week that this time-series data point is for. Only present if the aggregate_interval is 'week'.",
+                "type": "string"
+               }
+              }
+             }
+            ]
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments/{attachmentID}/unlocks/platforms": {
+   "get": {
+    "description": "Gets counts of unlocks by platform.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "description": "Numeric ID of the attachment to retrieve data for.",
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "unlocks": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "count": {
+              "type": "number"
+             },
+             "platform": {
+              "type": "string"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments/{attachmentID}/unlocks/totals": {
+   "get": {
+    "description": "Gets a summary of the count of unlocks over the past day, week, month, and lifetime of the attachment.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "description": "Numeric ID of the attachment to retrieve data for.",
+      "schema": {
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "unlocks": {
+           "type": "object",
+           "properties": {
+            "last_day": {
+             "type": "number"
+            },
+            "last_month": {
+             "type": "number"
+            },
+            "last_week": {
+             "type": "number"
+            },
+            "total": {
+             "type": "number"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments/{attachmentID}/unlocks": {
+   "get": {
+    "description": "Retrieve time-series unlock stats for a social unlock.",
+    "tags": [
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "attachmentID",
+      "required": true,
+      "description": "Numeric ID of the attachment to retrieve data for.",
+      "schema": {
+       "type": "integer"
+      }
+     },
+     {
+      "in": "query",
+      "name": "aggregate_interval",
+      "required": false,
+      "description": "The interval to aggregate time data over. Can 'day' to get one data point per day, 'hour' for one data point per hour, and 'week' for one data point per week.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "day",
+        "hour",
+        "week"
+       ],
+       "default": "day"
+      }
+     },
+     {
+      "in": "query",
+      "name": "start_date",
+      "required": false,
+      "description": "The earliest date to get data for.",
+      "schema": {
+       "type": "string",
+       "default": "attachment.createdAt"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "unlocks": {
+           "type": "array",
+           "items": {
+            "oneOf": [
+             {
+              "type": "object",
+              "properties": {
+               "downloads": {
+                "type": "number"
+               },
+               "day": {
+                "description": "The date of the day that this time-series data point is for. Only present if the aggregate_interval is 'day'.",
+                "type": "string"
+               }
+              }
+             },
+             {
+              "type": "object",
+              "properties": {
+               "downloads": {
+                "type": "number"
+               },
+               "hour": {
+                "description": "The date/time of the hour that this time-series data point is for. Only present if the aggregate_interval is 'hour'.",
+                "type": "string"
+               }
+              }
+             },
+             {
+              "type": "object",
+              "properties": {
+               "downloads": {
+                "type": "number"
+               },
+               "week": {
+                "description": "The date/time of the week that this time-series data point is for. Only present if the aggregate_interval is 'week'.",
+                "type": "string"
+               }
+              }
+             }
+            ]
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/expand": {
+   "get": {
+    "description": "Generate a template link which contains the user's tracking pixels, affiliate codes, and social media links. If this is a music or podcast link, you can provide a `url` query parameter which will be used to generate a services array linking to that track on all available platforms.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "target_type",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/LinkTargetType"
+      },
+      "description": "Numeric ID of the link to retrieve."
+     },
+     {
+      "in": "query",
+      "name": "url",
+      "required": false,
+      "schema": {
+       "type": "string"
+      },
+      "description": "The target URL of the link. The URL of a track on any streaming service, for music links."
+     },
+     {
+      "in": "query",
+      "name": "upc",
+      "required": false,
+      "schema": {
+       "type": "string"
+      },
+      "description": "The UPC code of the track, for music links."
+     },
+     {
+      "in": "query",
+      "name": "isrc",
+      "required": false,
+      "schema": {
+       "type": "string"
+      },
+      "description": "The ISRC code of the track, for music links."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully expanded link.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "link": {
+           "$ref": "#/components/schemas/Link"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{linkID}/insights/overview": {
+   "get": {
+    "description": "Gets a summary of the performance data for a specific link.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "linkID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the link to retrieve performance data for."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "insights": {
+           "type": "object",
+           "properties": {
+            "clicks": {
+             "type": "number"
+            },
+            "clickthroughs": {
+             "type": "number"
+            },
+            "ctr": {
+             "type": "number"
+            },
+            "email_clicks": {
+             "type": "number",
+             "description": "The number of times fans clicked on links in livestream reminder emails."
+            },
+            "emails_sent": {
+             "type": "number",
+             "description": "The number of times fans received livestream reminder emails."
+            },
+            "rsvps": {
+             "type": "number"
+            },
+            "unique_clicks": {
+             "type": "number"
+            },
+            "unique_clickthroughs": {
+             "type": "number"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/{linkID}/insights": {
+   "get": {
+    "description": "Retrieve performance data for a specific link by ID.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "linkID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the link to retrieve performance data for."
+     },
+     {
+      "in": "query",
+      "name": "metric",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "clicks",
+        "clickthroughs",
+        "rsvps"
+       ]
+      },
+      "description": "Which action type to query results for. 'rsvps' is only a valid value for livestream links."
+     },
+     {
+      "in": "query",
+      "name": "start_date",
+      "required": false,
+      "schema": {
+       "type": "string"
+      },
+      "description": "If provided, only actions that occurred after the specified date will be counted. Should be in ISO 8601 format."
+     },
+     {
+      "in": "query",
+      "name": "end_date",
+      "required": false,
+      "schema": {
+       "type": "string"
+      },
+      "description": "If provided, only actions that occurred before the specified date will be counted. Should be in ISO 8601 format."
+     },
+     {
+      "in": "query",
+      "name": "aggregate_interval",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "day",
+        "hour",
+        "week"
+       ]
+      },
+      "description": "If provided, results will be grouped into rows based on the specified aggregate interval."
+     },
+     {
+      "in": "query",
+      "name": "aggregate_geo",
+      "required": false,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "city",
+        "country",
+        "region"
+       ]
+      },
+      "description": "If provided, results will be grouped according to the location of the visiting fan. Location data is only available for a subset of link clicks."
+     },
+     {
+      "in": "query",
+      "name": "aggregate_by_referrer",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false
+      },
+      "description": "If provided, results will be grouped according to the domain that referred the fan to the fanlink."
+     },
+     {
+      "in": "query",
+      "name": "aggregate_by_service",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false
+      },
+      "description": "If provided, results will be grouped according to the service that the fan clicked on."
+     },
+     {
+      "in": "query",
+      "name": "for_distinct_fans",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false
+      },
+      "description": "If true, only one action per fan will be counted in the stats, even if the fan performed multiple clicks or clickthroughs."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved performance data.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "insights": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "clicks": {
+              "type": "integer"
+             },
+             "clickthroughs": {
+              "type": "integer"
+             },
+             "rsvps": {
+              "type": "integer"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links/validPath": {
+   "get": {
+    "description": "Checks that a potential link's path/subdomain combination is unique and valid.",
+    "tags": [
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "query",
+      "name": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "The shortened_path to check for validity."
+     },
+     {
+      "in": "query",
+      "name": "subdomain",
+      "required": false,
+      "schema": {
+       "type": "string"
+      },
+      "description": "The subdomain to check for validity."
+     },
+     {
+      "in": "query",
+      "name": "link_id",
+      "required": false,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the link being checked for validity. This parameter can be passed when editing a link to prevent the uniqueness check from comparing the link to itself."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "URL successfully validated.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "valid": {
+           "type": "boolean"
+          },
+          "type": {
+           "type": "string",
+           "description": "If the subdomain/path combination is invalid, this will specify which field is invalid.",
+           "enum": [
+            "path",
+            "subdomain"
+           ]
+          },
+          "reason": {
+           "type": "string",
+           "description": "A human-readable error message explaining why the subdomain/path combination is invalid."
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/users/{userID}/advertising/campaigns": {
+   "get": {
+    "description": "Retrieve a list of a user's ad campaigns.",
+    "tags": [
+     "Users",
+     "Ad Campaigns"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "userID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user whose ad campaigns will be retrieved."
+     },
+     {
+      "in": "query",
+      "name": "status",
+      "schema": {
+       "type": "string",
+       "default": "active",
+       "enum": [
+        "active",
+        "live",
+        "recent",
+        "paused",
+        "error",
+        "inactive",
+        "scheduled"
+       ]
+      }
+     },
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved list of ad campaigns.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaigns": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/AdCampaign"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/users/{userID}/advertising/userLists": {
+   "get": {
+    "description": "Retrieve a list of a user's user lists.",
+    "tags": [
+     "Users",
+     "User Lists",
+     "Advertising"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "userID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user whose user lists will be retrieved."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved list of user lists.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "lists": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/UserList"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/users/{userID}/attachments": {
+   "get": {
+    "description": "Retrieve a list of a user's attachments.",
+    "tags": [
+     "Users",
+     "Attachments"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "userID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user whose attachments will be retrieved."
+     },
+     {
+      "in": "query",
+      "name": "type",
+      "required": true,
+      "description": "Which type of attachment to retrieve.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "unlock",
+        "contest"
+       ]
+      }
+     },
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved list of attachments.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "attachments": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Attachment"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/users/{userID}/links": {
+   "get": {
+    "description": "Retrieve a list of a user's links.",
+    "tags": [
+     "Users",
+     "Links"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "userID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user whose links will be retrieved."
+     },
+     {
+      "in": "query",
+      "name": "target_type",
+      "schema": {
+       "type": "string"
+      },
+      "description": "Filter links returned by the target_type field."
+     },
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved list of links.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "links": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Link"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/users/{userID}": {
+   "get": {
+    "description": "Retrieve a specific user by ID.",
+    "tags": [
+     "Users"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "userID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user to retrieve. Can also be the string 'me', to get the currently-authenticated user."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successfully retrieved user.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "user": {
+           "$ref": "#/components/schemas/User"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "description": "Update a user.",
+    "tags": [
+     "Users"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "userID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user to update."
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/User"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully updated user.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "user": {
+           "$ref": "#/components/schemas/User"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/advertising/campaigns": {
+   "post": {
+    "description": "Create an ad campaign.",
+    "tags": [
+     "Ad Campaigns"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AdCampaign"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully created ad campaign.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaign": {
+           "$ref": "#/components/schemas/AdCampaign"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/advertising/userLists/{listID}/contacts": {
+   "post": {
+    "description": "Add or remove a set of users from a user list.",
+    "tags": [
+     "User Lists",
+     "Advertising"
+    ],
+    "parameters": [
+     {
+      "in": "path",
+      "name": "listID",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Numeric ID of the user list to add or remove contacts to or from."
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "add": {
+          "type": "array",
+          "items": {
+           "$ref": "#/components/schemas/UserListUser"
+          }
+         },
+         "remove": {
+          "type": "array",
+          "items": {
+           "$ref": "#/components/schemas/UserListUser"
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "$ref": "#/components/responses/Success"
+     }
+    }
+   }
+  },
+  "/advertising/userLists": {
+   "post": {
+    "description": "Create a user list, which is a collection of users that can be advertised to through a Facebook custom audience. For access to this feature, please contact support@toneden.io.",
+    "tags": [
+     "User Lists",
+     "Advertising"
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "external_ad_account_id": {
+          "description": "The ID of the Facebook ad account to create a custom audience in."
+         },
+         "type": {
+          "description": "The type of the user list. \"manual\" means that users are added or removed from this list ONLY via the ToneDen API.",
+          "enum": [
+           "manual"
+          ]
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully created user list.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "list": {
+           "$ref": "#/components/schemas/UserList"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/attachments": {
+   "post": {
+    "description": "Create an attachment.",
+    "tags": [
+     "Attachments"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Attachment"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully created attachment.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "attachment": {
+           "$ref": "#/components/schemas/Attachment"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/links": {
+   "post": {
+    "description": "Create a link.",
+    "tags": [
+     "Links"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/Link"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully created link.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "link": {
+           "$ref": "#/components/schemas/Link"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/playbooks/campaigns": {
+   "post": {
+    "description": "Create a playbook campaign.",
+    "tags": [
+     "Playbooks"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PlaybookCampaign"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successfully created playbook campaign.",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "campaign": {
+           "$ref": "#/components/schemas/PlaybookCampaign"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/users/{userID}/advertising/offlineConversions": {
+   "post": {
+    "description": "Upload a list of offline conversions.",
+    "tags": [
+     "Advertising"
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/OfflineConversionEvent"
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "$ref": "#/components/responses/Success"
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "responses": {
+   "Success": {
+    "description": "Operation succeeded.",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "success": {
+         "type": "boolean"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "schemas": {
+   "AdCampaignStatsObject": {
+    "type": "object",
+    "properties": {
+     "amount_spent": {
+      "type": "number",
+      "description": "The total amount of money the campaign has spent."
+     },
+     "reach": {
+      "type": "integer",
+      "description": "The number of unique people who have seen ads in this campaign."
+     },
+     "clicks": {
+      "type": "integer",
+      "description": "The total number of clicks that ads in this campaign have received."
+     },
+     "purchases": {
+      "type": "integer",
+      "description": "The total number of purchases that have been driven by this campaign."
+     },
+     "conversions": {
+      "type": "integer",
+      "description": "The number of the target event (clicks for link click campaigns, View Content events for conversion campaigns optimizing for View Content, post engagements for post engagement campaigns) that have occurred as a result of this campaign."
+     },
+     "conversion_rate": {
+      "type": "number",
+      "description": "The ratio of views of ads in this campaign to conversions."
+     },
+     "conversion_value": {
+      "type": "number",
+      "description": "The monetary value of purchases driven by this campaign."
+     },
+     "cost_per_conversion": {
+      "type": "number",
+      "description": "The average cost to drive a conversion."
+     },
+     "cpc": {
+      "type": "number",
+      "description": "The average cost to drive a click."
+     },
+     "ctr": {
+      "type": "number",
+      "description": "The ratio of views of ads in this campaign to clicks."
+     }
+    }
+   },
+   "AdCampaignStatsObjectWithFollowers": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/AdCampaignStatsObject"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "followers": {
+        "type": "number",
+        "description": "For growth campaigns, the total number of followers the user has on the growth platform."
+       },
+       "initial_followers": {
+        "type": "number",
+        "description": "For growth campaigns, the number of followers the user had on the growth platform when the campaign started."
+       }
+      }
+     }
+    ]
+   },
+   "AdCampaignIntervalStatsObject": {
+    "type": "object",
+    "description": "Will always have a 'total' key, for the stats for this time period aggregated across all audiences. Additionally, there will be a key for each audience ID containing performance stats for that audience only, excluding followers.",
+    "properties": {
+     "total": {
+      "$ref": "#/components/schemas/AdCampaignStatsObjectWithFollowers"
+     }
+    }
+   },
+   "AdCampaign": {
+    "allOf": [
+     {
+      "type": "object",
+      "properties": {
+       "id": {
+        "type": "number"
+       },
+       "title": {
+        "type": "string"
+       },
+       "platform": {
+        "type": "string",
+        "enum": [
+         "facebook",
+         "google"
+        ],
+        "description": "The platform the ad campaign will be delivering on (Facebook Ads or Google AdWords)."
+       },
+       "user_id": {
+        "type": "number"
+       },
+       "status": {
+        "type": "string",
+        "enum": [
+         "active",
+         "inactive",
+         "draft",
+         "error",
+         "pending",
+         "pending-update",
+         "paused",
+         "pending-review"
+        ]
+       },
+       "status_message": {
+        "type": "string",
+        "description": "The error message received while creating the ad, if the ad is in 'error' status."
+       },
+       "status_log": {
+        "type": "array",
+        "description": "A list of log items detailing actions performed on the campaign, such as updates by the user, automated budget rebalances, and ad approvals/rejections.",
+        "items": {
+         "type": "object"
+        }
+       },
+       "report_emails": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "disable_all_notifications": {
+        "type": "boolean"
+       },
+       "is_archived": {
+        "type": "boolean",
+        "default": false
+       },
+       "objective": {
+        "type": "string",
+        "description": "The ID of the Facebook pixel that will be used to track conversions in this campaign."
+       },
+       "optimization_id": {
+        "type": "string",
+        "description": "The name of the standard conversion event (or ID of the custom conversion event) to optimize this campaign for."
+       },
+       "target": {
+        "type": "string",
+        "description": "The URL to target in link-click and conversion ads, or the ID of the post, event, or product set to promote in post engagement, event RSVP, and dynamic ads, respectively."
+       },
+       "target_type": {
+        "type": "string",
+        "enum": [
+         "app",
+         "conversion",
+         "dynamic_product",
+         "event",
+         "likes",
+         "link",
+         "page_messaging",
+         "post_engagement",
+         "video_views"
+        ],
+        "description": "The type of the campaign objective."
+       },
+       "target_link_url": {
+        "type": "string",
+        "description": "For campaigns that have had their target URL masked by a fanlink, this will be the URL of the fanlink. This is always the 'true' target URL of ads in the campaign."
+       },
+       "targeting": {
+        "type": "object",
+        "description": "Contains targeting settings which are applied on a campaign-wide level, such as location targeting in Google campaigns."
+       },
+       "audiences": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/AdCampaignAudience"
+        },
+        "description": "Array of audience items which will map to adsets in Facebook campaigns, and adgroups in Google campaigns."
+       },
+       "creatives": {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/FacebookAdCampaignCreatives"
+         },
+         {
+          "$ref": "#/components/schemas/GoogleAdCampaignCreatives"
+         }
+        ]
+       },
+       "budget_type": {
+        "type": "string",
+        "enum": [
+         "daily",
+         "lifetime"
+        ]
+       },
+       "budget_amount": {
+        "type": "number"
+       },
+       "currency": {
+        "type": "string",
+        "description": "3-letter currency code that the budget of the campaign is in."
+       },
+       "start_timestamp": {
+        "type": "integer",
+        "description": "UNIX timestamp representing the date/time the campaign will start running."
+       },
+       "end_timestamp": {
+        "type": "integer",
+        "description": "UNIX timestamp representing the date/time the campaign will stop running."
+       },
+       "is_continuous": {
+        "type": "boolean",
+        "description": "Whether this campaign should run indefinitely. If true, the end_timestamp value is ignored."
+       },
+       "external_ad_account_id": {
+        "type": "string",
+        "description": "ID of the Facebook ad account or Google Adwords account which the campaign is running under."
+       },
+       "external_id": {
+        "type": "string",
+        "description": "ID of the campaign on the external ad platform."
+       },
+       "external_poster_id": {
+        "type": "string",
+        "description": "ID of the Facebook page running the campaign."
+       },
+       "instagram_account_id": {
+        "type": "string",
+        "description": "If the user manually selected an Instagram account when setting up the campaign, its ID will be stored in this field."
+       }
+      }
+     },
+     {
+      "$ref": "#/components/schemas/AdCampaignStatsObjectWithFollowers"
+     }
+    ]
+   },
+   "AdCampaignAudience": {
+    "allOf": [
+     {
+      "type": "object",
+      "properties": {
+       "name": {
+        "type": "string",
+        "description": "The user-input name of the audience, or the auto-generated name if none was specified by the user."
+       },
+       "data_source_platform": {
+        "type": "string",
+        "description": "The name of the platform which was used to generate the audience data. For example, this will be 'mailchimp' if the audience is a Mailchimp List audience, or 'spotify' if this is a Spotify Related Artist Interests audience. In combination with data_source, this field defines the type of the audience."
+       },
+       "data_source": {
+        "type": "string",
+        "description": "The type of data that was pulled from the audience platform (specified by data_source_platform) to generate the audience. A single platform may have multiple different types of audience data associated with it, and the data_source field determines which of these is used to generate the audience. For a Spotify Related Artist Interests audience, the data_source_platform is 'spotify' and the data_source is 'related-artist-interests'. For a Facebook Page Engagers audience, the data_source_platform is 'facebook' and the data_source is 'page-engagers'."
+       },
+       "is_lookalike": {
+        "type": "boolean",
+        "description": "Whether the audience is a lookalike. If an audience is a lookalike, the users pulled from the data_source_platform will not be targeted directly. Rather, a much larger set of users who are similar to the initial group of users will be generated and targeted."
+       },
+       "id": {
+        "type": "string",
+        "description": "The ID of the audience on the external ad platform. This will be an adgroup ID for Google, AdWords campaigns, and an adset ID for Facebook campaigns."
+       },
+       "targeting": {
+        "type": "object",
+        "description": "Specifies which users of the ad platform to show ads in this campaign to.",
+        "properties": {
+         "age": {
+          "type": "object",
+          "properties": {
+           "min": {
+            "type": "number"
+           },
+           "max": {
+            "type": "number"
+           }
+          }
+         },
+         "gender": {
+          "type": "string",
+          "enum": [
+           "m",
+           "f"
+          ]
+         },
+         "device_platforms": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "enum": [
+            "mobile",
+            "desktop"
+           ]
+          }
+         }
+        }
+       }
+      }
+     },
+     {
+      "$ref": "#/components/schemas/AdCampaignStatsObject"
+     }
+    ]
+   },
+   "FacebookAdCampaignCreatives": {
+    "type": "object",
+    "properties": {
+     "is_carousel": {
+      "type": "boolean",
+      "description": "Whether to display ads in this campaign in the carousel format. If true, every separate image/video, headline, and link description will be put into a carousel card. Each post text will create a separate carousel."
+     },
+     "cta_type": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "learnMore",
+        "addToCart",
+        "buyNow",
+        "buyTickets",
+        "getShowtimes",
+        "download",
+        "listenMusic",
+        "signUp",
+        "bookNow",
+        "orderNow",
+        "shopNow",
+        "watchMore",
+        "donateNow",
+        "messagePage",
+        "installMobileApp",
+        "listenNow",
+        "playGame",
+        "useApp",
+        "likePage"
+       ]
+      }
+     },
+     "display_asset": {
+      "description": "The primary visual element of the ad. Either an image or video.",
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "type": {
+         "type": "string",
+         "enum": [
+          "image",
+          "video"
+         ]
+        },
+        "image_url": {
+         "type": "string",
+         "description": "The URL of the image to show. If this is a video asset, this is the URL of the video thumbnail."
+        },
+        "video_id": {
+         "type": "string",
+         "description": "The ID of the Facebook video to display."
+        }
+       }
+      }
+     },
+     "text": {
+      "description": "Text which appears above the display asset.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "headline": {
+      "description": "Text which appears below the display asset.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "link_description": {
+      "description": "Text which will appear below the headline.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "GoogleAdCampaignCreatives": {
+    "type": "object",
+    "required": [
+     "headline1",
+     "headline2",
+     "description1"
+    ],
+    "properties": {
+     "headline1": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "headline2": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "headline3": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "description1": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "description2": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "Attachment": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "owner_id": {
+      "description": "The ID of the user account that owns the attachment.",
+      "type": "number"
+     },
+     "type": {
+      "type": "string",
+      "enum": [
+       "unlock",
+       "contest"
+      ]
+     },
+     "actions": {
+      "description": "The total approximate count of unlocks or entries this attachment has received.",
+      "type": "integer"
+     },
+     "artwork_url": {
+      "type": "string"
+     },
+     "title": {
+      "type": "string"
+     },
+     "link_path": {
+      "description": "The last portion of the URL of the landing page for this attachment. The complete URL format is toneden.io/{owner username}/post/{link_path}. If the is_private field is true, there will be an additional URL fragment: toneden.io/{owner username}/post/{link_path}/{secret_token}.",
+      "type": "string"
+     },
+     "is_private": {
+      "type": "boolean"
+     },
+     "is_hidden": {
+      "type": "boolean"
+     },
+     "secret_token": {
+      "description": "A randomly generated string to be added to the end of the landing page URL if the is_private field is true.",
+      "type": "string"
+     },
+     "message": {
+      "description": "The primary text that is displayed on the landing page of the attachment.",
+      "type": "string"
+     }
+    }
+   },
+   "Link": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "title": {
+      "description": "The internal title of the link\u2013 not fan-facing.",
+      "type": "string"
+     },
+     "user_id": {
+      "type": "number",
+      "description": "The ID of the user account that owns the link."
+     },
+     "target_type": {
+      "$ref": "#/components/schemas/LinkTargetType"
+     },
+     "target_url": {
+      "type": "string",
+      "description": "The destination URL for fanlink types which only have one destination (e.g. the URL of the event for EventLinks)."
+     },
+     "custom_domain": {
+      "type": "string",
+      "description": "The root domain that the link will live on. Built-in domains are biglink.to, tourlink.to, eventlink.to, podlink.to, helpgive.to, and streamlink.to. Users may also add custom domains by contacting support. If null, the link's domain will be fanlink.to."
+     },
+     "subdomain": {
+      "type": "string",
+      "description": "The subdomain of the link URL. Only available for built-in domains."
+     },
+     "shortened_path": {
+      "type": "string",
+      "description": "The path of the link URL. If left blank, this will be auto-generated."
+     },
+     "isrc": {
+      "type": "string",
+      "description": "An ISRC code entered by the user to generate a music link. This code will be used to auto-populate music services when the track or album is released."
+     },
+     "upc": {
+      "type": "string",
+      "description": "A UPC code entered by the user to generate a music link. This code will be used to auto-populate music services when the track or album is released."
+     },
+     "click_count": {
+      "type": "integer",
+      "description": "The number of times this link has been visited."
+     },
+     "clickthrough_count": {
+      "type": "integer",
+      "description": "The number of times a user visited the link's landing page and then clicked through to view the link's target content."
+     },
+     "show_socials": {
+      "type": "boolean",
+      "description": "Whether to display links to the owner's social media profiles on the link landing page."
+     },
+     "skip_landing_page": {
+      "type": "boolean",
+      "description": "Whether to never show the link's landing page, and instead immediatly send the user to the target URL when the link is visited."
+     },
+     "sort_services_by_clickthroughs": {
+      "type": "boolean",
+      "description": "If set to true, then the available music services will be sorted by clickthrough count in descending order on the landing page."
+     },
+     "use_saved_service": {
+      "type": "boolean",
+      "description": "The first time a fan clicks on a music service on any fanlink, that service will be stored in a cookie on the fan's device. If they then visit a music fanlink with use_saved_service set to true, instead of viewing the landing page they will be directed to their saved service to view the track."
+     },
+     "affiliate_codes": {
+      "type": "object",
+      "properties": {
+       "itunes": {
+        "type": "string"
+       },
+       "amazon": {
+        "type": "string"
+       }
+      }
+     },
+     "pixels": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "platform": {
+         "type": "string",
+         "enum": [
+          "facebook",
+          "google",
+          "twitter"
+         ]
+        },
+        "name": {
+         "type": "string"
+        },
+        "id": {
+         "description": "The ID of the pixel on the pixel platform.",
+         "type": "string"
+        }
+       }
+      }
+     },
+     "services": {
+      "type": "array",
+      "description": "A list of clickable links to display on the landing page. These represent individual music services for music fanlinks, livestreaming platforms for streamlinks, tour dates for tour fanlinks, URLs for biglinks, and podcast platforms for podlinks.",
+      "items": {
+       "oneOf": [
+        {
+         "$ref": "#/components/schemas/MusicLinkService"
+        },
+        {
+         "$ref": "#/components/schemas/StreamLinkService"
+        },
+        {
+         "$ref": "#/components/schemas/TourLinkService"
+        },
+        {
+         "$ref": "#/components/schemas/BiglinkService"
+        }
+       ]
+      }
+     },
+     "social_settings": {
+      "type": "array",
+      "description": "A list of links to social media profiles that will be displayed on the link landing page.",
+      "items": {
+       "$ref": "#/components/schemas/LinkSocialSetting"
+      }
+     },
+     "header": {
+      "type": "string",
+      "description": "The title text to be displayed on the link landing page."
+     },
+     "metadata_title": {
+      "type": "string",
+      "description": "The title of the fanlink that will appear when it is shared on social media."
+     },
+     "metadata_description": {
+      "type": "string",
+      "description": "The description of the fanlink that will appear when it is shared on social media."
+     },
+     "metadata_image_url": {
+      "type": "string",
+      "description": "The URL of the image that will appear when the fanlink is shared on social media."
+     },
+     "author": {
+      "type": "string",
+      "description": "The name of the author of content that will be shown on the link page."
+     },
+     "bg_color": {
+      "type": "string",
+      "description": "The hex color of the background for BigLinks."
+     },
+     "bg_url": {
+      "type": "string",
+      "description": "The URL of the background image of the link."
+     },
+     "image_url": {
+      "type": "string",
+      "description": "The URL of the landing page's header image."
+     },
+     "preview_url": {
+      "type": "string",
+      "description": "A YouTube video, Vimeo video, or audio file URL that will appear as playable media on the link landing page."
+     },
+     "autoplay_preview": {
+      "type": "boolean",
+      "description": "If preview_url is a YouTube video, autoplays video on landing pgae if true."
+     },
+     "button_color": {
+      "type": "string",
+      "description": "For EventLinks, the hex color of the primary action button."
+     },
+     "call_to_action": {
+      "type": "string",
+      "description": "For EventLinks and fundraiser links, the text of the primary action button."
+     },
+     "date": {
+      "type": "string",
+      "description": "For EventLinks, the date of the target event."
+     },
+     "location": {
+      "type": "string",
+      "description": "For EventLinks, the location of the target event."
+     },
+     "price": {
+      "type": "string",
+      "description": "For EventLinks, the price of tickets to the target event."
+     }
+    }
+   },
+   "GenericLinkService": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "integer",
+      "description": "A randomly-generated integer used to distinguish services in a link from one another."
+     },
+     "active": {
+      "type": "boolean",
+      "description": "Whether to display this service on the link landing page."
+     },
+     "url": {
+      "type": "string"
+     },
+     "clickthrough_count": {
+      "type": "string",
+      "description": "The number of times this service has been clicked by fans."
+     },
+     "link_text": {
+      "type": "string",
+      "description": "Text to display in this service's button."
+     },
+     "service_name": {
+      "type": "string",
+      "description": "Identifies the platform that this service links to."
+     }
+    }
+   },
+   "MusicLinkService": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/GenericLinkService"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "type": {
+        "type": "string",
+        "description": "The type of music entity that this service links to.",
+        "enum": [
+         "track",
+         "album"
+        ]
+       },
+       "track_id": {
+        "type": "string",
+        "description": "The ID of the album or track on the music platform."
+       },
+       "custom_title": {
+        "type": "string",
+        "description": "The name of this music service, if it isn't a default music service."
+       },
+       "logo_url": {
+        "type": "string",
+        "description": "The URL of the logo for this music service, if it isn't a default music service."
+       },
+       "preview_url": {
+        "type": "string",
+        "description": "The URL of an audio preview of this track hosted by the music service."
+       },
+       "rescan": {
+        "type": "boolean",
+        "description": "Whether this music platform should have the URL automatically populated when rescans occur."
+       },
+       "match_confidence": {
+        "type": "number",
+        "description": "A number from 0-100 representing how confident the rescan was that the correct URL was found for this track on this service."
+       }
+      }
+     }
+    ]
+   },
+   "StreamLinkService": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/GenericLinkService"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "follow_on_rsvp": {
+        "type": "boolean",
+        "description": "Whether to prompt fans who RSVP on this service to follow accounts on the streaming service."
+       },
+       "follow_channels": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "id": {
+           "type": "string"
+          },
+          "url": {
+           "type": "string"
+          },
+          "username": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    ]
+   },
+   "TourLinkService": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/GenericLinkService"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "location_name": {
+        "type": "string",
+        "description": "The name of the venue this tour date will be at."
+       },
+       "location": {
+        "description": "The city that the tour date will take place in.",
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string"
+         },
+         "state": {
+          "type": "string"
+         },
+         "country": {
+          "type": "string"
+         },
+         "region": {
+          "type": "string"
+         }
+        }
+       },
+       "date": {
+        "type": "string",
+        "description": "The date/time of this tour date."
+       }
+      }
+     }
+    ]
+   },
+   "BiglinkService": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/GenericLinkService"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "button_color": {
+        "type": "string"
+       },
+       "text_color": {
+        "type": "string"
+       }
+      }
+     }
+    ]
+   },
+   "LinkSocialSetting": {
+    "type": "object",
+    "properties": {
+     "active": {
+      "description": "Whether to display this social link.",
+      "type": "boolean"
+     },
+     "color": {
+      "description": "The color of the social icon.",
+      "type": "string"
+     },
+     "platform": {
+      "type": "string",
+      "enum": [
+       "angellist",
+       "bandcamp",
+       "behance",
+       "blog",
+       "custom-link",
+       "custom-music",
+       "custom-podcast",
+       "dribbble",
+       "dropbox",
+       "email",
+       "facebook",
+       "Flickr",
+       "github",
+       "instagram",
+       "lastfm",
+       "linkedin",
+       "medium",
+       "phone",
+       "pinterest",
+       "snapchat",
+       "soundcloud",
+       "spotify",
+       "toneden",
+       "tumblr",
+       "twitch",
+       "twitter",
+       "vimeo",
+       "website",
+       "yelp",
+       "youtube"
+      ]
+     },
+     "url": {
+      "description": "Link to the user's profile on the social platform.",
+      "type": "string"
+     }
+    }
+   },
+   "LinkTargetType": {
+    "type": "string",
+    "description": "Determines what type of link landing page to render.",
+    "enum": [
+     "music",
+     "podcast",
+     "livestream",
+     "event",
+     "tour",
+     "biglink",
+     "fundraiser",
+     "smartlink",
+     "custom"
+    ]
+   },
+   "MessageCampaign": {
+    "type": "object"
+   },
+   "PlaybookCampaign": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "title": {
+      "type": "string"
+     },
+     "user_id": {
+      "type": "number"
+     },
+     "template_id": {
+      "description": "The ID of this playbook campaign's template.",
+      "type": "number"
+     },
+     "is_archived": {
+      "type": "boolean",
+      "default": false
+     },
+     "status": {
+      "type": "string",
+      "enum": [
+       "active",
+       "paused",
+       "inactive",
+       "draft",
+       "error",
+       "pending"
+      ]
+     },
+     "subcampaigns": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/PlaybookSubcampaign"
+      }
+     }
+    }
+   },
+   "PlaybookSubcampaign": {
+    "description": "Models the relationship between a playbook and one of its subcampaigns - either an ad campaign, message campaign, link, or attachment.",
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "playbook_id": {
+      "description": "The ID of the parent PlaybookCampaign row.",
+      "type": "number"
+     },
+     "attachment": {
+      "$ref": "#/components/schemas/Attachment"
+     },
+     "ad_campaign": {
+      "$ref": "#/components/schemas/AdCampaign"
+     },
+     "link": {
+      "$ref": "#/components/schemas/Link"
+     },
+     "message_campaign": {
+      "$ref": "#/components/schemas/MessageCampaign"
+     },
+     "type": {
+      "type": "string",
+      "enum": [
+       "ad",
+       "attachment",
+       "link",
+       "message"
+      ]
+     }
+    }
+   },
+   "UserList": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "external_id": {
+      "description": "The ID of the Facebook custom audience belonging to this user list.",
+      "type": "string"
+     },
+     "external_ad_account_id": {
+      "description": "The ID of the Facebook ad account that owns this user list's custom audience.",
+      "type": "string"
+     },
+     "name": {
+      "description": "The name of the user list.",
+      "type": "string"
+     },
+     "user_id": {
+      "type": "number",
+      "description": "The ID of the user account that owns the user list."
+     },
+     "type": {
+      "type": "string",
+      "description": "The type of the user list. \"manual\" means that users are added or removed from this list ONLY via the ToneDen API.",
+      "enum": [
+       "manual"
+      ]
+     }
+    }
+   },
+   "User": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "avatar_url": {
+      "type": "string"
+     },
+     "username": {
+      "type": "string",
+      "description": "Unique, URL-friendly string identifying the user."
+     },
+     "display_name": {
+      "type": "string",
+      "description": "Non-unique, non-URL-friendly string identifying the user."
+     },
+     "email": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string",
+      "description": "Distinguishes between admin accounts (\"manager\" type) and profiles (\"artist\" type).",
+      "enum": [
+       "manager",
+       "artist"
+      ]
+     },
+     "about": {
+      "type": "string"
+     },
+     "account_count": {
+      "type": "integer"
+     },
+     "attribution_window_settings": {
+      "type": "object",
+      "properties": {
+       "click_days": {
+        "type": "integer",
+        "enum": [
+         1,
+         7,
+         28
+        ]
+       },
+       "view_days": {
+        "type": "integer",
+        "enum": [
+         1,
+         7,
+         28
+        ]
+       }
+      }
+     },
+     "birthday": {
+      "type": "string"
+     },
+     "city": {
+      "type": "string"
+     },
+     "country": {
+      "type": "string"
+     },
+     "creation_platform": {
+      "type": "string",
+      "description": "The name of the OAuth platform the user used to create their account, if any."
+     },
+     "default_notification_settings": {
+      "type": "object",
+      "properties": {
+       "emails": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "slack_channel_id": {
+        "type": "string"
+       },
+       "channels_by_type": {
+        "type": "object",
+        "properties": {
+         "ad_first_conversion": {
+          "$ref": "#/components/schemas/NotificationType"
+         },
+         "ad_recommendation": {
+          "$ref": "#/components/schemas/NotificationType"
+         },
+         "ad_stats_daily": {
+          "$ref": "#/components/schemas/NotificationType"
+         },
+         "ad_stats_final": {
+          "$ref": "#/components/schemas/NotificationType"
+         },
+         "ad_stats_monthly": {
+          "$ref": "#/components/schemas/NotificationType"
+         },
+         "ad_stats_weekly": {
+          "$ref": "#/components/schemas/NotificationType"
+         },
+         "predraft_campaign": {
+          "$ref": "#/components/schemas/NotificationType"
+         }
+        }
+       }
+      }
+     },
+     "facebook_id": {
+      "description": "ID of the personal Facebook profile connected to the account, if any.",
+      "type": "string"
+     },
+     "facebook_permissions": {
+      "description": "Which permissions were granted to ToneDen when the user connected their Facebook profile.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "facebook_profile_name": {
+      "description": "The name of the personal Facebook profile connected to the account, if any.",
+      "type": "string"
+     },
+     "fan_count": {
+      "description": "An approximate count of all 'fans' the user has. Included in this count is anyone who has unlocked a social unlock or entered a contest owned by this account."
+     },
+     "first_name": {
+      "type": "string"
+     },
+     "google_id": {
+      "description": "The ID of the personal Google account connected to the account, if any.",
+      "type": "string"
+     },
+     "google_permissions": {
+      "type": "array",
+      "description": "Which permissions were granted to ToneDen when the user connected their Google account.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "google_username": {
+      "description": "The name of the Google account connected to the account, if any.",
+      "type": "string"
+     },
+     "has_password": {
+      "description": "Whether the user has a password associated with the account.",
+      "type": "string"
+     },
+     "last_logged_in_date": {
+      "type": "string"
+     },
+     "last_name": {
+      "type": "string"
+     },
+     "report_settings": {
+      "type": "object",
+      "description": "Configuration which is used to generate PDF reports for ad campaigns.",
+      "properties": {
+       "prepared_by_email": {
+        "type": "string"
+       },
+       "prepared_by_phone": {
+        "type": "string"
+       },
+       "prepared_by_title": {
+        "type": "string"
+       },
+       "show_campaigns_with_no_spend": {
+        "type": "boolean"
+       },
+       "venue_name": {
+        "type": "string"
+       }
+      }
+     },
+     "state": {
+      "type": "string"
+     },
+     "subscription_id": {
+      "type": "integer"
+     }
+    }
+   },
+   "NotificationType": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "boolean",
+      "description": "Whether to send email notifications for this notification type."
+     },
+     "slack": {
+      "description": "Whether to send slack notifications for this notification type.",
+      "type": "boolean"
+     }
+    }
+   },
+   "UserListUser": {
+    "type": "object",
+    "description": "Object representing the user who performed the conversion event.",
+    "properties": {
+     "email": {
+      "type": "string",
+      "description": "Email address of the user."
+     },
+     "phone": {
+      "type": "string",
+      "description": "Phone number of the user."
+     },
+     "id": {
+      "type": "string",
+      "description": "External ID of the user."
+     },
+     "city": {
+      "type": "string",
+      "description": "Name of the city where the user lives."
+     },
+     "state": {
+      "type": "string",
+      "description": "Name of the state where the user lives."
+     },
+     "country": {
+      "type": "string",
+      "description": "2-letter country code of the country where the user lives."
+     },
+     "zip": {
+      "type": "string",
+      "description": "Zipcode where the user lives."
+     },
+     "gender": {
+      "type": "string",
+      "description": "Gender of the user.",
+      "enum": [
+       "m",
+       "f"
+      ]
+     },
+     "first_name": {
+      "type": "string",
+      "description": "First name of the user."
+     },
+     "last_name": {
+      "type": "string",
+      "description": "Last name of the user."
+     }
+    }
+   },
+   "OfflineConversionEvent": {
+    "type": "object",
+    "description": "Object representing a single conversion event.",
+    "properties": {
+     "user": {
+      "$ref": "#/components/schemas/UserListUser"
+     },
+     "event": {
+      "type": "string",
+      "enum": [
+       "ViewContent",
+       "Search",
+       "AddToCart",
+       "AddToWishlist",
+       "InitiateCheckout",
+       "AddPaymentInfo",
+       "Purchase",
+       "Lead"
+      ],
+      "description": "The type of conversion event which occurred."
+     },
+     "timestamp": {
+      "type": "number",
+      "description": "UNIX timestamp when the event occurred."
+     },
+     "value": {
+      "type": "number",
+      "description": "The amount the customer spent, if the event is a Purchase."
+     }
+    }
+   }
+  },
+  "parameters": {
+   "offset": {
+    "in": "query",
+    "name": "offset",
+    "required": false,
+    "schema": {
+     "type": "integer",
+     "default": 0
+    }
+   },
+   "limit": {
+    "in": "query",
+    "name": "limit",
+    "required": false,
+    "schema": {
+     "type": "integer"
+    }
+   }
+  }
+ }
+}

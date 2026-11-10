@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/filevine",
+  "description": "Projects, contacts, notes, tasks, deadlines, documents and webhooks in Filevine legal case management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Filevine"
+  }
+}

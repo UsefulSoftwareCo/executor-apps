@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/cleverreach",
+  "description": "Email marketing with CleverReach: recipients, groups, forms, mailings, reports, segments, attributes and the rest of the REST API v3.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "CleverReach"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

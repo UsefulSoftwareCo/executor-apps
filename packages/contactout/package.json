@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/contactout",
+  "description": "Find and verify professional contact details with ContactOut: profile enrichment, people and company search, email and phone checks, decision makers, usage stats and campaigns.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ContactOut"
+  }
+}

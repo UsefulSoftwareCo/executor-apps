@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fanvue",
+  "description": "Fanvue creator platform: profile, chats and messages, posts, media vault, subscribers, insights, tracking links, webhooks and agency management.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Fanvue"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

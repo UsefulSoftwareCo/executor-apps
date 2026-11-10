@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/humanitix",
+  "description": "Humanitix ticketing: events, orders, tickets, check-ins and tags.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Humanitix"
+  }
+}

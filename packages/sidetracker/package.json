@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sidetracker",
+  "description": "Cookie-free web analytics with Sidetracker: visitor sessions, visits, notes, conversions, lists and triggers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Sidetracker"
+  }
+}

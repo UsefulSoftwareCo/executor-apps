@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/unione",
+  "description": "Send and manage transactional email with UniOne: sending, templates, webhooks, domains, suppressions, projects and email validation.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "UniOne"
+  }
+}

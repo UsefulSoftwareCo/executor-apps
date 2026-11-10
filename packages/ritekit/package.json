@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ritekit",
+  "description": "RiteKit social media tools: hashtag stats and suggestions, trending, emoji, link shortening, CTAs and image generation.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "RiteKit"
+  }
+}

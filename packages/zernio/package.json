@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/zernio",
+  "description": "Schedule social posts, manage inbox conversations, pull analytics and run ads across 14+ platforms through the Zernio API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Zernio"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

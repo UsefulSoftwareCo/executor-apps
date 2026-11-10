@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/productboard",
+  "description": "Productboard REST API v2: features, components, initiatives, objectives, releases, notes, companies, users, members, teams, webhooks and analytics.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Productboard"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

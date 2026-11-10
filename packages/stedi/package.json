@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/stedi",
+  "description": "Stedi healthcare EDI: eligibility checks, claims, payers, enrollments, transactions and event destinations.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Stedi"
+  }
+}

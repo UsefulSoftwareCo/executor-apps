@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/itmplatform",
+  "description": "ITM Platform project, portfolio, task, service, financial and resource management.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ITM Platform"
+  }
+}

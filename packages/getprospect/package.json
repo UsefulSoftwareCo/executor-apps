@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/getprospect",
+  "description": "Find and verify business emails and enrich people and companies with GetProspect.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "GetProspect"
+  }
+}

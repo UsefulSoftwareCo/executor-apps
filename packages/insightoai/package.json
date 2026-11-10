@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/insightoai",
+  "description": "Build and run Insighto.ai conversational AI assistants: conversations, contacts, widgets, forms, data sources, calling and messaging.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Insighto.ai"
+  }
+}

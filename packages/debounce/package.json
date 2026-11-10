@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/debounce",
+  "description": "DeBounce email validation: single and bulk validation, reverse lookup, disposable detection, credit balance and usage history.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DeBounce"
+  }
+}

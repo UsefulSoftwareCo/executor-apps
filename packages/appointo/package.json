@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/appointo",
+  "description": "Appointo appointment booking for Shopify: products, appointments, availability, bookings and subscription contracts.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Appointo"
+  }
+}

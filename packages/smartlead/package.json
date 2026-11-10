@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/smartlead",
+  "description": "Cold email outreach with Smartlead: campaigns, sequences, leads, email accounts and warmup, master inbox, analytics, webhooks, Smart Delivery and Smart Senders.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Smartlead"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/certseal",
+  "description": "Issue and manage verifiable digital certificates with CertSeal: batches, recipients, designs, certificate lookup and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "CertSeal"
+  }
+}

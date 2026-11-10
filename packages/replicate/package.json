@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/replicate",
+  "description": "Run AI models on Replicate: predictions, models, versions, deployments, trainings, collections and hardware.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Replicate"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/freepik",
+  "description": "Freepik (Magnific) API: search stock resources, icons and videos, download assets, and run AI image, video, audio and editing tools.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Freepik"
+  }
+}

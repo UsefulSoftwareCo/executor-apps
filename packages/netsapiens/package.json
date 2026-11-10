@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/netsapiens",
+  "description": "Domains, users, phone numbers, call queues, auto attendants, devices, messaging, call history and the rest of the NetSapiens API v2 for a NetSapiens (SNAPsolution) VoIP platform.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "NetSapiens"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

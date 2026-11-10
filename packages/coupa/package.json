@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/coupa",
+  "description": "Coupa spend management: purchase orders, invoices, suppliers, requisitions, users, expenses and any other Core API resource of one Coupa instance.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Coupa"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

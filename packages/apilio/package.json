@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apilio",
+  "description": "Smart home logic with Apilio: read and set boolean, numeric and string variables, inspect conditions, and evaluate or activate logicblocks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Apilio"
+  }
+}

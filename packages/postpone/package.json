@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/postpone",
+  "description": "Schedule and analyze social posts across Reddit, X, Instagram, Facebook, TikTok, YouTube and more through Postpone's GraphQL API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Postpone"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100",
+    "graphql": "16.11.0"
+  }
+}

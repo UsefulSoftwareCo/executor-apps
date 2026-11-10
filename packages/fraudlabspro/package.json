@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/fraudlabspro",
+  "description": "Screen orders and users for fraud, send feedback, and verify phone numbers by SMS OTP with FraudLabs Pro.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "FraudLabs Pro"
+  }
+}

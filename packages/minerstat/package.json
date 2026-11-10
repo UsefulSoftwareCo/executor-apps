@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/minerstat",
+  "description": "Crypto mining data from Minerstat: coins, hardware, algorithms, pools and profitability.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Minerstat"
+  }
+}

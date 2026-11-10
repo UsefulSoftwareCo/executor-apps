@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ilovepdf",
+  "description": "Merge, split, compress, convert, OCR, protect, watermark and edit PDFs and images, and send e-signature requests, with the iLovePDF API.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "iLovePDF"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

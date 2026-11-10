@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/kibana",
+  "description": "Kibana dashboards, saved objects, spaces, alerting rules, connectors, Fleet, Security, Observability and the rest of the Kibana REST API on your own deployment.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Kibana"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

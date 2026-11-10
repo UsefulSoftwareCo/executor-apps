@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/outreach",
+  "description": "Prospects, accounts, opportunities, sequences, mailings, calls, tasks and templates in the Outreach sales engagement platform.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Outreach"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

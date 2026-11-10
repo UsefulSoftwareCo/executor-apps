@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/orangelogic",
+  "description": "OrangeDAM digital asset management: search assets, read and edit metadata, public and presigned links, share links, uploads, batch edits, reports and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Orange Logic"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bigml",
+  "description": "BigML machine learning: sources, datasets, models, ensembles, clusters, anomaly detectors, deepnets, time series, evaluations, predictions, batch jobs, WhizzML scripts and projects.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "BigML"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/slidesgpt",
+  "description": "Generate PowerPoint presentations from a prompt with SlidesGPT, then fetch, download, embed or delete them.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "SlidesGPT"
+  }
+}

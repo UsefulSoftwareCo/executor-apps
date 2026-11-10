@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-classroom",
+  "description": "Courses, rosters, coursework, announcements, submissions and invitations in Google Classroom.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Classroom"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

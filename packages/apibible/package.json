@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/apibible",
+  "description": "Read Scripture with API.Bible: Bibles, books, chapters, verses, passages, sections, search and audio Bibles.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "API.Bible"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/sevenio",
+  "description": "Send SMS, voice calls, RCS and WhatsApp messages with Seven.io, manage contacts, numbers and subaccounts, and run number lookups.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Seven.io"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/dialmycalls",
+  "description": "Send voice and text broadcasts with DialMyCalls: calls, texts, recordings, contacts, groups, caller IDs, keywords and vanity numbers.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "DialMyCalls"
+  }
+}

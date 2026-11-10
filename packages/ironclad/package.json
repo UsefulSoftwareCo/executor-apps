@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/ironclad",
+  "description": "Ironclad contract lifecycle management: workflows, records, approvals, signatures, webhooks, entities and obligations.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Ironclad"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

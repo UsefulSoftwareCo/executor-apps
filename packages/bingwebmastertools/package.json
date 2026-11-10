@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/bingwebmastertools",
+  "description": "Bing Webmaster Tools: sites, search traffic and keyword stats, crawl issues, URL and feed submission, blocks and site settings.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Bing Webmaster Tools"
+  }
+}

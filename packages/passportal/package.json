@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/passportal",
+  "description": "List, read, create and update Passportal (N-able) documentation documents through the Passportal API v2.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Passportal"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/momentumio",
+  "description": "Momentum.io revenue intelligence: meetings, users and AI signal definitions and executions.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Momentum.io"
+  }
+}

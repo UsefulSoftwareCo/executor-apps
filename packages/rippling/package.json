@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/rippling",
+  "description": "Rippling workforce platform: workers, users, compensation, departments, teams, work locations, leave, time entries, schedules, recruiting and more through the v2 REST API.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Rippling"
+  }
+}

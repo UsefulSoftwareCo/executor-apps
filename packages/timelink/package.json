@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/timelink",
+  "description": "Manage timelink time tracking: clients, projects, services, time entries, users, company settings and webhooks.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Timelink"
+  }
+}

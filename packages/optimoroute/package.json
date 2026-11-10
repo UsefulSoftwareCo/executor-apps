@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/optimoroute",
+  "description": "Route planning and dispatch with OptimoRoute: orders, routes, planning runs, driver parameters and completion details.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "OptimoRoute"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/google-drive",
+  "description": "Files, folders, shared drives, permissions, comments, revisions and changes in Google Drive.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Google Drive"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  }
+}

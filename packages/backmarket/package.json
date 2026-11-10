@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/backmarket",
+  "description": "Manage a Back Market seller account: listings, orders, buyback, shipping, after-sales care and competitor pricing.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "Back Market"
+  }
+}

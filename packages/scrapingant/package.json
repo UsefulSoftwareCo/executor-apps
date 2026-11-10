@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/scrapingant",
+  "description": "Scrape web pages through ScrapingAnt's headless Chrome and rotating proxies: raw HTML, LLM-ready markdown, AI data extraction, extended JSON responses and credit usage.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "ScrapingAnt"
+  }
+}

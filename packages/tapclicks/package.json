@@ -1,0 +1,12 @@
+{
+  "name": "@executor.sh/tapclicks",
+  "description": "TapClicks marketing reporting: clients, client groups, clusters, services and data views, users, roles, executive summaries, leads and orders.",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "apps": "0.0.1-beta.100"
+  },
+  "executor": {
+    "title": "TapClicks"
+  }
+}
