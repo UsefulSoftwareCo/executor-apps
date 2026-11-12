@@ -72,7 +72,7 @@ export default defineApp(
       {
         title: "TomTom",
         description:
-          "TomTom. search: geocoding, reverse geocoding, fuzzy, POI, category and along-route search. routing: route calculation and reachable range. maps: raster and vector tiles, static images, copyrights, WMS and WMTS. mcp: the official TomTom Maps MCP server (routing, multi-stop optimization, geocoding, search, static maps, traffic flow and incidents).",
+          "TomTom. search: geocoding, reverse geocoding, fuzzy, POI, category and along-route search, POI categories. routing: route calculation. maps: raster and vector tiles, map assets, static images, copyrights, WMS and WMTS. mcp: the official TomTom Maps MCP server (routing, multi-stop optimization, geocoding, search, static maps, traffic flow and incidents).",
         icons,
       },
     ),
