@@ -8,7 +8,7 @@ The top-level tools are shaped for agents, after [gogcli](https://github.com/ope
 
 ## Interface
 
-OpenAPI, from `https://api.apis.guru/v2/specs/googleapis.com/sheets/v4/openapi.json`. Google publishes Discovery documents, not OpenAPI; this is the APIs.guru conversion of Google's official Sheets v4 Discovery document (a maintained community conversion, not a Google-hosted file). The conversion requires both its `Oauth2` and `Oauth2c` schemes on every operation, so both are declared as bearer and filled from the OAuth access token. Three POST operations that only read (`developerMetadata.search`, `values.batchGetByDataFilter`, `getByDataFilter`) are marked as queries; all other mutations require approval.
+OpenAPI, converted from Google's own Sheets API v4 Discovery document (`https://sheets.googleapis.com/$discovery/rest?version=v4`) by `scripts/google-discovery.ts` into `openapi.json`, whose `info.x-executor-discovery` records the revision. Google publishes no OpenAPI for it. Every operation sends the OAuth access token as `Authorization: Bearer`. Three POST operations that only read (`developerMetadata.search`, `values.batchGetByDataFilter`, `getByDataFilter`) are marked as queries; all other mutations require approval.
 
 Google also runs an official remote MCP server (`https://sheetsmcp.googleapis.com/mcp/v1`) but it is Developer Preview only (needs the Workspace Developer Preview Program) and exposes just six tools, so the REST API is used instead.
 

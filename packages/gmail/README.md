@@ -8,7 +8,7 @@ The top-level tools are shaped for agents, after [gogcli](https://github.com/ope
 
 ## Interface
 
-OpenAPI, from `https://api.apis.guru/v2/specs/googleapis.com/gmail/v1/openapi.json`. Google publishes the Gmail API only as a Discovery document, which is the authoritative source (`https://gmail.googleapis.com/$discovery/rest?version=v1`), not OpenAPI. The spec used here is APIs.guru's maintained, unofficial OpenAPI conversion of that document (79 operations, matching the Discovery document). The spec's implicit/authorization-code oauth2 schemes are replaced by bearer schemes of the same names so the OAuth access token is sent as `Authorization: Bearer`.
+OpenAPI, converted from Google's own Gmail API v1 Discovery document (`https://gmail.googleapis.com/$discovery/rest?version=v1`) by `scripts/google-discovery.ts` into `openapi.json`, whose `info.x-executor-discovery` records the revision. Google publishes no OpenAPI for it. 79 operations, each sending the OAuth access token as `Authorization: Bearer`. A method's JSON resource is its request body on its own path, so `messages.send`, `messages.insert`, `messages.import`, `drafts.create`, `drafts.update` and `drafts.send` take a `Message` (or a `Draft` holding one) with the whole RFC 2822 message base64url-encoded in `raw`.
 
 Google also runs an official Gmail MCP server (`https://gmailmcp.googleapis.com/mcp/v1`). It is a gated Developer Preview: it requires Workspace Developer Preview Program membership and enabling `gmailmcp.googleapis.com`, exposes only about ten tools (search threads, get thread/message, drafts, labels), cannot send email, and allows only `gmail.readonly` and `gmail.compose`. Because of that, the REST API was chosen deliberately over the MCP server. Revisit once the MCP reaches general availability.
 
@@ -25,4 +25,4 @@ Scopes requested: `https://mail.google.com/` (full Gmail access, the scope Execu
 - 3 need the restricted `https://mail.google.com/` scope (permanent delete): `messages.delete`, `messages.batchDelete`, `threads.delete`. Trash instead.
 - 7 are administrative `gmail.settings.sharing` or service-account-only operations that need domain-wide delegation: `delegates.list/get/create/delete` (4), `forwardingAddresses.create/delete` (2), `settings.updateAutoForwarding` (1).
 - The `settings.cse.*` tools only work on Workspace accounts with client-side encryption.
-- Media upload endpoints (`/upload/gmail/v1/...`) are not part of the converted spec; send and insert use the `raw` base64url message field.
+- The media upload endpoints (`/upload/gmail/v1/...`) are not offered. They take the same message as a raw body, which a tool call would also have to base64-encode; messages too large for a JSON request (big attachments) may need them.
