@@ -1025,27 +1025,29 @@
     "properties": {
      "driveResourceInfo": {
       "$ref": "#/components/schemas/DriveResourceInfo",
-      "description": "Output only. Information about the Drive file where this task originates from. Currently, the Drive file can only be a document. This field is read-only."
+      "description": "Output only. Information about the Drive file where this task originates from. Currently, the Drive file can only be a document. This field is read-only.",
+      "readOnly": true
      },
      "linkToTask": {
       "description": "Output only. An absolute link to the original task in the surface of assignment (Docs, Chat spaces, etc.).",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "spaceInfo": {
       "$ref": "#/components/schemas/SpaceInfo",
-      "description": "Output only. Information about the Chat Space where this task originates from. This field is read-only."
+      "description": "Output only. Information about the Chat Space where this task originates from. This field is read-only.",
+      "readOnly": true
      },
      "surfaceType": {
       "description": "Output only. The type of surface this assigned task originates from. Currently limited to DOCUMENT or SPACE.",
+      "readOnly": true,
       "type": "string",
       "enum": [
        "CONTEXT_TYPE_UNSPECIFIED",
        "GMAIL",
        "DOCUMENT",
        "SPACE"
-      ],
-      "readOnly": true
+      ]
      }
     }
    },
@@ -1055,13 +1057,13 @@
     "properties": {
      "driveFileId": {
       "description": "Output only. Identifier of the file in the Drive API.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "resourceKey": {
       "description": "Output only. Resource key required to access files shared via a shared link. Not required for all files. See also developers.google.com/drive/api/guides/resource-keys.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },
@@ -1071,8 +1073,8 @@
     "properties": {
      "space": {
       "description": "Output only. The Chat space where this task originates from. The format is \"spaces/{space}\".",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },
@@ -1081,7 +1083,8 @@
     "properties": {
      "assignmentInfo": {
       "$ref": "#/components/schemas/AssignmentInfo",
-      "description": "Output only. Context information for assigned tasks. A task can be assigned to a user, currently possible from surfaces like Docs and Chat Spaces. This field is populated for tasks assigned to the current user and identifies where the task was assigned from. This field is read-only."
+      "description": "Output only. Context information for assigned tasks. A task can be assigned to a user, currently possible from surfaces like Docs and Chat Spaces. This field is populated for tasks assigned to the current user and identifies where the task was assigned from. This field is read-only.",
+      "readOnly": true
      },
      "completed": {
       "description": "Completion date of the task (as a RFC 3339 timestamp). This field is omitted if the task has not been completed.",
@@ -1109,11 +1112,12 @@
      },
      "kind": {
       "description": "Output only. Type of the resource. This is always \"tasks#task\".",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "links": {
       "description": "Output only. Collection of links. This collection is read-only.",
+      "readOnly": true,
       "type": "array",
       "items": {
        "type": "object",
@@ -1131,8 +1135,7 @@
          "type": "string"
         }
        }
-      },
-      "readOnly": true
+      }
      },
      "notes": {
       "description": "Notes describing the task. Tasks assigned from Google Docs cannot have notes. Optional. Maximum length allowed: 8192 characters.",
@@ -1140,18 +1143,18 @@
      },
      "parent": {
       "description": "Output only. Parent task identifier. This field is omitted if it is a top-level task. Use the \"move\" method to move the task under a different parent or to the top level. A parent task can never be an assigned task (from Chat Spaces, Docs). This field is read-only.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "position": {
       "description": "Output only. String indicating the position of the task among its sibling tasks under the same parent task or at the top level. If this string is greater than another task's corresponding position string according to lexicographical ordering, the task is positioned after the other task under the same parent task (or at the top level). Use the \"move\" method to move the task to another position.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "selfLink": {
       "description": "Output only. URL pointing to this task. Used to retrieve, update, or delete this task.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "status": {
       "description": "Status of the task. This is either \"needsAction\" or \"completed\".",
@@ -1163,13 +1166,13 @@
      },
      "updated": {
       "description": "Output only. Last modification time of the task (as a RFC 3339 timestamp).",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "webViewLink": {
       "description": "Output only. An absolute link to the task in the Google Tasks Web UI.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },
@@ -1186,13 +1189,13 @@
      },
      "kind": {
       "description": "Output only. Type of the resource. This is always \"tasks#taskList\".",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "selfLink": {
       "description": "Output only. URL pointing to this task list. Used to retrieve, update, or delete this task list.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "title": {
       "description": "Title of the task list. Maximum length allowed: 1024 characters.",
@@ -1200,8 +1203,8 @@
      },
      "updated": {
       "description": "Output only. Last modification time of the task list (as a RFC 3339 timestamp).",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },

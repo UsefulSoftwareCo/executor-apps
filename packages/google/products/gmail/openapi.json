@@ -5444,29 +5444,29 @@
     "properties": {
      "disableTime": {
       "description": "Output only. If a key pair is set to `DISABLED`, the time that the key pair's state changed from `ENABLED` to `DISABLED`. This field is present only when the key pair is in state `DISABLED`.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      },
      "enablementState": {
       "description": "Output only. The current state of the key pair.",
+      "readOnly": true,
       "type": "string",
       "enum": [
        "stateUnspecified",
        "enabled",
        "disabled"
-      ],
-      "readOnly": true
+      ]
      },
      "keyPairId": {
       "description": "Output only. The immutable ID for the client-side encryption S/MIME key pair.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "pem": {
       "description": "Output only. The public key and its certificate chain, in [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) format.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "pkcs7": {
       "description": "Input only. The public key and its certificate chain. The chain must be in [PKCS#7](https://en.wikipedia.org/wiki/PKCS_7) format and use PEM encoding and ASCII armor.",
@@ -5481,11 +5481,11 @@
      },
      "subjectEmailAddresses": {
       "description": "Output only. The email address identities that are specified on the leaf certificate.",
+      "readOnly": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "readOnly": true
+      }
      }
     }
    },
@@ -5503,8 +5503,8 @@
      },
      "privateKeyMetadataId": {
       "description": "Output only. The immutable ID for the private key metadata instance.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },
@@ -6521,12 +6521,12 @@
     "properties": {
      "labelFilterAction": {
       "description": "Filtering behavior of `labelIds list` specified. This field is deprecated because it caused incorrect behavior in some cases; use `label_filter_behavior` instead.",
+      "deprecated": true,
       "type": "string",
       "enum": [
        "include",
        "exclude"
-      ],
-      "deprecated": true
+      ]
      },
      "labelFilterBehavior": {
       "description": "Filtering behavior of `labelIds list` specified. This field replaces `label_filter_action`; if set, `label_filter_action` is ignored.",

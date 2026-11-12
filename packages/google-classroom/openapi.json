@@ -5853,11 +5853,11 @@
     "properties": {
      "copyHistory": {
       "description": "Output only. Identifiers of attachments that were previous copies of this attachment. If the attachment was previously copied by virtue of its parent post being copied, this enumerates the identifiers of attachments that were its previous copies in ascending chronological order of copy.",
+      "readOnly": true,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/CopyHistory"
-      },
-      "readOnly": true
+      }
      },
      "courseId": {
       "description": "Immutable. Identifier of the course.",
@@ -5873,8 +5873,8 @@
      },
      "gradeSyncEnabled": {
       "description": "Output only. Whether changes to `pointsEarned` values on this attachment's student submissions will be copied to the `pointsEarned` field on the students' CourseWork submissions. This field can be `true` for at most one add-on attachment per stream item.",
-      "type": "boolean",
-      "readOnly": true
+      "readOnly": true,
+      "type": "boolean"
      },
      "id": {
       "description": "Immutable. Classroom-assigned identifier for this attachment, unique per post.",
@@ -5891,8 +5891,8 @@
      },
      "postId": {
       "description": "Immutable. Deprecated, use `item_id` instead.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "studentViewUri": {
       "$ref": "#/components/schemas/EmbedUri",
@@ -5918,13 +5918,13 @@
     "properties": {
      "courseWorkSubmissionId": {
       "description": "Output only. Identifier of the course work submission under which this attachment submission was made.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "id": {
       "description": "Output only. Classroom-assigned identifier for this student submission. This is unique among submissions for the relevant course work and add-on attachment combination.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "pointsEarned": {
       "description": "Student grade on this attachment. If unset, no grade was set.",
@@ -5963,8 +5963,8 @@
      },
      "postId": {
       "description": "Immutable. Deprecated, use `item_id` instead.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "studentContext": {
       "$ref": "#/components/schemas/StudentContext",
@@ -6124,8 +6124,8 @@
      },
      "postId": {
       "description": "Immutable. Deprecated, use `item_id` instead.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -6147,11 +6147,11 @@
      },
      "courseMaterialSets": {
       "description": "Sets of materials that appear on the \"about\" page of this course. Read-only.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/CourseMaterialSet"
-      },
-      "deprecated": true
+      }
      },
      "courseState": {
       "description": "State of the course. If unspecified, the default state is `PROVISIONED`.",
@@ -6792,8 +6792,8 @@
      },
      "id": {
       "description": "Output only. System generated grading period ID. Read-only.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "startDate": {
       "$ref": "#/components/schemas/Date",
@@ -7454,9 +7454,9 @@
      },
      "creationTime": {
       "description": "Output only. Timestamp when this rubric was created. Read-only.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      },
      "criteria": {
       "description": "List of criteria. Each criterion is a dimension on which performance is rated.",
@@ -7475,9 +7475,9 @@
      },
      "updateTime": {
       "description": "Output only. Timestamp of the most recent change to this rubric. Read-only.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      }
     }
    },

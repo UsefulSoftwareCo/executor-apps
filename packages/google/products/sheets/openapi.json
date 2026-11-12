@@ -1640,7 +1640,8 @@
     "properties": {
      "table": {
       "$ref": "#/components/schemas/Table",
-      "description": "Output only. The table that was added."
+      "description": "Output only. The table that was added.",
+      "readOnly": true
      }
     }
    },
@@ -1757,8 +1758,8 @@
      },
      "bandedRangeReference": {
       "description": "Output only. The reference of the banded range, used to identify the ID that is not supported by the banded_range_id.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "columnProperties": {
       "$ref": "#/components/schemas/BandingProperties",
@@ -1780,7 +1781,8 @@
     "properties": {
      "firstBandColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The first color that is alternating. (Required) Deprecated: Use first_band_color_style."
+      "description": "The first color that is alternating. (Required) Deprecated: Use first_band_color_style.",
+      "deprecated": true
      },
      "firstBandColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -1788,7 +1790,8 @@
      },
      "footerColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the last row or column. If this field is not set, the last row or column is filled with either first_band_color or second_band_color, depending on the color of the previous row or column. Deprecated: Use footer_color_style."
+      "description": "The color of the last row or column. If this field is not set, the last row or column is filled with either first_band_color or second_band_color, depending on the color of the previous row or column. Deprecated: Use footer_color_style.",
+      "deprecated": true
      },
      "footerColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -1796,7 +1799,8 @@
      },
      "headerColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first_band_color and second_band_color starting from the second row or column. Otherwise, the first row or column is filled with first_band_color and the colors proceed to alternate as they normally would. Deprecated: Use header_color_style."
+      "description": "The color of the first row or column. If this field is set, the first row or column is filled with this color and the colors alternate between first_band_color and second_band_color starting from the second row or column. Otherwise, the first row or column is filled with first_band_color and the colors proceed to alternate as they normally would. Deprecated: Use header_color_style.",
+      "deprecated": true
      },
      "headerColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -1804,7 +1808,8 @@
      },
      "secondBandColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The second color that is alternating. (Required) Deprecated: Use second_band_color_style."
+      "description": "The second color that is alternating. (Required) Deprecated: Use second_band_color_style.",
+      "deprecated": true
      },
      "secondBandColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -1831,7 +1836,8 @@
      },
      "negativeColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "Color to be used, in case baseline value represents a negative change for key value. This field is optional. Deprecated: Use negative_color_style."
+      "description": "Color to be used, in case baseline value represents a negative change for key value. This field is optional. Deprecated: Use negative_color_style.",
+      "deprecated": true
      },
      "negativeColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -1843,7 +1849,8 @@
      },
      "positiveColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "Color to be used, in case baseline value represents a positive change for key value. This field is optional. Deprecated: Use positive_color_style."
+      "description": "Color to be used, in case baseline value represents a positive change for key value. This field is optional. Deprecated: Use positive_color_style.",
+      "deprecated": true
      },
      "positiveColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -1907,7 +1914,8 @@
     "properties": {
      "color": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used. Deprecated: Use color_style."
+      "description": "The color for elements (such as bars, lines, and points) associated with this series. If empty, a default color is used. Deprecated: Use color_style.",
+      "deprecated": true
      },
      "colorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -2061,11 +2069,11 @@
     "properties": {
      "criteria": {
       "description": "The criteria for showing/hiding values per column. The map's key is the column index, and the value is the criteria for that column. This field is deprecated in favor of filter_specs.",
+      "deprecated": true,
       "type": "object",
       "additionalProperties": {
        "$ref": "#/components/schemas/FilterCriteria"
-      },
-      "deprecated": true
+      }
      },
      "filterSpecs": {
       "description": "The filter criteria per column. Both criteria and filter_specs are populated in responses. If both fields are specified in an update request, this field takes precedence.",
@@ -2097,7 +2105,8 @@
     "properties": {
      "color": {
       "$ref": "#/components/schemas/Color",
-      "description": "Color of the series data point. If empty, the series default is used. Deprecated: Use color_style."
+      "description": "Color of the series data point. If empty, the series default is used. Deprecated: Use color_style.",
+      "deprecated": true
      },
      "colorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -2594,7 +2603,8 @@
     "properties": {
      "color": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the border. Deprecated: Use color_style."
+      "description": "The color of the border. Deprecated: Use color_style.",
+      "deprecated": true
      },
      "colorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -2616,9 +2626,9 @@
      },
      "width": {
       "description": "The width of the border, in pixels. Deprecated; the width is determined by the \"style\" field.",
+      "deprecated": true,
       "type": "integer",
-      "format": "int32",
-      "deprecated": true
+      "format": "int32"
      }
     }
    },
@@ -2650,7 +2660,8 @@
     "properties": {
      "bubbleBorderColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The bubble border color. Deprecated: Use bubble_border_color_style."
+      "description": "The bubble border color. Deprecated: Use bubble_border_color_style.",
+      "deprecated": true
      },
      "bubbleBorderColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -2831,7 +2842,8 @@
      },
      "dataSourceFormula": {
       "$ref": "#/components/schemas/DataSourceFormula",
-      "description": "Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`."
+      "description": "Output only. Information about a data source formula on the cell. The field is set if user_entered_value is a formula referencing some DATA_SOURCE sheet, e.g. `=SUM(DataSheet!Column)`.",
+      "readOnly": true
      },
      "dataSourceTable": {
       "$ref": "#/components/schemas/DataSourceTable",
@@ -2888,7 +2900,8 @@
     "properties": {
      "backgroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color of the cell. Deprecated: Use background_color_style."
+      "description": "The background color of the cell. Deprecated: Use background_color_style.",
+      "deprecated": true
      },
      "backgroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -3122,7 +3135,8 @@
      },
      "backgroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color of the entire chart. Not applicable to Org charts. Deprecated: Use background_color_style."
+      "description": "The background color of the entire chart. Not applicable to Org charts. Deprecated: Use background_color_style.",
+      "deprecated": true
      },
      "backgroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -3695,7 +3709,8 @@
     "properties": {
      "dataExecutionStatus": {
       "$ref": "#/components/schemas/DataExecutionStatus",
-      "description": "Output only. The data execution status."
+      "description": "Output only. The data execution status.",
+      "readOnly": true
      },
      "dataSourceId": {
       "description": "ID of the data source that the chart is associated with.",
@@ -3733,7 +3748,8 @@
     "properties": {
      "dataExecutionStatus": {
       "$ref": "#/components/schemas/DataExecutionStatus",
-      "description": "Output only. The data execution status."
+      "description": "Output only. The data execution status.",
+      "readOnly": true
      },
      "dataSourceId": {
       "description": "The ID of the data source the formula is associated with.",
@@ -3845,7 +3861,8 @@
      },
      "nextRun": {
       "$ref": "#/components/schemas/Interval",
-      "description": "Output only. The time interval of the next run."
+      "description": "Output only. The time interval of the next run.",
+      "readOnly": true
      },
      "refreshScope": {
       "description": "The scope of the refresh. Must be ALL_DATA_SOURCES.",
@@ -3970,7 +3987,8 @@
      },
      "dataExecutionStatus": {
       "$ref": "#/components/schemas/DataExecutionStatus",
-      "description": "Output only. The data execution status."
+      "description": "Output only. The data execution status.",
+      "readOnly": true
      },
      "dataSourceId": {
       "description": "The ID of the data source the data source table is associated with.",
@@ -4424,7 +4442,8 @@
     "properties": {
      "dataSourceColumnReference": {
       "$ref": "#/components/schemas/DataSourceColumnReference",
-      "description": "Output only. If set, this is a column in a data source sheet."
+      "description": "Output only. If set, this is a column in a data source sheet.",
+      "readOnly": true
      },
      "developerMetadata": {
       "description": "The developer metadata associated with a single row or column.",
@@ -4587,7 +4606,8 @@
     "properties": {
      "color": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the border. Deprecated: Use color_style."
+      "description": "The color of the border. Deprecated: Use color_style.",
+      "deprecated": true
      },
      "colorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -4684,7 +4704,8 @@
      },
      "visibleBackgroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background fill color to filter by; only cells with this fill color are shown. Mutually exclusive with visible_foreground_color. Deprecated: Use visible_background_color_style."
+      "description": "The background fill color to filter by; only cells with this fill color are shown. Mutually exclusive with visible_foreground_color. Deprecated: Use visible_background_color_style.",
+      "deprecated": true
      },
      "visibleBackgroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -4692,7 +4713,8 @@
      },
      "visibleForegroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The foreground color to filter by; only cells with this foreground color are shown. Mutually exclusive with visible_background_color. Deprecated: Use visible_foreground_color_style."
+      "description": "The foreground color to filter by; only cells with this foreground color are shown. Mutually exclusive with visible_background_color. Deprecated: Use visible_foreground_color_style.",
+      "deprecated": true
      },
      "visibleForegroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -4725,11 +4747,11 @@
     "properties": {
      "criteria": {
       "description": "The criteria for showing/hiding values per column. The map's key is the column index, and the value is the criteria for that column. This field is deprecated in favor of filter_specs.",
+      "deprecated": true,
       "type": "object",
       "additionalProperties": {
        "$ref": "#/components/schemas/FilterCriteria"
-      },
-      "deprecated": true
+      }
      },
      "filterSpecs": {
       "description": "The filter criteria for showing or hiding values per column. Both criteria and filter_specs are populated in responses. If both fields are specified in an update request, this field takes precedence.",
@@ -5085,7 +5107,8 @@
     "properties": {
      "barColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the column representing this series in each bucket. This field is optional. Deprecated: Use bar_color_style."
+      "description": "The color of the column representing this series in each bucket. This field is optional. Deprecated: Use bar_color_style.",
+      "deprecated": true
      },
      "barColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -5164,7 +5187,8 @@
     "properties": {
      "color": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color this interpolation point should use. Deprecated: Use color_style."
+      "description": "The color this interpolation point should use. Deprecated: Use color_style.",
+      "deprecated": true
      },
      "colorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -5439,7 +5463,8 @@
      },
      "nodeColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the org chart nodes. Deprecated: Use node_color_style."
+      "description": "The color of the org chart nodes. Deprecated: Use node_color_style.",
+      "deprecated": true
      },
      "nodeColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -5461,7 +5486,8 @@
      },
      "selectedNodeColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the selected org chart nodes. Deprecated: Use selected_node_color_style."
+      "description": "The color of the selected org chart nodes. Deprecated: Use selected_node_color_style.",
+      "deprecated": true
      },
      "selectedNodeColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -5794,15 +5820,16 @@
      },
      "criteria": {
       "description": "An optional mapping of filters per source column offset. The filters are applied before aggregating data into the pivot table. The map's key is the column offset of the source range that you want to filter, and the value is the criteria for that column. For example, if the source was `C10:E15`, a key of `0` will have the filter for column `C`, whereas the key `1` is for column `D`. This field is deprecated in favor of filter_specs.",
+      "deprecated": true,
       "type": "object",
       "additionalProperties": {
        "$ref": "#/components/schemas/PivotFilterCriteria"
-      },
-      "deprecated": true
+      }
      },
      "dataExecutionStatus": {
       "$ref": "#/components/schemas/DataExecutionStatus",
-      "description": "Output only. The data execution status for data source pivot tables."
+      "description": "Output only. The data execution status for data source pivot tables.",
+      "readOnly": true
      },
      "dataSourceId": {
       "description": "The ID of the data source the pivot table is reading data from.",
@@ -6577,8 +6604,8 @@
     "properties": {
      "mimeType": {
       "description": "Output only. The [MIME type](https://developers.google.com/drive/api/v3/mime-types) of the link, if there's one (for example, when it's a file in Drive).",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "uri": {
       "description": "Required. The URI to the link. This is always present.",
@@ -6817,7 +6844,8 @@
     "properties": {
      "dataSourceSheetProperties": {
       "$ref": "#/components/schemas/DataSourceSheetProperties",
-      "description": "Output only. If present, the field contains DATA_SOURCE sheet specific properties."
+      "description": "Output only. If present, the field contains DATA_SOURCE sheet specific properties.",
+      "readOnly": true
      },
      "gridProperties": {
       "$ref": "#/components/schemas/GridProperties",
@@ -6853,7 +6881,8 @@
      },
      "tabColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the tab in the UI. Deprecated: Use tab_color_style."
+      "description": "The color of the tab in the UI. Deprecated: Use tab_color_style.",
+      "deprecated": true
      },
      "tabColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -6894,7 +6923,8 @@
      },
      "backgroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color of the slicer. Deprecated: Use background_color_style."
+      "description": "The background color of the slicer. Deprecated: Use background_color_style.",
+      "deprecated": true
      },
      "backgroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -6956,7 +6986,8 @@
     "properties": {
      "backgroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground_color. Deprecated: Use background_color_style."
+      "description": "The background fill color to sort by; cells with this fill color are sorted to the top. Mutually exclusive with foreground_color. Deprecated: Use background_color_style.",
+      "deprecated": true
      },
      "backgroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -6973,7 +7004,8 @@
      },
      "foregroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background_color. Deprecated: Use foreground_color_style."
+      "description": "The foreground color to sort by; cells with this foreground color are sorted to the top. Mutually exclusive with background_color. Deprecated: Use foreground_color_style.",
+      "deprecated": true
      },
      "foregroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -7037,11 +7069,11 @@
      },
      "dataSourceSchedules": {
       "description": "Output only. A list of data source refresh schedules.",
+      "readOnly": true,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/DataSourceRefreshSchedule"
-      },
-      "readOnly": true
+      }
      },
      "dataSources": {
       "description": "A list of external data sources connected with the spreadsheet.",
@@ -7266,7 +7298,8 @@
      },
      "foregroundColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The foreground color of the text. Deprecated: Use foreground_color_style."
+      "description": "The foreground color of the text. Deprecated: Use foreground_color_style.",
+      "deprecated": true
      },
      "foregroundColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -7421,7 +7454,8 @@
     "properties": {
      "maxValueColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified. Deprecated: Use max_value_color_style."
+      "description": "The background color for cells with a color value greater than or equal to maxValue. Defaults to #109618 if not specified. Deprecated: Use max_value_color_style.",
+      "deprecated": true
      },
      "maxValueColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -7429,7 +7463,8 @@
      },
      "midValueColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified. Deprecated: Use mid_value_color_style."
+      "description": "The background color for cells with a color value at the midpoint between minValue and maxValue. Defaults to #efe6dc if not specified. Deprecated: Use mid_value_color_style.",
+      "deprecated": true
      },
      "midValueColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -7437,7 +7472,8 @@
      },
      "minValueColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified. Deprecated: Use min_value_color_style."
+      "description": "The background color for cells with a color value less than or equal to minValue. Defaults to #dc3912 if not specified. Deprecated: Use min_value_color_style.",
+      "deprecated": true
      },
      "minValueColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -7445,7 +7481,8 @@
      },
      "noDataColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color for cells that have no color data associated with them. Defaults to #000000 if not specified. Deprecated: Use no_data_color_style."
+      "description": "The background color for cells that have no color data associated with them. Defaults to #000000 if not specified. Deprecated: Use no_data_color_style.",
+      "deprecated": true
      },
      "noDataColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -7467,7 +7504,8 @@
      },
      "headerColor": {
       "$ref": "#/components/schemas/Color",
-      "description": "The background color for header cells. Deprecated: Use header_color_style."
+      "description": "The background color for header cells. Deprecated: Use header_color_style.",
+      "deprecated": true
      },
      "headerColorStyle": {
       "$ref": "#/components/schemas/ColorStyle",
@@ -8064,7 +8102,8 @@
     "properties": {
      "color": {
       "$ref": "#/components/schemas/Color",
-      "description": "The color of the column. Deprecated: Use color_style."
+      "description": "The color of the column. Deprecated: Use color_style.",
+      "deprecated": true
      },
      "colorStyle": {
       "$ref": "#/components/schemas/ColorStyle",

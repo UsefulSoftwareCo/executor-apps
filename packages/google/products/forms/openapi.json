@@ -691,20 +691,23 @@
     "properties": {
      "fileUploadAnswers": {
       "$ref": "#/components/schemas/FileUploadAnswers",
-      "description": "Output only. The answers to a file upload question."
+      "description": "Output only. The answers to a file upload question.",
+      "readOnly": true
      },
      "grade": {
       "$ref": "#/components/schemas/Grade",
-      "description": "Output only. The grade for the answer if the form was a quiz."
+      "description": "Output only. The grade for the answer if the form was a quiz.",
+      "readOnly": true
      },
      "questionId": {
       "description": "Output only. The question's ID. See also Question.question_id.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "textAnswers": {
       "$ref": "#/components/schemas/TextAnswers",
-      "description": "Output only. The specific answers as text."
+      "description": "Output only. The specific answers as text.",
+      "readOnly": true
      }
     }
    },
@@ -921,18 +924,18 @@
     "properties": {
      "fileId": {
       "description": "Output only. The ID of the Google Drive file.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "fileName": {
       "description": "Output only. The file name, as stored in Google Drive on upload.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "mimeType": {
       "description": "Output only. The MIME type of the file, as stored in Google Drive on upload.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },
@@ -942,11 +945,11 @@
     "properties": {
      "answers": {
       "description": "Output only. All submitted files for a FileUpload question.",
+      "readOnly": true,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/FileUploadAnswer"
-      },
-      "readOnly": true
+      }
      }
     }
    },
@@ -995,8 +998,8 @@
     "properties": {
      "formId": {
       "description": "Output only. The form ID.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "info": {
       "$ref": "#/components/schemas/Info",
@@ -1011,22 +1014,23 @@
      },
      "linkedSheetId": {
       "description": "Output only. The ID of the linked Google Sheet which is accumulating responses from this Form (if such a Sheet exists).",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "publishSettings": {
       "$ref": "#/components/schemas/PublishSettings",
-      "description": "Output only. The publishing settings for a form. This field isn't set for legacy forms because they don't have the publish_settings field. All newly created forms support publish settings. Forms with publish_settings value set can call SetPublishSettings API to publish or unpublish the form."
+      "description": "Output only. The publishing settings for a form. This field isn't set for legacy forms because they don't have the publish_settings field. All newly created forms support publish settings. Forms with publish_settings value set can call SetPublishSettings API to publish or unpublish the form.",
+      "readOnly": true
      },
      "responderUri": {
       "description": "Output only. The form URI to share with responders. This opens a page that allows the user to submit responses but not edit the questions. For forms that have publish_settings value set, this is the published form URI.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "revisionId": {
       "description": "Output only. The revision ID of the form. Used in the WriteControl in update requests to identify the revision on which the changes are based. The format of the revision ID may change over time, so it should be treated opaquely. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the form *content* has not changed. Conversely, a changed ID (for the same form and user) usually means the form *content* has been updated; however, a changed ID can also be due to internal factors such as ID format changes. Form content excludes form metadata, including: * sharing settings (who has access to the form) * publish_settings (if the form supports publishing and if it is published)",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "settings": {
       "$ref": "#/components/schemas/FormSettings",
@@ -1040,44 +1044,44 @@
     "properties": {
      "answers": {
       "description": "Output only. The actual answers to the questions, keyed by question_id.",
+      "readOnly": true,
       "type": "object",
       "additionalProperties": {
        "$ref": "#/components/schemas/Answer"
-      },
-      "readOnly": true
+      }
      },
      "createTime": {
       "description": "Output only. Timestamp for the first time the response was submitted.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      },
      "formId": {
       "description": "Output only. The form ID.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "lastSubmittedTime": {
       "description": "Output only. Timestamp for the most recent time the response was submitted. Does not track changes to grades.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      },
      "respondentEmail": {
       "description": "Output only. The email address (if collected) for the respondent.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "responseId": {
       "description": "Output only. The response ID.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "totalScore": {
       "description": "Output only. The total number of points the respondent received for their submission Only set if the form was a quiz and the response was graded. This includes points automatically awarded via autograding adjusted by any manual corrections entered by the form owner.",
+      "readOnly": true,
       "type": "number",
-      "format": "double",
-      "readOnly": true
+      "format": "double"
      }
     }
    },
@@ -1107,18 +1111,19 @@
     "properties": {
      "correct": {
       "description": "Output only. Whether the question was answered correctly or not. A zero-point score is not enough to infer incorrectness, since a correctly answered question could be worth zero points.",
-      "type": "boolean",
-      "readOnly": true
+      "readOnly": true,
+      "type": "boolean"
      },
      "feedback": {
       "$ref": "#/components/schemas/Feedback",
-      "description": "Output only. Additional feedback given for an answer."
+      "description": "Output only. Additional feedback given for an answer.",
+      "readOnly": true
      },
      "score": {
       "description": "Output only. The numeric score awarded for the answer.",
+      "readOnly": true,
       "type": "number",
-      "format": "double",
-      "readOnly": true
+      "format": "double"
      }
     }
    },
@@ -1173,8 +1178,8 @@
      },
      "contentUri": {
       "description": "Output only. A URI from which you can download the image; this is valid only for a limited time.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "properties": {
       "$ref": "#/components/schemas/MediaProperties",
@@ -1206,8 +1211,8 @@
      },
      "documentTitle": {
       "description": "Output only. The title of the document which is visible in Drive. If Info.title is empty, `document_title` may appear in its place in the Google Forms UI and be visible to responders. `document_title` can be set on create, but cannot be modified by a batchUpdate request. Please use the [Google Drive API](https://developers.google.com/drive/api/v3/reference/files/update) if you need to programmatically update `document_title`.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "title": {
       "description": "Required. The title of the form which is visible to responders.",
@@ -1624,8 +1629,8 @@
     "properties": {
      "value": {
       "description": "Output only. The answer value. Formatting used for different kinds of question: * ChoiceQuestion * `RADIO` or `DROP_DOWN`: A single string corresponding to the option that was selected. * `CHECKBOX`: Multiple strings corresponding to each option that was selected. * TextQuestion: The text that the user entered. * ScaleQuestion: A string containing the number that was selected. * DateQuestion * Without time or year: MM-DD e.g. \"05-19\" * With year: YYYY-MM-DD e.g. \"1986-05-19\" * With time: MM-DD HH:MM e.g. \"05-19 14:51\" * With year and time: YYYY-MM-DD HH:MM e.g. \"1986-05-19 14:51\" * TimeQuestion: String with time or duration in HH:MM format e.g. \"14:51\" * RowQuestion within QuestionGroupItem: The answer for each row of a QuestionGroupItem is represented as a separate Answer. Each will contain one string for `RADIO`-type choices or multiple strings for `CHECKBOX` choices.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      }
     }
    },
@@ -1635,11 +1640,11 @@
     "properties": {
      "answers": {
       "description": "Output only. Answers to a question. For multiple-value ChoiceQuestions, each answer is a separate value.",
+      "readOnly": true,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/TextAnswer"
-      },
-      "readOnly": true
+      }
      }
     }
    },
@@ -1779,20 +1784,20 @@
     "properties": {
      "createTime": {
       "description": "Output only. Timestamp of when this was created.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      },
      "errorType": {
       "description": "Output only. The most recent error type for an attempted delivery. To begin watching the form again a call can be made to watches.renew which also clears this error information.",
+      "readOnly": true,
       "type": "string",
       "enum": [
        "ERROR_TYPE_UNSPECIFIED",
        "PROJECT_NOT_AUTHORIZED",
        "NO_USER_ACCESS",
        "OTHER_ERRORS"
-      ],
-      "readOnly": true
+      ]
      },
      "eventType": {
       "description": "Required. Which event type to watch for.",
@@ -1805,24 +1810,24 @@
      },
      "expireTime": {
       "description": "Output only. Timestamp for when this will expire. Each watches.renew call resets this to seven days in the future.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      },
      "id": {
       "description": "Output only. The ID of this watch. See notes on CreateWatchRequest.watch_id.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "state": {
       "description": "Output only. The current state of the watch. Additional details about suspended watches can be found by checking the `error_type`.",
+      "readOnly": true,
       "type": "string",
       "enum": [
        "STATE_UNSPECIFIED",
        "ACTIVE",
        "SUSPENDED"
-      ],
-      "readOnly": true
+      ]
      },
      "target": {
       "$ref": "#/components/schemas/WatchTarget",

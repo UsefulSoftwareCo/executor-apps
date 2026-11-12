@@ -7261,8 +7261,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "type": "array",
@@ -7287,12 +7287,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -7471,8 +7472,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of captions that match the request criteria.",
@@ -7487,8 +7488,8 @@
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -7578,8 +7579,8 @@
     "properties": {
      "format": {
       "description": "The format of the video stream that you are sending to Youtube. ",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "frameRate": {
       "description": "The frame rate of the inbound video data.",
@@ -7642,7 +7643,8 @@
      },
      "conversionPings": {
       "$ref": "#/components/schemas/ChannelConversionPings",
-      "description": "The conversionPings object encapsulates information about conversion pings that need to be respected by the channel."
+      "description": "The conversionPings object encapsulates information about conversion pings that need to be respected by the channel.",
+      "deprecated": true
      },
      "etag": {
       "description": "Etag of this resource.",
@@ -7726,11 +7728,11 @@
      },
      "hints": {
       "description": "Additional experimental branding properties.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "$ref": "#/components/schemas/PropertyValue"
-      },
-      "deprecated": true
+      }
      },
      "image": {
       "$ref": "#/components/schemas/ImageSettings",
@@ -7738,7 +7740,8 @@
      },
      "watch": {
       "$ref": "#/components/schemas/WatchSettings",
-      "description": "Branding properties for the watch page."
+      "description": "Branding properties for the watch page.",
+      "deprecated": true
      }
     }
    },
@@ -7751,8 +7754,8 @@
       "properties": {
        "favorites": {
         "description": "The ID of the playlist that contains the channel\"s favorite videos. Use the [`playlistItems.insert`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/insert) and [`playlistItems.delete`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/delete) to add or remove items from that list.",
-        "type": "string",
-        "deprecated": true
+        "deprecated": true,
+        "type": "string"
        },
        "likes": {
         "description": "The ID of the playlist that contains the channel\"s liked videos. Use the [`playlistItems.insert`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/insert) and [`playlistItems.delete`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/delete) to add or remove items from that list.",
@@ -7764,13 +7767,13 @@
        },
        "watchHistory": {
         "description": "The ID of the playlist that contains the channel\"s watch history. Use the [`playlistItems.insert`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/insert) and [`playlistItems.delete`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/delete) to add or remove items from that list.",
-        "type": "string",
-        "deprecated": true
+        "deprecated": true,
+        "type": "string"
        },
        "watchLater": {
         "description": "The ID of the playlist that contains the channel\"s watch later playlist. Use the [`playlistItems.insert`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/insert) and [`playlistItems.delete`](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/delete) to add or remove items from that list.",
-        "type": "string",
-        "deprecated": true
+        "deprecated": true,
+        "type": "string"
        }
       }
      }
@@ -7832,8 +7835,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "type": "array",
@@ -7858,12 +7861,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -7923,11 +7927,11 @@
      },
      "localizations": {
       "description": "Localizations for different languages",
+      "deprecated": true,
       "type": "object",
       "additionalProperties": {
        "$ref": "#/components/schemas/ChannelSectionLocalization"
-      },
-      "deprecated": true
+      }
      },
      "snippet": {
       "$ref": "#/components/schemas/ChannelSectionSnippet",
@@ -7935,7 +7939,8 @@
      },
      "targeting": {
       "$ref": "#/components/schemas/ChannelSectionTargeting",
-      "description": "The targeting object contains basic targeting settings about the channel section."
+      "description": "The targeting object contains basic targeting settings about the channel section.",
+      "deprecated": true
      }
     }
    },
@@ -7968,8 +7973,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of ChannelSections that match the request criteria.",
@@ -7984,8 +7989,8 @@
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -7995,8 +8000,8 @@
     "properties": {
      "title": {
       "description": "The localized strings for channel section's title.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -8010,12 +8015,13 @@
      },
      "defaultLanguage": {
       "description": "The language of the channel section's default title and description.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "localized": {
       "$ref": "#/components/schemas/ChannelSectionLocalization",
-      "description": "Localized title, read-only."
+      "description": "Localized title, read-only.",
+      "deprecated": true
      },
      "position": {
       "description": "The position of the channel section in the channel.",
@@ -8024,13 +8030,13 @@
      },
      "style": {
       "description": "The style of the channel section.",
+      "deprecated": true,
       "type": "string",
       "enum": [
        "channelsectionStyleUnspecified",
        "horizontalRow",
        "verticalList"
-      ],
-      "deprecated": true
+      ]
      },
      "title": {
       "description": "The channel section's title for multiple_playlists and multiple_channels.",
@@ -8067,27 +8073,27 @@
     "properties": {
      "countries": {
       "description": "The country the channel section is targeting.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "deprecated": true
+      }
      },
      "languages": {
       "description": "The language the channel section is targeting.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "deprecated": true
+      }
      },
      "regions": {
       "description": "The region the channel section is targeting.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "deprecated": true
+      }
      }
     }
    },
@@ -8104,8 +8110,8 @@
      },
      "defaultTab": {
       "description": "Which content tab users should see when viewing the channel.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "description": {
       "description": "Specifies the channel description.",
@@ -8113,16 +8119,16 @@
      },
      "featuredChannelsTitle": {
       "description": "Title for the featured channels tab.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "featuredChannelsUrls": {
       "description": "The list of featured channels.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "deprecated": true
+      }
      },
      "keywords": {
       "description": "Lists keywords associated with the channel, comma-separated.",
@@ -8130,23 +8136,23 @@
      },
      "moderateComments": {
       "description": "Whether user-submitted comments left on the channel page need to be approved by the channel owner to be publicly visible.",
-      "type": "boolean",
-      "deprecated": true
+      "deprecated": true,
+      "type": "boolean"
      },
      "profileColor": {
       "description": "A prominent color that can be rendered on this channel page.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "showBrowseView": {
       "description": "Whether the tab to browse the videos should be displayed.",
-      "type": "boolean",
-      "deprecated": true
+      "deprecated": true,
+      "type": "boolean"
      },
      "showRelatedChannels": {
       "description": "Whether related channels should be proposed.",
-      "type": "boolean",
-      "deprecated": true
+      "deprecated": true,
+      "type": "boolean"
      },
      "title": {
       "description": "Specifies the channel title.",
@@ -8371,11 +8377,11 @@
      },
      "topicIds": {
       "description": "A list of Freebase topic IDs associated with the channel. You can retrieve information about each topic using the Freebase Topic API.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "deprecated": true
+      }
      }
     }
    },
@@ -8410,8 +8416,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of comments that match the request criteria.",
@@ -8433,12 +8439,13 @@
       "description": "General pagination information."
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -8471,8 +8478,8 @@
      },
      "imageUrl": {
       "description": "Output only. The URL of the image or animated GIF attached to the comment, if any. This property is only present when a comment contains an image or GIF. The URL is served as a signed link with a six-hour time to live (TTL) and expires six hours after retrieval.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "likeCount": {
       "description": "The total number of likes this comment has received.",
@@ -8571,8 +8578,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of comment threads that match the request criteria.",
@@ -8594,12 +8601,13 @@
       "description": "General pagination information."
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -9059,6 +9067,7 @@
      },
      "fmocRating": {
       "description": "This property has been deprecated. Use the contentDetails.contentRating.cncRating instead.",
+      "deprecated": true,
       "type": "string",
       "enum": [
        "fmocUnspecified",
@@ -9069,8 +9078,7 @@
        "fmoc18",
        "fmocE",
        "fmocUnrated"
-      ],
-      "deprecated": true
+      ]
      },
      "fpbRating": {
       "description": "The video's rating from South Africa's Film and Publication Board.",
@@ -9723,19 +9731,19 @@
      },
      "repeatIntervalSecs": {
       "description": "Interval frequency in seconds that api uses to insert cuepoints automatically.",
+      "deprecated": true,
       "type": "integer",
-      "format": "int32",
-      "deprecated": true
+      "format": "int32"
      },
      "scheduleStrategy": {
       "description": "The strategy to use when scheduling cuepoints.",
+      "deprecated": true,
       "type": "string",
       "enum": [
        "scheduleStrategyUnspecified",
        "concurrent",
        "nonConcurrent"
-      ],
-      "deprecated": true
+      ]
      }
     }
    },
@@ -9869,8 +9877,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of regions where YouTube is available. In this map, the i18n region ID is the map key, and its value is the corresponding i18nRegion resource.",
@@ -9885,8 +9893,8 @@
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -9910,7 +9918,8 @@
     "properties": {
      "backgroundImageUrl": {
       "$ref": "#/components/schemas/LocalizedProperty",
-      "description": "The URL for the background image shown on the video watch page. The image should be 1200px by 615px, with a maximum file size of 128k."
+      "description": "The URL for the background image shown on the video watch page. The image should be 1200px by 615px, with a maximum file size of 128k.",
+      "deprecated": true
      },
      "bannerExternalUrl": {
       "description": "This is generated when a ChannelBanner.Insert request has succeeded for the given channel.",
@@ -9918,98 +9927,102 @@
      },
      "bannerImageUrl": {
       "description": "Banner image. Desktop size (1060x175).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerMobileExtraHdImageUrl": {
       "description": "Banner image. Mobile size high resolution (1440x395).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerMobileHdImageUrl": {
       "description": "Banner image. Mobile size high resolution (1280x360).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerMobileImageUrl": {
       "description": "Banner image. Mobile size (640x175).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerMobileLowImageUrl": {
       "description": "Banner image. Mobile size low resolution (320x88).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerMobileMediumHdImageUrl": {
       "description": "Banner image. Mobile size medium/high resolution (960x263).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTabletExtraHdImageUrl": {
       "description": "Banner image. Tablet size extra high resolution (2560x424).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTabletHdImageUrl": {
       "description": "Banner image. Tablet size high resolution (2276x377).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTabletImageUrl": {
       "description": "Banner image. Tablet size (1707x283).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTabletLowImageUrl": {
       "description": "Banner image. Tablet size low resolution (1138x188).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTvHighImageUrl": {
       "description": "Banner image. TV size high resolution (1920x1080).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTvImageUrl": {
       "description": "Banner image. TV size extra high resolution (2120x1192).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTvLowImageUrl": {
       "description": "Banner image. TV size low resolution (854x480).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "bannerTvMediumImageUrl": {
       "description": "Banner image. TV size medium resolution (1280x720).",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "largeBrandedBannerImageImapScript": {
       "$ref": "#/components/schemas/LocalizedProperty",
-      "description": "The image map script for the large banner image."
+      "description": "The image map script for the large banner image.",
+      "deprecated": true
      },
      "largeBrandedBannerImageUrl": {
       "$ref": "#/components/schemas/LocalizedProperty",
-      "description": "The URL for the 854px by 70px image that appears below the video player in the expanded video view of the video watch page."
+      "description": "The URL for the 854px by 70px image that appears below the video player in the expanded video view of the video watch page.",
+      "deprecated": true
      },
      "smallBrandedBannerImageImapScript": {
       "$ref": "#/components/schemas/LocalizedProperty",
-      "description": "The image map script for the small banner image."
+      "description": "The image map script for the small banner image.",
+      "deprecated": true
      },
      "smallBrandedBannerImageUrl": {
       "$ref": "#/components/schemas/LocalizedProperty",
-      "description": "The URL for the 640px by 70px banner image that appears below the video player in the default view of the video watch page. The URL for the image that appears above the top-left corner of the video player. This is a 25-pixel-high image with a flexible width that cannot exceed 170 pixels."
+      "description": "The URL for the 640px by 70px banner image that appears below the video player in the default view of the video watch page. The URL for the image that appears above the top-left corner of the video player. This is a 25-pixel-high image with a flexible width that cannot exceed 170 pixels.",
+      "deprecated": true
      },
      "trackingImageUrl": {
       "description": "The URL for a 1px by 1px tracking pixel that can be used to collect statistics for views of the channel or video pages.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "watchIconImageUrl": {
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -10070,7 +10083,8 @@
      },
      "position": {
       "$ref": "#/components/schemas/InvideoPosition",
-      "description": "The spatial position within the video where the branding watermark will be displayed."
+      "description": "The spatial position within the video where the branding watermark will be displayed.",
+      "deprecated": true
      },
      "targetChannelId": {
       "description": "The channel to which this branding links. If not present it defaults to the current channel.",
@@ -10220,8 +10234,8 @@
      },
      "enableClosedCaptions": {
       "description": "This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.",
-      "type": "boolean",
-      "deprecated": true
+      "deprecated": true,
+      "type": "boolean"
      },
      "enableContentEncryption": {
       "description": "This setting indicates whether YouTube should enable content encryption for the broadcast.",
@@ -10237,8 +10251,8 @@
      },
      "enableLowLatency": {
       "description": "Indicates whether this broadcast has low latency enabled.",
-      "type": "boolean",
-      "deprecated": true
+      "deprecated": true,
+      "type": "boolean"
      },
      "latencyPreference": {
       "description": "If both this and enable_low_latency are set, they must match. LATENCY_NORMAL should match enable_low_latency=false LATENCY_LOW should match enable_low_latency=true LATENCY_ULTRA_LOW should have enable_low_latency omitted.",
@@ -10275,8 +10289,8 @@
      },
      "startWithSlate": {
       "description": "This setting indicates whether the broadcast should automatically begin with an [in-stream slate](https://developers.google.com/youtube/data/live/getting-started#Displaying_Slates) when you update the broadcast's status to live. After updating the status, you then need to send a [`liveCuepoints.insert`](https://developers.google.com/youtube/data/live/reference/rest/v3/liveCuepoints/insert) request that sets the cuepoint's eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers.",
-      "type": "boolean",
-      "deprecated": true
+      "deprecated": true,
+      "type": "boolean"
      },
      "stereoLayout": {
       "description": "The 3D stereo layout of this broadcast. This defaults to mono.",
@@ -10299,8 +10313,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of broadcasts that match the request criteria.",
@@ -10326,12 +10340,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -10696,13 +10711,13 @@
     }
    },
    "LiveChatMessageDeletedDetails": {
+    "deprecated": true,
     "type": "object",
     "properties": {
      "deletedMessageId": {
       "type": "string"
      }
-    },
-    "deprecated": true
+    }
    },
    "LiveChatMessageListResponse": {
     "type": "object",
@@ -10717,8 +10732,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "type": "array",
@@ -10748,23 +10763,24 @@
       "format": "uint32"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "Identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
    "LiveChatMessageRetractedDetails": {
+    "deprecated": true,
     "type": "object",
     "properties": {
      "retractedMessageId": {
       "type": "string"
      }
-    },
-    "deprecated": true
+    }
    },
    "LiveChatMessageSnippet": {
     "description": "Next ID: 35",
@@ -10780,7 +10796,8 @@
      },
      "fanFundingEventDetails": {
       "$ref": "#/components/schemas/LiveChatFanFundingEventDetails",
-      "description": "Details about the funding event, this is only set if the type is `fanFundingEvent`."
+      "description": "Details about the funding event, this is only set if the type is `fanFundingEvent`.",
+      "deprecated": true
      },
      "giftDetails": {
       "$ref": "#/components/schemas/LiveChatGiftDetails",
@@ -10806,10 +10823,12 @@
       "description": "Details about the Membership Gifting event, this is only set if the type is `membershipGiftingEvent`."
      },
      "messageDeletedDetails": {
-      "$ref": "#/components/schemas/LiveChatMessageDeletedDetails"
+      "$ref": "#/components/schemas/LiveChatMessageDeletedDetails",
+      "deprecated": true
      },
      "messageRetractedDetails": {
-      "$ref": "#/components/schemas/LiveChatMessageRetractedDetails"
+      "$ref": "#/components/schemas/LiveChatMessageRetractedDetails",
+      "deprecated": true
      },
      "newSponsorDetails": {
       "$ref": "#/components/schemas/LiveChatNewSponsorDetails",
@@ -10896,8 +10915,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of moderators that match the request criteria.",
@@ -10923,12 +10942,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -11233,8 +11253,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of live streams that match the request criteria.",
@@ -11259,12 +11279,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -11369,8 +11390,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of members that match the request criteria.",
@@ -11391,12 +11412,13 @@
       "$ref": "#/components/schemas/PageInfo"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -11511,8 +11533,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of pricing levels offered by a creator to the fans.",
@@ -11527,8 +11549,8 @@
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -11736,8 +11758,8 @@
     "properties": {
      "endAt": {
       "description": "The time, measured in seconds from the start of the video, when the video should stop playing. (The playlist owner can specify the times when the video should start and stop playing when the video is played in the context of the playlist.) By default, assume that the video.endTime is the end of the video.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "note": {
       "description": "A user-generated note for this item.",
@@ -11745,8 +11767,8 @@
      },
      "startAt": {
       "description": "The time, measured in seconds from the start of the video, when the video should start playing. (The playlist owner can specify the times when the video should start and stop playing when the video is played in the context of the playlist.) The default value is 0.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "videoId": {
       "description": "The ID that YouTube uses to uniquely identify a video. To [retrieve the `video` resource](https://developers.google.com/youtube/data/reference/rest/v3/videos/list), set the id query parameter to this value in your API request.",
@@ -11877,8 +11899,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of playlists that match the request criteria",
@@ -11904,12 +11926,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -11967,11 +11990,11 @@
      },
      "tags": {
       "description": "Keyword tags associated with the playlist.",
+      "deprecated": true,
       "type": "array",
       "items": {
        "type": "string"
-      },
-      "deprecated": true
+      }
      },
      "thumbnailVideoId": {
       "description": "Note: if the playlist has a custom thumbnail, this field will not be populated. The video id selected by the user that will be used as the thumbnail of this playlist. This field defaults to the first publicly viewable video in the playlist, if: 1. The user has never selected a video to be the thumbnail of the playlist. 2. The user selects a video to be the thumbnail, and then removes that video from the playlist. 3. The user selects a non-owned video to be the thumbnail, but that video becomes private, or gets deleted.",
@@ -12226,8 +12249,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of subscriptions that match the request criteria.",
@@ -12252,12 +12275,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -12345,8 +12369,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of Super Chat purchases that match the request criteria.",
@@ -12367,12 +12391,13 @@
       "$ref": "#/components/schemas/PageInfo"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -12621,8 +12646,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of thumbnails.",
@@ -12637,8 +12662,8 @@
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -12706,7 +12731,8 @@
      },
      "projectDetails": {
       "$ref": "#/components/schemas/VideoProjectDetails",
-      "description": "The projectDetails object contains information about the project specific video metadata. b/157517979: This part was never populated after it was added. However, it sees non-zero traffic because there is generated client code in the wild that refers to it [1]. We keep this field and do NOT remove it because otherwise V3 would return an error when this part gets requested [2]. [1] https://developers.google.com/resources/api-libraries/documentation/youtube/v3/csharp/latest/classGoogle_1_1Apis_1_1YouTube_1_1v3_1_1Data_1_1VideoProjectDetails.html [2] http://google3/video/youtube/src/python/servers/data_api/common.py?l=1565-1569&rcl=344141677"
+      "description": "The projectDetails object contains information about the project specific video metadata. b/157517979: This part was never populated after it was added. However, it sees non-zero traffic because there is generated client code in the wild that refers to it [1]. We keep this field and do NOT remove it because otherwise V3 would return an error when this part gets requested [2]. [1] https://developers.google.com/resources/api-libraries/documentation/youtube/v3/csharp/latest/classGoogle_1_1Apis_1_1YouTube_1_1v3_1_1Data_1_1VideoProjectDetails.html [2] http://google3/video/youtube/src/python/servers/data_api/common.py?l=1565-1569&rcl=344141677",
+      "deprecated": true
      },
      "recordingDetails": {
       "$ref": "#/components/schemas/VideoRecordingDetails",
@@ -12790,8 +12816,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of valid abuse reasons that are used with `video.ReportAbuse`.",
@@ -12806,8 +12832,8 @@
      },
      "visitorId": {
       "description": "The `visitorId` identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -12895,8 +12921,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of video categories that can be associated with YouTube videos. In this map, the video category ID is the map key, and its value is the corresponding videoCategory resource.",
@@ -12922,12 +12948,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -13002,7 +13029,8 @@
      },
      "regionRestriction": {
       "$ref": "#/components/schemas/VideoContentDetailsRegionRestriction",
-      "description": "The regionRestriction object contains information about the countries where a video is (or is not) viewable. The object will contain either the contentDetails.regionRestriction.allowed property or the contentDetails.regionRestriction.blocked property."
+      "description": "The regionRestriction object contains information about the countries where a video is (or is not) viewable. The object will contain either the contentDetails.regionRestriction.allowed property or the contentDetails.regionRestriction.blocked property.",
+      "deprecated": true
      }
     }
    },
@@ -13169,8 +13197,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "description": "A list of ratings that match the request criteria.",
@@ -13185,8 +13213,8 @@
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -13199,8 +13227,8 @@
      },
      "eventId": {
       "description": "Serialized EventId of the request which produced this response.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      },
      "items": {
       "type": "array",
@@ -13225,12 +13253,13 @@
       "type": "string"
      },
      "tokenPagination": {
-      "$ref": "#/components/schemas/TokenPagination"
+      "$ref": "#/components/schemas/TokenPagination",
+      "deprecated": true
      },
      "visitorId": {
       "description": "The visitorId identifies the visitor.",
-      "type": "string",
-      "deprecated": true
+      "deprecated": true,
+      "type": "string"
      }
     }
    },
@@ -13506,30 +13535,33 @@
     "properties": {
      "contentDetails": {
       "$ref": "#/components/schemas/VideoStatsContentDetails",
-      "description": "Output only. The VideoStatsContentDetails object contains information about the video content, including the length of the video."
+      "description": "Output only. The VideoStatsContentDetails object contains information about the video content, including the length of the video.",
+      "readOnly": true
      },
      "etag": {
       "description": "Output only. Etag of this resource.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "id": {
       "description": "Output only. The ID that YouTube uses to uniquely identify the video.",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "kind": {
       "description": "Output only. Identifies what kind of resource this is. Value: the fixed string \"youtube#videoStats\".",
-      "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "type": "string"
      },
      "snippet": {
       "$ref": "#/components/schemas/VideoStatsSnippet",
-      "description": "Output only. The VideoStatsSnippet object contains basic details about the video, such publish time."
+      "description": "Output only. The VideoStatsSnippet object contains basic details about the video, such publish time.",
+      "readOnly": true
      },
      "statistics": {
       "$ref": "#/components/schemas/VideoStatsStatistics",
-      "description": "Output only. The VideoStatsStatistics object contains statistics about the video."
+      "description": "Output only. The VideoStatsStatistics object contains statistics about the video.",
+      "readOnly": true
      }
     }
    },
@@ -13549,9 +13581,9 @@
      },
      "favoriteCount": {
       "description": "The number of users who currently have the video marked as a favorite video.",
+      "deprecated": true,
       "type": "string",
-      "format": "uint64",
-      "deprecated": true
+      "format": "uint64"
      },
      "likeCount": {
       "description": "The number of users who have indicated that they liked the video by giving it a positive rating.",
@@ -13571,9 +13603,9 @@
     "properties": {
      "duration": {
       "description": "Output only. The length of the video. The property value is a [`google.protobuf.Duration`](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#duration) object.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-duration",
-      "readOnly": true
+      "format": "google-duration"
      }
     }
    },
@@ -13583,9 +13615,9 @@
     "properties": {
      "publishTime": {
       "description": "Output only. The date and time that the video was uploaded. The property value is a [`google.protobuf.Timestamp`](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#timestamp) object.",
+      "readOnly": true,
       "type": "string",
-      "format": "google-datetime",
-      "readOnly": true
+      "format": "google-datetime"
      }
     }
    },
@@ -13595,21 +13627,21 @@
     "properties": {
      "commentCount": {
       "description": "Output only. The number of comments for the video.",
+      "readOnly": true,
       "type": "string",
-      "format": "int64",
-      "readOnly": true
+      "format": "int64"
      },
      "likeCount": {
       "description": "Output only. The number of users who have indicated that they liked the video by giving it a positive rating.",
+      "readOnly": true,
       "type": "string",
-      "format": "int64",
-      "readOnly": true
+      "format": "int64"
      },
      "viewCount": {
       "description": "Output only. The number of times the video has been viewed.",
+      "readOnly": true,
       "type": "string",
-      "format": "int64",
-      "readOnly": true
+      "format": "int64"
      }
     }
    },

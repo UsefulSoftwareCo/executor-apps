@@ -150,6 +150,10 @@ const schema = (s: Schema): Record<string, Json> => {
   const out: Record<string, Json> = {};
   if (s.$ref !== undefined) out.$ref = `#/components/schemas/${s.$ref}`;
   if (s.description !== undefined) out.description = s.description;
+  // Annotations sit beside a $ref, as `description` does: Executor reads these documents as
+  // OpenAPI 3.1, whose schemas allow $ref siblings.
+  if (s.readOnly === true) out.readOnly = true;
+  if (s.deprecated === true) out.deprecated = true;
   if (s.$ref !== undefined) return out;
   // "any" is Discovery's unconstrained value.
   if (s.type !== undefined && s.type !== "any") out.type = s.type;
@@ -159,8 +163,6 @@ const schema = (s: Schema): Record<string, Json> => {
     out.properties = Object.fromEntries(sorted(s.properties).map(([name, value]) => [name, schema(value)]));
   if (s.additionalProperties !== undefined) out.additionalProperties = schema(s.additionalProperties);
   if (s.items !== undefined) out.items = schema(s.items);
-  if (s.readOnly === true) out.readOnly = true;
-  if (s.deprecated === true) out.deprecated = true;
   return out;
 };
 
