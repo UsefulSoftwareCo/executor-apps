@@ -2,7 +2,7 @@
 
 Videos, channels, playlists and playlist items, comments and comment threads, captions, subscriptions,
 search, live broadcasts and streams, channel sections, memberships, watermarks, playlist images and more
-via the YouTube Data API v3 (82 operations; 54 mutations require approval).
+via the YouTube Data API v3 (77 operations; 49 mutations require approval).
 
 **Interface:** OpenAPI, converted from Google's own YouTube Data API v3 Discovery document (`https://youtube.googleapis.com/$discovery/rest?version=v3`) by `scripts/google-discovery.ts` into `openapi.json`, whose `info.x-executor-discovery` records the revision. Google publishes no OpenAPI for it.
 Google has no official YouTube remote MCP server. A method's JSON resource is its request body on its own
@@ -25,11 +25,16 @@ path. `thumbnails.set`, whose only body is the image, is sent with Google's simp
   screen's publishing status is "Testing", Google expires refresh tokens after 7 days, so publish the app
   or re-consent weekly.
 
-**Known gaps:** file uploads beside a JSON resource (`videos.insert`, `captions.insert` and `update`,
-`channelBanners.insert`, `watermarks.set`, `playlistImages.insert` and `update`) send only the resource:
-the media upload endpoints are not offered, and Google rejects the calls that need the file.
-`liveChat/messages/stream` is left out: it is a server-streamed RPC that keeps its response open while the
-chat runs, and `liveChatMessages.list` polls the same messages. The separate YouTube Analytics and Reporting APIs are
+**Known gaps:** methods that need a file sent with media upload beside their JSON resource are not
+covered: `videos.insert` (upload a video), `captions.insert` (upload a caption track),
+`playlistImages.insert` (add a playlist image), `channelBanners.insert` (upload a banner image) and
+`watermarks.set` (upload a watermark). A tool call cannot carry metadata plus a file, so these would
+only advertise an upload they cannot do. `captions.update` and `playlistImages.update` are offered
+for metadata-only changes, which Google accepts without a file (for example a caption track's draft
+status); replacing the file itself is not covered. `liveChat/messages/stream` is left out: it is a
+server-streamed RPC that keeps its response open while the chat runs, and `liveChatMessages.list` polls
+the same messages. `openapi.json` lists every left-out method and its reason in
+`info.x-executor-discovery.excluded`. The separate YouTube Analytics and Reporting APIs are
 not covered. YouTube Data API quota
 (10,000 units/day by default) applies per Google Cloud project. Partner-only scopes are not requested.
 

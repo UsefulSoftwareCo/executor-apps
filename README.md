@@ -53,7 +53,11 @@ Google publishes its REST APIs as Discovery documents, not OpenAPI. `scripts/goo
 fetches Google's own documents and writes each package's `openapi.json` (Gmail, Sheets, Forms, Tasks,
 Classroom, YouTube); each file records its Discovery URL and revision in `info.x-executor-discovery`.
 Rerun it to pick up Google's changes, then `node scripts/google-vendor.ts` to refresh the copies in
-`packages/google`. Its header lists the conversion rules (tool names, JSON bodies, media upload).
+`packages/google`. Output is sorted, so an unchanged revision regenerates without a diff. Its header
+lists the conversion rules (tool names, JSON bodies, media upload, the standard `fields` and
+`quotaUser` parameters). Methods left out, such as uploads that need a file beside their JSON body
+or methods whose scopes the app does not request, are listed with their reasons in
+`info.x-executor-discovery.excluded`.
 
 ## Microsoft Graph slices
 

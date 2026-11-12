@@ -1,8 +1,8 @@
 # Google Classroom
 
 Courses, rosters (students, teachers), invitations, coursework, coursework materials, announcements,
-topics, student submissions and grading, rubrics, student groups, grading periods, add-on
-attachments, and guardians in Google Classroom.
+topics, student submissions and grading, rubrics, student groups, grading periods, and guardians in
+Google Classroom.
 
 **Interface:** OpenAPI, converted from Google's own Classroom API v1 Discovery document (`https://classroom.googleapis.com/$discovery/rest?version=v1`) by `scripts/google-discovery.ts` into `openapi.json`, whose `info.x-executor-discovery` records the revision. Google publishes no OpenAPI for it.
 Google has no official Classroom MCP server. Requests go to
@@ -18,9 +18,13 @@ app asks for offline access so it receives a refresh token.
 
 **Known gaps:** no API-key method (the Classroom API needs user OAuth tokens). Some operations
 (guardians, guardian invitations, creating courses for others) need a Workspace for Education domain
-and the right role. Submission grading writes use the coursework scopes. The add-on tools
-(`*.getAddOnContext` and `*.addOnAttachments.*`) serve Classroom add-ons: most need the
-`classroom.addons.*` scopes, which this app does not request, so they fail with Google's permission
-error. While the consent screen is
+and the right role. Submission grading writes use the coursework scopes. Classroom add-on methods that accept only the `classroom.addons.*` scopes are not
+covered (26 methods: `getAddOnContext` and `addOnAttachments.create`, `get`, `list`, `patch` and
+`delete` on announcements, course work, course work materials and posts, plus
+`addOnAttachments.studentSubmissions.patch` on course work and posts). Those scopes belong to
+Classroom add-on apps, which Google verifies separately, so this app does not request them; the
+methods are listed with that reason in `openapi.json`'s `info.x-executor-discovery.excluded`. The
+add-on attachment submission reads (`addOnAttachments.studentSubmissions.get` and `list`) also accept
+the coursework scopes and are offered. While the consent screen is
 in Testing status, refresh tokens expire after 7 days; sensitive Classroom scopes also require app
 verification for production use.
