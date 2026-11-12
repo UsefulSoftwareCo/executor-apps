@@ -14,14 +14,14 @@ const check = process.argv.includes("--check");
 
 /** Mount key in packages/google/products → source package and the files it needs. */
 const products: Record<string, { readonly from: string; readonly files: readonly string[] }> = {
-  gmail: { from: "gmail", files: ["openapi.ts"] },
+  gmail: { from: "gmail", files: ["openapi.ts", "openapi.json"] },
   calendar: { from: "google-calendar", files: ["openapi.ts", "calendar-openapi.json"] },
   drive: { from: "google-drive", files: ["openapi.ts", "drive-openapi.json"] },
-  sheets: { from: "google-sheets", files: ["openapi.ts"] },
+  sheets: { from: "google-sheets", files: ["openapi.ts", "openapi.json"] },
   docs: { from: "google-docs", files: ["tools.ts"] },
   slides: { from: "google-slides", files: ["tools.ts"] },
-  forms: { from: "google-forms", files: ["openapi.ts"] },
-  tasks: { from: "google-tasks", files: ["openapi.ts"] },
+  forms: { from: "google-forms", files: ["openapi.ts", "openapi.json"] },
+  tasks: { from: "google-tasks", files: ["openapi.ts", "openapi.json"] },
   contacts: { from: "google-contacts", files: ["openapi.ts", "openapi.json"] },
   meet: { from: "google-meet", files: ["tools.ts"] },
   photos: { from: "google-photos", files: ["openapi.ts", "openapi.json", "picker-openapi.json"] },

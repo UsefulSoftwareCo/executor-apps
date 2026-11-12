@@ -38,8 +38,11 @@ key in one router, with one provider. A product's MCP server belongs in the
 same package as its API: build or extend `packages/<x>` (no `mcp` suffix),
 mounting the MCP server under an `mcp` key beside the API's `api` key. Use one
 provider for both, so the app has one account slot and its first sign-in is the
-one-click one; route each account to the interfaces its method works on. Never
-use an unofficial or community spec or MCP server without saying so in the
+one-click one; route each account to the interfaces its method works on. Use only
+the vendor's own API description, never a third-party conversion or community copy
+(APIs.guru, API Evangelist, a personal mirror). Google publishes Discovery documents,
+not OpenAPI: add the API to `scripts/google-discovery.ts`, which converts Google's own
+document. Never use an unofficial or community MCP server without saying so in the
 README.
 
 ## Auth

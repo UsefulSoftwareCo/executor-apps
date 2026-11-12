@@ -1,15 +1,13 @@
 # YouTube
 
 Videos, channels, playlists and playlist items, comments and comment threads, captions, subscriptions,
-search, live broadcasts and streams, channel sections, memberships, watermarks and more via the
-YouTube Data API v3 (75 operations; 50 mutations require approval).
+search, live broadcasts and streams, channel sections, memberships, watermarks, playlist images and more
+via the YouTube Data API v3 (82 operations; 54 mutations require approval).
 
-**Interface:** OpenAPI. Google publishes the YouTube Data API only as a Discovery document and has no
-official YouTube remote MCP server, so this uses APIs.guru's maintained OpenAPI conversion of Google's
-official Discovery document, an unofficial conversion that drifts from the source of truth,
-Google's Discovery document (https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest):
-https://api.apis.guru/v2/specs/googleapis.com/youtube/v3/openapi.json. The package removes the one
-operation the conversion invented (PUT commentThreads). Requests go to
+**Interface:** OpenAPI, converted from Google's own YouTube Data API v3 Discovery document (`https://youtube.googleapis.com/$discovery/rest?version=v3`) by `scripts/google-discovery.ts` into `openapi.json`, whose `info.x-executor-discovery` records the revision. Google publishes no OpenAPI for it.
+Google has no official YouTube remote MCP server. A method's JSON resource is its request body on its own
+path. `thumbnails.set`, whose only body is the image, is sent with Google's simple upload protocol: pass
+`uploadType: "media"`, the image as base64 and its `contentType`. Requests go to
 `https://youtube.googleapis.com`.
 
 **Auth:** two methods.
@@ -27,10 +25,12 @@ operation the conversion invented (PUT commentThreads). Requests go to
   screen's publishing status is "Testing", Google expires refresh tokens after 7 days, so publish the app
   or re-consent weekly.
 
-**Known gaps:** the APIs.guru conversion lacks 8 methods that Google's Discovery document defines:
-playlistImages list, insert, update and delete; videoTrainability get; videos batchGetStats;
-liveChat/messages stream; and liveChat/messages transition. Video and caption file uploads (media upload
-endpoints) and the separate YouTube Analytics and Reporting APIs are not covered. YouTube Data API quota
+**Known gaps:** file uploads beside a JSON resource (`videos.insert`, `captions.insert` and `update`,
+`channelBanners.insert`, `watermarks.set`, `playlistImages.insert` and `update`) send only the resource:
+the media upload endpoints are not offered, and Google rejects the calls that need the file.
+`liveChat/messages/stream` is left out: it is a server-streamed RPC that keeps its response open while the
+chat runs, and `liveChatMessages.list` polls the same messages. The separate YouTube Analytics and Reporting APIs are
+not covered. YouTube Data API quota
 (10,000 units/day by default) applies per Google Cloud project. Partner-only scopes are not requested.
 
 Executor Cloud can offer its shared **Executor for Google** OAuth client when the operator has configured it and enabled these scopes. Custom OAuth clients remain available; use the callback URL shown on the connect page. Self-hosted operators configure their own client. Google project API enablement, quotas, billing and account permissions still apply.

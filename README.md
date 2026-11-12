@@ -47,6 +47,14 @@ builds it and `scripts/publish.ts` syncs it to the bucket served at `https://cat
 It uploads changed files first, then `index.json`, then deletes objects the new index no longer
 names.
 
+## Google Discovery conversions
+
+Google publishes its REST APIs as Discovery documents, not OpenAPI. `scripts/google-discovery.ts`
+fetches Google's own documents and writes each package's `openapi.json` (Gmail, Sheets, Forms, Tasks,
+Classroom, YouTube); each file records its Discovery URL and revision in `info.x-executor-discovery`.
+Rerun it to pick up Google's changes, then `node scripts/google-vendor.ts` to refresh the copies in
+`packages/google`. Its header lists the conversion rules (tool names, JSON bodies, media upload).
+
 ## Microsoft Graph slices
 
 `packages/microsoft-teams/openapi.json` and `packages/excel/graph-excel.json` are generated from

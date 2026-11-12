@@ -3,13 +3,10 @@
 Google Forms and quizzes: create forms, read and batch-update their questions and settings, manage
 publication, read responses, and create or delete response watches (Pub/Sub notifications).
 
-**Interface:** OpenAPI. Google publishes the Forms API only as a Discovery document and has no
-official Forms MCP server, so this uses APIs.guru's maintained OpenAPI conversion of Google's
-official Forms v1 Discovery document, an unofficial conversion:
-https://api.apis.guru/v2/specs/googleapis.com/forms/v1/openapi.json. The conversion omits `forms.setPublishSettings`,
-which is in the Discovery document, so that one tool is hand-written (`custom.setPublishSettings`).
-Forms created through the API after June 30, 2026 are unpublished by default; call it with
-`isPublished` and `isAcceptingResponses` true to collect responses. Generated tools sit under `api.`.
+**Interface:** OpenAPI, converted from Google's own Forms API v1 Discovery document (`https://forms.googleapis.com/$discovery/rest?version=v1`) by `scripts/google-discovery.ts` into `openapi.json`, whose `info.x-executor-discovery` records the revision. Google publishes no OpenAPI for it.
+Google has no official Forms MCP server. Forms created through the API after June 30, 2026 are
+unpublished by default; call `api.forms.formsSetPublishSettings` with `isPublished` and
+`isAcceptingResponses` true to collect responses. Generated tools sit under `api.`.
 Requests go to `https://forms.googleapis.com`. Mutations require approval.
 
 **Auth:** OAuth 2.0 with your own Google OAuth client (Google has no dynamic client registration).
