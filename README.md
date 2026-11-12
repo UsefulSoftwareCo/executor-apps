@@ -54,6 +54,14 @@ Microsoft's Graph v1.0 OpenAPI document by `scripts/graph-slice.ts` (path filter
 components, bounded schema depth so the hosted tool listing stays small). The script's header
 has the regeneration commands; each file records its source commit in `info.x-executor-slice`.
 
+## Committed vendor documents
+
+Some vendors publish their OpenAPI document only where a live URL source cannot use it: an
+undocumented docs-site asset (TomTom), a zip (Apple App Store Connect) or a docs page behind a bot
+check (Lodgify v2). `scripts/vendor-openapi.ts <package>` downloads them, converts or unpacks them
+to JSON, and records each source URL, its SHA-256 and the retrieval date in
+`info.x-executor-source`. A rerun leaves a file untouched when its sources have not changed.
+
 ## License
 
 [MIT](LICENSE)
