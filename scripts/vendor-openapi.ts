@@ -4,7 +4,8 @@
 //
 // Each output is the vendor's document, converted from YAML or unzipped where needed, with
 // `info.x-executor-source` recording every source URL, its SHA-256 and the retrieval date. A rerun
-// whose sources are unchanged leaves the file as it is. Some outputs assemble several of the
+// always regenerates the file and rewrites it only when its bytes differ; unchanged sources keep
+// their recorded retrieval date, so a rerun on unchanged sources leaves a correct file as it is. Some outputs assemble several of the
 // vendor's documents into one so tool names stay stable (TomTom's Search, Geocoding and Reverse
 // Geocoding documents were one Search API before): their paths are disjoint, and a component that
 // two documents define differently is renamed in the later one (`<prefix><name>`), with its refs.
@@ -189,20 +190,30 @@ for (const output of wanted) {
   for (const load of output.parts) parts.push(await load());
   const sources = parts.map(({ fetched }) => ({ url: fetched.url, sha256: fetched.sha256 }));
   const file = join(root, "packages", name!, output.file);
-  if (existsSync(file)) {
-    const previous = (JSON.parse(readFileSync(file, "utf8")) as { info?: { "x-executor-source"?: { sources?: unknown } } })
-      .info?.["x-executor-source"]?.sources;
-    if (JSON.stringify(previous) === JSON.stringify(sources)) {
-      console.log(`${name}/${output.file}: unchanged`);
-      continue;
-    }
-  }
+  const existing = existsSync(file) ? readFileSync(file, "utf8") : undefined;
+  // Unchanged sources keep their recorded retrieval date, so the regenerated file is compared
+  // byte for byte with the committed one: an edited file or a generator change is rewritten.
+  const recorded =
+    existing === undefined
+      ? undefined
+      : (JSON.parse(existing) as { info?: { "x-executor-source"?: { sources?: unknown; retrieved?: unknown } } }).info?.[
+          "x-executor-source"
+        ];
+  const date =
+    JSON.stringify(recorded?.sources) === JSON.stringify(sources) && typeof recorded?.retrieved === "string"
+      ? recorded.retrieved
+      : retrieved;
   const [first, ...rest] = parts;
   const document = structuredClone(first!.fetched.document);
   for (const part of rest) merge(document, part.fetched.document, part.prefix ?? "");
   const info = isObject(document.info) ? document.info : (document.info = {});
-  info["x-executor-source"] = { sources, retrieved, generator: "scripts/vendor-openapi.ts" };
-  writeFileSync(file, `${JSON.stringify(document)}\n`);
+  info["x-executor-source"] = { sources, retrieved: date, generator: "scripts/vendor-openapi.ts" };
+  const text = `${JSON.stringify(document)}\n`;
+  if (text === existing) {
+    console.log(`${name}/${output.file}: unchanged`);
+    continue;
+  }
+  writeFileSync(file, text);
   const operations = Object.values(isObject(document.paths) ? document.paths : {}).reduce<number>(
     (count, item) =>
       count + (isObject(item) ? Object.keys(item).filter((key) => /^(get|put|post|delete|patch|head|options|trace)$/.test(key)).length : 0),
