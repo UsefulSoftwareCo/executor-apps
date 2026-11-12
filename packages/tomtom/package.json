@@ -1,6 +1,6 @@
 {
   "name": "@executor.sh/tomtom",
-  "description": "TomTom location APIs: geocoding and search, routing and reachable range, map tiles, static images and copyrights.",
+  "description": "TomTom location APIs: geocoding and search, routing, map tiles, static images and copyrights.",
   "private": true,
   "type": "module",
   "dependencies": {

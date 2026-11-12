@@ -1,10 +1,18 @@
 import type { OpenapiToolNamesOptions } from "apps/openapi";
+import maps from "./maps.json" with { type: "json" };
+import routing from "./routing.json" with { type: "json" };
+import search from "./search.json" with { type: "json" };
 
-// One TomTom product, three specs from the APIs.guru conversion of TomTom's published API definitions
-// (https://github.com/APIs-guru/openapi-directory/tree/main/APIs/tomtom.com). All use the `key` query parameter.
-const api = <const K extends Record<string, "query">>(name: string, kinds: K) =>
+type Document = Extract<OpenapiToolNamesOptions["source"], { document: unknown }>["document"];
+
+// One TomTom product, three documents: TomTom's own API Explorer OpenAPI files
+// (https://docs.tomtom.com/assets/openapi/), committed by scripts/vendor-openapi.ts because they are
+// not advertised downloads and may move. search.json joins the Search, Geocoding and Reverse
+// Geocoding files, which used to be one Search API. Each file records its sources in
+// info.x-executor-source. All use the `key` query parameter.
+const api = <const K extends Record<string, "query">>(document: object, kinds: K) =>
   ({
-    source: { url: `https://api.apis.guru/v2/specs/tomtom.com/${name}/1.0.0/openapi.json` },
+    source: { document: document as unknown as Document },
     allowedOrigin: "https://api.tomtom.com",
     securitySchemes: { api_key: { type: "apiKey", in: "query", name: "key" } },
     methods: { apiKey: [{ scheme: "api_key", field: "token", part: "value", prefix: "" }] },
@@ -13,12 +21,9 @@ const api = <const K extends Record<string, "query">>(name: string, kinds: K) =>
     kinds,
   }) satisfies OpenapiToolNamesOptions;
 
-export const mapsOptions = api("maps", {});
-export const routingOptions = api("routing", {
-  "routing.postCalculateReachableRange": "query",
-  "routing.postCalculateRoute": "query",
-});
-export const searchOptions = api("search", {
+export const mapsOptions = api(maps, {});
+export const routingOptions = api(routing, { "routing.postCalculateRoute": "query" });
+export const searchOptions = api(search, {
   "filters.postSearchGeometryFilterExt": "query",
   "search.postGeometrySearch": "query",
   "filters.postSearchRoutedFilter": "query",
