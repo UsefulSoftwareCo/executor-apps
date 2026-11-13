@@ -1,7 +1,7 @@
 # Google Drive
 
 Files, folders, shared drives, permissions, comments, replies, revisions, changes, labels,
-access proposals and approvals in Google Drive: 64 tools (36 mutations, each requiring approval).
+access proposals and approvals in Google Drive: 66 tools (38 mutations, each requiring approval).
 
 ## Curated tools
 
@@ -11,13 +11,17 @@ The top-level tools are shaped for agents, after [gogcli](https://github.com/ope
 
 OpenAPI, vendored as `drive-openapi.json`. Google publishes Drive v3 only as a Discovery
 document, so `discovery-to-openapi.mjs` converts Google's own document
-(`https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`, **revision 20261005**) into
+(`https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`, **revision 20261109**) into
 OpenAPI 3. The conversion is ours, not Google's, and the output is checked in so any upstream
 change shows up in review. To refresh:
 `curl -s https://www.googleapis.com/discovery/v1/apis/drive/v3/rest -o /tmp/d.json && node packages/google-drive/discovery-to-openapi.mjs /tmp/d.json > packages/google-drive/drive-openapi.json`,
 then update the revision above. (APIs.guru's copy was not used: it lagged Google's by 16
 methods, including approvals, access proposals, `files.download`, `files.generateCseToken`.)
-Every operation is declared with a plain bearer requirement.
+Every operation is declared with a plain bearer requirement. `files.create` and `files.update`
+take metadata only, so for each method Discovery marks `supportsMediaUpload` the converter also
+emits a `<method>Media` operation: a simple upload (`uploadType=media`) to the method's
+`/upload/drive/v3/...` path whose body is the file content (text types as text, others as base64).
+The same converter generates `google-calendar`'s document, which has no uploads.
 
 Google also runs an official remote MCP server (`https://drivemcp.googleapis.com/mcp/v1`),
 but it has 8 tools and is limited to the Google Workspace Developer Preview Program, so
@@ -41,8 +45,10 @@ files the app creates), so listing and searching the whole Drive would not work.
 
 ## Known gaps
 
-- File content upload (`upload/drive/v3`, media and multipart) is not in the Discovery
-  REST surface used here; `files.create` and `files.update` handle metadata only.
+- Uploads are simple uploads only: `files.driveFilesCreateMedia` and `files.driveFilesUpdateMedia`
+  send the content inside the tool call, with one of the listed content types (which becomes the
+  file's `mimeType`). A new file is "Untitled" in My Drive until `files.driveFilesUpdate` sets its
+  name and moves it. Multipart and resumable uploads are not exposed.
 - `files.export` and `files.get?alt=media` return binary data as base64 (`alt` is not exposed;
   use `files.download`, a long-running operation, for content).
 - Watch/push-notification channels are present but need a public webhook receiver.
