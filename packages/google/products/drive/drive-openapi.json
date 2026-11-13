@@ -1867,7 +1867,7 @@
    },
    "post": {
     "operationId": "drive.files.create",
-    "description": "Creates a file. For more information, see [Create and manage files](https://developers.google.com/workspace/drive/api/guides/create-file). This method supports an */upload* URI and accepts uploaded media with the following characteristics: - *Maximum file size:* 5,120 GB - *Accepted Media MIME types:* `*/*` (Specify a valid MIME type, rather than the literal `*/*` value. The literal `*/*` is only used to indicate that any valid MIME type can be uploaded. For more information, see [Google Workspace and Google Drive supported MIME types](https://developers.google.com/workspace/drive/api/guides/mime-types).) For more information on uploading files, see [Upload file data](https://developers.google.com/workspace/drive/api/guides/manage-uploads). Apps creating shortcuts with the `create` method must specify the MIME type `application/vnd.google-apps.shortcut`. Apps should specify a file extension in the `name` property when inserting files with the API. For example, an operation to insert a JPEG file should specify something like `\"name\": \"cat.jpg\"` in the metadata. Subsequent `GET` requests include the read-only `fileExtension` property populated with the extension originally specified in the `name` property. When a Google Drive user requests to download a file, or when the file is downloaded through the sync client, Drive builds a full filename (with extension) based on the name. In cases where the extension is missing, Drive attempts to determine the extension based on the file's MIME type.",
+    "description": "Creates a file. For more information, see [Create and manage files](https://developers.google.com/workspace/drive/api/guides/create-file). This method supports an */upload* URI and accepts uploaded media with the following characteristics: - *Maximum file size:* 5,120 GB - *Accepted Media MIME types:* `*/*` (Specify a valid MIME type, rather than the literal `*/*` value. The literal `*/*` is only used to indicate that any valid MIME type can be uploaded. For more information, see [Google Workspace and Google Drive supported MIME types](https://developers.google.com/workspace/drive/api/guides/mime-types).) For more information on uploading files, see [Upload file data](https://developers.google.com/workspace/drive/api/guides/manage-uploads). Apps creating shortcuts with the `create` method must specify the MIME type `application/vnd.google-apps.shortcut`. Apps should specify a file extension in the `name` property when inserting files with the API. For example, an operation to insert a JPEG file should specify something like `\"name\": \"cat.jpg\"` in the metadata. Subsequent `GET` requests include the read-only `fileExtension` property populated with the extension originally specified in the `name` property. When a Google Drive user requests to download a file, or when the file is downloaded through the sync client, Drive builds a full filename (with extension) based on the name. In cases where the extension is missing, Drive attempts to determine the extension based on the file's MIME type.\n\nThis operation sends metadata only. To send content, use drive.files.createMedia.",
     "parameters": [
      {
       "name": "useContentAsIndexableText",
@@ -2249,7 +2249,7 @@
    },
    "patch": {
     "operationId": "drive.files.update",
-    "description": "Updates a file's metadata, content, or both. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might be changed automatically, such as `modifiedDate`. This method supports patch semantics. This method supports an */upload* URI and accepts uploaded media with the following characteristics: - *Maximum file size:* 5,120 GB - *Accepted Media MIME types:* `*/*` (Specify a valid MIME type, rather than the literal `*/*` value. The literal `*/*` is only used to indicate that any valid MIME type can be uploaded. For more information, see [Google Workspace and Google Drive supported MIME types](https://developers.google.com/workspace/drive/api/guides/mime-types).) For more information on uploading files, see [Upload file data](https://developers.google.com/workspace/drive/api/guides/manage-uploads).",
+    "description": "Updates a file's metadata, content, or both. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might be changed automatically, such as `modifiedDate`. This method supports patch semantics. This method supports an */upload* URI and accepts uploaded media with the following characteristics: - *Maximum file size:* 5,120 GB - *Accepted Media MIME types:* `*/*` (Specify a valid MIME type, rather than the literal `*/*` value. The literal `*/*` is only used to indicate that any valid MIME type can be uploaded. For more information, see [Google Workspace and Google Drive supported MIME types](https://developers.google.com/workspace/drive/api/guides/mime-types).) For more information on uploading files, see [Upload file data](https://developers.google.com/workspace/drive/api/guides/manage-uploads).\n\nThis operation sends metadata only. To send content, use drive.files.updateMedia.",
     "parameters": [
      {
       "name": "supportsTeamDrives",
@@ -2527,6 +2527,267 @@
     ]
    }
   },
+  "/upload/drive/v3/files/{fileId}": {
+   "patch": {
+    "operationId": "drive.files.updateMedia",
+    "description": "Simple media upload for drive.files.update: the request body is the content itself, sent to /upload/drive/v3/files/{fileId} with uploadType=media. Google accepts up to 5 TiB, but the content travels inside the tool call, so keep it to a few MB. Metadata in drive.files.update's JSON body cannot be set here. Replaces the file's content; the contentType sent becomes its mimeType. Name and parents stay.\n\nUpdates a file's metadata, content, or both. When calling this method, only populate fields in the request that you want to modify. When updating fields, some fields might be changed automatically, such as `modifiedDate`. This method supports patch semantics. This method supports an */upload* URI and accepts uploaded media with the following characteristics: - *Maximum file size:* 5,120 GB - *Accepted Media MIME types:* `*/*` (Specify a valid MIME type, rather than the literal `*/*` value. The literal `*/*` is only used to indicate that any valid MIME type can be uploaded. For more information, see [Google Workspace and Google Drive supported MIME types](https://developers.google.com/workspace/drive/api/guides/mime-types).) For more information on uploading files, see [Upload file data](https://developers.google.com/workspace/drive/api/guides/manage-uploads).",
+    "parameters": [
+     {
+      "name": "supportsTeamDrives",
+      "in": "query",
+      "required": false,
+      "description": "Deprecated: Use `supportsAllDrives` instead.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "supportsAllDrives",
+      "in": "query",
+      "required": false,
+      "description": "Whether the requesting application supports both My Drives and shared drives.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "includeLabels",
+      "in": "query",
+      "required": false,
+      "description": "A comma-separated list of IDs of labels to include in the `labelInfo` part of the response.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "enforceSingleParent",
+      "in": "query",
+      "required": false,
+      "description": "Deprecated: Adding files to multiple folders is no longer supported. Use shortcuts instead.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "addParents",
+      "in": "query",
+      "required": false,
+      "description": "A comma-separated list of parent IDs to add.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "fileId",
+      "in": "path",
+      "required": true,
+      "description": "The ID of the file.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "ocrLanguage",
+      "in": "query",
+      "required": false,
+      "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "keepRevisionForever",
+      "in": "query",
+      "required": false,
+      "description": "Whether to set the `keepForever` field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "useContentAsIndexableText",
+      "in": "query",
+      "required": false,
+      "description": "Whether to use the uploaded content as indexable text.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "includePermissionsForView",
+      "in": "query",
+      "required": false,
+      "description": "Specifies which additional view's permissions to include in the response. Only `published` is supported.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "removeParents",
+      "in": "query",
+      "required": false,
+      "description": "A comma-separated list of parent IDs to remove.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "uploadType",
+      "in": "query",
+      "required": true,
+      "description": "Upload protocol. Only a simple upload, `media`, is supported here.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "media"
+       ]
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/File"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "text/plain": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/csv": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/tab-separated-values": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/html": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/markdown": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "application/octet-stream": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/pdf": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/zip": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/png": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/jpeg": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/gif": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/webp": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/svg+xml": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "audio/mpeg": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "video/mp4": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      }
+     }
+    },
+    "tags": [
+     "files"
+    ],
+    "servers": [
+     {
+      "url": "https://www.googleapis.com"
+     }
+    ]
+   }
+  },
   "/files/{fileId}/download": {
    "post": {
     "operationId": "drive.files.download",
@@ -2737,6 +2998,249 @@
       }
      }
     }
+   }
+  },
+  "/upload/drive/v3/files": {
+   "post": {
+    "operationId": "drive.files.createMedia",
+    "description": "Simple media upload for drive.files.create: the request body is the content itself, sent to /upload/drive/v3/files with uploadType=media. Google accepts up to 5 TiB, but the content travels inside the tool call, so keep it to a few MB. Metadata in drive.files.create's JSON body cannot be set here. The file's mimeType is the contentType sent, and it is created as \"Untitled\" in My Drive. Then call files.update with its id to set name and other metadata, and addParents/removeParents to move it.\n\nCreates a file. For more information, see [Create and manage files](https://developers.google.com/workspace/drive/api/guides/create-file). This method supports an */upload* URI and accepts uploaded media with the following characteristics: - *Maximum file size:* 5,120 GB - *Accepted Media MIME types:* `*/*` (Specify a valid MIME type, rather than the literal `*/*` value. The literal `*/*` is only used to indicate that any valid MIME type can be uploaded. For more information, see [Google Workspace and Google Drive supported MIME types](https://developers.google.com/workspace/drive/api/guides/mime-types).) For more information on uploading files, see [Upload file data](https://developers.google.com/workspace/drive/api/guides/manage-uploads). Apps creating shortcuts with the `create` method must specify the MIME type `application/vnd.google-apps.shortcut`. Apps should specify a file extension in the `name` property when inserting files with the API. For example, an operation to insert a JPEG file should specify something like `\"name\": \"cat.jpg\"` in the metadata. Subsequent `GET` requests include the read-only `fileExtension` property populated with the extension originally specified in the `name` property. When a Google Drive user requests to download a file, or when the file is downloaded through the sync client, Drive builds a full filename (with extension) based on the name. In cases where the extension is missing, Drive attempts to determine the extension based on the file's MIME type.",
+    "parameters": [
+     {
+      "name": "useContentAsIndexableText",
+      "in": "query",
+      "required": false,
+      "description": "Whether to use the uploaded content as indexable text.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "includePermissionsForView",
+      "in": "query",
+      "required": false,
+      "description": "Specifies which additional view's permissions to include in the response. Only `published` is supported.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "keepRevisionForever",
+      "in": "query",
+      "required": false,
+      "description": "Whether to set the `keepForever` field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "ignoreDefaultVisibility",
+      "in": "query",
+      "required": false,
+      "description": "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "supportsTeamDrives",
+      "in": "query",
+      "required": false,
+      "description": "Deprecated: Use `supportsAllDrives` instead.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "enforceSingleParent",
+      "in": "query",
+      "required": false,
+      "description": "Deprecated: Creating files in multiple folders is no longer supported.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "includeLabels",
+      "in": "query",
+      "required": false,
+      "description": "A comma-separated list of IDs of labels to include in the `labelInfo` part of the response.",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "supportsAllDrives",
+      "in": "query",
+      "required": false,
+      "description": "Whether the requesting application supports both My Drives and shared drives.",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "ocrLanguage",
+      "in": "query",
+      "required": false,
+      "description": "A language hint for OCR processing during image import (ISO 639-1 code).",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "uploadType",
+      "in": "query",
+      "required": true,
+      "description": "Upload protocol. Only a simple upload, `media`, is supported here.",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "media"
+       ]
+      }
+     },
+     {
+      "name": "fields",
+      "in": "query",
+      "required": false,
+      "description": "Selector specifying which fields to include in a partial response.",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Success",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/File"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "bearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "text/plain": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/csv": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/tab-separated-values": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/html": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "text/markdown": {
+       "schema": {
+        "type": "string"
+       }
+      },
+      "application/octet-stream": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/pdf": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/zip": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/png": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/jpeg": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/gif": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/webp": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "image/svg+xml": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "audio/mpeg": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      },
+      "video/mp4": {
+       "schema": {
+        "type": "string",
+        "format": "binary"
+       }
+      }
+     }
+    },
+    "tags": [
+     "files"
+    ],
+    "servers": [
+     {
+      "url": "https://www.googleapis.com"
+     }
+    ]
    }
   },
   "/files/{fileId}/export": {

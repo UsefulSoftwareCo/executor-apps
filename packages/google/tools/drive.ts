@@ -133,7 +133,7 @@ export const drive = (source: Source) => ({
   meta: {
     title: "Google Drive",
     description: "Find and read files across every linked Google account.",
-    instructions: `search spans every linked account unless \`account\` (an address) is given; read takes the account a result came from. Uploads, sharing, comments and revisions are under ${source.api("drive")}.`,
+    instructions: `search spans every linked account unless \`account\` (an address) is given; read takes the account a result came from. Uploads, sharing, comments and revisions are under ${source.api("drive")}: upload a file's content with files.driveFilesCreateMedia, then set its name and folder with files.driveFilesUpdate.`,
   },
 });
 
