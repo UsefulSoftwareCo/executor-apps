@@ -11,7 +11,7 @@ The top-level tools are shaped for agents, after [gogcli](https://github.com/ope
 
 OpenAPI, vendored as `drive-openapi.json`. Google publishes Drive v3 only as a Discovery
 document, so `discovery-to-openapi.mjs` converts Google's own document
-(`https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`, **revision 20261005**) into
+(`https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`, **revision 20261109**) into
 OpenAPI 3. The conversion is ours, not Google's, and the output is checked in so any upstream
 change shows up in review. To refresh:
 `curl -s https://www.googleapis.com/discovery/v1/apis/drive/v3/rest -o /tmp/d.json && node packages/google-drive/discovery-to-openapi.mjs /tmp/d.json > packages/google-drive/drive-openapi.json`,
