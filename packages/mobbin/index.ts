@@ -2,6 +2,7 @@ import {
   accountRouter,
   defineApp,
   defineProvider,
+  dynamicSkills,
   oauth2,
   router,
   toolAnnotations,
@@ -9,6 +10,7 @@ import {
 } from "apps";
 import { mcpHealth, mcpRouter } from "apps/mcp";
 import { always } from "apps/operations/approval";
+import { githubSkills } from "apps/skills";
 import { icons } from "./icon.js";
 
 const url = "https://api.mobbin.com/mcp";
@@ -30,7 +32,10 @@ const mobbin = defineProvider({
 
 export default defineApp(
   { user: { accounts: { mobbin: mobbin.many() } }, icons },
-  async ({ user, signal }) => ({
+  async ({ user, signal, fetch, cache }) => ({
+    dynamicSkills: dynamicSkills({
+      list: () => githubSkills({ repo: "mobbin/skills", path: "skills", fetch, signal, cache }),
+    }),
     tools: router(
       await accountRouter(
         user?.accounts.mobbin ?? [],
