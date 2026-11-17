@@ -7,7 +7,7 @@
     "title": "Slab"
   },
   "dependencies": {
-    "apps": "0.0.1-beta.100",
+    "apps": "0.0.1-beta.140",
     "graphql": "16.11.0"
   }
 }
