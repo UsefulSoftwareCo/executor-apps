@@ -4,14 +4,18 @@
 import { array, boolean, mutation, number, object, query, string } from "apps";
 import { always } from "apps/operations/approval";
 import {
+  accountZone,
   calendarZone,
   defined,
   fanOut,
   google,
+  GoogleError,
   parseTime,
+  pathId,
   select,
   single,
   zonedDate,
+  zonedIso,
   zonedTime,
   type Base,
   type Context,
@@ -74,6 +78,94 @@ const event = (target: Target, calendar: CalendarEntry, item: any) =>
 
 const sortKey = (start: string) => (start.length === 10 ? Date.parse(`${start}T00:00:00Z`) : Date.parse(start));
 
+const isDate = (value: string) => /^\d{4}-\d{2}-\d{2}$/.test(value.trim());
+const dateMs = (date: string) => Date.parse(`${date.trim()}T00:00:00Z`);
+/** A date `days` after another, both as YYYY-MM-DD. */
+const addDays = (date: string, days: number) => new Date(dateMs(date) + days * day).toISOString().slice(0, 10);
+
+/**
+ * The start and end an update writes. A new start without an end keeps the event's length, unless
+ * it switches between all-day and timed, where `minutes` (default 30) or one day applies. Patch
+ * merges these objects, so the kind not used is cleared with null: Google refuses both at once.
+ */
+const moved = (
+  current: { readonly start?: { readonly date?: string; readonly dateTime?: string }; readonly end?: { readonly date?: string; readonly dateTime?: string } },
+  input: { readonly start?: string; readonly end?: string; readonly minutes?: number },
+  zone: string,
+) => {
+  const wasAllDay = current.start?.date !== undefined;
+  const allDay = input.start === undefined ? wasAllDay : isDate(input.start);
+  if (input.end !== undefined && isDate(input.end) !== allDay)
+    throw new Error("start and end must both be dates (an all-day event) or both be times.");
+  if (allDay) {
+    if (input.minutes !== undefined) throw new Error("minutes applies to timed events; give an all-day event's end as a date.");
+    const start = input.start?.trim() ?? current.start?.date!;
+    const length = wasAllDay ? Math.max(1, Math.round((dateMs(current.end?.date ?? addDays(current.start!.date!, 1)) - dateMs(current.start!.date!)) / day)) : 1;
+    const end = input.end?.trim() ?? (input.start === undefined ? current.end?.date! : addDays(start, length));
+    if (dateMs(end) <= dateMs(start)) throw new Error("An all-day event's end is the day after its last day, so it must be after start.");
+    return { start: { date: start, dateTime: null, timeZone: null }, end: { date: end, dateTime: null, timeZone: null } };
+  }
+  const startAt = input.start === undefined ? Date.parse(current.start!.dateTime!) : parseTime(input.start, zone);
+  const length =
+    input.minutes !== undefined
+      ? input.minutes * 60000
+      : wasAllDay
+        ? 30 * 60000
+        : Date.parse(current.end!.dateTime!) - Date.parse(current.start!.dateTime!);
+  const endAt = input.end === undefined ? startAt + length : parseTime(input.end, zone);
+  if (endAt <= startAt) throw new Error("The event must end after it starts.");
+  return {
+    start: { dateTime: new Date(startAt).toISOString(), timeZone: zone, date: null },
+    end: { dateTime: new Date(endAt).toISOString(), timeZone: zone, date: null },
+  };
+};
+
+const sameAddress = (a: string | undefined, b: string) => a?.trim().toLowerCase() === b.trim().toLowerCase();
+
+/** An event's URL, refusing IDs that are not plausible before any request is made. */
+const eventUrl = (calendarId: string, eventId: string) =>
+  `${base}/calendars/${pathId("calendarId", calendarId)}/events/${pathId("eventId", eventId)}`;
+
+/** Everyone on an event other than the account itself. */
+const guests = (target: Target, current: any): { email?: string }[] =>
+  ((current.attendees ?? []) as { email?: string; self?: boolean }[]).filter((a) => !a.self && !sameAddress(a.email, target.email));
+
+/** Whether anyone besides the account is on the event, counting guests Google left out of its details. */
+const hasGuests = (target: Target, current: any) => current.attendeesOmitted === true || guests(target, current).length > 0;
+
+const omitted = (current: any) => {
+  if (current.attendeesOmitted)
+    throw new Error("Google left some guests out of this event's details (attendeesOmitted), so its guest list cannot be rewritten without dropping them. Nothing was changed.");
+};
+
+/**
+ * Reads an event, works out the patch from what it holds, and writes it only if the event is still
+ * the version read (If-Match on its ETag). If someone else changed it in between, Google answers 412
+ * and nothing is written, so it reads again and works the patch out afresh, up to three times.
+ */
+const edit = async (
+  ctx: Base,
+  target: Target,
+  url: string,
+  change: (current: any) => { readonly body: Record<string, unknown>; readonly search?: Record<string, string | number | undefined> },
+) => {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const current = await google(ctx, target, url);
+    const { body, search } = change(current);
+    try {
+      return await google(ctx, target, url, {
+        method: "PATCH",
+        search,
+        body,
+        headers: current.etag ? { "If-Match": current.etag } : {},
+      });
+    } catch (error) {
+      if (!(error instanceof GoogleError && error.status === 412)) throw error;
+    }
+  }
+  throw new Error("The event was changed by someone else each time it was read (3 tries), so nothing was changed. Read it again with agenda before retrying.");
+};
+
 const busyWindows = async (ctx: Base, targets: readonly Target[], start: number, end: number) =>
   fanOut(targets, async (target) => {
     const calendars = await shown(ctx, target, undefined);
@@ -106,18 +198,8 @@ const merge = (intervals: readonly { readonly start: number; readonly end: numbe
   return merged;
 };
 
-const iso = (zone: string, instant: number) => {
-  const text = new Intl.DateTimeFormat("sv-SE", {
-    timeZone: zone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).format(new Date(instant));
-  return text.replace(" ", "T");
-};
+/** Busy and free times carry their offset, so a slot passed to createEvent on any calendar keeps its instant. */
+const iso = zonedIso;
 
 /** Events across targets' shown calendars, sorted, with shared meetings listed once. */
 export const listEvents = async (
@@ -132,7 +214,7 @@ export const listEvents = async (
     const calendars = await shown(ctx, target, calendarIds);
     const lists = await Promise.all(
       calendars.map(async (calendar) => {
-        const { items = [] } = await google(ctx, target, `${base}/calendars/${encodeURIComponent(calendar.id)}/events`, {
+        const { items = [] } = await google(ctx, target, `${base}/calendars/${pathId("calendarId", calendar.id)}/events`, {
           search: {
             timeMin: new Date(start).toISOString(),
             timeMax: new Date(end).toISOString(),
@@ -179,7 +261,7 @@ export const calendar = (source: Source) => ({
       },
       async (ctx: Context, input) => {
         const targets = await select(ctx, source, input.account);
-        const zone = input.timeZone ?? (await calendarZone(ctx, targets[0]!));
+        const zone = input.timeZone ?? (await accountZone(ctx, targets[0]!));
         const { start, end } = window(zone, input);
         const { events, errors } = await listEvents(ctx, targets, start, end, input.query, input.calendarIds);
         return { timeZone: zone, from: new Date(start).toISOString(), to: new Date(end).toISOString(), events, errors };
@@ -188,7 +270,7 @@ export const calendar = (source: Source) => ({
     freeBusy: query(
       {
         description:
-          "Combined availability across every linked account (or one): busy intervals merged from each account's own calendars, and free slots of at least `minutes` within working hours (default 09:00-17:00 on weekdays, in the calendar's time zone). Use it to find a time that works across work and personal calendars.",
+          "Combined availability across every linked account (or one): busy intervals merged from each account's own calendars, and free slots of at least `minutes` within working hours (default 09:00-17:00 on weekdays, in the account's Calendar time zone). Use it to find a time that works across work and personal calendars. Busy and free times carry their offset, so a free slot can be passed straight to createEvent.",
         input: object({
           account,
           from: string().optional(),
@@ -203,7 +285,7 @@ export const calendar = (source: Source) => ({
       },
       async (ctx: Context, input) => {
         const targets = await select(ctx, source, input.account);
-        const zone = input.timeZone ?? (await calendarZone(ctx, targets[0]!));
+        const zone = input.timeZone ?? (await accountZone(ctx, targets[0]!));
         const { start, end } = window(zone, input);
         const { items, errors } = await busyWindows(ctx, targets, start, end);
         const busy = merge(items);
@@ -271,8 +353,10 @@ export const calendar = (source: Source) => ({
         approval: always(),
       },
       async (ctx: WriteContext, input) => {
+        const calendarId = input.calendarId ?? "primary";
+        const url = `${base}/calendars/${pathId("calendarId", calendarId)}/events`;
         const target = await single(ctx, source, input.account);
-        const zone = input.timeZone ?? (await calendarZone(ctx, target));
+        const zone = input.timeZone ?? (await calendarZone(ctx, target, calendarId));
         const allDay = /^\d{4}-\d{2}-\d{2}$/.test(input.start.trim());
         const when = (value: string) => (allDay ? { date: value.trim() } : { dateTime: new Date(parseTime(value, zone)).toISOString(), timeZone: zone });
         const startAt = parseTime(input.start, zone);
@@ -284,7 +368,7 @@ export const calendar = (source: Source) => ({
                 return { date: `${next.year}-${String(next.month).padStart(2, "0")}-${String(next.day).padStart(2, "0")}` };
               })()
             : { dateTime: new Date(startAt + (input.minutes ?? 30) * 60000).toISOString(), timeZone: zone };
-        const created = await google(ctx, target, `${base}/calendars/${encodeURIComponent(input.calendarId ?? "primary")}/events`, {
+        const created = await google(ctx, target, url, {
           method: "POST",
           search: { conferenceDataVersion: input.meet ? 1 : undefined, sendUpdates: input.attendees?.length ? "all" : undefined },
           body: {
@@ -299,7 +383,7 @@ export const calendar = (source: Source) => ({
               : {}),
           },
         });
-        const { iCalUID: _, ...summary } = event(target, { id: input.calendarId ?? "primary" }, created);
+        const { iCalUID: _, ...summary } = event(target, { id: calendarId }, created);
         return summary;
       },
     ),
@@ -316,22 +400,117 @@ export const calendar = (source: Source) => ({
         approval: always(),
       },
       async (ctx: WriteContext, input) => {
-        const target = await single(ctx, source, input.account);
-        const path = `${base}/calendars/${encodeURIComponent(input.calendarId ?? "primary")}/events/${encodeURIComponent(input.eventId)}`;
-        const current = await google(ctx, target, path);
-        const me = (current.attendees ?? []).find((a: any) => a.self || a.email?.toLowerCase() === target.email.toLowerCase());
-        if (!me) throw new Error(`${target.email} is not an attendee of this event.`);
+        const url = eventUrl(input.calendarId ?? "primary", input.eventId);
         const status = input.response.trim().toLowerCase();
         if (!["accepted", "declined", "tentative"].includes(status)) throw new Error('response must be "accepted", "declined" or "tentative".');
-        const attendees = current.attendees.map((a: any) => (a === me ? { ...a, responseStatus: status, ...(input.comment ? { comment: input.comment } : {}) } : a));
-        await google(ctx, target, path, { method: "PATCH", search: { sendUpdates: "all" }, body: { attendees } });
+        const target = await single(ctx, source, input.account);
+        await edit(ctx, target, url, (current) => {
+          const me = (current.attendees ?? []).find((a: any) => a.self || a.email?.toLowerCase() === target.email.toLowerCase());
+          if (!me) throw new Error(`${target.email} is not an attendee of this event.`);
+          omitted(current);
+          const attendees = current.attendees.map((a: any) => (a === me ? { ...a, responseStatus: status, ...(input.comment ? { comment: input.comment } : {}) } : a));
+          return { body: { attendees }, search: { sendUpdates: "all" } };
+        });
         return { account: target.email, eventId: input.eventId, response: status };
+      },
+    ),
+    updateEvent: mutation(
+      {
+        description:
+          "Change an event's title, times, description, location or attendees, or add a Google Meet link. Only the fields you pass change. A new start without an end keeps the event's length (or set minutes). Times without an offset are read in timeZone, else in that calendar's own time zone. Take eventId and calendarId from agenda: for a recurring event that changes only that occurrence. If anyone besides this account is on the event, or you add someone, the change shows on their calendars too: set affectsGuests to true so the person approving sees that, or the call is refused. Guests are emailed about the change unless notify is false.",
+        input: object({
+          account,
+          calendarId: string().optional(),
+          eventId: string({ minLength: 1 }),
+          summary: string().optional(),
+          start: string().optional(),
+          end: string().optional(),
+          minutes: number().optional(),
+          description: string().optional(),
+          location: string().optional(),
+          addAttendees: array(string()).optional(),
+          removeAttendees: array(string()).optional(),
+          meet: boolean().optional(),
+          timeZone: string().optional(),
+          notify: boolean().optional(),
+          affectsGuests: boolean().optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const calendarId = input.calendarId ?? "primary";
+        const url = eventUrl(calendarId, input.eventId);
+        const target = await single(ctx, source, input.account);
+        const times = input.start !== undefined || input.end !== undefined || input.minutes !== undefined;
+        const zone = times ? (input.timeZone ?? (await calendarZone(ctx, target, calendarId))) : undefined;
+        const requestId = crypto.randomUUID();
+        const updated = await edit(ctx, target, url, (current) => {
+          const body: Record<string, unknown> = {};
+          if (input.summary !== undefined) body.summary = input.summary;
+          if (input.description !== undefined) body.description = input.description;
+          if (input.location !== undefined) body.location = input.location;
+          if (zone !== undefined) Object.assign(body, moved(current, input, zone));
+          const added: { email: string }[] = [];
+          if (input.addAttendees?.length || input.removeAttendees?.length) {
+            omitted(current);
+            // Keep everyone else's entry as Google has it, with their responses.
+            const kept = ((current.attendees ?? []) as { email?: string }[]).filter(
+              (attendee) => !input.removeAttendees?.some((email) => sameAddress(attendee.email, email)),
+            );
+            added.push(
+              ...(input.addAttendees ?? [])
+                .filter((email, index, all) => all.findIndex((other) => sameAddress(other, email)) === index)
+                .filter((email) => !kept.some((attendee) => sameAddress(attendee.email, email)))
+                .map((email) => ({ email: email.trim() })),
+            );
+            body.attendees = [...kept, ...added];
+          }
+          if (input.meet) body.conferenceData = { createRequest: { requestId, conferenceSolutionKey: { type: "hangoutsMeet" } } };
+          if (Object.keys(body).length === 0) throw new Error("Pass at least one field to change.");
+          const others = hasGuests(target, current) || added.some((a) => !sameAddress(a.email, target.email));
+          if (others && input.affectsGuests !== true)
+            throw new Error(
+              `This event has other guests, so the change would show on their calendars too${input.notify === false ? "" : " and email them"}. Nothing was changed. Call again with affectsGuests: true so the approval says so.`,
+            );
+          return { body, search: { sendUpdates: input.notify === false ? "none" : "all", conferenceDataVersion: input.meet ? 1 : undefined } };
+        });
+        const { iCalUID: _, ...summary } = event(target, { id: calendarId }, updated);
+        return summary;
+      },
+    ),
+    deleteEvent: mutation(
+      {
+        description:
+          "Delete an event. Take eventId and calendarId from agenda: for a recurring event that deletes only that occurrence. Google Calendar keeps a deleted event in that calendar's trash for 30 days, where it can be restored. If anyone besides this account is on the event, set affectsGuests to true so the person approving sees that, or the call is refused: if you organize it, deleting cancels it for them, and they are emailed unless notify is false. To decline someone else's invitation instead, use respond.",
+        input: object({
+          account,
+          calendarId: string().optional(),
+          eventId: string({ minLength: 1 }),
+          notify: boolean().optional(),
+          affectsGuests: boolean().optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const calendarId = input.calendarId ?? "primary";
+        const url = eventUrl(calendarId, input.eventId);
+        const target = await single(ctx, source, input.account);
+        const current = await google(ctx, target, url);
+        if (hasGuests(target, current) && input.affectsGuests !== true)
+          throw new Error("This event has other guests, so deleting it may cancel it for them. Nothing was deleted. Call again with affectsGuests: true so the approval says so.");
+        await google(ctx, target, url, {
+          method: "DELETE",
+          search: { sendUpdates: input.notify === false ? "none" : "all" },
+          headers: current.etag ? { "If-Match": current.etag } : {},
+          hints: { 412: "The event changed after it was read, so it was not deleted. Read it again with agenda before retrying." },
+        });
+        return { account: target.email, calendarId, eventId: input.eventId, deleted: true };
       },
     ),
   },
   meta: {
     title: "Google Calendar",
-    description: "Agenda and availability across every linked Google account, and simple event writes.",
-    instructions: `agenda and freeBusy span every linked account unless \`account\` (an address) is given. Times without an offset are read in the account's Calendar time zone. Event edits, recurrence and sharing are under ${source.api("calendar")}.`,
+    description: "Agenda and availability across every linked Google account, and event writes.",
+    instructions: `agenda and freeBusy span every linked account unless \`account\` (an address) is given; times they take without an offset are read in the account's Calendar time zone. createEvent and updateEvent read such times in the calendar's own time zone, unless timeZone is given. Edit or delete an event with the account, calendarId and eventId agenda returned. Recurrence rules, moving events between calendars and sharing are under ${source.api("calendar")}.`,
   },
 });

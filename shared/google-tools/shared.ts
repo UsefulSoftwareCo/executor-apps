@@ -105,6 +105,43 @@ export const fanOut = async <T>(
 export const defined = <T extends object>(value: T): T =>
   Object.fromEntries(Object.entries(value).filter(([, field]) => field !== undefined)) as T;
 
+/**
+ * A Google ID as a URL path segment. IDs come from the caller, so anything that cannot be an ID is
+ * refused before a URL is built: blank, a dot segment ("." or "..", which URL parsing would resolve
+ * to the parent path), a slash, whitespace or a control character, or an implausible length.
+ * Calendar IDs are addresses (and may hold "#" or "+"), so no narrower alphabet is assumed.
+ */
+export const pathId = (name: string, value: string) => {
+  if (value.length === 0 || value.length > 1024 || /^\.+$/.test(value) || /[/\\\s\x00-\x1f\x7f]/.test(value))
+    throw new Error(`${name} ${JSON.stringify(value.slice(0, 80))} is not a Google ID. Use the ID a list or search tool returned.`);
+  return encodeURIComponent(value);
+};
+
+/** A safe next step for a failed call, by status. Google's response body is never included. */
+const nextStep: Readonly<Record<number, string>> = {
+  400: "Google refused the request as invalid: check the IDs and values passed.",
+  401: "The account's sign-in has expired or was revoked: reconnect the Google account in Executor.",
+  403: "The account may lack access to this item, or its sign-in may be missing a permission this tool needs: check its access, or reconnect it and grant everything asked for. Google also answers 403 when a usage limit is hit; if so, wait a minute before retrying.",
+  404: "Not found: the ID may be wrong, or the item was deleted.",
+  409: "Conflict: the item already exists or changed at the same moment. Read it again before retrying.",
+  410: "The item was already deleted.",
+  412: "The item changed since it was read. Read it again before retrying.",
+  429: "Google is rate limiting this account: wait a minute before retrying.",
+};
+
+/** A non-2xx answer from Google: the status and a next step, never the response body. */
+export class GoogleError extends Error {
+  constructor(
+    readonly status: number,
+    hint?: string,
+  ) {
+    super(
+      `Google answered ${status}. ${hint ?? nextStep[status] ?? (status >= 500 ? "Google had a temporary problem: wait a moment, then retry." : "The request failed.")}`,
+    );
+    this.name = "GoogleError";
+  }
+}
+
 /** Calls a Google JSON API with the target's token. `search` values left undefined are omitted. */
 export const google = async (
   ctx: Base,
@@ -114,6 +151,9 @@ export const google = async (
     readonly method?: string;
     readonly body?: unknown;
     readonly search?: Readonly<Record<string, string | number | boolean | readonly string[] | undefined>>;
+    readonly headers?: Readonly<Record<string, string>>;
+    /** Next steps that say more than the generic ones for this call, by status. */
+    readonly hints?: Readonly<Record<number, string>>;
   } = {},
 ): Promise<any> => {
   const address = new URL(url);
@@ -127,9 +167,11 @@ export const google = async (
     headers: {
       Authorization: `Bearer ${target.account.fields.access_token}`,
       ...(init.body === undefined ? {} : { "content-type": "application/json" }),
+      ...init.headers,
     },
     body: init.body === undefined ? undefined : JSON.stringify(init.body),
   });
+  if (!response.ok) throw new GoogleError(response.status, init.hints?.[response.status]);
   if (response.status === 204) return {};
   return decodeJson(response, json());
 };
@@ -140,7 +182,7 @@ export const googleText = async (ctx: Base, target: Target, url: string): Promis
     signal: ctx.signal,
     headers: { Authorization: `Bearer ${target.account.fields.access_token}` },
   });
-  if (!response.ok) throw new Error(`Google answered ${response.status}: ${(await response.text()).slice(0, 500)}`);
+  if (!response.ok) throw new GoogleError(response.status);
   return response.text();
 };
 
@@ -244,9 +286,45 @@ export const zonedDate = (zone: string, instant: number) => {
   return { year, month, day };
 };
 
+const pad = (value: number, width = 2) => String(value).padStart(width, "0");
+const offsetText = (offset: number) => {
+  const minutes = Math.abs(offset) / 60000;
+  return `${offset < 0 ? "-" : "+"}${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}`;
+};
+
 /**
- * An instant from what a model is likely to pass: an RFC 3339 time, a date (midnight in `zone`),
- * "now", "today", "tomorrow" or "yesterday".
+ * An instant as wall-clock time in a zone, with the zone's offset at that instant
+ * (2026-12-02T09:00:00-05:00), so it means the same instant wherever it is read.
+ */
+export const zonedIso = (zone: string, instant: number) => {
+  const offset = zoneOffset(zone, instant);
+  return new Date(Math.floor(instant / 1000) * 1000 + offset).toISOString().slice(0, 19) + offsetText(offset);
+};
+
+/**
+ * The instant a wall-clock time with seconds and milliseconds names in a zone. Refuses a time the
+ * zone skips (clocks going forward) and one it passes twice (clocks going back), naming the offsets
+ * that would make it exact, rather than picking an hour.
+ */
+const wallClock = (zone: string, y: number, mo: number, d: number, h: number, mi: number, s: number, ms: number) => {
+  const local = Date.UTC(y, mo - 1, d, h, mi, s);
+  const text = `${pad(y, 4)}-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}:${pad(s)}${ms ? `.${pad(ms, 3)}` : ""}`;
+  // A zone's offset changes at most once within a day either side, so these are the only candidates.
+  const offsets = [...new Set([zoneOffset(zone, local - 86_400_000), zoneOffset(zone, local + 86_400_000)])];
+  const valid = offsets.filter((offset) => zoneOffset(zone, local - offset) === offset);
+  if (valid.length === 0)
+    throw new Error(`${text} does not exist in ${zone}: the clocks skip forward over it. Give a time outside the skipped hour, or an offset.`);
+  if (valid.length > 1)
+    throw new Error(
+      `${text} happens twice in ${zone}, because the clocks go back then. Give it with an offset: ${valid.map((offset) => text + offsetText(offset)).join(" or ")}.`,
+    );
+  return local - valid[0]! + ms;
+};
+
+/**
+ * An instant from what a model is likely to pass: an RFC 3339 time, a local time read in `zone`
+ * (seconds and milliseconds kept), a date (midnight in `zone`), "now", "today", "tomorrow" or
+ * "yesterday".
  */
 export const parseTime = (value: string, zone: string, now = Date.now()) => {
   const text = value.trim().toLowerCase();
@@ -258,27 +336,41 @@ export const parseTime = (value: string, zone: string, now = Date.now()) => {
   }
   const date = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
   if (date) return zonedTime(zone, +date[1]!, +date[2]!, +date[3]!);
-  const local = /^(\d{4})-(\d{2})-(\d{2})t(\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?$/.exec(text);
-  if (local) return zonedTime(zone, +local[1]!, +local[2]!, +local[3]!, +local[4]!, +local[5]!);
+  const local = /^(\d{4})-(\d{2})-(\d{2})t(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d+))?)?$/.exec(text);
+  if (local) {
+    // Date holds milliseconds; finer digits are dropped.
+    const ms = local[7] === undefined ? 0 : +local[7].slice(0, 3).padEnd(3, "0");
+    return wallClock(zone, +local[1]!, +local[2]!, +local[3]!, +local[4]!, +local[5]!, +(local[6] ?? 0), ms);
+  }
   const instant = Date.parse(value);
   if (Number.isNaN(instant))
     throw new Error(`Could not read the time "${value}". Use RFC 3339 (2026-10-14T09:00:00-07:00), a date (2026-10-14), "now", "today" or "tomorrow".`);
   return instant;
 };
 
-const TimeZone = object({ value: string() });
-
-/** The zone of the account's Calendar settings, which dates without an offset are read in. */
-export const calendarZone = async (ctx: Base, target: Target) =>
+/** A zone setting read with the target's token and cached for a day under `key`. */
+const zoneSetting = (ctx: Base, target: Target, key: string, url: string, pick: (body: any) => unknown) =>
   ctx.cache.forAccount(target.account).get({
-    key: "calendar-zone",
+    key,
     schema: string(),
     freshFor: "1 day",
     load: async ({ fetch, signal }) => {
-      const response = await fetch("https://www.googleapis.com/calendar/v3/users/me/settings/timezone", {
-        signal,
-        headers: { Authorization: `Bearer ${target.account.fields.access_token}` },
-      });
-      return (await decodeJson(response, TimeZone)).value;
+      const zone = pick(await google({ ...ctx, fetch, signal }, target, url));
+      if (typeof zone !== "string" || zone === "") throw new Error("Google returned no time zone; pass timeZone.");
+      return zone;
     },
   });
+
+/** The zone of the account's Calendar settings, which reads spanning all its calendars use. */
+export const accountZone = (ctx: Base, target: Target) =>
+  zoneSetting(ctx, target, "calendar-zone", "https://www.googleapis.com/calendar/v3/users/me/settings/timezone", (body) => body.value);
+
+/** A calendar's own zone, which times without an offset written to that calendar are read in. */
+export const calendarZone = (ctx: Base, target: Target, calendarId: string) =>
+  zoneSetting(
+    ctx,
+    target,
+    `calendar-zone:${calendarId}`,
+    `https://www.googleapis.com/calendar/v3/calendars/${pathId("calendarId", calendarId)}?fields=timeZone`,
+    (body) => body.timeZone,
+  );
