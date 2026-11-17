@@ -11,6 +11,10 @@ jq -e --arg n "@executor.sh/$name" '.name == $n and (.executor.title | type == "
 # defineApp rejects more than 8 icons or more than 32 KiB of them when the package loads.
 node -e 'import(process.argv[1]).then(({ icons }) => { const size = JSON.stringify(icons).length; if (!Array.isArray(icons) || icons.length > 8 || size > 32768) { console.error(`${process.argv[2]}: icon.ts needs at most 8 icons totalling at most 32 KiB (has ${icons?.length} icons, ${Math.ceil(size / 1024)} KiB)`); process.exit(1); } })' "$dir/icon.ts" "$name" 2>&1 | grep -v 'extra certs\|ExperimentalWarning\|--trace-warnings'
 [ "${PIPESTATUS[0]}" -eq 0 ] || exit 1
+# A sign-in method's label is its short name (AUTHORING.md, "Auth"): the connect form, the sign-in
+# method menu and the check results show it. Explanations go in the guide or field descriptions.
+bun -e 'const [file, name] = process.argv.slice(-2); const app = (await import(file)).default; const accounts = app.accounts ?? {}; const long = [...Object.values(accounts.app ?? {}), ...Object.values(accounts.user ?? {})].flatMap((r) => Object.entries(r.provider?.auth ?? {})).filter(([, m]) => typeof m.label === "string" && m.label.length > 40); for (const [method, m] of long) console.error(`${name}: label of ${method} is ${m.label.length} characters, more than 40: "${m.label}". Use a short name such as "API key" and move the explanation to the guide or a field description`); if (long.length > 0) process.exit(1);' "$dir/index.ts" "$name" 2>&1 | grep -v 'extra certs'
+[ "${PIPESTATUS[0]}" -eq 0 ] || exit 1
 # Google packages carry copies of shared sources; a stale copy would ship old tools.
 case "$name" in google|gmail|google-*)
   (cd "$root" && node scripts/google-vendor.ts --check 2>&1 | grep -v 'extra certs')

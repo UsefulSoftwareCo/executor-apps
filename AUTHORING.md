@@ -65,6 +65,17 @@ say in the README when a detail could not be confirmed there.
   scopes the tools do not use, and say which in a comment. Never declare a
   scope the server does not advertise: Descript's `full_access` broke every
   sign-in.
+- A method's `label` is its short name, not its instructions. The connect form shows it as
+  the method's name in the "Sign-in method" menu, and in the check results and the fix prompt
+  ("Twilio rejected this API key"), so it must read as a noun in a sentence. Use two to four
+  words, at most 40 characters (`scripts/check.sh` fails longer ones), and the same name other
+  apps use for the same kind of credential. Good: "API key", "Personal access token",
+  "API key and secret", "Auth token or API key". Bad: "API key (from tinify.com/dashboard/api)",
+  "API key for one Abstract product (product: email-reputation, ...)", or any sentence. Put
+  where to find each value in the method's `guide` (Markdown the form shows above the fields),
+  and what goes in each field in that field's `title` and `description`. Changing a label makes
+  a new provider, so accounts connected for the old one stop fitting the app; get it right
+  first.
 - Declare `hosts` with every host credentials go to.
 - Give the provider a `health` check on a read-only current-user/account
   endpoint, decoding only fields that are always present (the schema builders

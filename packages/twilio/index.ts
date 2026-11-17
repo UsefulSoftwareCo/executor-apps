@@ -20,12 +20,28 @@ const twilio = defineProvider({
   hosts: ["*.twilio.com"],
   auth: {
     apiKey: secrets({
-      label:
-        "Account SID (AC...), then Username and Password. Use the Account SID as Username and the Auth Token as Password, or an API Key SID (SK...) as Username and its secret as Password",
+      label: "Auth token or API key",
+      guide: `
+        Sign in with your Auth Token or, better, an API key. Find your Account SID and Auth Token
+        on the [Twilio Console](https://console.twilio.com) home page, and create API keys under
+        [API keys & tokens](https://console.twilio.com/us1/account/keys-credentials/api-keys).
+      `,
       fields: object({
-        accountSid: plain(string({ minLength: 1 })),
-        username: plain(string({ minLength: 1 })),
-        password: string({ minLength: 1 }),
+        accountSid: plain(
+          string({ minLength: 1, title: "Account SID", description: "Starts with `AC`." }),
+        ),
+        username: plain(
+          string({
+            minLength: 1,
+            title: "Username",
+            description: "Your Account SID again, or an API key's SID (starts with `SK`).",
+          }),
+        ),
+        password: string({
+          minLength: 1,
+          title: "Password",
+          description: "Your Auth Token, or the API key's secret.",
+        }),
       }),
     }),
   },
