@@ -1,4 +1,4 @@
-// drive-openapi.json is generated from Google's own Drive v3 Discovery document (revision 20261005)
+// drive-openapi.json is generated from Google's own Drive v3 Discovery document (revision 20261109)
 // by discovery-to-openapi.mjs; see README. Credentials go only to www.googleapis.com.
 import type { JsonObject } from "apps";
 import type { OpenapiToolNamesOptions } from "apps/openapi";
