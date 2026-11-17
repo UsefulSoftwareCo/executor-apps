@@ -76,7 +76,7 @@ say in the README when a detail could not be confirmed there.
 
 - `package.json`: `"name": "@executor.sh/<id>"`, `description`,
   `"private": true`, `"type": "module"`, `"executor": { "title": "<Product name>" }`,
-  `dependencies.apps` exactly `0.0.1-beta.100` (plus `graphql` `16.11.0` or
+  `dependencies.apps` exactly `0.0.1-beta.140` (plus `graphql` `16.11.0` or
   `@modelcontextprotocol/sdk` `1.32.1` when used).
 - `index.ts`: declares the icons beside the accounts,
   `defineApp({ accounts: { ... }, icons }, ...)`, and wraps the tools in
