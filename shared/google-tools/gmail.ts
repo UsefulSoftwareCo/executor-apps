@@ -6,11 +6,14 @@ import {
   base64Lines,
   base64url,
   decodeBody,
+  defined,
   encodeHeader,
   fanOut,
   google,
+  GoogleError,
   htmlToText,
   mapLimit,
+  pathId,
   select,
   single,
   type Base,
@@ -44,27 +47,56 @@ const header = (part: Part | undefined, name: string) =>
 
 const charset = (part: Part) => /charset="?([^";]+)"?/i.exec(header(part, "Content-Type") ?? "")?.[1];
 
-/** The message text: its text/plain part, else its HTML part as text. Attachments are listed, not read. */
-const content = (payload: Part | undefined) => {
-  let plain: string | undefined;
-  let html: string | undefined;
-  const attachments: { filename: string; mimeType: string; size: number; attachmentId: string }[] = [];
+interface Attachment {
+  readonly filename: string;
+  readonly mimeType: string;
+  readonly size: number;
+  /** Shown in the body (an image a `cid:` link places), rather than only attached. */
+  readonly inline: boolean;
+  /** Set when Gmail stores the data apart, for the attachment tool; small parts carry it in the message. */
+  readonly attachmentId?: string;
+}
+
+/**
+ * A message's parts by what they are, not by how Gmail stores them. Multipart containers are
+ * opened. A part is body text only when it is text/plain or text/html with no filename and not
+ * marked `Content-Disposition: attachment`; every other part (a named file, an image, an attached
+ * message, a calendar invite...) is an attachment, whether its data is in the message or stored
+ * apart under an attachmentId.
+ */
+const parts = (payload: Part | undefined) => {
+  const plain: Part[] = [];
+  const html: Part[] = [];
+  const attachments: Attachment[] = [];
   const walk = (part: Part) => {
-    if (part.filename && part.body?.attachmentId) {
-      attachments.push({
-        filename: part.filename,
-        mimeType: part.mimeType ?? "application/octet-stream",
-        size: part.body.size ?? 0,
-        attachmentId: part.body.attachmentId,
-      });
-      return;
-    }
-    if (part.body?.data && part.mimeType === "text/plain" && plain === undefined) plain = decodeBody(part.body.data, charset(part));
-    if (part.body?.data && part.mimeType === "text/html" && html === undefined) html = decodeBody(part.body.data, charset(part));
-    for (const child of part.parts ?? []) walk(child);
+    const type = (part.mimeType ?? "").toLowerCase();
+    if (type.startsWith("multipart/") && part.parts) return part.parts.forEach(walk);
+    const disposition = (header(part, "Content-Disposition") ?? "").trim().toLowerCase();
+    const named = Boolean(part.filename);
+    if (!named && !disposition.startsWith("attachment") && (type === "text/plain" || type === "text/html"))
+      return (type === "text/plain" ? plain : html).push(part);
+    attachments.push(
+      defined({
+        filename: part.filename || "(no name)",
+        mimeType: part.mimeType || "application/octet-stream",
+        size: part.body?.size ?? 0,
+        inline: disposition.startsWith("inline") || header(part, "Content-ID") !== undefined,
+        attachmentId: part.body?.attachmentId,
+      }),
+    );
   };
   if (payload) walk(payload);
-  return { body: (plain ?? (html === undefined ? "" : htmlToText(html))).trim(), attachments };
+  return { plain, html, attachments };
+};
+
+const text = (part: Part | undefined) => (part?.body?.data ? decodeBody(part.body.data, charset(part)) : undefined);
+
+/** The message text: its first text/plain part, else its HTML part as text. Attachments are listed, not read. */
+const content = (payload: Part | undefined) => {
+  const found = parts(payload);
+  const plain = text(found.plain[0]);
+  const html = text(found.html[0]);
+  return { body: (plain ?? (html === undefined ? "" : htmlToText(html))).trim(), attachments: found.attachments };
 };
 
 /** Label IDs to names; system labels keep their IDs (INBOX, UNREAD, STARRED...). */
@@ -135,27 +167,33 @@ const addresses = (value: string | undefined) =>
     .filter(Boolean);
 const bare = (address: string) => (/<([^>]+)>/.exec(address)?.[1] ?? address).trim().toLowerCase();
 
+/** The reply headers that tie a message to the one it answers. */
+interface ReplyHeaders {
+  readonly inReplyTo?: string;
+  readonly references?: string;
+}
+
 /**
  * Builds the RFC 2822 message. A reply takes the original's thread, subject and references, and
- * addresses its sender (and, with replyAll, everyone else on it except this account).
+ * addresses its sender (and, with replyAll, everyone else on it except this account). `kept` carries
+ * a reply draft's existing reply headers when no replyToMessageId is given.
  */
-const compose = async (ctx: Base, target: Target, input: ComposeInput) => {
+const compose = async (ctx: Base, target: Target, input: ComposeInput, kept: ReplyHeaders = {}) => {
   let to = [...(input.to ?? [])];
   let cc = [...(input.cc ?? [])];
   let subject = input.subject;
   let threadId: string | undefined;
-  const extra: string[] = [];
+  let threadSubject: string | undefined;
+  let reply = kept;
   if (input.replyToMessageId) {
-    const original: Message = await google(ctx, target, `${base}/messages/${encodeURIComponent(input.replyToMessageId)}`, {
+    const original: Message = await google(ctx, target, `${base}/messages/${pathId("replyToMessageId", input.replyToMessageId)}`, {
       search: { format: "metadata", metadataHeaders: ["From", "To", "Cc", "Subject", "Message-ID", "References", "Reply-To"] },
     });
     threadId = original.threadId;
     const messageId = header(original.payload, "Message-ID");
-    if (messageId) {
-      extra.push(`In-Reply-To: ${messageId}`);
-      extra.push(`References: ${[header(original.payload, "References"), messageId].filter(Boolean).join(" ")}`);
-    }
+    reply = messageId ? { inReplyTo: messageId, references: [header(original.payload, "References"), messageId].filter(Boolean).join(" ") } : {};
     const originalSubject = header(original.payload, "Subject") ?? "";
+    threadSubject = originalSubject;
     subject ??= /^re:/i.test(originalSubject) ? originalSubject : `Re: ${originalSubject}`;
     const self = target.email.toLowerCase();
     const sender = header(original.payload, "Reply-To") ?? header(original.payload, "From") ?? "";
@@ -177,14 +215,15 @@ const compose = async (ctx: Base, target: Target, input: ComposeInput) => {
     ...(cc.length ? [`Cc: ${cc.join(", ")}`] : []),
     ...(input.bcc?.length ? [`Bcc: ${input.bcc.join(", ")}`] : []),
     `Subject: ${encodeHeader(subject ?? "")}`,
-    ...extra,
+    ...(reply.inReplyTo ? [`In-Reply-To: ${reply.inReplyTo}`] : []),
+    ...(reply.references ? [`References: ${reply.references}`] : []),
     "MIME-Version: 1.0",
     `Content-Type: ${input.html ? "text/html" : "text/plain"}; charset="UTF-8"`,
     "Content-Transfer-Encoding: base64",
     "",
     base64Lines(input.body),
   ];
-  return { raw: base64url(lines.join("\r\n")), threadId, to, cc, subject: subject ?? "" };
+  return { raw: base64url(lines.join("\r\n")), threadId, threadSubject, reply, to, cc, subject: subject ?? "" };
 };
 
 /** Matching threads across targets, newest first, each summarised by its latest message. */
@@ -195,7 +234,7 @@ export const searchMail = async (ctx: Base, targets: readonly Target[], q: strin
       labelNames(ctx, target),
     ]);
     return mapLimit(threads as { id: string }[], 10, async ({ id }) => {
-      const thread: { messages?: Message[] } = await google(ctx, target, `${base}/threads/${id}`, {
+      const thread: { messages?: Message[] } = await google(ctx, target, `${base}/threads/${pathId("threadId", id)}`, {
         search: { format: "metadata", metadataHeaders: ["From", "To", "Subject", "Date"] },
       });
       const messages = thread.messages ?? [];
@@ -209,6 +248,172 @@ export const searchMail = async (ctx: Base, targets: readonly Target[], q: strin
   });
   items.sort((a, b) => b.date.localeCompare(a.date));
   return { threads: items.slice(0, max), errors };
+};
+
+/**
+ * Runs a send. A refusal (4xx) means nothing went out and is reported as it is; anything else (a
+ * 5xx, a dropped connection, a cancelled call) leaves it unknown whether Gmail sent the message, so
+ * the error says to check before retrying rather than risk sending twice.
+ */
+const uncertain = async <T>(check: string, run: () => Promise<T>): Promise<T> => {
+  try {
+    return await run();
+  } catch (error) {
+    if (error instanceof GoogleError && error.status < 500) throw error;
+    throw new Error(
+      `Gmail did not confirm the send${error instanceof GoogleError ? ` (it answered ${error.status})` : ""}, so the message may or may not have gone. Before retrying, ${check}, so it is not sent twice.`,
+    );
+  }
+};
+
+const subjectKey = (subject: string | undefined) =>
+  (subject ?? "").replace(/^(\s*(re|fwd?|aw|sv)\s*:\s*)+/i, "").replace(/\s+/g, " ").trim().toLowerCase();
+
+/** A short hash of a draft's raw MIME message, which binds a send to the exact bytes approved. */
+const version = async (raw: string) =>
+  [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(raw)))]
+    .slice(0, 16)
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+
+/**
+ * Executor's approval shows a call's arguments exactly only while they print, as JSON indented by
+ * two spaces, in this many characters (`approvalPreviewChars` in `apps`); longer ones are shortened.
+ */
+const approvalLimit = 4000;
+
+/** Headers the approval shows: where the mail goes, whom it appears to come from, and its subject. */
+const shownHeaders = ["From", "Sender", "Reply-To", "To", "Cc", "Bcc", "Subject"];
+/** Headers a draft may carry without showing them: they neither route mail nor change its sender. */
+const quietHeaders = new Set([
+  "mime-version",
+  "date",
+  "message-id",
+  "in-reply-to",
+  "references",
+  "content-type",
+  "content-transfer-encoding",
+  "content-language",
+]);
+
+/** Elements an HTML body may use and still be shown as text: text, formatting, tables, links and `cid:` images. */
+const textTags = new Set(
+  "a abbr b bdi bdo big blockquote body br caption center cite code col colgroup dd del dfn div dl dt em font h1 h2 h3 h4 h5 h6 hr html i img ins kbd li mark ol p pre q s samp small span strike strong sub sup table tbody td tfoot th thead tr tt u ul var wbr".split(" "),
+);
+
+/** Why an HTML body cannot be shown faithfully as text, or undefined when it can. */
+const htmlProblem = (html: string) => {
+  if (/<!--|<!\[/.test(html)) return "its HTML has comments, which some mail apps display";
+  for (const [, name, attributes] of html.matchAll(/<\/?([a-zA-Z][\w-]*)([^>]*)>/g)) {
+    const tag = name!.toLowerCase();
+    if (!textTags.has(tag)) return `its HTML uses a <${tag}> element`;
+    if (/\bon[a-z]+\s*=|\b(background|srcset|action|formaction|poster|ping|data|dynsrc|lowsrc)\s*=|url\s*\(|expression\s*\(|@import/i.test(attributes!))
+      return `its HTML has a <${tag}> attribute that loads or runs something`;
+    if (tag === "img" && !/\bsrc\s*=\s*["']?cid:/i.test(attributes!)) return "its HTML loads an image from the web";
+  }
+  return undefined;
+};
+
+const escapeHtml = (value: string) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+
+/**
+ * An HTML body as text in which every link shows its real target: `label <target>`, or the target
+ * alone when the label is the target. This is how Gmail writes links in a draft's plain-text part.
+ */
+const htmlWithTargets = (html: string) => {
+  const linked = html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi, (_, attributes: string, inner: string) => {
+    const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(attributes);
+    if (!href) return inner;
+    const target = htmlToText(escapeHtml(href[1] ?? href[2] ?? href[3] ?? "").replaceAll("&amp;", "&")).trim();
+    return htmlToText(inner).trim() === target ? escapeHtml(target) : `${inner} &lt;${escapeHtml(target)}&gt;`;
+  });
+  // A link left unmatched (no closing tag) would lose its target in the conversion below.
+  return /<a\b[^>]*\bhref/i.test(linked) ? undefined : htmlToText(linked);
+};
+
+/** Text compared as words: runs of spaces and line breaks count as one space. */
+const words = (value: string) => value.replace(/\s+/g, " ").trim();
+
+/**
+ * What sending a draft would send, read from Gmail now: the fields its approval shows, the raw
+ * message they were read from, and why sendDraft would refuse it, if it would. Both reads must name
+ * the same message, or the draft changed between them.
+ */
+const draftPreview = async (ctx: Base, target: Target, draftId: string) => {
+  const url = `${base}/drafts/${pathId("draftId", draftId)}`;
+  const hints = { 404: "No such draft: it may have been sent or deleted already. List drafts with gmail.drafts." };
+  const [full, raw]: { message: Message & { raw?: string } }[] = await Promise.all([
+    google(ctx, target, url, { search: { format: "full" }, hints }),
+    google(ctx, target, url, { search: { format: "raw" }, hints }),
+  ]);
+  if (full.message.id !== raw.message.id || raw.message.raw === undefined)
+    throw new Error("The draft changed while it was being read. Read it again.");
+  const payload = full.message.payload;
+  const problems: string[] = [];
+
+  const names = (payload?.headers ?? []).map((h) => h.name);
+  for (const name of shownHeaders)
+    if (names.filter((other) => other.toLowerCase() === name.toLowerCase()).length > 1) problems.push(`it has more than one ${name} header`);
+  for (const name of new Set(names))
+    if (!quietHeaders.has(name.toLowerCase()) && !shownHeaders.some((shown) => shown.toLowerCase() === name.toLowerCase()))
+      problems.push(`it has a ${name} header, which the approval would not show`);
+
+  const found = parts(payload);
+  if (found.plain.length > 1 || found.html.length > 1) problems.push("it has more than one text part");
+  const plain = text(found.plain[0])?.replace(/\r\n/g, "\n");
+  const html = text(found.html[0]);
+  let body = plain ?? "";
+  let format = plain === undefined ? "no body" : "plain text";
+  if (html !== undefined) {
+    const problem = htmlProblem(html);
+    const shown = problem === undefined ? htmlWithTargets(html) : undefined;
+    if (problem !== undefined) problems.push(problem);
+    else if (shown === undefined) problems.push("its HTML has a link whose target cannot be shown");
+    else if (plain === undefined) [body, format] = [shown, "HTML, shown as text with each link's target in <>"];
+    else if (words(shown) !== words(plain))
+      problems.push("its HTML version says something other than its plain text (compared word for word, with each link as label <target>)");
+    else format = "plain text, with an HTML copy of the same text";
+  }
+  const send = {
+    account: target.email,
+    draftId,
+    from: header(payload, "From") ?? "(not set: the account's default address)",
+    sender: header(payload, "Sender") ?? "",
+    replyTo: header(payload, "Reply-To") ?? "",
+    to: header(payload, "To") ?? "",
+    cc: header(payload, "Cc") ?? "",
+    bcc: header(payload, "Bcc") ?? "",
+    subject: header(payload, "Subject") ?? "",
+    format,
+    body,
+    attachments: found.attachments.map((a) => `${a.filename} (${a.mimeType}, ${a.size} bytes${a.inline ? ", shown in the body" : ""})`),
+    version: await version(raw.message.raw),
+  };
+  const length = JSON.stringify(send, null, 2).length;
+  if (length > approvalLimit)
+    problems.push(`it is too long for an approval to show in full (${length} characters as the approval prints it; the limit is ${approvalLimit})`);
+  return { message: full.message, raw: raw.message.raw, send, problems };
+};
+
+/** Why sendDraft will not send a draft, in words for the person. */
+const refusal = (problems: readonly string[]) =>
+  `sendDraft only sends a draft whose whole content its approval shows, and ${problems.join("; ")}. The person can open the draft in Gmail and send it from there.`;
+
+/** The fields sendDraft's approval shows, in the order readDraft returns them. */
+const SendFields = {
+  account: string({ minLength: 1 }),
+  draftId: string({ minLength: 1 }),
+  from: string(),
+  sender: string(),
+  replyTo: string(),
+  to: string(),
+  cc: string(),
+  bcc: string(),
+  subject: string(),
+  format: string(),
+  body: string(),
+  attachments: array(string()),
+  version: string({ minLength: 1 }),
 };
 
 /** The curated tools and their router's metadata; `source` names the package's accounts. */
@@ -233,9 +438,10 @@ export const gmail = (source: Source) => ({
         input: object({ account, threadId: string({ minLength: 1 }) }),
       },
       async (ctx: Context, input) => {
+        const url = `${base}/threads/${pathId("threadId", input.threadId)}`;
         const target = await single(ctx, source, input.account);
         const [thread, names] = await Promise.all([
-          google(ctx, target, `${base}/threads/${encodeURIComponent(input.threadId)}`, { search: { format: "full" } }),
+          google(ctx, target, url, { search: { format: "full" } }),
           labelNames(ctx, target),
         ]);
         return { account: target.email, threadId: input.threadId, messages: ((thread.messages ?? []) as Message[]).map((m) => full(target, m, names)) };
@@ -247,9 +453,10 @@ export const gmail = (source: Source) => ({
         input: object({ account, messageId: string({ minLength: 1 }) }),
       },
       async (ctx: Context, input) => {
+        const url = `${base}/messages/${pathId("messageId", input.messageId)}`;
         const target = await single(ctx, source, input.account);
         const [message, names] = await Promise.all([
-          google(ctx, target, `${base}/messages/${encodeURIComponent(input.messageId)}`, { search: { format: "full" } }),
+          google(ctx, target, url, { search: { format: "full" } }),
           labelNames(ctx, target),
         ]);
         return full(target, message, names);
@@ -264,7 +471,7 @@ export const gmail = (source: Source) => ({
         fanOut(await select(ctx, source, input.account), async (target) => {
           const { labels = [] } = await google(ctx, target, `${base}/labels`);
           return mapLimit(labels as { id: string; name: string; type: string }[], 10, async (label) => {
-            const detail = await google(ctx, target, `${base}/labels/${encodeURIComponent(label.id)}`);
+            const detail = await google(ctx, target, `${base}/labels/${pathId("labelId", label.id)}`);
             return {
               account: target.email,
               id: label.id,
@@ -284,23 +491,28 @@ export const gmail = (source: Source) => ({
         approval: always(),
       },
       async (ctx: WriteContext, input) => {
+        if (input.replyToMessageId !== undefined) pathId("replyToMessageId", input.replyToMessageId);
         const target = await single(ctx, source, input.account);
         const message = await compose(ctx, target, input);
         if (message.to.length === 0 && message.cc.length === 0 && !input.bcc?.length) throw new Error("Pass at least one recipient.");
-        const sent = await google(ctx, target, `${base}/messages/send`, {
-          method: "POST",
-          body: { raw: message.raw, ...(message.threadId ? { threadId: message.threadId } : {}) },
-        });
+        const sent = await uncertain("search Sent (gmail.search with in:sent) for it", () =>
+          google(ctx, target, `${base}/messages/send`, {
+            method: "POST",
+            body: { raw: message.raw, ...(message.threadId ? { threadId: message.threadId } : {}) },
+          }),
+        );
         return { account: target.email, messageId: sent.id, threadId: sent.threadId, to: message.to, cc: message.cc, subject: message.subject };
       },
     ),
     draft: mutation(
       {
-        description: "Save a draft without sending it. Takes the same fields as send, and recipients may be left out.",
+        description:
+          "Save a draft without sending it. Takes the same fields as send, and recipients may be left out. List drafts with drafts; change, send or delete one with updateDraft, sendDraft or deleteDraft.",
         input: object(Compose),
         approval: always(),
       },
       async (ctx: WriteContext, input) => {
+        if (input.replyToMessageId !== undefined) pathId("replyToMessageId", input.replyToMessageId);
         const target = await single(ctx, source, input.account);
         const message = await compose(ctx, target, input);
         const draft = await google(ctx, target, `${base}/drafts`, {
@@ -308,6 +520,148 @@ export const gmail = (source: Source) => ({
           body: { message: { raw: message.raw, ...(message.threadId ? { threadId: message.threadId } : {}) } },
         });
         return { account: target.email, draftId: draft.id, messageId: draft.message?.id, threadId: draft.message?.threadId };
+      },
+    ),
+    drafts: query(
+      {
+        description:
+          "List drafts across every linked Google account (or one), newest first, with their recipients, subject and snippet. query takes Gmail search syntax. Read one in full with readDraft.",
+        input: object({ account, query: string().optional(), max: number().optional() }),
+      },
+      async (ctx: Context, input) => {
+        const max = Math.min(Math.max(input.max ?? 20, 1), 100);
+        const { items, errors } = await fanOut(await select(ctx, source, input.account), async (target) => {
+          const { drafts = [] } = await google(ctx, target, `${base}/drafts`, { search: { q: input.query, maxResults: max } });
+          return mapLimit(drafts as { id: string }[], 10, async ({ id }) => {
+            const draft: { id: string; message: Message } = await google(ctx, target, `${base}/drafts/${pathId("draftId", id)}`, {
+              search: { format: "metadata" },
+            });
+            const message = draft.message;
+            return {
+              account: target.email,
+              draftId: draft.id,
+              messageId: message.id,
+              threadId: message.threadId,
+              to: header(message.payload, "To") ?? "",
+              cc: header(message.payload, "Cc") ?? "",
+              subject: header(message.payload, "Subject") ?? "",
+              date: message.internalDate ? new Date(Number(message.internalDate)).toISOString() : "",
+              snippet: message.snippet ?? "",
+            };
+          });
+        });
+        items.sort((a, b) => b.date.localeCompare(a.date));
+        return { drafts: items.slice(0, max), errors };
+      },
+    ),
+    readDraft: query(
+      {
+        description:
+          "Read a draft as it would be sent: its addresses, subject, body and attachments. When sendDraft can send it, `send` is sendDraft's input: pass it unchanged, so the person approving sees everything that will go out. When it cannot, `cannotSend` says why; tell the person, who can send it from Gmail.",
+        input: object({ account, draftId: string({ minLength: 1 }) }),
+      },
+      async (ctx: Context, input) => {
+        pathId("draftId", input.draftId);
+        const target = await single(ctx, source, input.account);
+        const draft = await draftPreview(ctx, target, input.draftId);
+        const { body, attachments } = content(draft.message.payload);
+        return defined({
+          account: target.email,
+          draftId: input.draftId,
+          messageId: draft.message.id,
+          threadId: draft.message.threadId,
+          from: draft.send.from,
+          sender: draft.send.sender,
+          replyTo: draft.send.replyTo,
+          to: draft.send.to,
+          cc: draft.send.cc,
+          bcc: draft.send.bcc,
+          subject: draft.send.subject,
+          body,
+          attachments,
+          send: draft.problems.length === 0 ? draft.send : undefined,
+          cannotSend: draft.problems.length === 0 ? undefined : refusal(draft.problems),
+        });
+      },
+    ),
+    updateDraft: mutation(
+      {
+        description:
+          "Replace a draft's content with new fields, as draft takes them. The draft is rewritten whole, so pass every field it should keep (recipients, subject, body). A reply draft keeps its reply headers (In-Reply-To, References) and its thread, but Gmail shows it in that conversation only while its subject still matches the thread's: the result has a warning when it may not.",
+        input: object({ ...Compose, draftId: string({ minLength: 1 }) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const url = `${base}/drafts/${pathId("draftId", input.draftId)}`;
+        if (input.replyToMessageId !== undefined) pathId("replyToMessageId", input.replyToMessageId);
+        const target = await single(ctx, source, input.account);
+        const current: { message?: Message } = await google(ctx, target, url, {
+          search: { format: "metadata", metadataHeaders: ["Subject", "In-Reply-To", "References"] },
+          hints: { 404: "No such draft: it may have been sent or deleted already. List drafts with gmail.drafts." },
+        });
+        const existing = current.message?.payload;
+        const line = (name: string) => header(existing, name)?.replace(/[\r\n]+/g, " ");
+        const message = await compose(ctx, target, input, { inReplyTo: line("In-Reply-To"), references: line("References") });
+        const threadId = message.threadId ?? current.message?.threadId;
+        const draft = await google(ctx, target, url, {
+          method: "PUT",
+          body: { id: input.draftId, message: { raw: message.raw, ...(threadId ? { threadId } : {}) } },
+        });
+        // Only a reply draft is tied to a conversation; any other draft has a thread of its own.
+        const threadSubject = message.threadSubject ?? header(existing, "Subject");
+        const isReply = message.reply.inReplyTo !== undefined || message.reply.references !== undefined;
+        const warning =
+          isReply && subjectKey(message.subject) !== subjectKey(threadSubject)
+            ? `The subject no longer matches the thread's ("${threadSubject ?? ""}"), so Gmail may show this draft as a new conversation instead of in its thread.`
+            : undefined;
+        return defined({ account: target.email, draftId: draft.id, messageId: draft.message?.id, threadId: draft.message?.threadId, warning });
+      },
+    ),
+    sendDraft: mutation(
+      {
+        description:
+          "Send a saved draft, but only one whose whole content its approval can show. Read it with readDraft first and pass its `send` field unchanged: the person approving sees the account; From, Sender, Reply-To, To, Cc and Bcc; the subject; the complete body; and every attachment's name, type and size, inline images included. It refuses, and sends nothing, a draft: too long for that to fit the approval (about 4,000 characters in all); with HTML that says anything other than its plain text, compared word for word with each link written as label <target>; whose HTML uses more than text, formatting, tables, links and inline images (no web images, styles, forms or scripts); with more than one text part; or with headers other than those shown and Date, Message-ID, In-Reply-To, References, MIME-Version and Content-*. An HTML-only draft is shown as its text with each link's target. The person can send a refused draft from Gmail. If the draft changed since it was read, nothing is sent: read it again and ask for approval of what it now says.",
+        input: object(SendFields),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        pathId("draftId", input.draftId);
+        const target = await single(ctx, source, input.account);
+        const now = await draftPreview(ctx, target, input.draftId);
+        if (now.problems.length > 0) throw new Error(`Nothing was sent: ${refusal(now.problems)}`);
+        const changed = (Object.keys(SendFields) as (keyof typeof SendFields)[]).filter(
+          (field) => JSON.stringify(input[field]) !== JSON.stringify(now.send[field]),
+        );
+        if (changed.length > 0)
+          throw new Error(
+            `Nothing was sent: the draft is not what was approved (${changed.join(", ")} differ). It may have been edited since it was read. Read it again with readDraft and ask for approval of what it now says.`,
+          );
+        // Sending the raw message that was just checked means the bytes approved are the bytes sent,
+        // even if the draft is edited again from here on.
+        const sent = await uncertain("check Sent (gmail.search with in:sent) and whether gmail.drafts still lists the draft", () =>
+          google(ctx, target, `${base}/drafts/send`, {
+            method: "POST",
+            body: { id: input.draftId, message: { raw: now.raw, ...(now.message.threadId ? { threadId: now.message.threadId } : {}) } },
+            hints: { 404: "No such draft: it may have been sent or deleted already. Check Sent and gmail.drafts." },
+          }),
+        );
+        return { account: target.email, draftId: input.draftId, messageId: sent.id, threadId: sent.threadId };
+      },
+    ),
+    deleteDraft: mutation(
+      {
+        description: "Delete a draft permanently. It does not go to Trash and cannot be recovered.",
+        input: object({ account, draftId: string({ minLength: 1 }) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const url = `${base}/drafts/${pathId("draftId", input.draftId)}`;
+        const target = await single(ctx, source, input.account);
+        await google(ctx, target, url, {
+          method: "DELETE",
+          hints: { 404: "No such draft: it may have been sent or deleted already. List drafts with gmail.drafts." },
+        });
+        return { account: target.email, draftId: input.draftId, deleted: true };
       },
     ),
     modify: mutation(
@@ -327,6 +681,7 @@ export const gmail = (source: Source) => ({
         approval: always(),
       },
       async (ctx: WriteContext, input) => {
+        const threads = input.threadIds.map((id) => pathId("threadId", id));
         const target = await single(ctx, source, input.account);
         const names = await labelNames(ctx, target);
         const add = labelIds(names, input.addLabels ?? []);
@@ -336,8 +691,7 @@ export const gmail = (source: Source) => ({
         if (input.read === false) add.push("UNREAD");
         if (input.starred === true) add.push("STARRED");
         if (input.starred === false) remove.push("STARRED");
-        await mapLimit(input.threadIds, 10, async (id) => {
-          const thread = encodeURIComponent(id);
+        await mapLimit(threads, 10, async (thread) => {
           if (input.trash) await google(ctx, target, `${base}/threads/${thread}/trash`, { method: "POST" });
           if (add.length || remove.length)
             await google(ctx, target, `${base}/threads/${thread}/modify`, {
@@ -355,12 +709,9 @@ export const gmail = (source: Source) => ({
         input: object({ account, messageId: string({ minLength: 1 }), attachmentId: string({ minLength: 1 }), mimeType: string().optional() }),
       },
       async (ctx: Context, input) => {
+        const url = `${base}/messages/${pathId("messageId", input.messageId)}/attachments/${pathId("attachmentId", input.attachmentId)}`;
         const target = await single(ctx, source, input.account);
-        const { data = "", size } = await google(
-          ctx,
-          target,
-          `${base}/messages/${encodeURIComponent(input.messageId)}/attachments/${encodeURIComponent(input.attachmentId)}`,
-        );
+        const { data = "", size } = await google(ctx, target, url);
         const text = /^(text\/|application\/(json|xml|csv))/.test(input.mimeType ?? "");
         return text ? { size, text: decodeBody(data) } : { size, base64: (data as string).replaceAll("-", "+").replaceAll("_", "/") };
       },
@@ -369,6 +720,6 @@ export const gmail = (source: Source) => ({
   meta: {
     title: "Gmail",
     description: "Search, read and send mail across every linked Google account.",
-    instructions: `search spans every linked account unless \`account\` (an address) is given; its results carry the account, and reads and writes take that account. Writes need \`account\` only when several accounts are linked. The full Gmail API is under ${source.api("gmail")}.`,
+    instructions: `search and drafts span every linked account unless \`account\` (an address) is given; their results carry the account, and reads and writes take that account. Writes need \`account\` only when several accounts are linked. The full Gmail API (filters, vacation replies, send-as aliases, label edits, history) is under ${source.api("gmail")}.`,
   },
 });
