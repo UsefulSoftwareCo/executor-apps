@@ -297,7 +297,8 @@ export const gmail = (source: Source) => ({
     ),
     draft: mutation(
       {
-        description: "Save a draft without sending it. Takes the same fields as send, and recipients may be left out.",
+        description:
+          "Save a draft without sending it. Takes the same fields as send, and recipients may be left out. List drafts with drafts; change, send or delete one with updateDraft, sendDraft or deleteDraft.",
         input: object(Compose),
         approval: always(),
       },
@@ -309,6 +310,82 @@ export const gmail = (source: Source) => ({
           body: { message: { raw: message.raw, ...(message.threadId ? { threadId: message.threadId } : {}) } },
         });
         return { account: target.email, draftId: draft.id, messageId: draft.message?.id, threadId: draft.message?.threadId };
+      },
+    ),
+    drafts: query(
+      {
+        description:
+          "List drafts across every linked Google account (or one), newest first, with their recipients, subject and snippet. query takes Gmail search syntax. Read one in full with readMessage and its messageId.",
+        input: object({ account, query: string().optional(), max: number().optional() }),
+      },
+      async (ctx: Context, input) => {
+        const max = Math.min(Math.max(input.max ?? 20, 1), 100);
+        const { items, errors } = await fanOut(await select(ctx, source, input.account), async (target) => {
+          const { drafts = [] } = await google(ctx, target, `${base}/drafts`, { search: { q: input.query, maxResults: max } });
+          return mapLimit(drafts as { id: string }[], 10, async ({ id }) => {
+            const draft: { id: string; message: Message } = await google(ctx, target, `${base}/drafts/${encodeURIComponent(id)}`, {
+              search: { format: "metadata" },
+            });
+            const message = draft.message;
+            return {
+              account: target.email,
+              draftId: draft.id,
+              messageId: message.id,
+              threadId: message.threadId,
+              to: header(message.payload, "To") ?? "",
+              cc: header(message.payload, "Cc") ?? "",
+              subject: header(message.payload, "Subject") ?? "",
+              date: message.internalDate ? new Date(Number(message.internalDate)).toISOString() : "",
+              snippet: message.snippet ?? "",
+            };
+          });
+        });
+        items.sort((a, b) => b.date.localeCompare(a.date));
+        return { drafts: items.slice(0, max), errors };
+      },
+    ),
+    updateDraft: mutation(
+      {
+        description:
+          "Replace a draft's content with new fields, as draft takes them. The draft is rewritten whole, so pass every field it should keep (recipients, subject, body). It stays in its thread.",
+        input: object({ ...Compose, draftId: string({ minLength: 1 }) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const path = `${base}/drafts/${encodeURIComponent(input.draftId)}`;
+        const current: { message?: { threadId?: string } } = await google(ctx, target, path, { search: { format: "minimal" } });
+        const message = await compose(ctx, target, input);
+        const threadId = message.threadId ?? current.message?.threadId;
+        const draft = await google(ctx, target, path, {
+          method: "PUT",
+          body: { id: input.draftId, message: { raw: message.raw, ...(threadId ? { threadId } : {}) } },
+        });
+        return { account: target.email, draftId: draft.id, messageId: draft.message?.id, threadId: draft.message?.threadId };
+      },
+    ),
+    sendDraft: mutation(
+      {
+        description: "Send a saved draft as it is. Find it with drafts, and read it with readMessage before sending.",
+        input: object({ account, draftId: string({ minLength: 1 }) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const sent = await google(ctx, target, `${base}/drafts/send`, { method: "POST", body: { id: input.draftId } });
+        return { account: target.email, draftId: input.draftId, messageId: sent.id, threadId: sent.threadId };
+      },
+    ),
+    deleteDraft: mutation(
+      {
+        description: "Delete a draft permanently. It does not go to Trash and cannot be recovered.",
+        input: object({ account, draftId: string({ minLength: 1 }) }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        await google(ctx, target, `${base}/drafts/${encodeURIComponent(input.draftId)}`, { method: "DELETE" });
+        return { account: target.email, draftId: input.draftId, deleted: true };
       },
     ),
     modify: mutation(
@@ -370,6 +447,6 @@ export const gmail = (source: Source) => ({
   meta: {
     title: "Gmail",
     description: "Search, read and send mail across every linked Google account.",
-    instructions: `search spans every linked account unless \`account\` (an address) is given; its results carry the account, and reads and writes take that account. Writes need \`account\` only when several accounts are linked. The full Gmail API is under ${source.api("gmail")}.`,
+    instructions: `search and drafts span every linked account unless \`account\` (an address) is given; their results carry the account, and reads and writes take that account. Writes need \`account\` only when several accounts are linked. The full Gmail API (filters, vacation replies, send-as aliases, label edits, history) is under ${source.api("gmail")}.`,
   },
 });
