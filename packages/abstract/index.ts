@@ -54,7 +54,7 @@ const abstract = defineProvider({
   hosts: Object.values(hosts),
   auth: {
     apiKey: secrets({
-      label: "API key",
+      label: `API key for one Abstract product (product: ${products.join(", ")})`,
       guide: `
         Abstract issues a separate API key for each product, so add one account per product.
         Copy the key from the product's page in your [Abstract dashboard](https://app.abstractapi.com).

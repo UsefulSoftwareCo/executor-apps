@@ -20,7 +20,8 @@ const twilio = defineProvider({
   hosts: ["*.twilio.com"],
   auth: {
     apiKey: secrets({
-      label: "Auth token or API key",
+      label:
+        "Account SID (AC...), then Username and Password. Use the Account SID as Username and the Auth Token as Password, or an API Key SID (SK...) as Username and its secret as Password",
       guide: `
         Sign in with your Auth Token or, better, an API key. Find your Account SID and Auth Token
         on the [Twilio Console](https://console.twilio.com) home page, and create API keys under
