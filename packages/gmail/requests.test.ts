@@ -24,6 +24,7 @@ const reply = mime(
 const raw = Buffer.from(message).toString("base64url");
 const replyRaw = Buffer.from(reply).toString("base64url");
 const me = { userId: "me" };
+const credentialParameters = ["access_token", "oauth_token", "key"];
 
 /** The JSON operations that take a whole message, and the request Gmail documents for each. */
 const jsonCases = [
@@ -163,6 +164,30 @@ for (const mount of [
         input: { path: me, query: { uploadType: "resumable" }, contentType: "message/rfc822", body: Buffer.from(message).toString("base64") },
       });
       assert.equal(result.ok ? "ok" : result.error._tag, "HostInputInvalid");
+    });
+
+    test("a write whose body Gmail treats as optional can still omit it", async () => {
+      const request = await approvedCall(host, `${mount.prefix}gmailUsersLabelsPatch`, { accountId, input: { path: { ...me, id: "Label_1" } } });
+      assert.equal(request.method, "PATCH");
+      assert.equal(request.path, "/gmail/v1/users/me/labels/Label_1");
+      assert.equal(request.body.length, 0);
+    });
+
+    // A credential given as a tool argument would land in the request URL and the approval prompt;
+    // the account binding supplies credentials, so these standard parameters are not offered.
+    test("credential query parameters are refused and never reach a request URL", async () => {
+      for (const name of credentialParameters) {
+        const sent = host.requests.length;
+        const listed = await host.call(`${mount.prefix}gmailUsersMessagesList`, { accountId, input: { path: me, query: { [name]: "synthetic-credential" } } });
+        assert.equal(listed.ok ? "ok" : listed.error._tag, "HostInputInvalid", name);
+        const upload = await host.call(`${mount.prefix}gmailUsersMessagesSendMedia`, {
+          accountId,
+          input: { path: me, query: { uploadType: "media", [name]: "synthetic-credential" }, contentType: "message/rfc822", body: Buffer.from(message).toString("base64") },
+        });
+        assert.equal(upload.ok ? "ok" : upload.error._tag, "HostInputInvalid", name);
+        assert.equal(host.requests.length, sent, `${name} reached Google`);
+      }
+      for (const request of host.requests) for (const name of credentialParameters) assert.equal(request.query.has(name), false, `${name} in ${request.path}`);
     });
   });
 }

@@ -112,5 +112,20 @@ for (const mount of [
         assert.equal(result.ok ? "ok" : result.error._tag, "HostInputInvalid", uploadType);
       }
     });
+
+    test("credential query parameters are refused and never reach a request URL", async () => {
+      for (const name of ["access_token", "oauth_token", "key"]) {
+        const sent = host.requests.length;
+        const listed = await host.call(`${mount.prefix}driveFilesList`, { accountId, input: { query: { [name]: "synthetic-credential" } } });
+        assert.equal(listed.ok ? "ok" : listed.error._tag, "HostInputInvalid", name);
+        const upload = await host.call(`${mount.prefix}driveFilesCreateMedia`, {
+          accountId,
+          input: { query: { uploadType: "media", [name]: "synthetic-credential" }, contentType: "text/plain", body: text },
+        });
+        assert.equal(upload.ok ? "ok" : upload.error._tag, "HostInputInvalid", name);
+        assert.equal(host.requests.length, sent, `${name} reached Google`);
+      }
+      for (const request of host.requests) for (const name of ["access_token", "oauth_token", "key"]) assert.equal(request.query.has(name), false, `${name} in ${request.path}`);
+    });
   });
 }
