@@ -80,7 +80,8 @@ const addDays = (date: string, days: number) => new Date(dateMs(date) + days * d
 
 /**
  * The start and end an update writes. A new start without an end keeps the event's length, unless
- * it switches between all-day and timed, where `minutes` (default 30) or one day applies.
+ * it switches between all-day and timed, where `minutes` (default 30) or one day applies. Patch
+ * merges these objects, so the kind not used is cleared with null: Google refuses both at once.
  */
 const moved = (
   current: { readonly start?: { readonly date?: string; readonly dateTime?: string }; readonly end?: { readonly date?: string; readonly dateTime?: string } },
@@ -92,11 +93,12 @@ const moved = (
   if (input.end !== undefined && isDate(input.end) !== allDay)
     throw new Error("start and end must both be dates (an all-day event) or both be times.");
   if (allDay) {
+    if (input.minutes !== undefined) throw new Error("minutes applies to timed events; give an all-day event's end as a date.");
     const start = input.start?.trim() ?? current.start?.date!;
     const length = wasAllDay ? Math.max(1, Math.round((dateMs(current.end?.date ?? addDays(current.start!.date!, 1)) - dateMs(current.start!.date!)) / day)) : 1;
     const end = input.end?.trim() ?? (input.start === undefined ? current.end?.date! : addDays(start, length));
     if (dateMs(end) <= dateMs(start)) throw new Error("An all-day event's end is the day after its last day, so it must be after start.");
-    return { start: { date: start }, end: { date: end } };
+    return { start: { date: start, dateTime: null, timeZone: null }, end: { date: end, dateTime: null, timeZone: null } };
   }
   const startAt = input.start === undefined ? Date.parse(current.start!.dateTime!) : parseTime(input.start, zone);
   const length =
@@ -108,8 +110,8 @@ const moved = (
   const endAt = input.end === undefined ? startAt + length : parseTime(input.end, zone);
   if (endAt <= startAt) throw new Error("The event must end after it starts.");
   return {
-    start: { dateTime: new Date(startAt).toISOString(), timeZone: zone },
-    end: { dateTime: new Date(endAt).toISOString(), timeZone: zone },
+    start: { dateTime: new Date(startAt).toISOString(), timeZone: zone, date: null },
+    end: { dateTime: new Date(endAt).toISOString(), timeZone: zone, date: null },
   };
 };
 
