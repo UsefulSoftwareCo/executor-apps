@@ -1,4 +1,4 @@
-// gmail-openapi.json is generated from Google's own Gmail v1 Discovery document (revision 20261106)
+// gmail-openapi.json is generated from Google's own Gmail v1 Discovery document (revision 20261109)
 // by discovery-to-openapi.mjs; see README. Credentials go only to gmail.googleapis.com.
 import type { JsonObject } from "apps";
 import type { OpenapiToolNamesOptions } from "apps/openapi";

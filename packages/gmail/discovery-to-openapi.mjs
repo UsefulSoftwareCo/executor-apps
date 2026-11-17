@@ -1,26 +1,33 @@
 // Converts Google's Gmail v1 Discovery document into the vendored gmail-openapi.json.
 // Usage: node discovery-to-openapi.mjs <discovery.json> > gmail-openapi.json
 // Fetch the input from https://gmail.googleapis.com/$discovery/rest?version=v1
-// The same converter as packages/google-drive's, with Gmail's settings below.
+// Derived from packages/google-drive's converter, with Gmail's settings below. Unlike that one, it
+// keeps all of Google's standard parameters and writes its output in a fixed order.
 import { readFileSync } from "node:fs";
 
 const d = JSON.parse(readFileSync(process.argv[2], "utf8"));
 
 // Package settings. A method that takes content (`supportsMediaUpload`) also gets a `<id>Media`
 // operation: a simple upload (`uploadType=media`) to Discovery's `/upload/...` path whose body is
-// the content itself. Gmail's uploads take a whole RFC 822 message.
+// the content itself. Gmail's uploads take a whole RFC 822 message. Gmail's JSON operations take
+// the whole message too, as base64url `raw`, so they stay the ordinary way to send.
 const MEDIA_TYPES = ["message/rfc822"];
 const rfc822 =
   "The body is the whole RFC 822 message (headers and body), base64-encoded. " +
-  "For an ordinary message, the JSON operation with a base64url `raw` field is simpler and also takes threadId; " +
-  "use this upload for large messages.";
+  "The JSON operation takes the same message as base64url `raw` and is the usual choice; it also sets threadId (needed for a reply) and labelIds, which this upload cannot. " +
+  "This is a simple upload of one request: multipart and resumable uploads are not supported.";
 /** What an agent must know about each upload operation, by Discovery method id. */
-const MEDIA_NOTES = Object.fromEntries(
-  ["drafts.create", "drafts.update", "drafts.send", "messages.send", "messages.insert", "messages.import"].map((id) => [
-    `gmail.users.${id}`,
-    rfc822,
-  ]),
-);
+const MEDIA_NOTES = {
+  ...Object.fromEntries(["drafts.create", "messages.send", "messages.insert", "messages.import"].map((id) => [`gmail.users.${id}`, rfc822])),
+  "gmail.users.drafts.update": `${rfc822} To replace a draft's message and then send it, call this with the draft's id, then the JSON drafts.send with that id.`,
+};
+/**
+ * Methods that get no upload operation, and why. drafts.send must name the draft it sends, and a
+ * simple upload carries only the message, with no way to give the draft's id.
+ */
+const NO_MEDIA = {
+  "gmail.users.drafts.send": "a simple upload cannot carry the id of the draft to send",
+};
 /**
  * Tag every operation with its top-level Discovery resource (false: group operations by path).
  * Gmail's paths all start with /gmail/v1/users, so tags keep its tools under `users`.
@@ -41,6 +48,10 @@ const size = (bytes) => {
   return `${Number(value.toFixed(1))} ${units[unit]}`;
 };
 
+// Google returns the Discovery document's keys in a different order on every fetch, so the output
+// is sorted: a refresh then shows only real changes.
+const sorted = (record) => Object.entries(record ?? {}).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+
 const schema = (s) => {
   if (!s) return {};
   if (s.$ref) return { $ref: `#/components/schemas/${s.$ref}` };
@@ -51,7 +62,7 @@ const schema = (s) => {
   if (s.format) out.format = s.format;
   if (s.enum) out.enum = s.enum;
   if (s.properties) {
-    out.properties = Object.fromEntries(Object.entries(s.properties).map(([k, v]) => [k, schema(v)]));
+    out.properties = Object.fromEntries(sorted(s.properties).map(([k, v]) => [k, schema(v)]));
   }
   if (s.additionalProperties) out.additionalProperties = schema(s.additionalProperties);
   if (s.items) out.items = schema(s.items);
@@ -69,18 +80,24 @@ const param = (name, p) => {
   };
 };
 
+// Google's standard parameters, accepted by every method. `uploadType` on an upload operation is
+// replaced by the one value supported there.
+const standard = sorted(d.parameters).map(([n, p]) => param(n, p));
+
 const paths = {};
 const walk = (resources) => {
-  for (const r of Object.values(resources ?? {})) {
-    for (const m of Object.values(r.methods ?? {})) {
+  for (const [, r] of sorted(resources)) {
+    for (const [, m] of sorted(r.methods)) {
       const key = `/${m.path.replace(/^\//, "")}`;
-      const params = Object.entries(m.parameters ?? {}).map(([n, p]) => param(n, p));
-      params.push({ name: "fields", in: "query", required: false, description: d.parameters.fields.description, schema: { type: "string" } });
+      // Path parameters in the method's own order, then the rest by name.
+      const order = m.parameterOrder ?? [];
+      const own = sorted(m.parameters).sort(([a], [b]) => (order.includes(a) ? order.indexOf(a) : order.length) - (order.includes(b) ? order.indexOf(b) : order.length));
+      const params = own.map(([n, p]) => param(n, p));
       const op = {
         operationId: m.id,
         ...(RESOURCE_TAGS ? { tags: [m.id.split(".")[1]] } : {}),
         description: m.description?.trim(),
-        parameters: params,
+        parameters: [...params, ...standard],
         responses: {
           200: m.response
             ? { description: "Success", content: { "application/json": { schema: schema(m.response) } } }
@@ -91,9 +108,8 @@ const walk = (resources) => {
       if (m.request) {
         op.requestBody = { required: true, content: { "application/json": { schema: schema(m.request) } } };
       }
-      const simple = m.supportsMediaUpload ? m.mediaUpload?.protocols?.simple : undefined;
-      if (simple) op.description = `${op.description}\n\nThis operation sends metadata only. To send content, use ${m.id}Media.`;
       (paths[key] ??= {})[m.httpMethod.toLowerCase()] = op;
+      const simple = m.supportsMediaUpload && !NO_MEDIA[m.id] ? m.mediaUpload?.protocols?.simple : undefined;
       if (simple) {
         const uploadKey = `/${simple.path.replace(/^\//, "")}`;
         const limit = m.mediaUpload.maxSize ? ` Google accepts up to ${size(m.mediaUpload.maxSize)}, but the content travels inside the tool call, so keep it to a few MB.` : "";
@@ -107,7 +123,7 @@ const walk = (resources) => {
             `Metadata in ${m.id}'s JSON body cannot be set here. ${MEDIA_NOTES[m.id] ?? ""}\n\n${m.description?.trim()}`,
           servers: [{ url: d.rootUrl.replace(/\/$/, "") }],
           parameters: [
-            ...params.slice(0, -1),
+            ...params,
             {
               name: "uploadType",
               in: "query",
@@ -115,7 +131,7 @@ const walk = (resources) => {
               description: "Upload protocol. Only a simple upload, `media`, is supported here.",
               schema: { type: "string", enum: ["media"] },
             },
-            params.at(-1),
+            ...standard.filter((p) => p.name !== "uploadType"),
           ],
           requestBody: {
             required: true,
@@ -145,7 +161,7 @@ const doc = {
   security: [{ bearer: [] }],
   paths,
   components: {
-    schemas: Object.fromEntries(Object.entries(d.schemas).map(([k, v]) => [k, schema(v)])),
+    schemas: Object.fromEntries(sorted(d.schemas).map(([k, v]) => [k, schema(v)])),
     securitySchemes: { bearer: { type: "http", scheme: "bearer" } },
   },
 };

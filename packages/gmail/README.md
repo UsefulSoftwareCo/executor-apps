@@ -1,6 +1,6 @@
 # Gmail
 
-Messages, threads, drafts, labels, history, filters, forwarding addresses, send-as aliases, delegates and settings for a Gmail account, as 85 tools generated from the Gmail API. Every mutation asks for approval.
+Messages, threads, drafts, labels, history, filters, forwarding addresses, send-as aliases, delegates and settings for a Gmail account, as 84 tools generated from the Gmail API. Every mutation asks for approval.
 
 ## Curated tools
 
@@ -8,9 +8,9 @@ The top-level tools are shaped for agents, after [gogcli](https://github.com/ope
 
 ## Interface
 
-OpenAPI, vendored as `gmail-openapi.json`. Google publishes the Gmail API only as a Discovery document, so `discovery-to-openapi.mjs` (the converter `google-drive` uses, with Gmail's settings) converts Google's own document (`https://gmail.googleapis.com/$discovery/rest?version=v1`, **revision 20261106**) into OpenAPI 3. The output is checked in so any upstream change shows up in review. To refresh: `curl -s 'https://gmail.googleapis.com/$discovery/rest?version=v1' -o /tmp/g.json && node packages/gmail/discovery-to-openapi.mjs /tmp/g.json > packages/gmail/gmail-openapi.json`, update the revision here and in `openapi.ts`, then run `node scripts/google-vendor.ts`. Every operation is tagged with its Discovery resource, so the tools stay under `users` as before, and carries a plain bearer requirement.
+OpenAPI, vendored as `gmail-openapi.json`. Google publishes the Gmail API only as a Discovery document, so `discovery-to-openapi.mjs` (derived from `google-drive`'s converter, with Gmail's settings) converts Google's own document (`https://gmail.googleapis.com/$discovery/rest?version=v1`, **revision 20261109**) into OpenAPI 3. The output is checked in so any upstream change shows up in review. To refresh: `curl -s 'https://gmail.googleapis.com/$discovery/rest?version=v1' -o /tmp/g.json && node packages/gmail/discovery-to-openapi.mjs /tmp/g.json > packages/gmail/gmail-openapi.json`, update the revision here and in `openapi.ts`, then run `node scripts/google-vendor.ts`. The output is sorted, because Google returns the document's keys in a different order on each fetch. Every operation keeps Google's standard query parameters (`fields`, `quotaUser`, `prettyPrint` and the rest), as the APIs.guru conversion did, is tagged with its Discovery resource, so the tools stay under `users` as before, and carries a plain bearer requirement.
 
-APIs.guru's conversion, used before, is no longer used: it turned the six methods that take a whole message (`drafts.create`, `drafts.update`, `drafts.send`, `messages.send`, `messages.insert`, `messages.import`) into `message/*` uploads sent to the JSON path, so none of them could succeed. Here those methods take JSON with a base64url `raw` message, and each also has a `<method>Media` operation: a simple upload (`uploadType=media`) of the base64-encoded RFC 822 message to its `/upload/gmail/v1/...` path, for large messages.
+APIs.guru's conversion, used before, is no longer used: it turned the six methods that take a whole message (`drafts.create`, `drafts.update`, `drafts.send`, `messages.send`, `messages.insert`, `messages.import`) into `message/*` uploads sent to the JSON path, so none of them could succeed. Here those methods take JSON with a base64url `raw` message, which carries the whole message; a reply also sets `threadId` there. Five of them also have a `<method>Media` operation: a simple upload (`uploadType=media`) of the base64-encoded RFC 822 message to its `/upload/gmail/v1/...` path. `drafts.send` has none, because a simple upload cannot say which draft to send; to replace a draft's message and send it, call `gmailUsersDraftsUpdateMedia` with its id and then `gmailUsersDraftsSend`.
 
 Google also runs an official Gmail MCP server (`https://gmailmcp.googleapis.com/mcp/v1`). It is a gated Developer Preview: it requires Workspace Developer Preview Program membership and enabling `gmailmcp.googleapis.com`, exposes only about ten tools (search threads, get thread/message, drafts, labels), cannot send email, and allows only `gmail.readonly` and `gmail.compose`. Because of that, the REST API was chosen deliberately over the MCP server. Revisit once the MCP reaches general availability.
 
@@ -22,9 +22,9 @@ Scopes requested: `https://mail.google.com/` (full Gmail access, the scope Execu
 
 ## Known gaps
 
-10 of the 85 tools are exposed but cannot succeed with the granted scopes:
+10 of the 84 tools are exposed but cannot succeed with the granted scopes:
 
 - 3 need the restricted `https://mail.google.com/` scope (permanent delete): `messages.delete`, `messages.batchDelete`, `threads.delete`. Trash instead.
 - 7 are administrative `gmail.settings.sharing` or service-account-only operations that need domain-wide delegation: `delegates.list/get/create/delete` (4), `forwardingAddresses.create/delete` (2), `settings.updateAutoForwarding` (1).
 - The `settings.cse.*` tools only work on Workspace accounts with client-side encryption.
-- Uploads (the `<method>Media` tools) are simple uploads only; the message travels inside the tool call, and metadata such as `threadId` or `labelIds` needs the JSON operation. Multipart and resumable uploads are not exposed.
+- Uploads (the `<method>Media` tools) are simple uploads only, so they are no help for large messages: the message travels inside the tool call, as it does for the JSON operations, and metadata such as `threadId` or `labelIds` needs the JSON operation. Multipart and resumable uploads are not exposed.
