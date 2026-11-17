@@ -77,7 +77,11 @@ say in the README when a detail could not be confirmed there.
 - `package.json`: `"name": "@executor.sh/<id>"`, `description`,
   `"private": true`, `"type": "module"`, `"executor": { "title": "<Product name>" }`,
   `dependencies.apps` exactly `0.0.1-beta.140` (plus `graphql` `16.11.0` or
-  `@modelcontextprotocol/sdk` `1.32.1` when used).
+  `@modelcontextprotocol/sdk` `1.32.1` when used). A package that needs an
+  option from a later version pins that version and is listed in
+  `scripts/check.sh`: `linkedin` and `linkedinads` pin `0.0.1-beta.142` for
+  `pkce: false`. The root `apps` devDependency, which `tsc -p .` checks every
+  package against, is the latest version any package pins.
 - `index.ts`: declares the icons beside the accounts,
   `defineApp({ accounts: { ... }, icons }, ...)`, and wraps the tools in
   `router(..., { title, description, icons })`, adding `instructions` only for
