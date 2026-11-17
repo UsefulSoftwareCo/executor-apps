@@ -5,6 +5,7 @@ import { test } from "node:test";
 import { Effect } from "effect";
 import { calendar } from "./tools/calendar.ts";
 import { gmail } from "./tools/gmail.ts";
+import { approvalElicitation } from "apps/contracts";
 import { base64url, decodeBody, parseTime, type Source } from "./tools/shared.ts";
 
 const self = "user@example.com";
@@ -159,6 +160,24 @@ test("updateEvent and createEvent read local times in the selected calendar's ow
     timeZone: "America/New_York",
   });
   assert.equal(explicit.calls.find((call) => call.method === "PATCH")!.body.start.dateTime, "2026-12-02T14:00:00.000Z");
+});
+
+// The account is in New York; the slot is booked on a calendar in London. 09:00 New York is 14:00Z.
+test("a free slot from freeBusy goes straight into createEvent on a calendar in another zone and keeps its instant", async () => {
+  const { calls, ctx } = google({
+    "GET /calendar/v3/users/me/settings/timezone": () => ({ value: "America/New_York" }),
+    "GET /calendar/v3/users/me/calendarList": () => ({ items: [{ id: self, primary: true, accessRole: "owner" }] }),
+    "POST /calendar/v3/freeBusy": () => ({ calendars: { [self]: { busy: [{ start: "2026-12-02T15:00:00Z", end: "2026-12-02T16:00:00Z" }] } } }),
+    "GET /calendar/v3/calendars/team%40example.com": () => ({ timeZone: "Europe/London" }),
+    "POST /calendar/v3/calendars/team%40example.com/events": (call) => ({ ...solo, ...call.body }),
+  });
+  const availability = await run(calendarTools.freeBusy, ctx, { from: "2026-12-02", days: 1 });
+  assert.deepEqual(availability.busy, [{ start: "2026-12-02T10:00:00-05:00", end: "2026-12-02T11:00:00-05:00" }]);
+  assert.deepEqual(availability.free[0], { start: "2026-12-02T09:00:00-05:00", end: "2026-12-02T10:00:00-05:00", minutes: 60 });
+  await run(calendarTools.createEvent, ctx, { calendarId: "team@example.com", summary: "Sync", start: availability.free[0].start, minutes: 30 });
+  const post = calls.find((call) => call.method === "POST" && call.path.endsWith("/events"))!;
+  assert.equal(post.body.start.dateTime, "2026-12-02T14:00:00.000Z");
+  assert.equal(post.body.end.dateTime, "2026-12-02T14:30:00.000Z");
 });
 
 test("updateEvent moves an all-day event by whole days and keeps how many days it spans", async () => {
@@ -326,7 +345,7 @@ test("deleteEvent deletes on the primary calendar by default, only the version i
 
 // ".." would make `calendars/team%40example.com/events/..` resolve to the calendar itself.
 test("every Calendar and Gmail tool refuses an ID that is not one before sending anything", async () => {
-  const send = { account: self, from: "", to: "", cc: "", bcc: "", subject: "", excerpt: "", bodyLength: 0, attachments: [], version: "v" };
+  const send = { account: self, from: "", sender: "", replyTo: "", to: "", cc: "", bcc: "", subject: "", format: "", body: "", attachments: [], version: "v" };
   const cases: [object, (id: string) => object][] = [
     [calendarTools.updateEvent, (id) => ({ calendarId: "team@example.com", eventId: id, summary: "x", affectsGuests: true })],
     [calendarTools.updateEvent, (id) => ({ calendarId: id, eventId: "evt_1", summary: "x", affectsGuests: true })],
@@ -456,33 +475,71 @@ test("drafts lists drafts newest first with their recipients and subject", async
   });
 });
 
-/** A saved draft as Gmail returns it in `full` and `raw` form; `edit` stands for a later edit. */
-const savedDraft = (edit = 0) => {
-  const subject = edit === 0 ? "Plan for Q1" : "Plan for Q1 (revised)";
-  const text = edit === 0 ? "Hi Alex,\n\nHere is the plan.\n" : "Hi Alex,\n\nHere is the new plan.\n";
-  const mime = `From: User <user@example.com>\r\nTo: alex@example.com\r\nSubject: ${subject}\r\n\r\n${text}`;
-  const message = {
-    id: `msg_d9_${edit}`,
-    threadId: "thr_9",
-    payload: {
-      mimeType: "multipart/mixed",
-      headers: [
-        { name: "From", value: "User <user@example.com>" },
-        { name: "To", value: "alex@example.com" },
-        { name: "Cc", value: "sam@example.com" },
-        { name: "Bcc", value: "kim@example.com" },
-        { name: "Subject", value: subject },
-      ],
-      parts: [
-        { mimeType: "text/plain", body: { data: base64url(text), size: text.length } },
-        { mimeType: "application/pdf", filename: "plan.pdf", body: { attachmentId: "att_1", size: 2048 } },
-      ],
-    },
+/** A MIME part of a fake draft: a leaf with its content, or a container of parts. */
+interface Piece {
+  readonly type: string;
+  readonly content?: string;
+  readonly filename?: string;
+  readonly headers?: Readonly<Record<string, string>>;
+  /** Gmail keeps the data apart, under an attachmentId, instead of in the message. */
+  readonly stored?: boolean;
+  readonly parts?: readonly Piece[];
+}
+
+/**
+ * A draft as Gmail returns it, built from one set of parts: `full` (parsed parts, as readDraft reads
+ * them) and `raw` (the MIME text that is sent). `id` names this version of its message.
+ */
+const fakeDraft = (id: string, headers: readonly (readonly [string, string])[], top: Piece) => {
+  const lines = (pairs: readonly (readonly [string, string])[]) => pairs.map(([name, value]) => `${name}: ${value}`);
+  const own = (piece: Piece) => Object.entries(piece.headers ?? {});
+  const full = (piece: Piece, outer: readonly (readonly [string, string])[]): any => {
+    const leaf = piece.parts === undefined;
+    const named = [...outer, ["Content-Type", piece.type], ...own(piece), ...(leaf ? [["Content-Transfer-Encoding", "base64"]] : [])];
+    const part = { mimeType: piece.type, filename: piece.filename ?? "", headers: named.map(([name, value]) => ({ name, value })) };
+    if (!leaf) return { ...part, body: { size: 0 }, parts: piece.parts!.map((child) => full(child, [])) };
+    const size = Buffer.byteLength(piece.content ?? "");
+    return { ...part, body: piece.stored ? { attachmentId: `att_${piece.filename}`, size } : { data: base64url(piece.content ?? ""), size } };
   };
-  const raw = base64url(mime);
+  const mime = (piece: Piece, outer: readonly (readonly [string, string])[], path: string): string[] => {
+    if (piece.parts !== undefined)
+      return [
+        ...lines(outer),
+        `Content-Type: ${piece.type}; boundary="b${path}"`,
+        ...lines(own(piece)),
+        "",
+        ...piece.parts.flatMap((child, index) => [`--b${path}`, ...mime(child, [], `${path}.${index}`)]),
+        `--b${path}--`,
+      ];
+    const type = piece.filename ? `${piece.type}; name="${piece.filename}"` : `${piece.type}; charset="UTF-8"`;
+    return [...lines(outer), `Content-Type: ${type}`, ...lines(own(piece)), "Content-Transfer-Encoding: base64", "", Buffer.from(piece.content ?? "").toString("base64")];
+  };
+  const message = { id: `msg_${id}`, threadId: "thr_9", payload: full(top, headers) };
+  const raw = base64url(mime(top, headers, "0").join("\r\n"));
   const route = (call: Call) =>
     call.search.get("format") === "raw" ? { id: "d9", message: { id: message.id, threadId: message.threadId, raw } } : { id: "d9", message };
-  return Object.assign(route, { raw });
+  return Object.assign(route, { raw, message });
+};
+
+const addressed = (subject = "Plan for Q1") =>
+  [
+    ["From", "User <user@example.com>"],
+    ["To", "alex@example.com"],
+    ["Cc", "sam@example.com"],
+    ["Bcc", "kim@example.com"],
+    ["Subject", subject],
+    ["MIME-Version", "1.0"],
+  ] as const;
+const planText = "Hi Alex,\n\nHere is the plan: Q1 doc <https://docs.example.com/q1>\n";
+const planHtml = '<div dir="ltr">Hi Alex,<br><br>Here is the plan: <a href="https://docs.example.com/q1">Q1 doc</a></div>';
+const pdf = { type: "application/pdf", filename: "plan.pdf", content: "%PDF-1.4 synthetic", stored: true, headers: { "Content-Disposition": 'attachment; filename="plan.pdf"' } };
+/** A plain-text draft with the same text in HTML, a link and a PDF; `edit` 1 is the same draft edited later. */
+const plan = (edit = 0) => {
+  const edited = (value: string) => (edit === 0 ? value : value.replace("the plan:", "the new plan:"));
+  return fakeDraft(`d9_${edit}`, addressed(edit === 0 ? "Plan for Q1" : "Plan for Q1 (revised)"), {
+    type: "multipart/mixed",
+    parts: [{ type: "multipart/alternative", parts: [{ type: "text/plain", content: edited(planText) }, { type: "text/html", content: edited(planHtml) }] }, pdf],
+  });
 };
 
 /** The first 16 bytes of a SHA-256 hash, in hex: how a draft's raw message is versioned. */
@@ -491,29 +548,36 @@ const sha = async (text: string) =>
     .subarray(0, 16)
     .toString("hex");
 
-/** sendDraft's input for the unedited saved draft: what the person approves. */
+/** sendDraft's input for the unedited plan: what the person approves. */
 const approved = async () => ({
   account: self,
   draftId: "d9",
   from: "User <user@example.com>",
+  sender: "",
+  replyTo: "",
   to: "alex@example.com",
   cc: "sam@example.com",
   bcc: "kim@example.com",
   subject: "Plan for Q1",
-  excerpt: "Hi Alex,\n\nHere is the plan.",
-  bodyLength: 27,
-  attachments: ["plan.pdf (application/pdf, 2048 bytes)"],
-  version: await sha(savedDraft().raw),
+  format: "plain text, with an HTML copy of the same text",
+  body: planText,
+  attachments: ["plan.pdf (application/pdf, 18 bytes)"],
+  version: await sha(plan().raw),
 });
 const sent = () => ({ id: "msg_sent", threadId: "thr_9", labelIds: ["SENT"] });
+/** The prompt Executor shows for a call, from the `apps` host's own printer. */
+const prompt = (input: object) => approvalElicitation("gmail.sendDraft", input as never).message;
 
-test("readDraft shows what sending would send, and sendDraft sends exactly that", async () => {
-  const draft = savedDraft();
+test("readDraft shows the whole draft as it would be sent, the approval shows all of it, and sendDraft sends exactly that", async () => {
+  const draft = plan();
   const { calls, ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": draft, "POST /gmail/v1/users/me/drafts/send": sent });
   const read = await run(gmailTools.readDraft, ctx, { draftId: "d9" });
   assert.deepEqual(read.send, await approved());
   // The approval shows the input, so sendDraft's input must carry the content, not only an ID.
   assert.deepEqual(fields(gmailTools.sendDraft), Object.keys(read.send));
+  const shown = prompt(read.send);
+  assert.match(shown, /^Approve gmail\.sendDraft\?\n\nArguments:\n/);
+  assert.ok(shown.includes(JSON.stringify(planText)), "the complete body is in the approval");
 
   const result = await run(gmailTools.sendDraft, ctx, read.send);
   const post = calls.find((call) => call.method === "POST")!;
@@ -523,14 +587,118 @@ test("readDraft shows what sending would send, and sendDraft sends exactly that"
 
 test("sendDraft sends nothing when the draft is not what was approved", async () => {
   // The person approved the unedited draft; it was edited afterwards.
-  const edited = google({ "GET /gmail/v1/users/me/drafts/d9": savedDraft(1), "POST /gmail/v1/users/me/drafts/send": sent });
-  await assert.rejects(run(gmailTools.sendDraft, edited.ctx, await approved()), /Nothing was sent.*subject, excerpt, bodyLength, version differ.*readDraft/);
+  const edited = google({ "GET /gmail/v1/users/me/drafts/d9": plan(1), "POST /gmail/v1/users/me/drafts/send": sent });
+  await assert.rejects(run(gmailTools.sendDraft, edited.ctx, await approved()), /Nothing was sent.*\(subject, body, version differ\).*readDraft/);
   assert.equal(edited.calls.some((call) => call.method === "POST"), false);
   // The shown fields must also be the draft's: a caller cannot show one recipient and send to another.
-  const { calls, ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": savedDraft(), "POST /gmail/v1/users/me/drafts/send": sent });
+  const { calls, ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": plan(), "POST /gmail/v1/users/me/drafts/send": sent });
   await assert.rejects(run(gmailTools.sendDraft, ctx, { ...(await approved()), to: "someone@example.com" }), /Nothing was sent.*\(to differ\)/);
   await assert.rejects(run(gmailTools.sendDraft, ctx, { ...(await approved()), account: "acc_test" }), /Nothing was sent.*\(account differ\)/);
   assert.equal(calls.some((call) => call.method === "POST"), false);
+});
+
+const plainOnly = (content: string) => ({ type: "text/plain", content });
+const htmlOnly = (content: string) => ({ type: "text/html", content });
+const alternative = (plain: string, html: string) => ({ type: "multipart/alternative", parts: [plainOnly(plain), htmlOnly(html)] });
+
+test("sendDraft refuses a draft its approval could not show in full, and sends nothing", async () => {
+  const basic = [["From", "user@example.com"], ["To", "alex@example.com"], ["Subject", "Lunch"]] as const;
+  for (const [headers, top, reason] of [
+    [basic, alternative("Lunch at noon?\n", "<p>Wire the deposit to account 12345 today.</p>"), /its HTML version says something other than its plain text/],
+    [basic, alternative("Reset your password here.\n", '<p>Reset your password <a href="https://evil.example/reset">here</a>.</p>'), /HTML version says something other/],
+    [basic, htmlOnly('<p>Hi</p><img src="https://tracker.example/p.gif">'), /its HTML loads an image from the web/],
+    [basic, htmlOnly("<style>p { display: none }</style><p>Hi</p>"), /its HTML uses a <style> element/],
+    [basic, htmlOnly('<p style="background: url(https://tracker.example/p.gif)">Hi</p>'), /attribute that loads or runs something/],
+    [basic, plainOnly("All good. ".repeat(450)), /too long for an approval to show in full \(\d+ characters as the approval prints it; the limit is 4000\)/],
+    [[...basic, ["Disposition-Notification-To", "alex@example.com"]], plainOnly("Hi"), /it has a Disposition-Notification-To header, which the approval would not show/],
+    [[...basic, ["To", "other@example.com"]], plainOnly("Hi"), /it has more than one To header/],
+    [basic, { type: "multipart/mixed", parts: [plainOnly("Hi"), plainOnly("Hidden second part")] }, /it has more than one text part/],
+  ] as const) {
+    const { calls, ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": fakeDraft("odd", headers, top), "POST /gmail/v1/users/me/drafts/send": sent });
+    const read = await run(gmailTools.readDraft, ctx, { draftId: "d9" });
+    assert.equal(read.send, undefined, String(reason));
+    assert.match(read.cannotSend, reason);
+    assert.match(read.cannotSend, /^sendDraft only sends a draft whose whole content its approval shows, and .*The person can open the draft in Gmail and send it from there\.$/);
+    const error: Error = await run(gmailTools.sendDraft, ctx, { ...(await approved()), version: "approved-elsewhere" }).then(
+      () => assert.fail("sent"),
+      (error) => error,
+    );
+    assert.match(error.message, /^Nothing was sent: sendDraft only sends a draft whose whole content its approval shows, and /);
+    assert.match(error.message, reason);
+    assert.match(error.message, /The person can open the draft in Gmail and send it from there\.$/);
+    assert.equal(calls.some((call) => call.method === "POST"), false, String(reason));
+  }
+});
+
+// The limit is the host's: the longest body sendDraft accepts is shown exactly, one more character is refused.
+test("sendDraft's size limit is exactly where Executor's approval stops showing arguments in full", async () => {
+  const read = async (length: number) => {
+    const { ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": fakeDraft(`x${length}`, addressed(), plainOnly("x".repeat(length))) });
+    return run(gmailTools.readDraft, ctx, { draftId: "d9" });
+  };
+  const small = (await read(10)).send;
+  const longest = 10 + 4000 - JSON.stringify(small, null, 2).length;
+  const fits = await read(longest);
+  assert.ok(fits.send, "the longest body that fits is sendable");
+  assert.match(prompt(fits.send), /^Approve gmail\.sendDraft\?\n\nArguments:\n/);
+  assert.ok(prompt(fits.send).includes(JSON.stringify("x".repeat(longest))));
+  const over = await read(longest + 1);
+  assert.equal(over.send, undefined);
+  assert.match(prompt({ ...fits.send, body: "x".repeat(longest + 1) }), /^Approve gmail\.sendDraft\?\n\nArguments, shortened for review/);
+});
+
+test("readDraft shows Sender and Reply-To, and an HTML-only draft as its text with each link's real target", async () => {
+  const headers = [
+    ["From", "User <user@example.com>"],
+    ["Sender", "assistant@example.com"],
+    ["Reply-To", "Billing <billing@example.net>"],
+    ["To", "alex@example.com"],
+    ["Subject", "Your account"],
+  ] as const;
+  const draft = fakeDraft("html", headers, htmlOnly("<p>Reset your password <a href='https://example.net/reset?a=1&amp;b=2'>here</a>.</p>"));
+  const { calls, ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": draft, "POST /gmail/v1/users/me/drafts/send": sent });
+  const read = await run(gmailTools.readDraft, ctx, { draftId: "d9" });
+  assert.equal(read.send.sender, "assistant@example.com");
+  assert.equal(read.send.replyTo, "Billing <billing@example.net>");
+  assert.equal(read.send.format, "HTML, shown as text with each link's target in <>");
+  assert.equal(read.send.body, "Reset your password here <https://example.net/reset?a=1&b=2>.");
+  await run(gmailTools.sendDraft, ctx, read.send);
+  assert.equal(calls.at(-1)!.body.message.raw, draft.raw);
+});
+
+test("every attachment is listed by what it is, wherever Gmail keeps its data, inline images included", async () => {
+  const draft = fakeDraft("files", addressed(), {
+    type: "multipart/mixed",
+    parts: [
+      {
+        type: "multipart/related",
+        parts: [
+          alternative("See attached.\n", '<p>See attached.</p><img src="cid:logo1" alt="">'),
+          { type: "image/png", filename: "logo.png", content: "PNG-synthetic", headers: { "Content-Disposition": "inline", "Content-ID": "<logo1>" } },
+        ],
+      },
+      // Small enough for Gmail to keep its data in the message: no attachmentId.
+      { type: "application/pdf", filename: "invoice.pdf", content: "%PDF synthetic", headers: { "Content-Disposition": 'attachment; filename="invoice.pdf"' } },
+      pdf,
+    ],
+  });
+  const { ctx } = google({
+    "GET /gmail/v1/users/me/drafts/d9": draft,
+    "GET /gmail/v1/users/me/messages/msg_files": () => draft.message,
+    "GET /gmail/v1/users/me/labels": () => ({ labels: [] }),
+  });
+  const read = await run(gmailTools.readDraft, ctx, { draftId: "d9" });
+  assert.deepEqual(read.send.attachments, [
+    "logo.png (image/png, 13 bytes, shown in the body)",
+    "invoice.pdf (application/pdf, 14 bytes)",
+    "plan.pdf (application/pdf, 18 bytes)",
+  ]);
+  assert.equal(read.send.body, "See attached.\n");
+  const message = await run(gmailTools.readMessage, ctx, { messageId: "msg_files" });
+  assert.deepEqual(
+    message.attachments.map((a: { filename: string }) => a.filename),
+    ["logo.png", "invoice.pdf", "plan.pdf"],
+  );
 });
 
 test("a send whose outcome is unknown says to check Sent and the draft before retrying", async () => {
@@ -538,7 +706,7 @@ test("a send whose outcome is unknown says to check Sent and the draft before re
     [503, /did not confirm the send \(it answered 503\), so the message may or may not have gone.*in:sent.*gmail\.drafts/],
     [404, /answered 404\. No such draft: it may have been sent or deleted already/],
   ] as const) {
-    const { ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": savedDraft(), "POST /gmail/v1/users/me/drafts/send": () => status(code) });
+    const { ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": plan(), "POST /gmail/v1/users/me/drafts/send": () => status(code) });
     const read = await run(gmailTools.readDraft, ctx, { draftId: "d9" });
     const error: Error = await run(gmailTools.sendDraft, ctx, read.send).then(
       () => assert.fail("sent"),
