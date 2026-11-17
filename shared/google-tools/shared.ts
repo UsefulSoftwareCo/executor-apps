@@ -293,6 +293,15 @@ const offsetText = (offset: number) => {
 };
 
 /**
+ * An instant as wall-clock time in a zone, with the zone's offset at that instant
+ * (2026-12-02T09:00:00-05:00), so it means the same instant wherever it is read.
+ */
+export const zonedIso = (zone: string, instant: number) => {
+  const offset = zoneOffset(zone, instant);
+  return new Date(Math.floor(instant / 1000) * 1000 + offset).toISOString().slice(0, 19) + offsetText(offset);
+};
+
+/**
  * The instant a wall-clock time with seconds and milliseconds names in a zone. Refuses a time the
  * zone skips (clocks going forward) and one it passes twice (clocks going back), naming the offsets
  * that would make it exact, rather than picking an hour.
