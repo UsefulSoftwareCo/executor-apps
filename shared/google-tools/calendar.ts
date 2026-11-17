@@ -14,6 +14,7 @@ import {
   select,
   single,
   zonedDate,
+  zonedIso,
   zonedTime,
   type Base,
   type Context,
@@ -196,18 +197,8 @@ const merge = (intervals: readonly { readonly start: number; readonly end: numbe
   return merged;
 };
 
-const iso = (zone: string, instant: number) => {
-  const text = new Intl.DateTimeFormat("sv-SE", {
-    timeZone: zone,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).format(new Date(instant));
-  return text.replace(" ", "T");
-};
+/** Busy and free times carry their offset, so a slot passed to createEvent on any calendar keeps its instant. */
+const iso = zonedIso;
 
 /** Events across targets' shown calendars, sorted, with shared meetings listed once. */
 export const listEvents = async (
@@ -278,7 +269,7 @@ export const calendar = (source: Source) => ({
     freeBusy: query(
       {
         description:
-          "Combined availability across every linked account (or one): busy intervals merged from each account's own calendars, and free slots of at least `minutes` within working hours (default 09:00-17:00 on weekdays, in the account's Calendar time zone). Use it to find a time that works across work and personal calendars.",
+          "Combined availability across every linked account (or one): busy intervals merged from each account's own calendars, and free slots of at least `minutes` within working hours (default 09:00-17:00 on weekdays, in the account's Calendar time zone). Use it to find a time that works across work and personal calendars. Busy and free times carry their offset, so a free slot can be passed straight to createEvent.",
         input: object({
           account,
           from: string().optional(),
