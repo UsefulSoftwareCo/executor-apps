@@ -47,27 +47,56 @@ const header = (part: Part | undefined, name: string) =>
 
 const charset = (part: Part) => /charset="?([^";]+)"?/i.exec(header(part, "Content-Type") ?? "")?.[1];
 
-/** The message text: its text/plain part, else its HTML part as text. Attachments are listed, not read. */
-const content = (payload: Part | undefined) => {
-  let plain: string | undefined;
-  let html: string | undefined;
-  const attachments: { filename: string; mimeType: string; size: number; attachmentId: string }[] = [];
+interface Attachment {
+  readonly filename: string;
+  readonly mimeType: string;
+  readonly size: number;
+  /** Shown in the body (an image a `cid:` link places), rather than only attached. */
+  readonly inline: boolean;
+  /** Set when Gmail stores the data apart, for the attachment tool; small parts carry it in the message. */
+  readonly attachmentId?: string;
+}
+
+/**
+ * A message's parts by what they are, not by how Gmail stores them. Multipart containers are
+ * opened. A part is body text only when it is text/plain or text/html with no filename and not
+ * marked `Content-Disposition: attachment`; every other part (a named file, an image, an attached
+ * message, a calendar invite...) is an attachment, whether its data is in the message or stored
+ * apart under an attachmentId.
+ */
+const parts = (payload: Part | undefined) => {
+  const plain: Part[] = [];
+  const html: Part[] = [];
+  const attachments: Attachment[] = [];
   const walk = (part: Part) => {
-    if (part.filename && part.body?.attachmentId) {
-      attachments.push({
-        filename: part.filename,
-        mimeType: part.mimeType ?? "application/octet-stream",
-        size: part.body.size ?? 0,
-        attachmentId: part.body.attachmentId,
-      });
-      return;
-    }
-    if (part.body?.data && part.mimeType === "text/plain" && plain === undefined) plain = decodeBody(part.body.data, charset(part));
-    if (part.body?.data && part.mimeType === "text/html" && html === undefined) html = decodeBody(part.body.data, charset(part));
-    for (const child of part.parts ?? []) walk(child);
+    const type = (part.mimeType ?? "").toLowerCase();
+    if (type.startsWith("multipart/") && part.parts) return part.parts.forEach(walk);
+    const disposition = (header(part, "Content-Disposition") ?? "").trim().toLowerCase();
+    const named = Boolean(part.filename);
+    if (!named && !disposition.startsWith("attachment") && (type === "text/plain" || type === "text/html"))
+      return (type === "text/plain" ? plain : html).push(part);
+    attachments.push(
+      defined({
+        filename: part.filename || "(no name)",
+        mimeType: part.mimeType || "application/octet-stream",
+        size: part.body?.size ?? 0,
+        inline: disposition.startsWith("inline") || header(part, "Content-ID") !== undefined,
+        attachmentId: part.body?.attachmentId,
+      }),
+    );
   };
   if (payload) walk(payload);
-  return { body: (plain ?? (html === undefined ? "" : htmlToText(html))).trim(), attachments };
+  return { plain, html, attachments };
+};
+
+const text = (part: Part | undefined) => (part?.body?.data ? decodeBody(part.body.data, charset(part)) : undefined);
+
+/** The message text: its first text/plain part, else its HTML part as text. Attachments are listed, not read. */
+const content = (payload: Part | undefined) => {
+  const found = parts(payload);
+  const plain = text(found.plain[0]);
+  const html = text(found.html[0]);
+  return { body: (plain ?? (html === undefined ? "" : htmlToText(html))).trim(), attachments: found.attachments };
 };
 
 /** Label IDs to names; system labels keep their IDs (INBOX, UNREAD, STARRED...). */
@@ -247,13 +276,68 @@ const version = async (raw: string) =>
     .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
 
-const excerptLength = 1000;
-const listedAttachments = 20;
+/**
+ * Executor's approval shows a call's arguments exactly only while they print, as JSON indented by
+ * two spaces, in this many characters (`approvalPreviewChars` in `apps`); longer ones are shortened.
+ */
+const approvalLimit = 4000;
+
+/** Headers the approval shows: where the mail goes, whom it appears to come from, and its subject. */
+const shownHeaders = ["From", "Sender", "Reply-To", "To", "Cc", "Bcc", "Subject"];
+/** Headers a draft may carry without showing them: they neither route mail nor change its sender. */
+const quietHeaders = new Set([
+  "mime-version",
+  "date",
+  "message-id",
+  "in-reply-to",
+  "references",
+  "content-type",
+  "content-transfer-encoding",
+  "content-language",
+]);
+
+/** Elements an HTML body may use and still be shown as text: text, formatting, tables, links and `cid:` images. */
+const textTags = new Set(
+  "a abbr b bdi bdo big blockquote body br caption center cite code col colgroup dd del dfn div dl dt em font h1 h2 h3 h4 h5 h6 hr html i img ins kbd li mark ol p pre q s samp small span strike strong sub sup table tbody td tfoot th thead tr tt u ul var wbr".split(" "),
+);
+
+/** Why an HTML body cannot be shown faithfully as text, or undefined when it can. */
+const htmlProblem = (html: string) => {
+  if (/<!--|<!\[/.test(html)) return "its HTML has comments, which some mail apps display";
+  for (const [, name, attributes] of html.matchAll(/<\/?([a-zA-Z][\w-]*)([^>]*)>/g)) {
+    const tag = name!.toLowerCase();
+    if (!textTags.has(tag)) return `its HTML uses a <${tag}> element`;
+    if (/\bon[a-z]+\s*=|\b(background|srcset|action|formaction|poster|ping|data|dynsrc|lowsrc)\s*=|url\s*\(|expression\s*\(|@import/i.test(attributes!))
+      return `its HTML has a <${tag}> attribute that loads or runs something`;
+    if (tag === "img" && !/\bsrc\s*=\s*["']?cid:/i.test(attributes!)) return "its HTML loads an image from the web";
+  }
+  return undefined;
+};
+
+const escapeHtml = (value: string) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
 /**
- * What sending a draft would send, read from Gmail now: the fields its approval shows, and the raw
- * message they were read from. Both reads must name the same message, or the draft changed between
- * them.
+ * An HTML body as text in which every link shows its real target: `label <target>`, or the target
+ * alone when the label is the target. This is how Gmail writes links in a draft's plain-text part.
+ */
+const htmlWithTargets = (html: string) => {
+  const linked = html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi, (_, attributes: string, inner: string) => {
+    const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(attributes);
+    if (!href) return inner;
+    const target = htmlToText(escapeHtml(href[1] ?? href[2] ?? href[3] ?? "").replaceAll("&amp;", "&")).trim();
+    return htmlToText(inner).trim() === target ? escapeHtml(target) : `${inner} &lt;${escapeHtml(target)}&gt;`;
+  });
+  // A link left unmatched (no closing tag) would lose its target in the conversion below.
+  return /<a\b[^>]*\bhref/i.test(linked) ? undefined : htmlToText(linked);
+};
+
+/** Text compared as words: runs of spaces and line breaks count as one space. */
+const words = (value: string) => value.replace(/\s+/g, " ").trim();
+
+/**
+ * What sending a draft would send, read from Gmail now: the fields its approval shows, the raw
+ * message they were read from, and why sendDraft would refuse it, if it would. Both reads must name
+ * the same message, or the draft changed between them.
  */
 const draftPreview = async (ctx: Base, target: Target, draftId: string) => {
   const url = `${base}/drafts/${pathId("draftId", draftId)}`;
@@ -264,43 +348,70 @@ const draftPreview = async (ctx: Base, target: Target, draftId: string) => {
   ]);
   if (full.message.id !== raw.message.id || raw.message.raw === undefined)
     throw new Error("The draft changed while it was being read. Read it again.");
-  const { body, attachments } = content(full.message.payload);
   const payload = full.message.payload;
-  return {
-    message: full.message,
-    raw: raw.message.raw,
+  const problems: string[] = [];
+
+  const names = (payload?.headers ?? []).map((h) => h.name);
+  for (const name of shownHeaders)
+    if (names.filter((other) => other.toLowerCase() === name.toLowerCase()).length > 1) problems.push(`it has more than one ${name} header`);
+  for (const name of new Set(names))
+    if (!quietHeaders.has(name.toLowerCase()) && !shownHeaders.some((shown) => shown.toLowerCase() === name.toLowerCase()))
+      problems.push(`it has a ${name} header, which the approval would not show`);
+
+  const found = parts(payload);
+  if (found.plain.length > 1 || found.html.length > 1) problems.push("it has more than one text part");
+  const plain = text(found.plain[0])?.replace(/\r\n/g, "\n");
+  const html = text(found.html[0]);
+  let body = plain ?? "";
+  let format = plain === undefined ? "no body" : "plain text";
+  if (html !== undefined) {
+    const problem = htmlProblem(html);
+    const shown = problem === undefined ? htmlWithTargets(html) : undefined;
+    if (problem !== undefined) problems.push(problem);
+    else if (shown === undefined) problems.push("its HTML has a link whose target cannot be shown");
+    else if (plain === undefined) [body, format] = [shown, "HTML, shown as text with each link's target in <>"];
+    else if (words(shown) !== words(plain))
+      problems.push("its HTML version says something other than its plain text (compared word for word, with each link as label <target>)");
+    else format = "plain text, with an HTML copy of the same text";
+  }
+  const send = {
+    account: target.email,
+    draftId,
+    from: header(payload, "From") ?? "(not set: the account's default address)",
+    sender: header(payload, "Sender") ?? "",
+    replyTo: header(payload, "Reply-To") ?? "",
+    to: header(payload, "To") ?? "",
+    cc: header(payload, "Cc") ?? "",
+    bcc: header(payload, "Bcc") ?? "",
+    subject: header(payload, "Subject") ?? "",
+    format,
     body,
-    attachments,
-    send: {
-      account: target.email,
-      draftId,
-      from: header(payload, "From") ?? "(not set: the account's default address)",
-      to: header(payload, "To") ?? "",
-      cc: header(payload, "Cc") ?? "",
-      bcc: header(payload, "Bcc") ?? "",
-      subject: header(payload, "Subject") ?? "",
-      excerpt: body.length > excerptLength ? `${body.slice(0, excerptLength)}…` : body,
-      bodyLength: body.length,
-      attachments: [
-        ...attachments.slice(0, listedAttachments).map((a) => `${a.filename} (${a.mimeType}, ${a.size} bytes)`),
-        ...(attachments.length > listedAttachments ? [`and ${attachments.length - listedAttachments} more`] : []),
-      ],
-      version: await version(raw.message.raw),
-    },
+    attachments: found.attachments.map((a) => `${a.filename} (${a.mimeType}, ${a.size} bytes${a.inline ? ", shown in the body" : ""})`),
+    version: await version(raw.message.raw),
   };
+  const length = JSON.stringify(send, null, 2).length;
+  if (length > approvalLimit)
+    problems.push(`it is too long for an approval to show in full (${length} characters as the approval prints it; the limit is ${approvalLimit})`);
+  return { message: full.message, raw: raw.message.raw, send, problems };
 };
+
+/** Why sendDraft will not send a draft, in words for the person. */
+const refusal = (problems: readonly string[]) =>
+  `sendDraft only sends a draft whose whole content its approval shows, and ${problems.join("; ")}. The person can open the draft in Gmail and send it from there.`;
 
 /** The fields sendDraft's approval shows, in the order readDraft returns them. */
 const SendFields = {
   account: string({ minLength: 1 }),
   draftId: string({ minLength: 1 }),
   from: string(),
+  sender: string(),
+  replyTo: string(),
   to: string(),
   cc: string(),
   bcc: string(),
   subject: string(),
-  excerpt: string(),
-  bodyLength: number(),
+  format: string(),
+  body: string(),
   attachments: array(string()),
   version: string({ minLength: 1 }),
 };
@@ -446,27 +557,31 @@ export const gmail = (source: Source) => ({
     readDraft: query(
       {
         description:
-          "Read a draft as it would be sent: account, From, To, Cc, Bcc, subject, body and attachments. Its `send` field is sendDraft's input: pass it unchanged, so the person approving the send sees what will go out.",
+          "Read a draft as it would be sent: its addresses, subject, body and attachments. When sendDraft can send it, `send` is sendDraft's input: pass it unchanged, so the person approving sees everything that will go out. When it cannot, `cannotSend` says why; tell the person, who can send it from Gmail.",
         input: object({ account, draftId: string({ minLength: 1 }) }),
       },
       async (ctx: Context, input) => {
         pathId("draftId", input.draftId);
         const target = await single(ctx, source, input.account);
         const draft = await draftPreview(ctx, target, input.draftId);
-        return {
+        const { body, attachments } = content(draft.message.payload);
+        return defined({
           account: target.email,
           draftId: input.draftId,
           messageId: draft.message.id,
           threadId: draft.message.threadId,
           from: draft.send.from,
+          sender: draft.send.sender,
+          replyTo: draft.send.replyTo,
           to: draft.send.to,
           cc: draft.send.cc,
           bcc: draft.send.bcc,
           subject: draft.send.subject,
-          body: draft.body,
-          attachments: draft.attachments,
-          send: draft.send,
-        };
+          body,
+          attachments,
+          send: draft.problems.length === 0 ? draft.send : undefined,
+          cannotSend: draft.problems.length === 0 ? undefined : refusal(draft.problems),
+        });
       },
     ),
     updateDraft: mutation(
@@ -505,7 +620,7 @@ export const gmail = (source: Source) => ({
     sendDraft: mutation(
       {
         description:
-          "Send a saved draft. Read it with readDraft first and pass its `send` field unchanged: the person approving sees the account, From, To, Cc, Bcc, subject, the start of the body and the attachments. If the draft has changed since it was read, nothing is sent: read it again and ask for approval of what it now says.",
+          "Send a saved draft, but only one whose whole content its approval can show. Read it with readDraft first and pass its `send` field unchanged: the person approving sees the account; From, Sender, Reply-To, To, Cc and Bcc; the subject; the complete body; and every attachment's name, type and size, inline images included. It refuses, and sends nothing, a draft: too long for that to fit the approval (about 4,000 characters in all); with HTML that says anything other than its plain text, compared word for word with each link written as label <target>; whose HTML uses more than text, formatting, tables, links and inline images (no web images, styles, forms or scripts); with more than one text part; or with headers other than those shown and Date, Message-ID, In-Reply-To, References, MIME-Version and Content-*. An HTML-only draft is shown as its text with each link's target. The person can send a refused draft from Gmail. If the draft changed since it was read, nothing is sent: read it again and ask for approval of what it now says.",
         input: object(SendFields),
         approval: always(),
       },
@@ -513,6 +628,7 @@ export const gmail = (source: Source) => ({
         pathId("draftId", input.draftId);
         const target = await single(ctx, source, input.account);
         const now = await draftPreview(ctx, target, input.draftId);
+        if (now.problems.length > 0) throw new Error(`Nothing was sent: ${refusal(now.problems)}`);
         const changed = (Object.keys(SendFields) as (keyof typeof SendFields)[]).filter(
           (field) => JSON.stringify(input[field]) !== JSON.stringify(now.send[field]),
         );
