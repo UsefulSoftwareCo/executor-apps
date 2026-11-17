@@ -59,11 +59,12 @@ interface Attachment {
 }
 
 /**
- * A message's parts by what they are, not by how Gmail stores them. Multipart containers are
- * opened. A part is body text only when it is text/plain or text/html with no filename and not
- * marked `Content-Disposition: attachment`; every other part (a named file, an image, an attached
- * message, a calendar invite...) is an attachment, whether its data is in the message or stored
- * apart under an attachmentId.
+ * A message's parts by what they are, not by how Gmail stores them. Each part is classified before
+ * it is opened: a named part, or one marked `Content-Disposition: attachment`, is an attachment even
+ * when it is a container (an attached bundle of parts is listed, not read as body). Other multipart
+ * containers are opened. A part is body text only when it is text/plain or text/html, unnamed and not
+ * an attachment; every other part (a file, an image, an attached message, a calendar invite...) is
+ * an attachment, whether its data is in the message or stored apart under an attachmentId.
  */
 const parts = (payload: Part | undefined) => {
   const plain: Part[] = [];
@@ -71,10 +72,11 @@ const parts = (payload: Part | undefined) => {
   const attachments: Attachment[] = [];
   const walk = (part: Part) => {
     const type = (part.mimeType ?? "").toLowerCase();
-    if (type.startsWith("multipart/") && part.parts) return part.parts.forEach(walk);
     const disposition = (header(part, "Content-Disposition") ?? "").trim().toLowerCase();
     const named = Boolean(part.filename);
-    if (!named && !disposition.startsWith("attachment") && (type === "text/plain" || type === "text/html"))
+    const attached = named || disposition.startsWith("attachment");
+    if (!attached && type.startsWith("multipart/") && part.parts) return part.parts.forEach(walk);
+    if (!attached && (type === "text/plain" || type === "text/html"))
       return (type === "text/plain" ? plain : html).push(part);
     attachments.push(
       defined({
@@ -277,63 +279,363 @@ const version = async (raw: string) =>
     .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
 
+// ---------------------------------------------------------------------------------------------
+// What sendDraft sends: an allow-list. A draft is sent only when every header, every MIME part and
+// everything in its HTML is listed in `sendable` and is shown in the approval. Anything else is
+// refused, with nothing sent: the checks name what is allowed, never what is forbidden.
+
 /**
  * Executor's approval shows a call's arguments exactly only while they print, as JSON indented by
  * two spaces, in this many characters (`approvalPreviewChars` in `apps`); longer ones are shortened.
  */
 const approvalLimit = 4000;
 
-/** Headers the approval shows: where the mail goes, whom it appears to come from, and its subject. */
-const shownHeaders = ["From", "Sender", "Reply-To", "To", "Cc", "Bcc", "Subject"];
-/** Headers a draft may carry without showing them: they neither route mail nor change its sender. */
-const quietHeaders = new Set([
-  "mime-version",
-  "date",
-  "message-id",
-  "in-reply-to",
-  "references",
-  "content-type",
-  "content-transfer-encoding",
-  "content-language",
-]);
+/** Everything sendDraft accepts in a draft. sendDraft's description is written from this. */
+const sendable = {
+  /** Message headers the approval shows, with encoded words decoded. Each at most once. */
+  shownHeaders: ["From", "Sender", "Reply-To", "To", "Cc", "Bcc", "Subject"],
+  /** Message headers allowed unshown: they neither route mail nor change its sender or text. */
+  quietHeaders: ["MIME-Version", "Date", "Message-ID", "In-Reply-To", "References", "Content-Type", "Content-Transfer-Encoding", "Content-Language"],
+  /** Headers a part inside the message may have. */
+  partHeaders: ["Content-Type", "Content-Transfer-Encoding", "Content-Disposition", "Content-ID", "X-Attachment-Id"],
+  /** Containers that are opened, unless named or marked as an attachment. */
+  containers: ["multipart/mixed", "multipart/alternative", "multipart/related"],
+  /** Body text: an unnamed part of one of these types, not marked as an attachment, each at most once. */
+  bodyTypes: ["text/plain", "text/html"],
+  transferEncodings: ["7bit", "8bit", "binary", "base64", "quoted-printable"],
+  /** Charsets text and headers are decoded from. Text without a charset must be ASCII. */
+  charsets: ["utf-8", "us-ascii", "iso-8859-1", "windows-1252"],
+  /** HTML elements, each with the attributes it may have. */
+  elements: {
+    a: ["href", "target"],
+    b: [],
+    blockquote: [],
+    br: [],
+    div: [],
+    em: [],
+    hr: [],
+    i: [],
+    img: ["src", "alt", "width", "height"],
+    li: [],
+    ol: [],
+    p: [],
+    span: [],
+    strong: [],
+    u: [],
+    ul: [],
+    wbr: [],
+  } as Readonly<Record<string, readonly string[]>>,
+  /** Attributes any of those elements may have, with only these values. */
+  anywhere: { dir: ["ltr"], class: ["gmail_signature", "gmail_signature_prefix"], "data-smartmail": ["gmail_signature"] } as Readonly<
+    Record<string, readonly string[]>
+  >,
+  /** Values for the element attributes above. */
+  values: {
+    href: "an http:, https: or mailto: address, shown as the link's `label <target>`",
+    target: "_blank",
+    src: "cid: naming one of the draft's inline attachments",
+    alt: "text, shown as [image: alt]",
+    width: "digits",
+    height: "digits",
+  },
+  linkSchemes: ["http:", "https:", "mailto:"],
+  /** Named character references; numeric ones are read too. */
+  entities: { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " } as Readonly<Record<string, string>>,
+} as const;
 
-/** Elements an HTML body may use and still be shown as text: text, formatting, tables, links and `cid:` images. */
-const textTags = new Set(
-  "a abbr b bdi bdo big blockquote body br caption center cite code col colgroup dd del dfn div dl dt em font h1 h2 h3 h4 h5 h6 hr html i img ins kbd li mark ol p pre q s samp small span strike strong sub sup table tbody td tfoot th thead tr tt u ul var wbr".split(" "),
-);
+/** Elements that end a line of text, and elements with no closing tag. */
+const blocks = new Set(["blockquote", "div", "hr", "li", "ol", "p", "ul"]);
+const voids = new Set(["br", "hr", "img", "wbr"]);
 
-/** Why an HTML body cannot be shown faithfully as text, or undefined when it can. */
-const htmlProblem = (html: string) => {
-  if (/<!--|<!\[/.test(html)) return "its HTML has comments, which some mail apps display";
-  for (const [, name, attributes] of html.matchAll(/<\/?([a-zA-Z][\w-]*)([^>]*)>/g)) {
-    const tag = name!.toLowerCase();
-    if (!textTags.has(tag)) return `its HTML uses a <${tag}> element`;
-    if (/\bon[a-z]+\s*=|\b(background|srcset|action|formaction|poster|ping|data|dynsrc|lowsrc)\s*=|url\s*\(|expression\s*\(|@import/i.test(attributes!))
-      return `its HTML has a <${tag}> attribute that loads or runs something`;
-    if (tag === "img" && !/\bsrc\s*=\s*["']?cid:/i.test(attributes!)) return "its HTML loads an image from the web";
-  }
-  return undefined;
+/** A reason sendDraft will not send a draft. */
+class Refusal extends Error {}
+const refuse = (reason: string): never => {
+  throw new Refusal(reason);
 };
 
-const escapeHtml = (value: string) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+/**
+ * Characters that hide or reorder text: controls other than tab and line breaks, format characters
+ * (zero-width, bidirectional controls, invisible tags), private-use and unassigned code points, line
+ * and paragraph separators, and characters drawn blank.
+ */
+const hiding = /(?![\t\n\r])[\p{Cc}\p{Cf}\p{Co}\p{Cn}\p{Zl}\p{Zp}͏ᅟᅠㅤﾠ]/u;
+const visible = (value: string, where: string) => {
+  const found = hiding.exec(value);
+  if (found) refuse(`${where} has a character that hides or reorders text (U+${found[0].codePointAt(0)!.toString(16).toUpperCase().padStart(4, "0")})`);
+  return value;
+};
+
+/** Text from bytes in one of the allowed charsets; anything else, or bytes not valid in it, is refused. */
+const decodeText = (bytes: Uint8Array, charset: string, where: string) => {
+  const label = charset.toLowerCase();
+  if (!(sendable.charsets as readonly string[]).includes(label)) refuse(`${where} is in the ${charset} charset, which it does not read`);
+  if (label === "us-ascii") {
+    if (bytes.some((byte) => byte > 0x7f)) refuse(`${where} has bytes that are not ASCII but names no charset`);
+    return String.fromCharCode(...bytes);
+  }
+  try {
+    // WHATWG reads iso-8859-1 as windows-1252, as mail apps do.
+    return new TextDecoder(label === "utf-8" ? "utf-8" : "windows-1252", { fatal: true, ignoreBOM: true }).decode(bytes);
+  } catch {
+    return refuse(`${where} is not valid ${charset}`);
+  }
+};
+
+const base64Bytes = (data: string) => Uint8Array.from(atob(data.replaceAll("-", "+").replaceAll("_", "/")), (char) => char.charCodeAt(0));
+
+/** A header value with RFC 2047 encoded words decoded; an encoded word it cannot read is refused. */
+const decodeWords = (value: string, where: string) => {
+  const decoded = value
+    .replace(/(\?=)\s+(?==\?)/g, "$1")
+    .replace(/=\?([^?\s]+)\?([bq])\?([^?\s]*)\?=/gi, (_, charset: string, encoding: string, data: string) => {
+      if (encoding.toLowerCase() === "b") {
+        if (!/^[A-Za-z0-9+/]*={0,2}$/.test(data)) refuse(`${where} has an encoded word it cannot read`);
+        return decodeText(base64Bytes(data), charset, where);
+      }
+      if (!/^(?:[!-<>@-~]|=[0-9A-Fa-f]{2})*$/.test(data.replaceAll("_", " ").replaceAll(" ", "!"))) refuse(`${where} has an encoded word it cannot read`);
+      const bytes: number[] = [];
+      for (let at = 0; at < data.length; at++)
+        if (data[at] === "=") bytes.push(parseInt(data.slice(at + 1, (at += 2) + 1), 16));
+        else bytes.push(data[at] === "_" ? 0x20 : data.charCodeAt(at));
+      return decodeText(Uint8Array.from(bytes), charset, where);
+    });
+  if (decoded.includes("=?")) refuse(`${where} has an encoded word it cannot read`);
+  return visible(decoded, where);
+};
+
+/** A MIME header value's token and parameters (RFC 2045); any other form is refused. */
+const mimeValue = (value: string, where: string) => {
+  const head = /^\s*([^\s;"]+)\s*/.exec(value) ?? refuse(`${where} is not in a form it reads`);
+  const params = new Map<string, string>();
+  let rest = value.slice(head[0].length);
+  while (rest.length > 0) {
+    if (/^;\s*$/.test(rest)) break;
+    const param =
+      /^;\s*([A-Za-z0-9!#$%&'+.^_`|~-]+)\s*=\s*(?:"((?:[^"\\]|\\.)*)"|([^\s;"]+))\s*/.exec(rest) ?? refuse(`${where} is not in a form it reads`);
+    const name = param[1]!.toLowerCase();
+    if (params.has(name)) refuse(`${where} names ${name} twice`);
+    params.set(name, param[2] === undefined ? param[3]! : param[2].replace(/\\(.)/g, "$1"));
+    rest = rest.slice(param[0].length);
+  }
+  return { value: head[1]!.toLowerCase(), params };
+};
+
+interface Shown {
+  readonly plain?: string;
+  readonly html?: string;
+  readonly attachments: { readonly text: string; readonly contentId?: string }[];
+}
+
+/** Reads every part of a draft by the allow-list, classifying each part before opening it. */
+const readParts = (payload: Part) => {
+  let plain: string | undefined;
+  let html: string | undefined;
+  const attachments: { text: string; contentId?: string }[] = [];
+  const walk = (part: Part, top: boolean) => {
+    const allowed = top ? [...sendable.shownHeaders, ...sendable.quietHeaders] : sendable.partHeaders;
+    const seen = new Set<string>();
+    for (const { name } of part.headers ?? []) {
+      const key = name.toLowerCase();
+      if (seen.has(key)) refuse(`it has more than one ${name} header`);
+      seen.add(key);
+      if (!allowed.some((other) => other.toLowerCase() === key))
+        refuse(top ? `it has a ${name} header, which the approval would not show` : `a part of it has a ${name} header`);
+    }
+    const type = (part.mimeType ?? "").toLowerCase();
+    const declared = header(part, "Content-Type");
+    const params = declared === undefined ? new Map<string, string>() : mimeValue(declared, "a Content-Type header").params;
+    if (declared !== undefined && mimeValue(declared, "a Content-Type header").value !== type) refuse("a part's Content-Type disagrees with Gmail's reading of it");
+    const encoding = header(part, "Content-Transfer-Encoding");
+    if (encoding !== undefined && !(sendable.transferEncodings as readonly string[]).includes(encoding.trim().toLowerCase()))
+      refuse(`a part of it uses the ${encoding.trim()} transfer encoding, which it does not read`);
+    const dispositionHeader = header(part, "Content-Disposition");
+    const disposition = dispositionHeader === undefined ? undefined : mimeValue(dispositionHeader, "a Content-Disposition header");
+    if (disposition && (!["inline", "attachment"].includes(disposition.value) || [...disposition.params.keys()].some((key) => key !== "filename")))
+      refuse(`a part of it has a Content-Disposition it does not read (${dispositionHeader})`);
+    const name = part.filename ?? "";
+    for (const given of [params.get("name"), disposition?.params.get("filename")])
+      if (given !== undefined && decodeWords(given, "an attachment's name") !== name) refuse("an attachment's name cannot be read reliably");
+    const attached = name !== "" || disposition?.value === "attachment";
+
+    if (type.startsWith("multipart/")) {
+      if (attached) refuse(`it has an attached ${type} part (${name || "no name"}), which it does not open`);
+      if (!(sendable.containers as readonly string[]).includes(type)) refuse(`it has a ${type} part`);
+      if (!part.parts?.length) refuse(`it has an empty ${type} part`);
+      return part.parts!.forEach((child) => walk(child, false));
+    }
+    if (part.parts?.length || type.startsWith("message/")) refuse(`it has an attached ${type || "message"} part, which it does not open`);
+    if (!attached && (sendable.bodyTypes as readonly string[]).includes(type)) {
+      if (part.body?.attachmentId !== undefined || (part.body?.data === undefined && (part.body?.size ?? 0) > 0))
+        refuse("its text is stored apart from the message, so the approval could not show it");
+      const text = decodeText(base64Bytes(part.body?.data ?? ""), params.get("charset") ?? "us-ascii", "its text").replace(/\r\n/g, "\n");
+      if ((type === "text/plain" ? plain : html) !== undefined) refuse("it has more than one text part");
+      if (type === "text/plain") plain = visible(text, "its text");
+      else html = text;
+      return;
+    }
+    if (name === "") refuse(`it has an unnamed ${type} part`);
+    visible(name, "an attachment's name");
+    const contentId = header(part, "Content-ID")?.trim().replace(/^<(.*)>$/, "$1");
+    const inline = disposition?.value === "inline" || contentId !== undefined;
+    attachments.push({ text: `${name} (${type}, ${part.body?.size ?? 0} bytes${inline ? ", shown in the body" : ""})`, contentId });
+  };
+  walk(payload, true);
+  return { plain, html, attachments } satisfies Shown;
+};
+
+/** Text with its character references decoded; only the named ones listed, and numeric ones, are read. */
+const htmlCharacters = (raw: string) =>
+  visible(
+    raw.replace(/&[^;]*;?/g, (reference) => {
+      const named = /^&([A-Za-z]+);$/.exec(reference);
+      if (named) return sendable.entities[named[1]!] ?? refuse(`its HTML has a character reference it does not read (${reference})`);
+      const numeric = /^&#(?:([0-9]{1,7})|[xX]([0-9A-Fa-f]{1,6}));$/.exec(reference);
+      const code = numeric ? (numeric[1] === undefined ? parseInt(numeric[2]!, 16) : Number(numeric[1])) : -1;
+      if (code <= 0 || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)) refuse(`its HTML has a character reference it does not read (${reference.slice(0, 12)})`);
+      return String.fromCodePoint(code);
+    }),
+    "its HTML",
+  );
 
 /**
- * An HTML body as text in which every link shows its real target: `label <target>`, or the target
- * alone when the label is the target. This is how Gmail writes links in a draft's plain-text part.
+ * What a draft's HTML shows, as text with every link's real target, read by the allow-list: a
+ * tokenizer that reads each tag's element and attribute names as HTML does, and refuses any tag,
+ * attribute, value, reference or nesting it does not positively recognise.
  */
-const htmlWithTargets = (html: string) => {
-  const linked = html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/gi, (_, attributes: string, inner: string) => {
-    const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(attributes);
-    if (!href) return inner;
-    const target = htmlToText(escapeHtml(href[1] ?? href[2] ?? href[3] ?? "").replaceAll("&amp;", "&")).trim();
-    return htmlToText(inner).trim() === target ? escapeHtml(target) : `${inner} &lt;${escapeHtml(target)}&gt;`;
-  });
-  // A link left unmatched (no closing tag) would lose its target in the conversion below.
-  return /<a\b[^>]*\bhref/i.test(linked) ? undefined : htmlToText(linked);
+const htmlText = (html: string, inlineIds: ReadonlySet<string>) => {
+  const out: string[] = [];
+  const open: { name: string; href?: string; at: number }[] = [];
+  let at = 0;
+  while (at < html.length) {
+    const next = html.indexOf("<", at);
+    const chunk = html.slice(at, next === -1 ? html.length : next);
+    if (chunk) out.push(htmlCharacters(chunk).replace(/[ \t\n\r\f]+/g, " "));
+    if (next === -1) break;
+    at = next;
+    const rest = html.slice(at);
+    const close = /^<\/([a-zA-Z][a-zA-Z0-9]*)\s*>/.exec(rest);
+    if (close) {
+      const name = close[1]!.toLowerCase();
+      const top = open.pop();
+      if (top?.name !== name) refuse(`its HTML closes <${name}> where that element is not open`);
+      if (name === "a") {
+        const label = out.splice(top!.at).join("");
+        out.push(label.trim() === top!.href ? top!.href! : `${label} <${top!.href}>`);
+      }
+      if (blocks.has(name) && name !== "li") out.push("\n");
+      at += close[0].length;
+      continue;
+    }
+    const start = /^<([a-zA-Z][a-zA-Z0-9]*)/.exec(rest) ?? refuse("its HTML has a < that does not open an element it allows (a comment, a declaration or a stray <)");
+    const name = start[1]!.toLowerCase();
+    const allowed = sendable.elements[name] ?? refuse(`its HTML uses the element <${name}>`);
+    at += start[0].length;
+    const attributes = new Map<string, string>();
+    for (;;) {
+      const end = /^\s*(\/?)>/.exec(html.slice(at));
+      if (end) {
+        if (end[1] && !voids.has(name)) refuse(`its HTML writes <${name}/>, which HTML does not read as closed`);
+        at += end[0].length;
+        break;
+      }
+      const attribute =
+        /^\s+([^\s"'>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/.exec(html.slice(at)) ?? refuse(`its HTML has a <${name}> tag it cannot read`);
+      const key = attribute[1]!.toLowerCase();
+      if (attributes.has(key)) refuse(`its HTML has two ${key} attributes on one <${name}>`);
+      attributes.set(key, htmlCharacters(attribute[2] ?? attribute[3] ?? attribute[4] ?? ""));
+      at += attribute[0].length;
+    }
+    for (const [key, value] of attributes) {
+      const fixed = sendable.anywhere[key];
+      if (fixed) {
+        const words = key === "class" ? value.split(/\s+/).filter(Boolean) : [value];
+        if (words.length === 0 || words.some((word) => !fixed.includes(word))) refuse(`its HTML has ${key}="${value}" on <${name}>`);
+      } else if (!allowed.includes(key)) refuse(`its HTML has the attribute ${key} on <${name}>`);
+    }
+    let shown = "";
+    if (name === "a") {
+      if (open.some((element) => element.name === "a")) refuse("its HTML has a link inside a link");
+      const href = attributes.get("href") ?? refuse("its HTML has a link with no target");
+      if (/\s/.test(href) || !(sendable.linkSchemes as readonly string[]).includes(/^[a-z][a-z0-9+.-]*:/i.exec(href)?.[0].toLowerCase() ?? ""))
+        refuse(`its HTML links to ${JSON.stringify(href.slice(0, 60))}, which is not an http:, https: or mailto: address`);
+      if (attributes.has("target") && attributes.get("target") !== "_blank") refuse("its HTML has a link target other than _blank");
+      open.push({ name, href, at: out.length });
+      continue;
+    }
+    if (name === "img") {
+      const src = attributes.get("src") ?? "";
+      if (/^https?:/i.test(src)) refuse("its HTML loads an image from the web");
+      if (!/^cid:/i.test(src) || !inlineIds.has(src.slice(4))) refuse("its HTML shows an image that is not one of the draft's inline attachments");
+      for (const size of ["width", "height"]) if (attributes.has(size) && !/^\d{1,4}$/.test(attributes.get(size)!)) refuse(`its HTML has an image ${size} that is not a number`);
+      const alt = attributes.get("alt")?.trim();
+      shown = alt ? `[image: ${alt}]` : "[image]";
+    }
+    if (name === "br") shown = "\n";
+    else if (name === "li") shown = "\n- ";
+    else if (blocks.has(name)) shown = `\n${shown}`;
+    out.push(shown);
+    if (!voids.has(name)) open.push({ name, at: out.length });
+  }
+  if (open.length > 0) refuse(`its HTML leaves <${open.at(-1)!.name}> open`);
+  return out
+    .join("")
+    .replace(/[ \t]*\n[ \t]*/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 };
 
 /** Text compared as words: runs of spaces and line breaks count as one space. */
 const words = (value: string) => value.replace(/\s+/g, " ").trim();
+
+/** The draft as its approval shows it, or a Refusal saying what the allow-list does not cover. */
+const approvable = (payload: Part | undefined) => {
+  if (payload === undefined) return refuse("Gmail returned no content for it");
+  const found = readParts(payload);
+  let body = found.plain ?? "";
+  let format = found.plain === undefined ? "no body" : "plain text";
+  if (found.html !== undefined) {
+    const inlineIds = new Set(found.attachments.flatMap((a) => (a.contentId === undefined ? [] : [a.contentId])));
+    const shown = htmlText(found.html, inlineIds);
+    if (found.plain === undefined) [body, format] = [shown, "HTML, shown as text with each link's target in <>"];
+    else if (words(shown) !== words(found.plain))
+      refuse("its HTML version says something other than its plain text (compared word for word, with each link as label <target>)");
+    else format = "plain text, with an HTML copy of the same text";
+  }
+  const shownHeader = (name: string) => {
+    const value = header(payload, name);
+    return value === undefined ? undefined : decodeWords(value, `its ${name} header`);
+  };
+  return {
+    from: shownHeader("From") ?? "(not set: the account's default address)",
+    sender: shownHeader("Sender") ?? "",
+    replyTo: shownHeader("Reply-To") ?? "",
+    to: shownHeader("To") ?? "",
+    cc: shownHeader("Cc") ?? "",
+    bcc: shownHeader("Bcc") ?? "",
+    subject: shownHeader("Subject") ?? "",
+    format,
+    body,
+    attachments: found.attachments.map((a) => a.text),
+  };
+};
+
+/** sendDraft's rule in words, written from `sendable`, for its description. */
+const sendableRule = [
+  `It sends only a draft whose every header, part and HTML element is on its allow-list and shown in the approval, within ${approvalLimit} characters of approval text.`,
+  `Headers: ${sendable.shownHeaders.join(", ")} (shown, once each), and unshown only ${sendable.quietHeaders.join(", ")}.`,
+  `Parts: ${sendable.containers.join(", ")} (opened unless named or attached); one ${sendable.bodyTypes.join(" and one ")} body; any other part only as a named attachment, listed with its type and size; parts may carry only ${sendable.partHeaders.join(", ")}.`,
+  `Encodings: ${sendable.transferEncodings.join(", ")}; charsets ${sendable.charsets.join(", ")}.`,
+  `HTML elements: ${Object.entries(sendable.elements)
+    .map(([element, attributes]) => (attributes.length ? `<${element}> (${attributes.join(", ")})` : `<${element}>`))
+    .join(", ")}; on any of them only ${Object.entries(sendable.anywhere)
+    .map(([key, values]) => `${key}=${values.join("|")}`)
+    .join(", ")}.`,
+  `Values: ${Object.entries(sendable.values)
+    .map(([key, value]) => `${key} ${value}`)
+    .join("; ")}. Character references: ${Object.keys(sendable.entities).join(", ")} and numeric.`,
+  "HTML must say, word for word with each link as label <target>, what the plain text says. No character that hides or reorders text (zero-width, bidirectional controls and the like).",
+  "Everything else is refused with nothing sent: for example any style attribute or <style>, comments, web images, data- attributes other than the one listed, attached emails, text stored apart from the message, other charsets, and Gmail's quoted replies and most formatted signatures. The person can send a refused draft from Gmail.",
+].join(" ");
 
 /**
  * What sending a draft would send, read from Gmail now: the fields its approval shows, the raw
@@ -349,51 +651,16 @@ const draftPreview = async (ctx: Base, target: Target, draftId: string) => {
   ]);
   if (full.message.id !== raw.message.id || raw.message.raw === undefined)
     throw new Error("The draft changed while it was being read. Read it again.");
-  const payload = full.message.payload;
-  const problems: string[] = [];
-
-  const names = (payload?.headers ?? []).map((h) => h.name);
-  for (const name of shownHeaders)
-    if (names.filter((other) => other.toLowerCase() === name.toLowerCase()).length > 1) problems.push(`it has more than one ${name} header`);
-  for (const name of new Set(names))
-    if (!quietHeaders.has(name.toLowerCase()) && !shownHeaders.some((shown) => shown.toLowerCase() === name.toLowerCase()))
-      problems.push(`it has a ${name} header, which the approval would not show`);
-
-  const found = parts(payload);
-  if (found.plain.length > 1 || found.html.length > 1) problems.push("it has more than one text part");
-  const plain = text(found.plain[0])?.replace(/\r\n/g, "\n");
-  const html = text(found.html[0]);
-  let body = plain ?? "";
-  let format = plain === undefined ? "no body" : "plain text";
-  if (html !== undefined) {
-    const problem = htmlProblem(html);
-    const shown = problem === undefined ? htmlWithTargets(html) : undefined;
-    if (problem !== undefined) problems.push(problem);
-    else if (shown === undefined) problems.push("its HTML has a link whose target cannot be shown");
-    else if (plain === undefined) [body, format] = [shown, "HTML, shown as text with each link's target in <>"];
-    else if (words(shown) !== words(plain))
-      problems.push("its HTML version says something other than its plain text (compared word for word, with each link as label <target>)");
-    else format = "plain text, with an HTML copy of the same text";
+  try {
+    const send = { account: target.email, draftId, ...approvable(full.message.payload), version: await version(raw.message.raw) };
+    const length = JSON.stringify(send, null, 2).length;
+    if (length > approvalLimit)
+      refuse(`it is too long for an approval to show in full (${length} characters as the approval prints it; the limit is ${approvalLimit})`);
+    return { message: full.message, raw: raw.message.raw, send, problems: [] as string[] };
+  } catch (error) {
+    if (!(error instanceof Refusal)) throw error;
+    return { message: full.message, raw: raw.message.raw, send: undefined, problems: [error.message] };
   }
-  const send = {
-    account: target.email,
-    draftId,
-    from: header(payload, "From") ?? "(not set: the account's default address)",
-    sender: header(payload, "Sender") ?? "",
-    replyTo: header(payload, "Reply-To") ?? "",
-    to: header(payload, "To") ?? "",
-    cc: header(payload, "Cc") ?? "",
-    bcc: header(payload, "Bcc") ?? "",
-    subject: header(payload, "Subject") ?? "",
-    format,
-    body,
-    attachments: found.attachments.map((a) => `${a.filename} (${a.mimeType}, ${a.size} bytes${a.inline ? ", shown in the body" : ""})`),
-    version: await version(raw.message.raw),
-  };
-  const length = JSON.stringify(send, null, 2).length;
-  if (length > approvalLimit)
-    problems.push(`it is too long for an approval to show in full (${length} characters as the approval prints it; the limit is ${approvalLimit})`);
-  return { message: full.message, raw: raw.message.raw, send, problems };
 };
 
 /** Why sendDraft will not send a draft, in words for the person. */
@@ -571,16 +838,16 @@ export const gmail = (source: Source) => ({
           draftId: input.draftId,
           messageId: draft.message.id,
           threadId: draft.message.threadId,
-          from: draft.send.from,
-          sender: draft.send.sender,
-          replyTo: draft.send.replyTo,
-          to: draft.send.to,
-          cc: draft.send.cc,
-          bcc: draft.send.bcc,
-          subject: draft.send.subject,
+          from: header(draft.message.payload, "From") ?? "",
+          sender: header(draft.message.payload, "Sender") ?? "",
+          replyTo: header(draft.message.payload, "Reply-To") ?? "",
+          to: header(draft.message.payload, "To") ?? "",
+          cc: header(draft.message.payload, "Cc") ?? "",
+          bcc: header(draft.message.payload, "Bcc") ?? "",
+          subject: header(draft.message.payload, "Subject") ?? "",
           body,
           attachments,
-          send: draft.problems.length === 0 ? draft.send : undefined,
+          send: draft.send,
           cannotSend: draft.problems.length === 0 ? undefined : refusal(draft.problems),
         });
       },
@@ -621,7 +888,7 @@ export const gmail = (source: Source) => ({
     sendDraft: mutation(
       {
         description:
-          "Send a saved draft, but only one whose whole content its approval can show. Read it with readDraft first and pass its `send` field unchanged: the person approving sees the account; From, Sender, Reply-To, To, Cc and Bcc; the subject; the complete body; and every attachment's name, type and size, inline images included. It refuses, and sends nothing, a draft: too long for that to fit the approval (about 4,000 characters in all); with HTML that says anything other than its plain text, compared word for word with each link written as label <target>; whose HTML uses more than text, formatting, tables, links and inline images (no web images, styles, forms or scripts); with more than one text part; or with headers other than those shown and Date, Message-ID, In-Reply-To, References, MIME-Version and Content-*. An HTML-only draft is shown as its text with each link's target. The person can send a refused draft from Gmail. If the draft changed since it was read, nothing is sent: read it again and ask for approval of what it now says.",
+          `Send a saved draft, but only one whose whole content its approval can show. Read it with readDraft first and pass its \`send\` field unchanged: the person approving sees the account, every address header, the subject, the complete body (HTML shown as text with each link's real target) and every attachment's name, type and size. If readDraft says cannotSend, tell the person why; they can send it from Gmail. ${sendableRule} If the draft changed since it was read, nothing is sent: read it again and ask for approval of what it now says.`,
         input: object(SendFields),
         approval: always(),
       },
@@ -629,9 +896,10 @@ export const gmail = (source: Source) => ({
         pathId("draftId", input.draftId);
         const target = await single(ctx, source, input.account);
         const now = await draftPreview(ctx, target, input.draftId);
-        if (now.problems.length > 0) throw new Error(`Nothing was sent: ${refusal(now.problems)}`);
+        if (now.send === undefined) throw new Error(`Nothing was sent: ${refusal(now.problems)}`);
+        const approvedNow = now.send;
         const changed = (Object.keys(SendFields) as (keyof typeof SendFields)[]).filter(
-          (field) => JSON.stringify(input[field]) !== JSON.stringify(now.send[field]),
+          (field) => JSON.stringify(input[field]) !== JSON.stringify(approvedNow[field]),
         );
         if (changed.length > 0)
           throw new Error(
