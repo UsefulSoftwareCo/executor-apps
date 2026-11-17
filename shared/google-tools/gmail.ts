@@ -346,7 +346,7 @@ export const gmail = (source: Source) => ({
     updateDraft: mutation(
       {
         description:
-          "Replace a draft's content with new fields, as draft takes them. The draft is rewritten whole, so pass every field it should keep (recipients, subject, body). It stays in its thread.",
+          "Replace a draft's content with new fields, as draft takes them. The draft is rewritten whole, so pass every field it should keep (recipients, subject, body). It stays in its thread, but a reply draft keeps its reply headers (In-Reply-To, References) only if replyToMessageId is passed again.",
         input: object({ ...Compose, draftId: string({ minLength: 1 }) }),
         approval: always(),
       },
