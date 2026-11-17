@@ -479,6 +479,12 @@ test("drafts lists drafts newest first with their recipients and subject", async
 interface Piece {
   readonly type: string;
   readonly content?: string;
+  /** The leaf's bytes, when they are not UTF-8 text. */
+  readonly bytes?: Uint8Array;
+  /** The leaf's Content-Transfer-Encoding; base64 when not given. */
+  readonly transferEncoding?: string;
+  /** The whole Content-Type value, when it is not the usual one for `type`. */
+  readonly contentType?: string;
   readonly filename?: string;
   readonly headers?: Readonly<Record<string, string>>;
   /** Gmail keeps the data apart, under an attachmentId, instead of in the message. */
@@ -487,34 +493,38 @@ interface Piece {
 }
 
 /**
- * A draft as Gmail returns it, built from one set of parts: `full` (parsed parts, as readDraft reads
- * them) and `raw` (the MIME text that is sent). `id` names this version of its message.
+ * A draft as Gmail returns it, built from one set of parts: `full` (parsed parts and their headers,
+ * as readDraft reads them) and `raw` (the MIME text that is sent). `id` names this version of its
+ * message. Both carry the same headers, Content-Type values and bytes.
  */
 const fakeDraft = (id: string, headers: readonly (readonly [string, string])[], top: Piece) => {
-  const lines = (pairs: readonly (readonly [string, string])[]) => pairs.map(([name, value]) => `${name}: ${value}`);
-  const own = (piece: Piece) => Object.entries(piece.headers ?? {});
-  const full = (piece: Piece, outer: readonly (readonly [string, string])[]): any => {
-    const leaf = piece.parts === undefined;
-    const named = [...outer, ["Content-Type", piece.type], ...own(piece), ...(leaf ? [["Content-Transfer-Encoding", "base64"]] : [])];
-    const part = { mimeType: piece.type, filename: piece.filename ?? "", headers: named.map(([name, value]) => ({ name, value })) };
-    if (!leaf) return { ...part, body: { size: 0 }, parts: piece.parts!.map((child) => full(child, [])) };
-    const size = Buffer.byteLength(piece.content ?? "");
-    return { ...part, body: piece.stored ? { attachmentId: `att_${piece.filename}`, size } : { data: base64url(piece.content ?? ""), size } };
+  const contentType = (piece: Piece, path: string) =>
+    piece.contentType ??
+    (piece.parts !== undefined ? `${piece.type}; boundary="b${path}"` : piece.filename ? `${piece.type}; name="${piece.filename}"` : `${piece.type}; charset="UTF-8"`);
+  const bytes = (piece: Piece) => Buffer.from(piece.bytes ?? Buffer.from(piece.content ?? ""));
+  const pairs = (piece: Piece, outer: readonly (readonly [string, string])[], path: string): (readonly [string, string])[] => [
+    ...outer,
+    ["Content-Type", contentType(piece, path)],
+    ...Object.entries(piece.headers ?? {}),
+    ...(piece.parts === undefined ? [["Content-Transfer-Encoding", piece.transferEncoding ?? "base64"] as const] : []),
+  ];
+  const full = (piece: Piece, outer: readonly (readonly [string, string])[], path: string): any => {
+    const part = {
+      mimeType: piece.type,
+      filename: piece.filename ?? "",
+      headers: pairs(piece, outer, path).map(([name, value]) => ({ name, value })),
+    };
+    if (piece.parts !== undefined) return { ...part, body: { size: 0 }, parts: piece.parts.map((child, index) => full(child, [], `${path}.${index}`)) };
+    const data = bytes(piece);
+    return { ...part, body: piece.stored ? { attachmentId: `att_${piece.filename ?? "text"}`, size: data.length } : { data: data.toString("base64url"), size: data.length } };
   };
   const mime = (piece: Piece, outer: readonly (readonly [string, string])[], path: string): string[] => {
+    const head = pairs(piece, outer, path).map(([name, value]) => `${name}: ${value}`);
     if (piece.parts !== undefined)
-      return [
-        ...lines(outer),
-        `Content-Type: ${piece.type}; boundary="b${path}"`,
-        ...lines(own(piece)),
-        "",
-        ...piece.parts.flatMap((child, index) => [`--b${path}`, ...mime(child, [], `${path}.${index}`)]),
-        `--b${path}--`,
-      ];
-    const type = piece.filename ? `${piece.type}; name="${piece.filename}"` : `${piece.type}; charset="UTF-8"`;
-    return [...lines(outer), `Content-Type: ${type}`, ...lines(own(piece)), "Content-Transfer-Encoding: base64", "", Buffer.from(piece.content ?? "").toString("base64")];
+      return [...head, "", ...piece.parts.flatMap((child, index) => [`--b${path}`, ...mime(child, [], `${path}.${index}`)]), `--b${path}--`];
+    return [...head, "", (piece.transferEncoding ?? "base64") === "base64" ? bytes(piece).toString("base64") : bytes(piece).toString("latin1")];
   };
-  const message = { id: `msg_${id}`, threadId: "thr_9", payload: full(top, headers) };
+  const message = { id: `msg_${id}`, threadId: "thr_9", payload: full(top, headers, "0") };
   const raw = base64url(mime(top, headers, "0").join("\r\n"));
   const route = (call: Call) =>
     call.search.get("format") === "raw" ? { id: "d9", message: { id: message.id, threadId: message.threadId, raw } } : { id: "d9", message };
@@ -607,8 +617,8 @@ test("sendDraft refuses a draft its approval could not show in full, and sends n
     [basic, alternative("Lunch at noon?\n", "<p>Wire the deposit to account 12345 today.</p>"), /its HTML version says something other than its plain text/],
     [basic, alternative("Reset your password here.\n", '<p>Reset your password <a href="https://evil.example/reset">here</a>.</p>'), /HTML version says something other/],
     [basic, htmlOnly('<p>Hi</p><img src="https://tracker.example/p.gif">'), /its HTML loads an image from the web/],
-    [basic, htmlOnly("<style>p { display: none }</style><p>Hi</p>"), /its HTML uses a <style> element/],
-    [basic, htmlOnly('<p style="background: url(https://tracker.example/p.gif)">Hi</p>'), /attribute that loads or runs something/],
+    [basic, htmlOnly("<style>p { display: none }</style><p>Hi</p>"), /its HTML uses the element <style>/],
+    [basic, htmlOnly('<p style="background: url(https://tracker.example/p.gif)">Hi</p>'), /its HTML has the attribute style on <p>/],
     [basic, plainOnly("All good. ".repeat(450)), /too long for an approval to show in full \(\d+ characters as the approval prints it; the limit is 4000\)/],
     [[...basic, ["Disposition-Notification-To", "alex@example.com"]], plainOnly("Hi"), /it has a Disposition-Notification-To header, which the approval would not show/],
     [[...basic, ["To", "other@example.com"]], plainOnly("Hi"), /it has more than one To header/],
@@ -673,7 +683,7 @@ test("every attachment is listed by what it is, wherever Gmail keeps its data, i
       {
         type: "multipart/related",
         parts: [
-          alternative("See attached.\n", '<p>See attached.</p><img src="cid:logo1" alt="">'),
+          alternative("See attached.\n[image: logo]\n", '<p>See attached.</p><img src="cid:logo1" alt="logo">'),
           { type: "image/png", filename: "logo.png", content: "PNG-synthetic", headers: { "Content-Disposition": "inline", "Content-ID": "<logo1>" } },
         ],
       },
@@ -693,12 +703,220 @@ test("every attachment is listed by what it is, wherever Gmail keeps its data, i
     "invoice.pdf (application/pdf, 14 bytes)",
     "plan.pdf (application/pdf, 18 bytes)",
   ]);
-  assert.equal(read.send.body, "See attached.\n");
+  assert.equal(read.send.body, "See attached.\n[image: logo]\n");
   const message = await run(gmailTools.readMessage, ctx, { messageId: "msg_files" });
   assert.deepEqual(
     message.attachments.map((a: { filename: string }) => a.filename),
     ["logo.png", "invoice.pdf", "plan.pdf"],
   );
+});
+
+const probeHeaders = [["From", "user@example.com"], ["To", "alex@example.com"], ["Subject", "Synthetic review"]] as const;
+
+/** Reads a draft built from `top` and tries to send it; returns what was read, sent and refused. */
+const attempt = async (top: Piece, headers: readonly (readonly [string, string])[] = probeHeaders) => {
+  const draft = fakeDraft("probe", headers, top);
+  const { calls, ctx } = google({ "GET /gmail/v1/users/me/drafts/d9": draft, "POST /gmail/v1/users/me/drafts/send": sent });
+  const read = await run(gmailTools.readDraft, ctx, { draftId: "d9" });
+  const error: Error | undefined = await run(gmailTools.sendDraft, ctx, read.send ?? { ...(await approved()), version: "approved-elsewhere" }).then(
+    () => undefined,
+    (error) => error,
+  );
+  const posts = calls.filter((call) => call.method === "POST");
+  return { read, error, sentRaw: posts.length === 1 ? posts[0]!.body.message.raw : undefined, draft };
+};
+/** Asserts a draft is refused for `reason`, by readDraft and by sendDraft, and nothing is sent. */
+const refused = async (top: Piece, reason: RegExp, headers?: readonly (readonly [string, string])[]) => {
+  const { read, error, sentRaw } = await attempt(top, headers);
+  assert.equal(sentRaw, undefined, `sent: ${reason}`);
+  assert.equal(read.send, undefined, String(reason));
+  assert.match(read.cannotSend ?? "", reason);
+  assert.match(error?.message ?? "", /^Nothing was sent: sendDraft only sends a draft whose whole content its approval shows/);
+  assert.match(error!.message, reason);
+};
+/** Asserts a draft is sent byte for byte, with its approval showing `body`. */
+const sends = async (top: Piece, body: string, headers?: readonly (readonly [string, string])[]) => {
+  const { read, error, sentRaw, draft } = await attempt(top, headers);
+  assert.equal(read.cannotSend, undefined, `${body}: ${read.cannotSend}`);
+  assert.equal(error, undefined);
+  assert.equal(read.send.body, body);
+  assert.equal(sentRaw, draft.raw);
+  return read.send;
+};
+
+// The second review's probes: HTML whose approved text differed from what a recipient sees.
+test("sendDraft refuses HTML that could show a recipient other text or links than the approval", async () => {
+  await refused(alternative("Pay here <https://safe.example>", '<a data-href="https://safe.example" href="https://evil.example">Pay here</a>'), /its HTML has the attribute data-href on <a>/);
+  await refused(htmlOnly('<img data-src="cid:logo" src="https://tracker.example/p.gif">Hi'), /its HTML has the attribute data-src on <img>/);
+  await refused(alternative("Do not pay this invoice.", '<span style="display:none">Do not </span>pay this invoice.'), /its HTML has the attribute style on <span>/);
+  await refused(alternative("Do not pay this invoice.", "<span hidden>Do not </span>pay this invoice."), /its HTML has the attribute hidden on <span>/);
+  await refused(alternative("Send to account 12345", '<p>Send to account <bdo dir="rtl">12345</bdo></p>'), /its HTML uses the element <bdo>/);
+  await refused(alternative("Hi", '<abbr title="Wire money to account 54321">Hi</abbr>'), /its HTML uses the element <abbr>/);
+  await refused(
+    { type: "multipart/related", parts: [alternative("Hi", '<p>Hi</p><img src="cid:logo" alt="Wire money to 54321">'), { type: "image/png", filename: "logo.png", content: "PNG", headers: { "Content-ID": "<logo>", "Content-Disposition": "inline" } }] },
+    /its HTML version says something other than its plain text/,
+  );
+  await refused(alternative("Pay​ now", "<p>Pay&#8203; now</p>"), /hides or reorders text \(U\+200B\)/);
+  await refused(plainOnly("account ‮12345‬"), /its text has a character that hides or reorders text \(U\+202E\)/);
+});
+
+// Text Gmail keeps apart from the message, encoded headers and other charsets: shown decoded, or refused.
+test("sendDraft shows text only as it is decoded, and refuses text it has not read", async () => {
+  await refused({ type: "text/plain", content: `WIRE MONEY TO ACCOUNT 54321 ${"x".repeat(8000)}`, stored: true }, /its text is stored apart from the message/);
+  await refused({ type: "text/html", content: "<p>WIRE MONEY TO ACCOUNT 54321</p>", stored: true }, /its text is stored apart from the message/);
+  const encoded = await sends(plainOnly("Hi"), "Hi", [
+    ["From", "=?UTF-8?B?QmlsbGluZw==?= <user@example.com>"],
+    ["To", "alex@example.com"],
+    ["Subject", "=?UTF-8?B?V2lyZSBtb25leSB0byBhY2NvdW50IDU0MzIx?="],
+  ]);
+  assert.equal(encoded.subject, "Wire money to account 54321");
+  assert.equal(encoded.from, "Billing <user@example.com>");
+  const cp1252 = Uint8Array.from([0x48, 0x69, 0x20, 0x93, 0x41, 0x6c, 0x65, 0x78, 0x94]);
+  for (const contentType of ["text/plain; charset=windows-1252", "text/plain; charset = windows-1252", 'text/plain; xcharset=utf-8; charset="windows-1252"'])
+    await sends({ type: "text/plain", contentType, bytes: cp1252 }, "Hi “Alex”");
+  await refused({ type: "text/plain", contentType: "text/plain; charset=shift_jis", bytes: cp1252 }, /in the shift_jis charset, which it does not read/);
+  await refused({ type: "text/plain", contentType: "text/plain", bytes: cp1252 }, /bytes that are not ASCII but names no charset/);
+  await refused({ type: "text/plain", contentType: "text/plain; charset=utf-8", bytes: cp1252 }, /its text is not valid utf-8/);
+  await refused(plainOnly("Hi"), /its Subject header is in the x-unknown charset, which it does not read/, [...probeHeaders.slice(0, 2), ["Subject", "=?x-unknown?B?SGk=?="]]);
+  await refused(plainOnly("Hi"), /its Subject header has an encoded word it cannot read/, [...probeHeaders.slice(0, 2), ["Subject", "=?UTF-8?B?not base64!?="]]);
+});
+
+// An attached container used to be opened as if it were body, and its name dropped.
+test("sendDraft refuses an attached bundle of parts or an attached email instead of opening it", async () => {
+  const bundle = {
+    type: "multipart/alternative",
+    filename: "bundle.mime",
+    headers: { "Content-Disposition": 'attachment; filename="bundle.mime"' },
+    // Its text matches the body's, so the old reading saw nothing to refuse and dropped the attachment.
+    parts: [htmlOnly("Hi")],
+  };
+  await refused({ type: "multipart/mixed", parts: [plainOnly("Hi"), bundle] }, /it has an attached multipart\/alternative part \(bundle\.mime\), which it does not open/);
+  await refused({ type: "multipart/mixed", parts: [plainOnly("Hi"), { type: "message/rfc822", filename: "old.eml", parts: [plainOnly("Private forwarded text")] }] }, /attached message\/rfc822 part/);
+  // Reading the message lists the bundle as an attachment rather than reading it as body.
+  const draft = fakeDraft("bundle", probeHeaders, { type: "multipart/mixed", parts: [plainOnly("Hi"), bundle] });
+  const { ctx } = google({ "GET /gmail/v1/users/me/messages/msg_bundle": () => draft.message, "GET /gmail/v1/users/me/labels": () => ({ labels: [] }) });
+  const message = await run(gmailTools.readMessage, ctx, { messageId: "msg_bundle" });
+  assert.equal(message.body, "Hi");
+  assert.deepEqual(
+    message.attachments.map((a: { filename: string; mimeType: string }) => [a.filename, a.mimeType]),
+    [["bundle.mime", "multipart/alternative"]],
+  );
+});
+
+const inlineLogo = { type: "image/png", filename: "logo.png", content: "PNG", headers: { "Content-ID": "<logo>", "Content-Disposition": 'inline; filename="logo.png"' } };
+
+// One allowed and one refused example for each class on the allow-list.
+test("the sendDraft allow-list: what each element, attribute, value, reference, character and part class accepts and refuses", async () => {
+  const cases: [string, Piece, string | RegExp, (readonly (readonly [string, string])[])?][] = [
+    // Text elements.
+    ["formatting", htmlOnly("<p><b>B</b> <strong>S</strong> <i>I</i> <em>E</em> <u>U</u> <span>N</span><wbr>W</p><hr><blockquote>Q</blockquote>"), "B S I E U NW\n\nQ"],
+    ["lists", htmlOnly("<ul><li>One</li><li>Two</li></ul><ol><li>Three</li></ol>"), "- One\n- Two\n\n- Three"],
+    ["line breaks", htmlOnly('<div dir="ltr">Hi Alex,<div><br></div><div>Lunch?</div></div>'), "Hi Alex,\n\nLunch?"],
+    ["unlisted element", htmlOnly("<font color=white>Hi</font>"), /its HTML uses the element <font>/],
+    ["table", htmlOnly("<table><tr><td>Hi</td></tr></table>"), /its HTML uses the element <table>/],
+    ["style element", htmlOnly("<style>p { display: none }</style><p>Hi</p>"), /its HTML uses the element <style>/],
+    ["script", htmlOnly("<script>alert(1)</script>Hi"), /its HTML uses the element <script>/],
+    ["form", htmlOnly("<form>Hi</form>"), /its HTML uses the element <form>/],
+    // Attributes on any element, with fixed values.
+    ["dir ltr", htmlOnly('<p dir="ltr">Hi</p>'), "Hi"],
+    ["dir rtl", htmlOnly('<p dir="rtl">Hi</p>'), /its HTML has dir="rtl" on <p>/],
+    ["signature class", htmlOnly('<div class="gmail_signature" data-smartmail="gmail_signature">User</div>'), "User"],
+    ["other class", htmlOnly('<div class="gmail_quote">User</div>'), /its HTML has class="gmail_quote" on <div>/],
+    ["other data attribute", htmlOnly('<div data-x="1">User</div>'), /its HTML has the attribute data-x on <div>/],
+    ["style attribute", htmlOnly('<p style="color: black">Hi</p>'), /its HTML has the attribute style on <p>/],
+    ["event attribute", htmlOnly('<p onclick="x()">Hi</p>'), /its HTML has the attribute onclick on <p>/],
+    ["title attribute", htmlOnly('<p title="secret">Hi</p>'), /its HTML has the attribute title on <p>/],
+    ["two of one attribute", htmlOnly('<p dir="ltr" dir="rtl">Hi</p>'), /two dir attributes on one <p>/],
+    // Links: the real href, http, https or mailto.
+    ["link", htmlOnly('<p>See <a href="https://example.com/a?b=1&amp;c=2" target="_blank">the doc</a></p>'), "See the doc <https://example.com/a?b=1&c=2>"],
+    ["link labelled with its target", htmlOnly('<a href="mailto:alex@example.com">mailto:alex@example.com</a>'), "mailto:alex@example.com"],
+    ["link labelled with another address", htmlOnly('<a href="https://evil.example">https://safe.example</a>'), "https://safe.example <https://evil.example>"],
+    ["data link", htmlOnly('<a href="data:text/html,Hello">Hi</a>'), /links to "data:text\/html,Hello", which is not an http:, https: or mailto: address/],
+    ["javascript link", htmlOnly('<a href="javascript:alert(1)">Hi</a>'), /which is not an http:, https: or mailto: address/],
+    ["link with a space in its target", htmlOnly('<a href="https://example.com/ x">Hi</a>'), /which is not an http:, https: or mailto: address/],
+    ["other link target", htmlOnly('<a href="https://example.com" target="frame">Hi</a>'), /link target other than _blank/],
+    ["link inside a link", htmlOnly('<a href="https://a.example"><a href="https://b.example">Hi</a></a>'), /a link inside a link/],
+    // Images: inline attachments only, alt shown.
+    ["inline image", { type: "multipart/related", parts: [htmlOnly('<p>Logo</p><img src="cid:logo" alt="logo" width="10" height="10">'), inlineLogo] }, "Logo\n[image: logo]"],
+    ["web image", htmlOnly('<img src="https://example.com/logo.png">Hi'), /its HTML loads an image from the web/],
+    ["data image", htmlOnly('<img src="data:image/png;base64,AA==">Hi'), /not one of the draft's inline attachments/],
+    ["missing inline image", htmlOnly('<img src="cid:missing" alt="Unshown text">Hi'), /not one of the draft's inline attachments/],
+    ["image size not a number", { type: "multipart/related", parts: [htmlOnly('<img src="cid:logo" width="0px">'), inlineLogo] }, /image width that is not a number/],
+    // References, markup and characters.
+    ["references", htmlOnly("<p>Fish &amp; chips &lt;3 &#233;&#x263A;&nbsp;!</p>"), "Fish & chips <3 é☺ !"],
+    ["unknown reference", htmlOnly("<p>&NotEqualTilde;</p>"), /character reference it does not read \(&NotEqualTilde;\)/],
+    ["bare ampersand", htmlOnly("<p>Fish & chips</p>"), /character reference it does not read/],
+    ["comment", htmlOnly("Hi<!-- Wire money -->"), /a < that does not open an element it allows/],
+    ["doctype", htmlOnly("<!DOCTYPE html><p>Hi</p>"), /a < that does not open an element it allows/],
+    ["stray <", htmlOnly("<p>1 < 2</p>"), /a < that does not open an element it allows/],
+    ["unclosed element", htmlOnly("<div>Hi"), /leaves <div> open/],
+    ["misnested elements", htmlOnly("<b><i>Hi</b></i>"), /closes <b> where that element is not open/],
+    ["self-closed container", htmlOnly("<div/>Hi"), /writes <div\/>/],
+    ["attributes run together", htmlOnly('<a href="https://a.example"target="_blank">Hi</a>'), /a <a> tag it cannot read/],
+    ["zero-width character", plainOnly("Pay​now"), /U\+200B/],
+    ["word joiner", plainOnly("Pay⁠now"), /U\+2060/],
+    ["private-use character", plainOnly("Paynow"), /U\+E000/],
+    ["tag character", plainOnly("Hi\u{e0041}"), /U\+E0041/],
+    ["accents and scripts", plainOnly("Café, Ελληνικά, 日本語, עברית"), "Café, Ελληνικά, 日本語, עברית"],
+    // Parts.
+    ["plain text", plainOnly("Hi Alex,\nLunch at noon?"), "Hi Alex,\nLunch at noon?"],
+    ["matching plain and HTML", alternative("Hi\nUser <https://example.com>", '<div dir="ltr">Hi<div class="gmail_signature"><a href="https://example.com">User</a></div></div>'), "Hi\nUser <https://example.com>"],
+    ["named attachment", { type: "multipart/mixed", parts: [plainOnly("Hi"), pdf] }, "Hi"],
+    ["unnamed attachment", { type: "multipart/mixed", parts: [plainOnly("Hi"), { type: "application/pdf", content: "PDF" }] }, /it has an unnamed application\/pdf part/],
+    ["name only in Content-Type", { type: "multipart/mixed", parts: [plainOnly("Hi"), { type: "text/plain", contentType: 'text/plain; name="secret.txt"', content: "secret" }] }, /an attachment's name cannot be read reliably/],
+    ["RFC 2231 name", { type: "multipart/mixed", parts: [plainOnly("Hi"), { type: "application/pdf", content: "PDF", headers: { "Content-Disposition": "attachment; filename*=utf-8''private%20doc.pdf" } }] }, /a Content-Disposition header is not in a form it reads/],
+    ["signed message", { type: "multipart/signed", parts: [plainOnly("Hi")] }, /it has a multipart\/signed part/],
+    ["two text parts", { type: "multipart/mixed", parts: [plainOnly("Hi"), plainOnly("Different")] }, /more than one text part/],
+    ["quoted-printable", { type: "text/plain", content: "Hi", transferEncoding: "quoted-printable" }, "Hi"],
+    ["unread transfer encoding", { type: "text/plain", content: "Hi", transferEncoding: "x-uuencode" }, /uses the x-uuencode transfer encoding, which it does not read/],
+    ["two transfer encodings", { type: "text/plain", content: "Hi", headers: { "Content-Transfer-Encoding": "quoted-printable" } }, /more than one Content-Transfer-Encoding header/],
+    ["part header not listed", { type: "multipart/mixed", parts: [plainOnly("Hi"), { ...pdf, headers: { ...pdf.headers, "Content-Location": "https://example.com/x" } }] }, /a part of it has a Content-Location header/],
+    // Message headers.
+    ["Reply-To and Sender", plainOnly("Hi"), "Hi", [...probeHeaders, ["Reply-To", "billing@example.net"], ["Sender", "assistant@example.com"]]],
+    ...["Return-Path", "Resent-To", "Resent-From", "Disposition-Notification-To", "List-Post", "X-Mailer"].map(
+      (name) => [`${name} header`, plainOnly("Hi"), new RegExp(`it has a ${name} header, which the approval would not show`), [...probeHeaders, [name, "other@example.com"]]] as [string, Piece, RegExp, (readonly (readonly [string, string])[])],
+    ),
+    ["two To headers", plainOnly("Hi"), /more than one To header/, [...probeHeaders, ["To", "other@example.com"]]],
+    ["hidden character in a header", plainOnly("Hi"), /its Subject header has a character that hides or reorders text/, [...probeHeaders.slice(0, 2), ["Subject", "Invoice ‮paid"]]],
+  ];
+  for (const [name, top, expected, headers] of cases) {
+    if (typeof expected === "string") await sends(top, expected, headers).catch((error) => assert.fail(`${name}: ${error.message}`));
+    else await refused(top, expected, headers).catch((error) => assert.fail(`${name}: ${error.message}`));
+  }
+});
+
+// Known limits: Gmail's quoted replies (and signatures laid out with styles or web images) are refused today.
+test("sendDraft refuses Gmail's quoted replies and image signatures, as its description says", async () => {
+  await refused(
+    alternative(
+      "Thanks!\nOn Tue, Alex wrote:\n> Lunch?",
+      '<div dir="ltr">Thanks!</div><br><div class="gmail_quote"><div class="gmail_attr">On Tue, Alex wrote:<br></div><blockquote class="gmail_quote" style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Lunch?</blockquote></div>',
+    ),
+    /class="gmail_quote"/,
+  );
+  await refused(alternative("Hi", '<div dir="ltr">Hi<img src="https://example.com/logo.png"></div>'), /loads an image from the web/);
+  assert.match(native(gmailTools.sendDraft).description, /Gmail's quoted replies and most formatted signatures/);
+});
+
+// What gmail.draft writes must stay sendable: its MIME is read back as Gmail would return it.
+test("a draft written by gmail.draft is shown in full and sent by sendDraft", async () => {
+  const made = google({ "POST /gmail/v1/users/me/drafts": () => ({ id: "d9", message: { id: "m" } }) });
+  await run(gmailTools.draft, made.ctx, { to: ["alex@example.com"], cc: ["sam@example.com"], subject: "Café plans", body: "Hi Alex,\nLunch at noon? — User" });
+  const raw: string = made.calls.at(-1)!.body.message.raw;
+  const [head, encoded] = decodeBody(raw).split("\r\n\r\n") as [string, string];
+  const headers = [{ name: "From", value: "User <user@example.com>" }, ...head.split("\r\n").map((line) => ({ name: line.slice(0, line.indexOf(":")), value: line.slice(line.indexOf(":") + 1).trim() }))];
+  const data = Buffer.from(encoded.replaceAll("\r\n", ""), "base64");
+  const payload = { mimeType: "text/plain", filename: "", headers, body: { data: data.toString("base64url"), size: data.length } };
+  const saved = google({
+    "GET /gmail/v1/users/me/drafts/d9": (call) => ({ id: "d9", message: call.search.get("format") === "raw" ? { id: "m", raw } : { id: "m", payload } }),
+    "POST /gmail/v1/users/me/drafts/send": sent,
+  });
+  const read = await run(gmailTools.readDraft, saved.ctx, { draftId: "d9" });
+  assert.equal(read.cannotSend, undefined);
+  assert.equal(read.send.body, "Hi Alex,\nLunch at noon? — User");
+  assert.equal(read.send.subject, "Café plans");
+  await run(gmailTools.sendDraft, saved.ctx, read.send);
+  assert.equal(saved.calls.at(-1)!.body.message.raw, raw);
 });
 
 test("a send whose outcome is unknown says to check Sent and the draft before retrying", async () => {
