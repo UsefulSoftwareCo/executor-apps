@@ -2,7 +2,7 @@
 // Usage: node discovery-to-openapi.mjs <discovery.json> > gmail-openapi.json
 // Fetch the input from https://gmail.googleapis.com/$discovery/rest?version=v1
 // Derived from packages/google-drive's converter, with Gmail's settings below. Unlike that one, it
-// keeps all of Google's standard parameters and writes its output in a fixed order.
+// keeps Google's standard parameters (except the credential ones) and writes its output in a fixed order.
 import { readFileSync } from "node:fs";
 
 const d = JSON.parse(readFileSync(process.argv[2], "utf8"));
@@ -25,6 +25,18 @@ const MEDIA_NOTES = {
  * Methods that get no upload operation, and why. drafts.send must name the draft it sends, and a
  * simple upload carries only the message, with no way to give the draft's id.
  */
+/**
+ * The methods whose JSON body is required: each takes the whole message (or, for drafts.send, the
+ * draft's id) and cannot work without it. Every other body stays optional, as Google allows.
+ */
+const REQUIRED_BODY = new Set(
+  ["drafts.create", "drafts.update", "drafts.send", "messages.send", "messages.insert", "messages.import"].map((id) => `gmail.users.${id}`),
+);
+/**
+ * Standard parameters that are not offered. They carry credentials, which the account binding
+ * supplies; a value given here would land in the request URL and the approval prompt.
+ */
+const CREDENTIAL_PARAMETERS = new Set(["access_token", "oauth_token", "key"]);
 const NO_MEDIA = {
   "gmail.users.drafts.send": "a simple upload cannot carry the id of the draft to send",
 };
@@ -80,9 +92,11 @@ const param = (name, p) => {
   };
 };
 
-// Google's standard parameters, accepted by every method. `uploadType` on an upload operation is
+// Google's standard parameters, accepted by every method, less the credential ones. `uploadType` on an upload operation is
 // replaced by the one value supported there.
-const standard = sorted(d.parameters).map(([n, p]) => param(n, p));
+const standard = sorted(d.parameters)
+  .filter(([n]) => !CREDENTIAL_PARAMETERS.has(n))
+  .map(([n, p]) => param(n, p));
 
 const paths = {};
 const walk = (resources) => {
@@ -106,7 +120,7 @@ const walk = (resources) => {
         security: [{ bearer: [] }],
       };
       if (m.request) {
-        op.requestBody = { required: true, content: { "application/json": { schema: schema(m.request) } } };
+        op.requestBody = { required: REQUIRED_BODY.has(m.id), content: { "application/json": { schema: schema(m.request) } } };
       }
       (paths[key] ??= {})[m.httpMethod.toLowerCase()] = op;
       const simple = m.supportsMediaUpload && !NO_MEDIA[m.id] ? m.mediaUpload?.protocols?.simple : undefined;

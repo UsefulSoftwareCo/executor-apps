@@ -47,15 +47,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -83,24 +74,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -192,15 +165,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -228,24 +192,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -330,15 +276,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -366,24 +303,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -443,7 +362,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -485,15 +404,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -521,24 +431,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -675,15 +567,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -711,24 +594,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -832,15 +697,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -868,24 +724,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -993,15 +831,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -1029,24 +858,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -1153,15 +964,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -1189,24 +991,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -1305,15 +1089,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -1341,24 +1116,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -1460,15 +1217,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -1496,24 +1244,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -1636,15 +1366,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -1672,24 +1393,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -1844,15 +1547,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -1880,24 +1574,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -1989,15 +1665,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2025,24 +1692,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -2102,7 +1751,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -2142,15 +1791,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2178,24 +1818,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -2296,15 +1918,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2332,24 +1945,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -2441,15 +2036,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2477,24 +2063,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -2593,15 +2161,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2629,24 +2188,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -2706,7 +2247,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -2755,15 +2296,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2791,24 +2323,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -2868,7 +2382,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -2910,15 +2424,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -2946,24 +2451,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -3016,7 +2503,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -3058,15 +2545,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -3094,24 +2572,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -3164,7 +2624,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -3215,15 +2675,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -3251,24 +2702,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -3387,15 +2820,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -3423,24 +2847,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -3572,15 +2978,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -3608,24 +3005,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -3779,15 +3158,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -3815,24 +3185,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -3953,15 +3305,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -3989,24 +3332,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -4155,15 +3480,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -4191,24 +3507,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -4334,15 +3632,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -4370,24 +3659,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -4495,15 +3766,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -4531,24 +3793,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -4608,7 +3852,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -4650,15 +3894,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -4686,24 +3921,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -4817,15 +4034,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -4853,24 +4061,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -4978,15 +4168,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5014,24 +4195,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5132,15 +4295,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5168,24 +4322,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5295,15 +4431,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5331,24 +4458,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5440,15 +4549,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5476,24 +4576,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5583,15 +4665,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5619,24 +4692,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5696,7 +4751,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -5738,15 +4793,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5774,24 +4820,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5881,15 +4909,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -5917,24 +4936,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -5994,7 +4995,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -6036,15 +5037,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6072,24 +5064,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -6179,15 +5153,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6215,24 +5180,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -6292,7 +5239,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -6334,15 +5281,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6370,24 +5308,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -6477,15 +5397,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6513,24 +5424,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -6590,7 +5483,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -6632,15 +5525,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6668,24 +5552,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -6775,15 +5641,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6811,24 +5668,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -6888,7 +5727,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -6930,15 +5769,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -6966,24 +5796,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -7043,7 +5855,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -7102,15 +5914,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -7138,24 +5941,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -7256,15 +6041,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -7292,24 +6068,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -7401,15 +6159,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -7437,24 +6186,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -7555,15 +6286,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -7591,24 +6313,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -7668,7 +6372,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -7723,15 +6427,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -7759,24 +6454,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -7836,7 +6513,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -7895,15 +6572,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -7931,24 +6599,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8049,15 +6699,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -8085,24 +6726,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8162,7 +6785,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -8213,15 +6836,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -8249,24 +6863,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8326,7 +6922,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -8377,15 +6973,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -8413,24 +7000,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8531,15 +7100,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -8567,24 +7127,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8637,7 +7179,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -8679,15 +7221,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -8715,24 +7248,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8792,7 +7307,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -8832,15 +7347,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -8868,24 +7374,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -8986,15 +7474,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9022,24 +7501,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9131,15 +7592,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9167,24 +7619,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9276,15 +7710,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9312,24 +7737,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9389,7 +7796,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -9429,15 +7836,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9465,24 +7863,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9583,15 +7963,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9619,24 +7990,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9728,15 +8081,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9764,24 +8108,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9873,15 +8199,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -9909,24 +8226,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -9986,7 +8285,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -10026,15 +8325,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10062,24 +8352,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -10180,15 +8452,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10216,24 +8479,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -10325,15 +8570,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10361,24 +8597,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -10470,15 +8688,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10506,24 +8715,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -10583,7 +8774,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -10623,15 +8814,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10659,24 +8841,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -10777,15 +8941,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10813,24 +8968,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -10922,15 +9059,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -10958,24 +9086,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11074,15 +9184,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -11110,24 +9211,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11187,7 +9270,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -11236,15 +9319,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -11272,24 +9346,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11349,7 +9405,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -11400,15 +9456,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -11436,24 +9483,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11556,15 +9585,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -11592,24 +9612,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11710,15 +9712,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -11746,24 +9739,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11864,15 +9839,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -11900,24 +9866,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -11977,7 +9925,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -12026,15 +9974,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -12062,24 +10001,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -12189,15 +10110,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -12225,24 +10137,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -12336,15 +10230,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -12372,24 +10257,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -12507,15 +10374,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -12543,24 +10401,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -12701,15 +10541,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -12737,24 +10568,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -12855,15 +10668,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -12891,24 +10695,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -12968,7 +10754,7 @@
      }
     ],
     "requestBody": {
-     "required": true,
+     "required": false,
      "content": {
       "application/json": {
        "schema": {
@@ -13019,15 +10805,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -13055,24 +10832,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
@@ -13173,15 +10932,6 @@
       }
      },
      {
-      "name": "access_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth access token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
       "name": "alt",
       "in": "query",
       "required": false,
@@ -13209,24 +10959,6 @@
       "in": "query",
       "required": false,
       "description": "Selector specifying which fields to include in a partial response.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "key",
-      "in": "query",
-      "required": false,
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "schema": {
-       "type": "string"
-      }
-     },
-     {
-      "name": "oauth_token",
-      "in": "query",
-      "required": false,
-      "description": "OAuth 2.0 token for the current user.",
       "schema": {
        "type": "string"
       }
