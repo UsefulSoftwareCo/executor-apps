@@ -73,6 +73,48 @@ const event = (target: Target, calendar: CalendarEntry, item: any) =>
 
 const sortKey = (start: string) => (start.length === 10 ? Date.parse(`${start}T00:00:00Z`) : Date.parse(start));
 
+const isDate = (value: string) => /^\d{4}-\d{2}-\d{2}$/.test(value.trim());
+const dateMs = (date: string) => Date.parse(`${date.trim()}T00:00:00Z`);
+/** A date `days` after another, both as YYYY-MM-DD. */
+const addDays = (date: string, days: number) => new Date(dateMs(date) + days * day).toISOString().slice(0, 10);
+
+/**
+ * The start and end an update writes. A new start without an end keeps the event's length, unless
+ * it switches between all-day and timed, where `minutes` (default 30) or one day applies.
+ */
+const moved = (
+  current: { readonly start?: { readonly date?: string; readonly dateTime?: string }; readonly end?: { readonly date?: string; readonly dateTime?: string } },
+  input: { readonly start?: string; readonly end?: string; readonly minutes?: number },
+  zone: string,
+) => {
+  const wasAllDay = current.start?.date !== undefined;
+  const allDay = input.start === undefined ? wasAllDay : isDate(input.start);
+  if (input.end !== undefined && isDate(input.end) !== allDay)
+    throw new Error("start and end must both be dates (an all-day event) or both be times.");
+  if (allDay) {
+    const start = input.start?.trim() ?? current.start?.date!;
+    const length = wasAllDay ? Math.max(1, Math.round((dateMs(current.end?.date ?? addDays(current.start!.date!, 1)) - dateMs(current.start!.date!)) / day)) : 1;
+    const end = input.end?.trim() ?? (input.start === undefined ? current.end?.date! : addDays(start, length));
+    if (dateMs(end) <= dateMs(start)) throw new Error("An all-day event's end is the day after its last day, so it must be after start.");
+    return { start: { date: start }, end: { date: end } };
+  }
+  const startAt = input.start === undefined ? Date.parse(current.start!.dateTime!) : parseTime(input.start, zone);
+  const length =
+    input.minutes !== undefined
+      ? input.minutes * 60000
+      : wasAllDay
+        ? 30 * 60000
+        : Date.parse(current.end!.dateTime!) - Date.parse(current.start!.dateTime!);
+  const endAt = input.end === undefined ? startAt + length : parseTime(input.end, zone);
+  if (endAt <= startAt) throw new Error("The event must end after it starts.");
+  return {
+    start: { dateTime: new Date(startAt).toISOString(), timeZone: zone },
+    end: { dateTime: new Date(endAt).toISOString(), timeZone: zone },
+  };
+};
+
+const sameAddress = (a: string | undefined, b: string) => a?.trim().toLowerCase() === b.trim().toLowerCase();
+
 const busyWindows = async (ctx: Base, targets: readonly Target[], start: number, end: number) =>
   fanOut(targets, async (target) => {
     const calendars = await shown(ctx, target, undefined);
@@ -327,10 +369,90 @@ export const calendar = (source: Source) => ({
         return { account: target.email, eventId: input.eventId, response: status };
       },
     ),
+    updateEvent: mutation(
+      {
+        description:
+          "Change an event's title, times, description, location or attendees, or add a Google Meet link. Only the fields you pass change. A new start without an end keeps the event's length (or set minutes). Take eventId and calendarId from agenda: for a recurring event that changes only that occurrence. Attendees are told of the change unless notify is false.",
+        input: object({
+          account,
+          calendarId: string().optional(),
+          eventId: string({ minLength: 1 }),
+          summary: string().optional(),
+          start: string().optional(),
+          end: string().optional(),
+          minutes: number().optional(),
+          description: string().optional(),
+          location: string().optional(),
+          addAttendees: array(string()).optional(),
+          removeAttendees: array(string()).optional(),
+          meet: boolean().optional(),
+          timeZone: string().optional(),
+          notify: boolean().optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const calendarId = input.calendarId ?? "primary";
+        const path = `${base}/calendars/${encodeURIComponent(calendarId)}/events/${encodeURIComponent(input.eventId)}`;
+        const current = await google(ctx, target, path);
+        const body: Record<string, unknown> = {};
+        if (input.summary !== undefined) body.summary = input.summary;
+        if (input.description !== undefined) body.description = input.description;
+        if (input.location !== undefined) body.location = input.location;
+        if (input.start !== undefined || input.end !== undefined || input.minutes !== undefined) {
+          const zone = input.timeZone ?? (await calendarZone(ctx, target));
+          Object.assign(body, moved(current, input, zone));
+        }
+        if (input.addAttendees?.length || input.removeAttendees?.length) {
+          // Keep everyone else's entry as Google has it, with their responses.
+          const kept = ((current.attendees ?? []) as { email?: string }[]).filter(
+            (attendee) => !input.removeAttendees?.some((email) => sameAddress(attendee.email, email)),
+          );
+          const added = (input.addAttendees ?? [])
+            .filter((email, index, all) => all.findIndex((other) => sameAddress(other, email)) === index)
+            .filter((email) => !kept.some((attendee) => sameAddress(attendee.email, email)))
+            .map((email) => ({ email: email.trim() }));
+          body.attendees = [...kept, ...added];
+        }
+        if (input.meet)
+          body.conferenceData = { createRequest: { requestId: crypto.randomUUID(), conferenceSolutionKey: { type: "hangoutsMeet" } } };
+        if (Object.keys(body).length === 0) throw new Error("Pass at least one field to change.");
+        const updated = await google(ctx, target, path, {
+          method: "PATCH",
+          search: { sendUpdates: input.notify === false ? "none" : "all", conferenceDataVersion: input.meet ? 1 : undefined },
+          body,
+        });
+        const { iCalUID: _, ...summary } = event(target, { id: calendarId }, updated);
+        return summary;
+      },
+    ),
+    deleteEvent: mutation(
+      {
+        description:
+          "Delete an event. Take eventId and calendarId from agenda: for a recurring event that deletes only that occurrence. If you organize it, attendees are told it is cancelled unless notify is false. To decline someone else's invitation instead, use respond.",
+        input: object({
+          account,
+          calendarId: string().optional(),
+          eventId: string({ minLength: 1 }),
+          notify: boolean().optional(),
+        }),
+        approval: always(),
+      },
+      async (ctx: WriteContext, input) => {
+        const target = await single(ctx, source, input.account);
+        const calendarId = input.calendarId ?? "primary";
+        await google(ctx, target, `${base}/calendars/${encodeURIComponent(calendarId)}/events/${encodeURIComponent(input.eventId)}`, {
+          method: "DELETE",
+          search: { sendUpdates: input.notify === false ? "none" : "all" },
+        });
+        return { account: target.email, calendarId, eventId: input.eventId, deleted: true };
+      },
+    ),
   },
   meta: {
     title: "Google Calendar",
-    description: "Agenda and availability across every linked Google account, and simple event writes.",
-    instructions: `agenda and freeBusy span every linked account unless \`account\` (an address) is given. Times without an offset are read in the account's Calendar time zone. Event edits, recurrence and sharing are under ${source.api("calendar")}.`,
+    description: "Agenda and availability across every linked Google account, and event writes.",
+    instructions: `agenda and freeBusy span every linked account unless \`account\` (an address) is given. Times without an offset are read in the account's Calendar time zone. Edit or delete an event with the account, calendarId and eventId agenda returned. Recurrence rules, moving events between calendars and sharing are under ${source.api("calendar")}.`,
   },
 });
