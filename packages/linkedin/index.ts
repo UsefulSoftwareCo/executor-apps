@@ -31,6 +31,9 @@ const linkedin = defineProvider({
       authorizationUrl: "https://www.linkedin.com/oauth/v2/authorization",
       tokenUrl: "https://www.linkedin.com/oauth/v2/accessToken",
       tokenEndpointAuthMethod: "client_secret_post",
+      // LinkedIn's web flow answers a token request carrying code_verifier with 401 invalid_client,
+      // even with the right secret, so sign in without PKCE; the client secret binds the code.
+      pkce: false,
       scopes: ["openid", "profile", "email", "w_member_social"],
     }),
   },
