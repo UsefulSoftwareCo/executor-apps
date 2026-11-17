@@ -102,8 +102,8 @@ test("updateEvent moves an event, keeps its length, and sends only the changed f
   });
   const patch = calls.find((call) => call.method === "PATCH")!;
   assert.deepEqual(patch.body, {
-    start: { dateTime: "2026-12-02T09:30:00.000Z", timeZone: "Europe/London" },
-    end: { dateTime: "2026-12-02T10:15:00.000Z", timeZone: "Europe/London" },
+    start: { dateTime: "2026-12-02T09:30:00.000Z", timeZone: "Europe/London", date: null },
+    end: { dateTime: "2026-12-02T10:15:00.000Z", timeZone: "Europe/London", date: null },
   });
   assert.equal(patch.search.get("sendUpdates"), "all");
   assert.equal(patch.search.has("conferenceDataVersion"), false);
@@ -120,8 +120,8 @@ test("updateEvent reads local times in the calendar's zone, not UTC", async () =
   });
   await run(calendarTools.updateEvent, ctx, { calendarId: "team@example.com", eventId: "evt_1", start: "2026-12-02T09:00", minutes: 60 });
   const patch = calls.find((call) => call.method === "PATCH")!;
-  assert.deepEqual(patch.body.start, { dateTime: "2026-12-02T14:00:00.000Z", timeZone: "America/New_York" });
-  assert.deepEqual(patch.body.end, { dateTime: "2026-12-02T15:00:00.000Z", timeZone: "America/New_York" });
+  assert.deepEqual(patch.body.start, { dateTime: "2026-12-02T14:00:00.000Z", timeZone: "America/New_York", date: null });
+  assert.deepEqual(patch.body.end, { dateTime: "2026-12-02T15:00:00.000Z", timeZone: "America/New_York", date: null });
 });
 
 test("updateEvent moves an all-day event by whole days and keeps how many days it spans", async () => {
@@ -131,8 +131,36 @@ test("updateEvent moves an all-day event by whole days and keeps how many days i
     [`PATCH ${eventPath}`]: (call) => ({ ...allDay, ...call.body }),
   });
   const result = await run(calendarTools.updateEvent, ctx, { calendarId: "team@example.com", eventId: "evt_1", start: "2026-12-10", timeZone: "UTC" });
-  assert.deepEqual(calls.at(-1)!.body, { start: { date: "2026-12-10" }, end: { date: "2026-12-13" } });
+  assert.deepEqual(calls.at(-1)!.body, {
+    start: { date: "2026-12-10", dateTime: null, timeZone: null },
+    end: { date: "2026-12-13", dateTime: null, timeZone: null },
+  });
   assert.equal(result.allDay, true);
+});
+
+// Patch merges start and end into what Google holds, and Google refuses an event with both a date
+// and a dateTime, so a switch must clear the kind it leaves behind.
+test("updateEvent switches a timed event to all-day and back, clearing the other kind", async () => {
+  const toAllDay = google({
+    [`GET ${eventPath}`]: () => timed,
+    [`PATCH ${eventPath}`]: (call) => ({ ...timed, ...call.body }),
+  });
+  await run(calendarTools.updateEvent, toAllDay.ctx, { calendarId: "team@example.com", eventId: "evt_1", start: "2026-12-05", timeZone: "UTC" });
+  assert.deepEqual(toAllDay.calls.at(-1)!.body, {
+    start: { date: "2026-12-05", dateTime: null, timeZone: null },
+    end: { date: "2026-12-06", dateTime: null, timeZone: null },
+  });
+
+  const allDay = { ...timed, start: { date: "2026-12-01" }, end: { date: "2026-12-02" } };
+  const toTimed = google({
+    [`GET ${eventPath}`]: () => allDay,
+    [`PATCH ${eventPath}`]: (call) => ({ ...allDay, ...call.body }),
+  });
+  await run(calendarTools.updateEvent, toTimed.ctx, { calendarId: "team@example.com", eventId: "evt_1", start: "2026-12-01T13:00", timeZone: "UTC" });
+  assert.deepEqual(toTimed.calls.at(-1)!.body, {
+    start: { dateTime: "2026-12-01T13:00:00.000Z", timeZone: "UTC", date: null },
+    end: { dateTime: "2026-12-01T13:30:00.000Z", timeZone: "UTC", date: null },
+  });
 });
 
 test("updateEvent adds and removes attendees without touching others' responses, and can stay quiet", async () => {
@@ -167,6 +195,7 @@ test("updateEvent refuses an empty change or an end before the start, and writes
     [{}, /Pass at least one field to change/],
     [{ start: "2026-12-02T10:00:00Z", end: "2026-12-02T09:00:00Z" }, /must end after it starts/],
     [{ start: "2026-12-02", end: "2026-12-02T09:00:00Z" }, /both be dates/],
+    [{ start: "2026-12-02", minutes: 60 }, /minutes applies to timed events/],
   ] as const) {
     const { calls, ctx } = google({ [`GET ${eventPath}`]: () => timed });
     await assert.rejects(run(calendarTools.updateEvent, ctx, { calendarId: "team@example.com", eventId: "evt_1", timeZone: "UTC", ...input }), message);
