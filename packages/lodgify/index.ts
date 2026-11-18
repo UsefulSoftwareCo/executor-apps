@@ -12,7 +12,7 @@ import {
 import { always } from "apps/operations/approval";
 import { liveOpenapiRouter } from "apps/openapi";
 import { icons } from "./icon.js";
-import { options } from "./openapi.js";
+import { v1Options, v2Options } from "./openapi.js";
 
 const lodgify = defineProvider({
   name: "Lodgify",
@@ -38,16 +38,22 @@ export default defineApp(
     tools: router(
       await accountRouter(
         user?.accounts.lodgify ?? [],
-        (account) =>
-          withApprovals(liveOpenapiRouter({ ...options, cache, fetch, signal, account }), (tool) =>
-            tool.kind === "mutation" ? always() : undefined,
-          ),
+        (account) => {
+          const mount = (options: typeof v1Options) =>
+            withApprovals(liveOpenapiRouter({ ...options, cache, fetch, signal, account }), (tool) =>
+              tool.kind === "mutation" ? always() : undefined,
+            );
+          return router(
+            { v1: mount(v1Options), v2: mount(v2Options) },
+            { title: "Lodgify", description: "Lodgify Public API v1 and v2." },
+          );
+        },
         { signal },
       ),
       {
         title: "Lodgify",
         description:
-          "Manage vacation rentals with Lodgify: properties, rooms, availability, rates, quotes, bookings, messaging threads and webhooks.",
+          "Manage vacation rentals with Lodgify. v2: properties, rooms, availability calendars, daily rates and rate settings, quotes, bookings (list, read, key codes, payment links, check-in and check-out) and messaging threads. v1: bookings and enquiries (create, update, delete, status changes, messages), availability updates, rates, add-ons, payment settings, countries, currencies and webhooks.",
         icons,
       },
     ),
