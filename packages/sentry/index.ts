@@ -100,7 +100,7 @@ export default defineApp(
               (account) => {
                 const origin = regions[regionOf(account.fields.region)];
                 return withApprovals(
-                  liveOpenapiRouter({ ...options, allowedOrigin: origin, baseUrl: origin, cache, fetch, signal, account }),
+                  liveOpenapiRouter({ ...options, allowedOrigin: origin, baseUrl: `${origin}/api/0`, cache, fetch, signal, account }),
                   (tool) => (tool.kind === "mutation" ? always() : undefined),
                 );
               },

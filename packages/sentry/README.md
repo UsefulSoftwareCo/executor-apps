@@ -2,7 +2,7 @@
 
 Natural-language issue and event search, traces and Seer root-cause analysis through Sentry's official remote MCP server, mounted under `mcp`, for accounts that sign in with Sentry; plus issues, events, projects, releases, alerts, teams, organizations, monitors, replays and the rest of the Sentry REST API (266 tools, 119 of them mutations, which ask for approval), mounted under `api`, for auth-token accounts. One provider serves both, so the app has one account slot.
 
-**Interface:** MCP at https://mcp.sentry.dev/mcp (Streamable HTTP, docs at https://mcp.sentry.dev/). Tools are listed live; every tool without `readOnlyHint` requires approval. OpenAPI from Sentry's own published API description at https://raw.githubusercontent.com/getsentry/sentry-api-schema/main/openapi-derefed.json (the official getsentry repository, which backs docs.sentry.io/api). The description lists https://{region}.sentry.io with region `us` or `de`; the account's region decides which origin receives credentials.
+**Interface:** MCP at https://mcp.sentry.dev/mcp (Streamable HTTP, docs at https://mcp.sentry.dev/). Tools are listed live; every tool without `readOnlyHint` requires approval. OpenAPI from Sentry's own published API description at https://raw.githubusercontent.com/getsentry/sentry-api-schema/main/openapi-derefed.json (the official getsentry repository, which backs docs.sentry.io/api). The description lists https://{region}.sentry.io/api/0 with region `us` or `de`; the account's region decides which origin receives credentials.
 
 ## Auth
 
