@@ -1110,6 +1110,7 @@
   {"id": "gatherup", "category": "reviews"},
   {"id": "genderapi", "category": "developer tools"},
   {"id": "gettranscribe", "category": "transcription"},
+  {"id": "getyoutubetranscript", "category": "transcription"},
   {"id": "glasp", "category": "bookmark managers"},
   {"id": "gradium", "category": "artificial intelligence"},
   {"id": "idealpostcodes", "category": "developer tools"},
