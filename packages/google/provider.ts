@@ -1,6 +1,6 @@
 import { decodeJson, defineProvider, oauth2, object, string } from "apps";
 
-const Profile = object({ emailAddress: string() });
+const Profile = object({ sub: string(), email: string() });
 
 // Every scope here is on Executor for Google's allowlist, so Executor Cloud can offer its hosted
 // client. Google Chat is left out: its chat.* scopes are not on that list.
@@ -53,12 +53,13 @@ export const google = defineProvider({
     }),
   },
   async health({ account, fetch, signal }) {
-    const response = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/profile", {
+    // Check Google identity, not Gmail: Google accounts need not have a mailbox.
+    const response = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
       signal,
       headers: { Authorization: `Bearer ${account.fields.access_token}` },
     });
     const me = await decodeJson(response, Profile);
-    return { accountInfo: { externalId: me.emailAddress, email: me.emailAddress } };
+    return { accountInfo: { externalId: me.sub, email: me.email } };
   },
 });
 
