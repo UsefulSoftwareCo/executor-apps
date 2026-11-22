@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/mofi",
+  "description": "Read-only Open Finance data from Brazilian banks: balances, cards, transactions, statements, recurring charges and spending, through Mofi's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Mofi"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.140",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}
