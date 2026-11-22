@@ -905,6 +905,7 @@
   {"id": "persistiq", "category": "crm"},
   {"id": "piggy", "category": "marketing automation"},
   {"id": "pocketsmith", "category": "accounting"},
+  {"id": "mofi", "category": "accounting"},
   {"id": "postiz", "category": "social media marketing"},
   {"id": "redirect-pizza", "category": "url shortener"},
   {"id": "reteno", "category": "marketing automation"},
