@@ -2,7 +2,7 @@
 
 Text to speech, speech to text, voices and voice cloning, dubbing, sound effects, music, pronunciation dictionaries, conversational AI agents, knowledge bases, Studio projects, history and workspace management.
 
-**Interface:** OpenAPI, ElevenLabs' official document at https://api.elevenlabs.io/openapi.json (413 tools). The document declares no security scheme (each operation takes an optional `xi-api-key` header parameter), so `openapi.ts` patches in a global `xi-api-key` apiKey scheme and the account's key is sent on every call. Requests go to `api.elevenlabs.io` only.
+**Interface:** OpenAPI, ElevenLabs' official document at https://api.elevenlabs.io/openapi.json (545 tools). The document declares no security scheme (each operation takes an optional `xi-api-key` header parameter), so `openapi.ts` patches in a global `xi-api-key` apiKey scheme and the account's key is sent on every call. Requests go to `api.elevenlabs.io` only.
 
 **Auth:** API key (`apiKey`). Create one under Settings > API Keys at https://elevenlabs.io/app/settings/api-keys; keys can be scoped to specific endpoints, and a restricted key only works for the tools its scopes cover. ElevenLabs offers no OAuth for third-party apps.
 
