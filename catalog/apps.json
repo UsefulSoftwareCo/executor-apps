@@ -938,6 +938,7 @@
   {"id": "payhere", "category": "ecommerce"},
   {"id": "pingdom", "category": "server monitoring"},
   {"id": "plausible-analytics", "category": "analytics"},
+  {"id": "highseat", "category": "analytics"},
   {"id": "timelinesai", "category": "communication"},
   {"id": "vibe", "category": "ads & conversion"},
   {"id": "artificialanalysis", "category": "developer tools"},
