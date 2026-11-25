@@ -299,6 +299,8 @@ const sendable = {
   partHeaders: ["Content-Type", "Content-Transfer-Encoding", "Content-Disposition", "Content-ID", "X-Attachment-Id"],
   /** Containers that are opened, unless named or marked as an attachment. */
   containers: ["multipart/mixed", "multipart/alternative", "multipart/related"],
+  /** The Content-Type parameters each kind of part may have. A container's `start` or `type` could make another part the one shown. */
+  contentTypeParameters: { container: ["boundary"], text: ["charset"], attachment: ["name"] },
   /** Body text: an unnamed part of one of these types, not marked as an attachment, each at most once. */
   bodyTypes: ["text/plain", "text/html"],
   transferEncodings: ["7bit", "8bit", "binary", "base64", "quoted-printable"],
@@ -456,14 +458,21 @@ const readParts = (payload: Part) => {
       if (given !== undefined && decodeWords(given, "an attachment's name") !== name) refuse("an attachment's name cannot be read reliably");
     const attached = name !== "" || disposition?.value === "attachment";
 
+    const onlyParameters = (kind: keyof typeof sendable.contentTypeParameters) => {
+      const extra = [...params.keys()].filter((key) => !(sendable.contentTypeParameters[kind] as readonly string[]).includes(key));
+      if (extra.length > 0) refuse(`a ${type} part has a Content-Type parameter it does not read (${extra.join(", ")})`);
+    };
+
     if (type.startsWith("multipart/")) {
       if (attached) refuse(`it has an attached ${type} part (${name || "no name"}), which it does not open`);
+      onlyParameters("container");
       if (!(sendable.containers as readonly string[]).includes(type)) refuse(`it has a ${type} part`);
       if (!part.parts?.length) refuse(`it has an empty ${type} part`);
       return part.parts!.forEach((child) => walk(child, false));
     }
     if (part.parts?.length || type.startsWith("message/")) refuse(`it has an attached ${type || "message"} part, which it does not open`);
     if (!attached && (sendable.bodyTypes as readonly string[]).includes(type)) {
+      onlyParameters("text");
       if (part.body?.attachmentId !== undefined || (part.body?.data === undefined && (part.body?.size ?? 0) > 0))
         refuse("its text is stored apart from the message, so the approval could not show it");
       const text = decodeText(base64Bytes(part.body?.data ?? ""), params.get("charset") ?? "us-ascii", "its text").replace(/\r\n/g, "\n");
@@ -473,6 +482,7 @@ const readParts = (payload: Part) => {
       return;
     }
     if (name === "") refuse(`it has an unnamed ${type} part`);
+    onlyParameters("attachment");
     visible(name, "an attachment's name");
     const contentId = header(part, "Content-ID")?.trim().replace(/^<(.*)>$/, "$1");
     const inline = disposition?.value === "inline" || contentId !== undefined;
@@ -622,7 +632,9 @@ const approvable = (payload: Part | undefined) => {
 const sendableRule = [
   `It sends only a draft whose every header, part and HTML element is on its allow-list and shown in the approval, within ${approvalLimit} characters of approval text.`,
   `Headers: ${sendable.shownHeaders.join(", ")} (shown, once each), and unshown only ${sendable.quietHeaders.join(", ")}.`,
-  `Parts: ${sendable.containers.join(", ")} (opened unless named or attached); one ${sendable.bodyTypes.join(" and one ")} body; any other part only as a named attachment, listed with its type and size; parts may carry only ${sendable.partHeaders.join(", ")}.`,
+  `Parts: ${sendable.containers.join(", ")} (opened unless named or attached); one ${sendable.bodyTypes.join(" and one ")} body; any other part only as a named attachment, listed with its type and size; parts may carry only ${sendable.partHeaders.join(", ")}, and Content-Type only the parameter ${Object.entries(sendable.contentTypeParameters)
+    .map(([kind, names]) => `${names.join(", ")} (${kind})`)
+    .join(", ")}.`,
   `Encodings: ${sendable.transferEncodings.join(", ")}; charsets ${sendable.charsets.join(", ")}.`,
   `HTML elements: ${Object.entries(sendable.elements)
     .map(([element, attributes]) => (attributes.length ? `<${element}> (${attributes.join(", ")})` : `<${element}>`))
@@ -863,7 +875,8 @@ export const gmail = (source: Source) => ({
         if (input.replyToMessageId !== undefined) pathId("replyToMessageId", input.replyToMessageId);
         const target = await single(ctx, source, input.account);
         const current: { message?: Message } = await google(ctx, target, url, {
-          search: { format: "metadata", metadataHeaders: ["Subject", "In-Reply-To", "References"] },
+          // drafts.get takes only `format`; its metadata form carries every header.
+          search: { format: "metadata" },
           hints: { 404: "No such draft: it may have been sent or deleted already. List drafts with gmail.drafts." },
         });
         const existing = current.message?.payload;
