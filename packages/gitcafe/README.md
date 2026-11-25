@@ -10,7 +10,7 @@ GitCafe's REST API also has an OpenAPI 3.1 document (`https://git.cafe/api/opena
 
 ## Auth
 
-- **OAuth** (`oauth`): discovered from the MCP server's protected-resource metadata (authorization server `https://git.cafe`). Executor registers a public PKCE client through dynamic client registration (`tokenEndpointAuthMethod: none`, the only method the server lists) and sends the resource indicator `https://git.cafe/mcp`. Nothing has to be set up at GitCafe first. On the consent screen the person picks **All repositories you can access** or **Only select repositories…**, and the account reaches only those. To reach a repository outside a selection, connect again.
+- **OAuth** (`oauth`): discovered from the MCP server's protected-resource metadata (authorization server `https://git.cafe`). Executor registers a public PKCE client through dynamic client registration (`tokenEndpointAuthMethod: none`, the only method the server lists) and sends the resource indicator `https://git.cafe/mcp`. Nothing has to be set up at GitCafe first: Executor registers its own redirect URI with the client. The person needs a verified GitCafe account. On the consent screen the person picks **All repositories you can access** or **Only select repositories…**, and the account reaches only those. To reach a repository outside a selection, connect again.
 - Scopes: the server answers an unauthenticated `initialize`, so discovery finds no scope challenge and would otherwise request the protected resource's whole `scopes_supported` (95 permissions, admin included). The 11 declared scopes are the union of the scopes in the server's own 401 challenges for its tools: `repo:contents:read`, `issue:contents:read`, `pr:contents:read`, `pr:review:read`, `comment:contents:read`, plus `repo:contents:write` (`commit_changes`), `issue:contents:write`, `comment:contents:write`, `pr:contents:write`, `pr:review:write` and `pr:merge:write`.
 - There is no personal access token method: GitCafe's personal access tokens work for the REST API and Git, not for the MCP server.
 
@@ -19,6 +19,6 @@ Health check: an MCP `initialize` with the account's token. A token the server d
 ## Known gaps
 
 - Labels, assignees and milestones cannot be changed with the MCP tools, and CI cannot be started or cancelled (GitCafe's MCP docs).
-- The scopes for `ci_read` on private repositories could not be confirmed without an account; its challenge names no extra scope.
+- Which scopes `ci_read` needs on private repositories could not be confirmed without an account: on public repositories it answers without signing in, so it gave no scope challenge.
 - Tool calls were not made against a real GitCafe account. The sign-in was checked against git.cafe up to its consent screen (discovery, registration and an authorization request it accepted). The token exchange, the health check and the tool calls were checked against a local stand-in that copies the server's OAuth and MCP behaviour.
 - GitCafe limits dynamic client registrations to 10 an hour per network address, and deletes a registered client that is not used within a day ([rate limits](https://git.cafe/docs/reference/rate-limits)).

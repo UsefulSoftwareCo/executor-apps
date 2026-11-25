@@ -67,7 +67,7 @@ const gitcafe = defineProvider({
         params: { protocolVersion: "2025-11-25", capabilities: {}, clientInfo: { name: "executor-health", version: "1" } },
       }),
     });
-    await decodeJson(response, object({ jsonrpc: string() }));
+    await decodeJson(response, object({ result: object({ protocolVersion: string() }) }));
   },
 });
 
@@ -88,7 +88,7 @@ export default defineApp(
         description:
           "Repositories, code, branches and tags, code search, issues, pull requests, diffs, reviews, comments, merges, server-side commits and CI results on GitCafe, through GitCafe's MCP server.",
         instructions:
-          "Each account reaches only the repositories chosen when it was connected; get_me lists them. Repositories imported from GitHub may sync both ways, so comments, reviews and merges on them can also appear on GitHub. Read-only tools run without approval; everything else asks, including submit_feedback, which sends a report to the GitCafe team.",
+          "Each account reaches only the repositories chosen when it was connected: get_me says whether that is every repository the person can access or a selection, and list_repositories lists them. Repositories imported from GitHub may sync both ways, so comments, reviews and merges on them can also appear on GitHub. Read-only tools run without approval; everything else asks, including submit_feedback, which sends a report to the GitCafe team.",
         icons,
       },
     ),
