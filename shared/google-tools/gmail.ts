@@ -44,14 +44,18 @@ const header = (part: Part | undefined, name: string) =>
 
 const charset = (part: Part) => /charset="?([^";]+)"?/i.exec(header(part, "Content-Type") ?? "")?.[1];
 
-/** The message text: its text/plain part, else its HTML part as text. Attachments are listed, not read. */
-const content = (payload: Part | undefined) => {
+/**
+ * The message text: its text/plain part, else its HTML part as text. Attachments are listed, not
+ * read; each names its message, so it can be passed to the attachment tool as it is.
+ */
+const content = (messageId: string, payload: Part | undefined) => {
   let plain: string | undefined;
   let html: string | undefined;
-  const attachments: { filename: string; mimeType: string; size: number; attachmentId: string }[] = [];
+  const attachments: { messageId: string; filename: string; mimeType: string; size: number; attachmentId: string }[] = [];
   const walk = (part: Part) => {
     if (part.filename && part.body?.attachmentId) {
       attachments.push({
+        messageId,
         filename: part.filename,
         mimeType: part.mimeType ?? "application/octet-stream",
         size: part.body.size ?? 0,
@@ -90,7 +94,7 @@ const full = (target: Target, message: Message, names: Map<string, string>) => (
   ...summary(target, message, names),
   cc: header(message.payload, "Cc") ?? "",
   replyTo: header(message.payload, "Reply-To") ?? "",
-  ...content(message.payload),
+  ...content(message.id, message.payload),
 });
 
 /** Resolves label names or IDs, case-insensitively, to IDs. */
@@ -351,8 +355,14 @@ export const gmail = (source: Source) => ({
     attachment: query(
       {
         description:
-          "Read an attachment listed by readMessage or readThread. Text attachments (text/*, JSON, CSV, XML) come back as text; others as base64.",
-        input: object({ account, messageId: string({ minLength: 1 }), attachmentId: string({ minLength: 1 }), mimeType: string().optional() }),
+          "Read an attachment listed by readMessage or readThread; pass one entry of its attachment list (messageId, attachmentId, mimeType, filename). Text attachments (text/*, JSON, CSV, XML) come back as `text`. PNG, JPEG, GIF and WebP images come back as `image`, an MCP image block, and other files, such as PDFs, as `file`, an MCP resource block named after the attachment: Executor sends both to you as media or a file you can read, not as base64 text. Inside a program the bytes are `image.data` or `file.resource.blob`, in standard base64.",
+        input: object({
+          account,
+          messageId: string({ minLength: 1 }),
+          attachmentId: string({ minLength: 1 }),
+          mimeType: string().optional(),
+          filename: string().optional(),
+        }),
       },
       async (ctx: Context, input) => {
         const target = await single(ctx, source, input.account);
@@ -361,8 +371,14 @@ export const gmail = (source: Source) => ({
           target,
           `${base}/messages/${encodeURIComponent(input.messageId)}/attachments/${encodeURIComponent(input.attachmentId)}`,
         );
-        const text = /^(text\/|application\/(json|xml|csv))/.test(input.mimeType ?? "");
-        return text ? { size, text: decodeBody(data) } : { size, base64: (data as string).replaceAll("-", "+").replaceAll("_", "/") };
+        const mimeType = (input.mimeType ?? "application/octet-stream").split(";")[0]!.trim().toLowerCase();
+        if (/^(text\/|application\/(json|xml|csv))/.test(mimeType)) return { size, text: decodeBody(data) };
+        const bytes = (data as string).replaceAll("-", "+").replaceAll("_", "/");
+        if (/^image\/(png|jpeg|gif|webp)$/.test(mimeType)) return { size, image: { type: "image", mimeType, data: bytes } };
+        // The URI ends in the attachment's name, which clients use when they save the file.
+        const name = encodeURIComponent(input.filename || "attachment");
+        const uri = `gmail:///messages/${encodeURIComponent(input.messageId)}/${name}`;
+        return { size, file: { type: "resource", resource: { uri, mimeType, blob: bytes } } };
       },
     ),
   },
