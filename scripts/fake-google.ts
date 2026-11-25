@@ -127,7 +127,8 @@ export const hostPackage = async (name: string) => {
   const user = Object.fromEntries(
     Object.entries(declared.value.accounts.user as Record<string, { definition: unknown }>).map(([slot, { definition }]) => [
       slot,
-      [{ id: accountId, provider: definition, method: "oauth", fields: { access_token: token } }],
+      // Hosts send a credential generation, and an account-scoped cache key needs one.
+      [{ id: accountId, provider: definition, method: "oauth", generation: 1, fields: { access_token: token } }],
     ]),
   );
   const context = { ...hostContext({ app: {}, user } as never), cache };
@@ -140,8 +141,12 @@ export const hostPackage = async (name: string) => {
       assert.ok(listed.ok, "inspect failed");
       return listed.value.tools;
     },
-    call: (tool: string, input: unknown, options: { approve?: boolean } = {}) =>
-      post({ operation: "call", tool, input }, options.approve ? { ...context, approval: { tool, input } } : context),
+    /** `approved` is the input the user approved, when a test needs it to differ from `input`. */
+    call: (tool: string, input: unknown, options: { approve?: boolean; approved?: unknown } = {}) =>
+      post(
+        { operation: "call", tool, input },
+        options.approve ? { ...context, approval: { tool, input: "approved" in options ? options.approved : input } } : context,
+      ),
     close: async () => {
       globalThis.fetch = realFetch;
       await google.close();
