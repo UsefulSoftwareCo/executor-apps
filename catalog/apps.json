@@ -126,6 +126,7 @@
   {"id": "gitlab", "category": "developer tools"},
   {"id": "sharepoint", "category": "documents"},
   {"id": "bitbucket", "category": "developer tools"},
+  {"id": "gitcafe", "category": "developer tools"},
   {"id": "neon", "category": "databases"},
   {"id": "zoom", "category": "video conferencing"},
   {"id": "onedrive", "category": "file management & storage"},

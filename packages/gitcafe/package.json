@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/gitcafe",
+  "description": "Repositories, code search, issues, pull requests, reviews, merges, server-side commits and CI results through GitCafe's official MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "GitCafe"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.140",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}
