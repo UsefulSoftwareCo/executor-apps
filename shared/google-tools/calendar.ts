@@ -129,8 +129,19 @@ const eventUrl = (calendarId: string, eventId: string) =>
 const guests = (target: Target, current: any): { email?: string }[] =>
   ((current.attendees ?? []) as { email?: string; self?: boolean }[]).filter((a) => !a.self && !sameAddress(a.email, target.email));
 
-/** Whether anyone besides the account is on the event, counting guests Google left out of its details. */
-const hasGuests = (target: Target, current: any) => current.attendeesOmitted === true || guests(target, current).length > 0;
+/** An organizer other than this calendar and the account: a change shows on their calendar too, even when they are not listed as an attendee. */
+const otherOrganizer = (target: Target, current: any) =>
+  typeof current.organizer?.email === "string" && current.organizer.self !== true && !sameAddress(current.organizer.email, target.email);
+
+/** Whether anyone besides the account is on the event, counting guests Google left out of its details and its organizer. */
+const hasGuests = (target: Target, current: any) => current.attendeesOmitted === true || guests(target, current).length > 0 || otherOrganizer(target, current);
+
+/** The ETag a write must match. Without one the write could not be made conditional, so nothing is written. */
+const etag = (current: any): string => {
+  if (typeof current.etag !== "string" || current.etag === "")
+    throw new Error("Google did not return this event's version (ETag), so it cannot be changed only if no one else changed it. Nothing was changed.");
+  return current.etag;
+};
 
 const omitted = (current: any) => {
   if (current.attendeesOmitted)
@@ -156,7 +167,7 @@ const edit = async (
         method: "PATCH",
         search,
         body,
-        headers: current.etag ? { "If-Match": current.etag } : {},
+        headers: { "If-Match": etag(current) },
       });
     } catch (error) {
       if (!(error instanceof GoogleError && error.status === 412)) throw error;
@@ -500,7 +511,7 @@ export const calendar = (source: Source) => ({
         await google(ctx, target, url, {
           method: "DELETE",
           search: { sendUpdates: input.notify === false ? "none" : "all" },
-          headers: current.etag ? { "If-Match": current.etag } : {},
+          headers: { "If-Match": etag(current) },
           hints: { 412: "The event changed after it was read, so it was not deleted. Read it again with agenda before retrying." },
         });
         return { account: target.email, calendarId, eventId: input.eventId, deleted: true };
