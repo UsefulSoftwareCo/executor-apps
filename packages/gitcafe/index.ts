@@ -88,7 +88,7 @@ export default defineApp(
         description:
           "Repositories, code, branches and tags, code search, issues, pull requests, diffs, reviews, comments, merges, server-side commits and CI results on GitCafe, through GitCafe's MCP server.",
         instructions:
-          "Each account reaches only the repositories chosen when it was connected: get_me says whether that is every repository the person can access or a selection, and list_repositories lists them. Repositories imported from GitHub may sync both ways, so comments, reviews and merges on them can also appear on GitHub. Read-only tools run without approval; everything else asks, including submit_feedback, which sends a report to the GitCafe team.",
+          "Each account reaches only the repositories chosen when it was connected: get_me says whether that is every repository the person can access or a selection. list_repositories lists what the account can read, oldest first: with every repository, that is all public repositories on GitCafe too, so pass owner (the handle from get_me) to list the person's own. Repositories imported from GitHub may sync both ways, so comments, reviews and merges on them can also appear on GitHub. Read-only tools run without approval; everything else asks, including submit_feedback, which sends a report to the GitCafe team.",
         icons,
       },
     ),

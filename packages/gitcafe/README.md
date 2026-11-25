@@ -19,6 +19,6 @@ Health check: an MCP `initialize` with the account's token. A token the server d
 ## Known gaps
 
 - Labels, assignees and milestones cannot be changed with the MCP tools, and CI cannot be started or cancelled (GitCafe's MCP docs).
-- Which scopes `ci_read` needs on private repositories could not be confirmed without an account: on public repositories it answers without signing in, so it gave no scope challenge.
-- Tool calls were not made against a real GitCafe account. The sign-in was checked against git.cafe up to its consent screen (discovery, registration and an authorization request it accepted). The token exchange, the health check and the tool calls were checked against a local stand-in that copies the server's OAuth and MCP behaviour.
+- With **All repositories you can access**, `list_repositories` also lists every public repository on GitCafe, oldest first; pass `owner` to list the person's own. With a selection, the tools refuse every repository outside it, public ones included.
+- `ci_read` answered `runs` on a private repository with these scopes, but its `jobs` and `log` facets were not tried there (the test repository had no CI).
 - GitCafe limits dynamic client registrations to 10 an hour per network address, and deletes a registered client that is not used within a day ([rate limits](https://git.cafe/docs/reference/rate-limits)).
