@@ -1,0 +1,13 @@
+{
+  "name": "@executor.sh/highseat",
+  "description": "Highseat web analytics: traffic reports, goals, funnels, notes, saved reports and site settings, through Highseat's official remote MCP server.",
+  "private": true,
+  "type": "module",
+  "executor": {
+    "title": "Highseat"
+  },
+  "dependencies": {
+    "apps": "0.0.1-beta.140",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}
