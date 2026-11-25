@@ -293,6 +293,14 @@ test("updateEvent gives up after three conflicts, and refuses to rewrite a guest
   );
   assert.equal(busy.calls.filter((call) => call.method === "PATCH").length, 3);
 
+  // Without an ETag the write could not be conditional, so nothing is written.
+  for (const tool of ["updateEvent", "deleteEvent", "respond"] as const) {
+    const unversioned = google({ [`GET ${eventPath}`]: () => ({ ...timed, etag: undefined }) });
+    const input = { calendarId: "team@example.com", eventId: "evt_1", summary: "Moved", response: "declined", affectsGuests: true };
+    await assert.rejects(run(calendarTools[tool], unversioned.ctx, input), /did not return this event's version \(ETag\).*Nothing was changed/, tool);
+    assert.deepEqual(unversioned.calls.map((call) => call.method), ["GET"], tool);
+  }
+
   const shortened = google({ [`GET ${eventPath}`]: () => ({ ...timed, attendeesOmitted: true }) });
   await assert.rejects(
     run(calendarTools.updateEvent, shortened.ctx, { calendarId: "team@example.com", eventId: "evt_1", removeAttendees: ["sam@example.com"], affectsGuests: true }),
@@ -321,11 +329,29 @@ test("updateEvent refuses an empty change, an end before the start, or a change 
     [timed, { summary: "Renamed", notify: false, affectsGuests: false }, /other guests/],
     [solo, { addAttendees: ["kim@example.com"] }, /other guests/],
     [{ ...solo, attendeesOmitted: true }, { summary: "Renamed" }, /other guests/],
+    // An organizer other than this calendar and the account sees the change, listed as an attendee or not.
+    [{ ...solo, organizer: { email: "lee@example.com" } }, { summary: "Renamed" }, /other guests/],
   ] as const) {
     const { calls, ctx } = google({ [`GET ${eventPath}`]: () => event });
     await assert.rejects(run(calendarTools.updateEvent, ctx, { calendarId: "team@example.com", eventId: "evt_1", timeZone: "UTC", ...input }), message);
     assert.deepEqual(calls.map((call) => call.method), ["GET"]);
   }
+});
+
+test("an event organized by the account or by the calendar being edited needs no affectsGuests", async () => {
+  for (const organizer of [{ email: self }, { email: "team@example.com", self: true }]) {
+    const { calls, ctx } = google({
+      [`GET ${eventPath}`]: () => ({ ...solo, organizer }),
+      [`PATCH ${eventPath}`]: (call) => ({ ...solo, organizer, ...call.body }),
+      [`DELETE ${eventPath}`]: () => undefined,
+    });
+    await run(calendarTools.updateEvent, ctx, { calendarId: "team@example.com", eventId: "evt_1", summary: "Renamed" });
+    await run(calendarTools.deleteEvent, ctx, { calendarId: "team@example.com", eventId: "evt_1" });
+    assert.deepEqual(calls.map((call) => call.method), ["GET", "PATCH", "GET", "DELETE"], organizer.email);
+  }
+  const other = google({ [`GET ${eventPath}`]: () => ({ ...solo, organizer: { email: "lee@example.com" } }) });
+  await assert.rejects(run(calendarTools.deleteEvent, other.ctx, { calendarId: "team@example.com", eventId: "evt_1" }), /other guests.*Nothing was deleted/);
+  assert.deepEqual(other.calls.map((call) => call.method), ["GET"]);
 });
 
 test("deleteEvent deletes on the primary calendar by default, only the version it read, and tells attendees unless notify is false", async () => {
@@ -772,8 +798,10 @@ test("sendDraft shows text only as it is decoded, and refuses text it has not re
   assert.equal(encoded.subject, "Wire money to account 54321");
   assert.equal(encoded.from, "Billing <user@example.com>");
   const cp1252 = Uint8Array.from([0x48, 0x69, 0x20, 0x93, 0x41, 0x6c, 0x65, 0x78, 0x94]);
-  for (const contentType of ["text/plain; charset=windows-1252", "text/plain; charset = windows-1252", 'text/plain; xcharset=utf-8; charset="windows-1252"'])
+  for (const contentType of ["text/plain; charset=windows-1252", "text/plain; charset = windows-1252", 'text/plain; charset="windows-1252"'])
     await sends({ type: "text/plain", contentType, bytes: cp1252 }, "Hi “Alex”");
+  // A parameter whose name merely contains "charset" is not read as the charset: it is refused.
+  await refused({ type: "text/plain", contentType: 'text/plain; xcharset=utf-8; charset="windows-1252"', bytes: cp1252 }, /a text\/plain part has a Content-Type parameter it does not read \(xcharset\)/);
   await refused({ type: "text/plain", contentType: "text/plain; charset=shift_jis", bytes: cp1252 }, /in the shift_jis charset, which it does not read/);
   await refused({ type: "text/plain", contentType: "text/plain", bytes: cp1252 }, /bytes that are not ASCII but names no charset/);
   await refused({ type: "text/plain", contentType: "text/plain; charset=utf-8", bytes: cp1252 }, /its text is not valid utf-8/);
@@ -801,6 +829,31 @@ test("sendDraft refuses an attached bundle of parts or an attached email instead
     message.attachments.map((a: { filename: string; mimeType: string }) => [a.filename, a.mimeType]),
     [["bundle.mime", "multipart/alternative"]],
   );
+});
+
+// A container's start or type can make a part other than the shown text the one a mail client
+// displays (RFC 2387), so only the parameters sendDraft reads are accepted on any part.
+test("sendDraft refuses Content-Type parameters it does not read, such as a related container's start", async () => {
+  const root = { type: "text/html", filename: "root.html", content: "<p>Send the money to account 54321</p>", headers: { "Content-ID": "<root>" } };
+  await refused(
+    { type: "multipart/related", contentType: 'multipart/related; boundary="b0"; start="<root>"', parts: [plainOnly("Hi"), root] },
+    /a multipart\/related part has a Content-Type parameter it does not read \(start\)/,
+  );
+  await refused(
+    { type: "multipart/related", contentType: 'multipart/related; boundary="b0"; type="text/html"', parts: [plainOnly("Hi"), root] },
+    /a multipart\/related part has a Content-Type parameter it does not read \(type\)/,
+  );
+  await refused({ type: "text/plain", contentType: 'text/plain; charset="UTF-8"; format=flowed', content: "Hi" }, /a text\/plain part has a Content-Type parameter it does not read \(format\)/);
+  await refused(
+    { type: "multipart/mixed", parts: [plainOnly("Hi"), { ...pdf, contentType: 'application/pdf; name="plan.pdf"; x-mac-type="50444620"' }] },
+    /an? application\/pdf part has a Content-Type parameter it does not read \(x-mac-type\)/,
+  );
+  // The parameters it reads are still accepted on each kind of part.
+  await sends(
+    { type: "multipart/related", contentType: 'multipart/related; boundary="b0"', parts: [plainOnly("Hi"), { ...pdf, contentType: 'application/pdf; name="plan.pdf"' }] },
+    "Hi",
+  );
+  assert.match(native(gmailTools.sendDraft).description, /Content-Type only the parameter boundary \(container\), charset \(text\), name \(attachment\)/);
 });
 
 const inlineLogo = { type: "image/png", filename: "logo.png", content: "PNG", headers: { "Content-ID": "<logo>", "Content-Disposition": 'inline; filename="logo.png"' } };
@@ -986,6 +1039,8 @@ test("updateDraft rewrites a reply draft as RFC 2822 and keeps the headers that 
     "PUT /gmail/v1/users/me/drafts/d4": () => ({ id: "d4", message: { id: "msg_5", threadId: "thr_4" } }),
   });
   const result = await run(gmailTools.updateDraft, ctx, { draftId: "d4", to: ["alex@example.com"], subject: "RE: plan", body: "Revised text" });
+  // drafts.get takes only format (Gmail's Discovery document); its metadata form has every header.
+  assert.deepEqual([...calls[0]!.search.keys()], ["format"]);
   assert.equal(calls[0]!.search.get("format"), "metadata");
   const put = calls[1]!;
   assert.equal(put.body.id, "d4");

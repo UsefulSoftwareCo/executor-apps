@@ -17,6 +17,8 @@ export interface Recorded {
   readonly query: URLSearchParams;
   readonly contentType: string | undefined;
   readonly authorization: string | undefined;
+  /** The If-Match header, which makes a write conditional on the version read. */
+  readonly ifMatch: string | undefined;
   readonly body: Buffer;
 }
 
@@ -46,6 +48,7 @@ const fakeGoogle = async () => {
       query: url.searchParams,
       contentType: request.headers["content-type"],
       authorization: request.headers.authorization,
+      ifMatch: request.headers["if-match"],
       body: await read(request),
     };
     requests.push(recorded);

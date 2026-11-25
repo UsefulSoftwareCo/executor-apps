@@ -162,11 +162,13 @@ for (const pkg of packages) {
         assert.equal(patch.host, "www.googleapis.com");
         assert.equal(patch.path, eventPath);
         assert.deepEqual(json(patch), { summary: "Planning (moved)" });
+        assert.equal(patch.ifMatch, event.etag);
         assert.equal(patch.query.get("sendUpdates"), "all");
 
         const remove = await approvedCall(pkg.tool("calendar", "deleteEvent"), writes.deleteEvent!.input);
         assert.deepEqual(remove.sent.map((request) => `${request.method} ${request.path}`), [`DELETE ${eventPath}`]);
         assert.equal(remove.sent[0]!.body.length, 0);
+        assert.equal(remove.sent[0]!.ifMatch, event.etag);
         assert.equal(remove.sent[0]!.query.get("sendUpdates"), "all");
         assert.deepEqual(remove.result, { account: self, calendarId: "team@example.com", eventId: "evt_1", deleted: true });
       });
